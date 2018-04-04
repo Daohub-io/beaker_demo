@@ -1,10 +1,24 @@
 <template>
   <div class="storage">
       <b-container>
+        <b-row>
+          <b-col>
+            <header class="top">
+              <b-badge>Total Storage: {{ listStore.length * 8 }} Bytes </b-badge>
+              <b-badge>Tables: {{ tableCount }}</b-badge>
+            </header>
+          </b-col>
+        </b-row>
         <b-row >
-            <b-col cols="6">
-                <h5>Storage View</h5>
-                <b-table :items="listStore" small="true"></b-table>
+            <b-col cols="12">
+                <b-table 
+                  :sort-by.sync="sortBy" 
+                  :items="listStore"
+                  :fields="fields"
+                  :hover="true"
+                  :small="true"
+                  @row-clicked="viewTable">
+                </b-table>
             </b-col>
         </b-row>
       </b-container>
@@ -16,6 +30,13 @@ export default {
   name: "StorageView",
   data() {
     return {
+      sortBy: 'tableId',
+      fields: [
+        { key: 'tableId', sortable: true },
+        'last action',
+        'read',
+        'write'
+      ],
       storage: {},
       error: false
     };
@@ -29,8 +50,12 @@ export default {
     },
     listStore() {
       return Object.entries(this.storage).map(([key, value]) => {
-        return {key, value}
+        const tableId = Number(key.substring(0,4))
+        return {tableId, key, value}
       })
+    },
+    tableCount() {
+      return new Set(Object.keys(this.storage).map(key => Number(key.substring(0,4)))).size
     }
   },
   methods: {
@@ -40,7 +65,7 @@ export default {
       const web3 = this.$web3();
 
       // Get all Used Storage Keys
-      const currentKeys = await this.$getStorageKeys(kernelAddr, 32);
+      const currentKeys = await this.$getStorageKeys(kernelAddr, 100);
       if (currentKeys) {
         this.error = false
 
@@ -51,14 +76,25 @@ export default {
       } else {
         this.error = true
       }      
+    },
+    viewTable(item) {
+      console.log(item.tableId)
     }
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
+
 .storage h5 {
-    padding: 2rem 0 0;
-} 
+  padding: 2rem 0 0;
+}
+.storage .table-hover tbody tr:hover {
+  cursor: pointer;
+}
+
+.storage header.top {
+  padding: 2rem 0 1rem;
+}
 </style>
