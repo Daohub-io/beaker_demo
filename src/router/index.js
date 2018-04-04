@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+import Login from '@/components/Login'
 import CreateOrg from '@/components/CreateOrg'
 import ListOrg from '@/components/ListOrg'
 import ViewOrg from '@/components/ViewOrg'
@@ -13,6 +14,10 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
+    {
+      path: '/login',
+      component: Login
+    },
     {
       path: '/org/create',
       component: CreateOrg

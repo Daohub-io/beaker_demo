@@ -15,6 +15,12 @@
               <form @submit.stop.prevent="handleOk">
                 <p>Network Id: {{ network.id }}</p>
                 <p>Type: {{ network.type }} </p>
+                <ul>
+                  Accounts:
+                  <li v-for="account in accounts">
+                     {{ account }} 
+                  </li>
+                </ul>
                 <b-form-input type="text" placeholder="Enter Node Address" v-model="address"></b-form-input>
               </form>
             </b-modal>
@@ -42,9 +48,10 @@ export default {
     return {
       connected: null,
       address: "http://localhost:8545",
+      accounts: [],
       network: {
-        id: '',
-        type: ''
+        id: "",
+        type: ""
       }
     };
   },
@@ -58,12 +65,13 @@ export default {
     },
     async connect() {
       try {
-        await this.$connect({address: this.address})
+        await this.$connect({ address: this.address });
 
-        const web3 = this.$web3();        
-        this.network.id = await web3.eth.net.getId()
-        this.network.type = await web3.eth.net.getNetworkType()
-
+        const web3 = this.$web3();
+        this.network.id = await web3.eth.net.getId();
+        this.network.type = await web3.eth.net.getNetworkType();
+        this.accounts = this.$accounts();
+        
       } catch (e) {
         console.error(e, `Invalid Connection`);
         this.connected = false;
@@ -102,5 +110,4 @@ body,
 .content {
   flex-grow: 1;
 }
-
 </style>

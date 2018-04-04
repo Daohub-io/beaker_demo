@@ -17,7 +17,8 @@ export default {
         Vue.web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
         Vue.accounts = [];
         Vue.kernels = new Map();
-        
+        window.web3 = Vue.web3
+
         Vue.prototype.$web3 = () => Vue.web3;
         Vue.prototype.$accounts = () => Vue.accounts;
         Vue.prototype.$kernels = () => Vue.kernels;
@@ -26,13 +27,33 @@ export default {
         Vue.prototype.$MIN_GAS_PRICE = () => MIN_GAS_PRICE;
 
 
+        Vue.prototype.$unlockAccount = async function (account, password) {
+
+            const req = {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                mode: 'cors',
+                body: JSON.stringify({
+                    id: "1",
+                    method: "personal_unlockAccount",
+                    jsonrpc: "2.0",
+                    params: [account, password, null]
+                })
+            }
+
+            await fetch(Vue.web3.currentProvider.host, req)
+        }
         Vue.prototype.$connect = async function ({ address = "http://localhost:8545" }) {
             Vue.web3.setProvider(address);
             Vue.accounts = await Vue.web3.eth.getAccounts();
         }
 
-        Vue.prototype.$createKernel = async function ({ name, account = false }) {
-            if (!account) account = Vue.accounts[0];
+        Vue.prototype.$createKernel = async function ({ name, account = false, password = '' }) {
+            // Unlock Account
+            if (!account) account = Vue.accounts[1];
+            await this.$unlockAccount(account, password)
 
             const Kernel = new Vue.web3.eth.Contract([KernelABI])
             let instance = await Kernel.deploy({ data: KernelABI.bytecode }).send({ from: account, gas: MIN_GAS, gasPrice: MIN_GAS_PRICE })

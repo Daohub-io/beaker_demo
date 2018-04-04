@@ -5,6 +5,7 @@
 ## Build Setup
 
 Requires Yarn: `npm i -g yarn`
+Requires Parity, see: https://wiki.parity.io/Setup
 
 ``` bash
 # install dependencies
@@ -26,8 +27,8 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 ## Development
 
 ```bash
-# run ganache-cli seperately at localhost:8545
-yarn ganache
+# run parity-cli seperately at localhost:8545 with local dev chain
+parity --config dev --jsonrpc-cors http://localhost:8080 --ws-origins http://localhost:8080
 
 # serve with hot reload at localhost:8080
 yarn dev
