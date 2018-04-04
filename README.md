@@ -28,7 +28,7 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 ```bash
 # run parity-cli seperately at localhost:8545 with local dev chain
-parity --config dev-insecure --jsonrpc-cors http://localhost:8080 --ws-origins http://localhost:8080
+parity --config dev-insecure --jsonrpc-cors http://localhost:8080 --fat-db=on
 
 # serve with hot reload at localhost:8080
 yarn dev

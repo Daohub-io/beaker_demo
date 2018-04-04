@@ -26,7 +26,6 @@
           </b-col>
         </b-row>
       </b-container>
-      
   </div>
 </template>
 
@@ -81,14 +80,12 @@ export default {
       const instance = this.kernel.instance;
 
       const raw = await instance.methods.listProcedures().call();
-      console.log(raw);
       const procedures = raw
         .map(web3.utils.toAscii)
         .map(s => s.replace(/\0.*$/, ""))
         .map(name => ({ name }));
 
       for (const i in procedures) {
-        console.log(i);
         const address = await instance.methods
           .getProcedure(web3.utils.toHex(procedures[i].name))
           .call();

@@ -27,6 +27,27 @@ export default {
         Vue.prototype.$MIN_GAS_PRICE = () => MIN_GAS_PRICE;
 
 
+        Vue.prototype.$getStorageKeys = async function (address, quantity, start = null, block = 'latest') {
+            const req = {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                mode: 'cors',
+                body: JSON.stringify({
+                    id: "1",
+                    method: "parity_listStorageKeys",
+                    jsonrpc: "2.0",
+                    params: [address, quantity, start, block]
+                })
+            }
+            
+            let res = await fetch(Vue.web3.currentProvider.host, req)
+            let { result } = await res.json()
+
+            return result
+        }
+
         Vue.prototype.$unlockAccount = async function (account, password) {
 
             const req = {
@@ -61,7 +82,6 @@ export default {
             // Add Kernel to List
             Vue.kernels.set(instance.options.address, { name, instance });
             return instance;
-
         }
 
     }
