@@ -7,8 +7,8 @@ import ListOrg from '@/components/ListOrg'
 import ViewOrg from '@/components/ViewOrg'
 
 import OrgStorage from '@/components/org/Storage.vue'
+import OrgFile from '@/components/org/File.vue'
 import OrgProcedures from '@/components/org/Procedures.vue'
-
 
 Vue.use(Router)
 
@@ -34,6 +34,11 @@ export default new Router({
           name: 'k_storage',
           path: 'storage',
           component: OrgStorage
+        },
+        {
+          name: 'k_table',
+          path: 'file/:fileId',
+          component: OrgFile
         },
         {
           name: 'k_procedures',

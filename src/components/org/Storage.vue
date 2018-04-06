@@ -4,8 +4,12 @@
         <b-row>
           <b-col>
             <header class="top">
-              <b-badge>Total Storage: {{ listStore.length * 8 }} Bytes </b-badge>
-              <b-badge>Tables: {{ tableCount }}</b-badge>
+              <b-nav fill class="details">
+                <b-nav-item>{{ listStore.length * 8 }} Bytes</b-nav-item>
+                <b-nav-item>{{ tableCount }} Files</b-nav-item>
+                <b-nav-item>{{ 0 }} Changes</b-nav-item>
+                <b-nav-item>{{ 0 }} Members</b-nav-item>
+              </b-nav>
             </header>
           </b-col>
         </b-row>
@@ -33,15 +37,15 @@ export default {
       sortBy: 'tableId',
       fields: [
         { key: 'tableId', sortable: true },
-        'last action',
-        'read',
-        'write'
+        'type',
+        'size',
+        'last action'
       ],
       storage: {},
       error: false
     };
   },
-  mounted() {
+  created() {
     this.getData();
   },
   computed: {
@@ -78,7 +82,7 @@ export default {
       }      
     },
     viewTable(item) {
-      console.log(item.tableId)
+      this.$router.push({path: `file/${item.tableId}`})
     }
   }
 };
@@ -96,5 +100,11 @@ export default {
 
 .storage header.top {
   padding: 2rem 0 1rem;
+}
+
+.storage header.top .details {
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid #9a9a9a;
 }
 </style>

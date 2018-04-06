@@ -52,9 +52,10 @@ export default {
 .org header {
   background-color: #ddd;
   padding-top: 1rem;
+  padding-bottom: 0;
 }
 
 .org h4 {
-
+  margin: 0 0 1rem 0;
 }
 </style>
