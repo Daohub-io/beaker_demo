@@ -28,7 +28,7 @@ export default {
   name: "FileView",
   data() {
     return {
-      sortBy: "tableId",
+      sortBy: "key",
       fields: [{ key: "key", sortable: true }, "value"],
       table: {},
       error: false
@@ -43,7 +43,7 @@ export default {
     },
     listTable() {
       return Object.entries(this.table).map(([key, value]) => {
-        return { key, value: Number(value) };
+        return { key, value: Number(value) }
       });
     },
     tableId() {
@@ -52,11 +52,10 @@ export default {
     path() {
       const kernel = this.kernel;
       const tableId = this.tableId;
-      const id = this.$route.params.id
-
+      
       return [
-        { text: kernel.name, to: { name: 'k_storage', replace: true } },
-        { text: tableId}
+        { text: String(kernel.name), to: { name: 'k_storage', replace: true } },
+        { text: String(tableId) }
       ];
     }
   },

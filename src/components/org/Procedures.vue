@@ -7,8 +7,14 @@
               <b-btn v-b-modal.modalCreateProc size="sm"> Create New Procedure </b-btn>
               <b-modal id="modalCreateProc" ref="modal" title="Create Procedure" @ok="createProcedure">
                 <form>
+                  <label class="mr-sm-2" for="inlineFormCustomSelectPref">Type</label>
+                  <b-form-select 
+                                v-model="procedure.type"
+                                :options="options"
+                                >
+                  </b-form-select>
                   <b-form-textarea id="textarea1"
-                              v-model="procedure.code"
+                              v-model="procedure.input"
                               placeholder="Enter new Procedure Code"
                               :rows="3"
                               :max-rows="100">
@@ -35,9 +41,11 @@ export default {
   data() {
     return {
       procedures: [],
+      options: ['Opcode', 'ABI', 'Solidity'],
       procedure: {
         name: "",
-        code: ""
+        type: "Opcode",
+        input: ""
       },
       status: "off"
     };
@@ -60,7 +68,29 @@ export default {
         this.status = "running";
         window.Instance = instance;
         let name = web3.utils.toHex(this.procedure.name);
-        let code = web3.utils.toHex(this.procedure.code);
+
+        let code;
+        switch (this.procedure.type) {
+          case "Opcode":
+            code = this.procedure.input
+            break;
+          case "ABI":
+            code = JSON.parse(this.procedure.input).bytecode;
+            break;
+          case "Solidity": {
+            const contract = await web3.eth.compile.solidity(
+              this.procedure.input
+            );
+            code = contract.abi.bytecode;
+            break;
+          }
+        }
+
+        // Convert to Hex
+        code = web3.utils.toHex(code);
+
+        // HACK
+        await this.$unlockAccount(account, '')
 
         await instance.methods.createProcedure(name, code).send({
           from: account,
