@@ -60,9 +60,9 @@ export default {
       const procedure = this.procedure
       try {
         this.status = "running";
-
-        await this.$createProcedure({kernel: instance, procedure})
-        this.$saveProcedure(kernelAddr, procedure)
+        console.log(this.kernel)
+        await this.$createProcedure(instance, procedure)
+        this.$saveProcedure(instance, procedure)
 
       } catch (e) {
         console.error(e);

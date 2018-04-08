@@ -9,9 +9,10 @@
         </b-row>
         <b-row>
           <b-col>
-            <b-nav class="sub_bar" tabs>
-                <b-nav-item :to="{name: 'k_storage'}" :active="$route.name == 'k_storage'">Storage</b-nav-item>
-                <b-nav-item :to="{name: 'k_procedures'}" :active="$route.name == 'k_procedures'">Procedures</b-nav-item>
+             <b-nav class="sub_bar" tabs>
+                <b-nav-item :to="{name: 'k_storage'}" exact>Storage</b-nav-item>
+                <b-nav-item :to="{name: 'k_procedures'}">Procedures</b-nav-item>
+                <b-nav-item :to="{name: 'k_actions'}">Actions</b-nav-item>
             </b-nav>
           </b-col>
         </b-row>
@@ -25,6 +26,7 @@
 export default {
   name: "ViewOrg",
   data() {
+
     let id = this.$route.params.id;
 
     // See http://web3js.readthedocs.io/en/1.0/web3-eth-contract.html#properties
@@ -36,6 +38,9 @@ export default {
   computed: {
     kernel() {
       return this.$kernels()[this.$route.params.id];
+    },
+    routeName() {
+      return this.$route.name
     }
   },
   methods: {

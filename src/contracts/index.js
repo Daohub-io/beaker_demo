@@ -7,6 +7,22 @@ const MIN_GAS = 4712388;
 const MIN_GAS_PRICE = 100000000000;
 
 
+// class Organization {
+//     kernel = {}
+//     address = ''
+//     name = ''
+//     storageKeys = []
+
+//     constructor(name, address, kernel) {
+//         this.name = name
+//         this.address = address
+//         this.kernel = kernel
+//     }
+
+
+
+// }
+
 // Web3 Vue Plugin
 // See: https://vuejs.org/v2/guide/plugins.html
 export default {
@@ -17,7 +33,6 @@ export default {
         Vue.web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
         Vue.accounts = [];
         Vue.kernels = {};
-        window.web3 = Vue.web3
 
         Vue.prototype.$web3 = () => Vue.web3;
         Vue.prototype.$accounts = () => Vue.accounts;
@@ -25,7 +40,6 @@ export default {
 
         Vue.prototype.$MIN_GAS = () => MIN_GAS;
         Vue.prototype.$MIN_GAS_PRICE = () => MIN_GAS_PRICE;
-
 
         Vue.prototype.$getStorageKeys = async function (address, quantity, start = null, block = 'latest') {
             const req = {
@@ -86,7 +100,7 @@ export default {
             return instance;
         }
 
-        Vue.prototype.$createProcedure = async function ({ kernel, procedure, account = false, password = '' }) {
+        Vue.prototype.$createProcedure = async function (kernel, procedure, account = false, password = '') {
             // Unlock Account
             if (!account) account = Vue.accounts[1];
             await this.$unlockAccount(account, password)
@@ -106,8 +120,8 @@ export default {
 
         }
 
-        Vue.prototype.$saveProcedure = function (kernelAddr, procedure) {
-            Vue.set(Vue.kernels[kernelAddr].procedures, procedure.name, procedure)
+        Vue.prototype.$saveProcedure = function (kernel, procedure) {
+            Vue.set(Vue.kernels[kernel.options.address].procedures, procedure.name, JSON.parse(procedure.abi))
         }
 
     }

@@ -1,27 +1,14 @@
 <template>
-  <div class="storage">
+  <div class=".actions">
       <b-container>
-        <b-row>
-          <b-col>
-            <header class="top">
-              <b-nav fill class="details">
-                <b-nav-item>{{ listStore.length * 8 }} Bytes</b-nav-item>
-                <b-nav-item>{{ tableCount }} Files</b-nav-item>
-                <b-nav-item>{{ 0 }} Changes</b-nav-item>
-                <b-nav-item>{{ 0 }} Members</b-nav-item>
-              </b-nav>
-            </header>
-          </b-col>
-        </b-row>
         <b-row>
             <b-col cols="12">
                 <b-table 
-                  :sort-by.sync="sortBy" 
-                  :items="listStore"
+                  :items="listActions"
                   :fields="fields"
                   :hover="true"
                   :small="true"
-                  @row-clicked="viewTable">
+                  @row-clicked="viewAction">
                 </b-table>
             </b-col>
         </b-row>
@@ -31,17 +18,12 @@
 
 <script>
 export default {
-  name: "StorageView",
+  name: ".View",
   data() {
     return {
-      sortBy: 'fileId',
       fields: [
-        { key: 'fileId', sortable: true },
-        'type',
-        'size',
-        'last action'
+        'name'
       ],
-      storage: {},
       error: false
     };
   },
@@ -52,14 +34,14 @@ export default {
     kernel() {
       return this.$kernels()[this.$route.params.id];
     },
-    listStore() {
-      return Object.entries(this.storage).map(([key, value]) => {
-        const fileId = Number(key.substring(0,4))
-        return {fileId, key, value}
-      })
-    },
-    tableCount() {
-      return new Set(Object.keys(this.storage).map(key => Number(key.substring(0,4)))).size
+    listActions() {
+      const kernel = this.$kernels()[this.$route.params.id];
+      
+      const d = Object.entries(kernel.procedures).map(([name, prop]) => {
+          return prop.abi.map(action => ({name: action.name}))
+      }).flatten()
+
+      return d
     }
   },
   methods: {
@@ -81,8 +63,8 @@ export default {
         this.error = true
       }      
     },
-    viewTable(item) {
-      this.$router.push({path: `file/${item.fileId}`})
+    viewAction(item) {
+      
     }
   }
 };
@@ -91,18 +73,18 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 
-.storage h5 {
+.actions h5 {
   padding: 2rem 0 0;
 }
-.storage .table-hover tbody tr:hover {
+.actions .table-hover tbody tr:hover {
   cursor: pointer;
 }
 
-.storage header.top {
+.actions header.top {
   padding: 2rem 0 1rem;
 }
 
-.storage header.top .details {
+.actions header.top .details {
   width: 100%;
   border-radius: 4px;
   border: 1px solid #9a9a9a;

@@ -11,11 +11,23 @@
         <b-row >
             <b-col cols="12">
                 <b-table 
-                  :sort-by.sync="sortBy" 
-                  :items="actions"
+                  :items="procedure.abi"
                   :fields="fields"
                   :hover="true"
                   :small="true">
+                  
+                  <template slot="inputs" slot-scope="data">
+                    <span v-for="param in data.item.inputs">
+                      {{ param.name }}:{{ param.type}}
+                    </span>
+                  </template>
+
+                   <template slot="outputs" slot-scope="data">
+                    <span v-for="param in data.item.outputs">
+                      {{ param.name }}:{{ param.type}}
+                    </span>
+                  </template>
+                  
                 </b-table>
             </b-col>
         </b-row>
@@ -29,10 +41,10 @@ export default {
   data() {
     return {
       sortBy: "key",
-      fields: [{ key: "key", sortable: true }, "value"],
-      actions: [],
-      name: '',
-      address: ''
+      fields: ["name", "inputs", "outputs"],
+      name: "",
+      address: "",
+      procedure: {}
     };
   },
   created() {
@@ -47,7 +59,10 @@ export default {
       const name = this.name;
 
       return [
-        { text: String(kernel.name), to: { name: "k_procedures", replace: true } },
+        {
+          text: String(kernel.name),
+          to: { name: "k_procedures", replace: true }
+        },
         { text: String(name) }
       ];
     }
@@ -59,7 +74,7 @@ export default {
       const web3 = this.$web3();
 
       this.name = this.$route.params.procedureId;
-      this.address = await kernel.methods.getProcedure(web3.utils.toHex(name));
+      this.procedure = this.kernel.procedures[this.name];
     }
   }
 };

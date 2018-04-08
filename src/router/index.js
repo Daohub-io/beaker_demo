@@ -10,6 +10,7 @@ import OrgStorage from '@/components/org/Storage.vue'
 import OrgFile from '@/components/org/File.vue'
 import OrgProcedures from '@/components/org/Procedures.vue'
 import OrgProcedure from '@/components/org/Procedure.vue'
+import OrgActions from '@/components/org/Actions.vue'
 
 
 Vue.use(Router)
@@ -33,8 +34,8 @@ export default new Router({
       component: ViewOrg,
       children : [
         {
+          path: '',
           name: 'k_storage',
-          path: 'storage',
           component: OrgStorage
         },
         {
@@ -51,6 +52,11 @@ export default new Router({
           name: 'k_procedure',
           path: 'procedure/:procedureId',
           component: OrgProcedure
+        },
+        {
+          name: 'k_actions',
+          path: 'actions',
+          component: OrgActions
         }
       ]
     }
