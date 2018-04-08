@@ -35,7 +35,7 @@ export default {
   },
   computed: {
     kernel() {
-      return this.$kernels().get(this.$route.params.id);
+      return this.$kernels()[this.$route.params.id];
     }
   },
   methods: {

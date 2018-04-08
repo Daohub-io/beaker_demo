@@ -13,7 +13,7 @@
             </header>
           </b-col>
         </b-row>
-        <b-row >
+        <b-row>
             <b-col cols="12">
                 <b-table 
                   :sort-by.sync="sortBy" 
@@ -50,7 +50,7 @@ export default {
   },
   computed: {
     kernel() {
-      return this.$kernels().get(this.$route.params.id);
+      return this.$kernels()[this.$route.params.id];
     },
     listStore() {
       return Object.entries(this.storage).map(([key, value]) => {

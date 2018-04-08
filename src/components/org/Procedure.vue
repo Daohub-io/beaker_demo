@@ -1,5 +1,5 @@
 <template>
-  <div class="storage">
+  <div class="procedure">
       <b-container>
         <b-row>
           <b-col>
@@ -12,7 +12,7 @@
             <b-col cols="12">
                 <b-table 
                   :sort-by.sync="sortBy" 
-                  :items="listTable"
+                  :items="actions"
                   :fields="fields"
                   :hover="true"
                   :small="true">
@@ -25,13 +25,14 @@
 
 <script>
 export default {
-  name: "FileView",
+  name: "ProcedureView",
   data() {
     return {
       sortBy: "key",
       fields: [{ key: "key", sortable: true }, "value"],
-      table: {},
-      error: false
+      actions: [],
+      name: '',
+      address: ''
     };
   },
   created() {
@@ -41,21 +42,13 @@ export default {
     kernel() {
       return this.$kernels()[this.$route.params.id];
     },
-    listTable() {
-      return Object.entries(this.table).map(([key, value]) => {
-        return { key, value: Number(value) }
-      });
-    },
-    tableId() {
-        return Number(this.$route.params.fileId);
-    },
     path() {
       const kernel = this.kernel;
-      const tableId = this.tableId;
-      
+      const name = this.name;
+
       return [
-        { text: String(kernel.name), to: { name: 'k_storage', replace: true } },
-        { text: String(tableId) }
+        { text: String(kernel.name), to: { name: "k_procedures", replace: true } },
+        { text: String(name) }
       ];
     }
   },
@@ -65,25 +58,8 @@ export default {
       const kernelAddr = kernel.options.address;
       const web3 = this.$web3();
 
-      // Get all Used Storage Keys
-      const currentKeys = await this.$getStorageKeys(kernelAddr, 100);
-      if (currentKeys) {
-        this.error = false;
-
-        const tableKeys = currentKeys.filter(key => {
-          return Number(key.substring(0, 4)) === this.tableId;
-        });
-
-        tableKeys.forEach(async key => {
-          this.$set(
-            this.table,
-            key,
-            await web3.eth.getStorageAt(kernelAddr, key)
-          );
-        });
-      } else {
-        this.error = true;
-      }
+      this.name = this.$route.params.procedureId;
+      this.address = await kernel.methods.getProcedure(web3.utils.toHex(name));
     }
   }
 };
@@ -91,18 +67,18 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-.storage h5 {
+.procedure h5 {
   padding: 2rem 0 0;
 }
-.storage .table-hover tbody tr:hover {
+.procedure .table-hover tbody tr:hover {
   cursor: pointer;
 }
 
-.storage header.top {
+.procedure header.top {
   padding: 2rem 0 1rem;
 }
 
-.storage header.top .details {
+.procedure header.top .details {
   width: 100%;
   border-radius: 4px;
   border: 1px solid #9a9a9a;

@@ -24,7 +24,7 @@ export default {
       let kernels = this.$kernels();
       let web3 = this.$web3();
 
-      return Array.from(kernels).map(([address, {name}]) => {
+      return Object.entries(kernels).map(([address, {name}]) => {
           return {
               name,
               address,

@@ -8,14 +8,9 @@
               <b-modal id="modalCreateProc" ref="modal" title="Create Procedure" @ok="createProcedure">
                 <form>
                   <label class="mr-sm-2" for="inlineFormCustomSelectPref">Type</label>
-                  <b-form-select 
-                                v-model="procedure.type"
-                                :options="options"
-                                >
-                  </b-form-select>
                   <b-form-textarea id="textarea1"
-                              v-model="procedure.input"
-                              placeholder="Enter new Procedure Code"
+                              v-model="procedure.abi"
+                              placeholder="Enter new Procedure ABI"
                               :rows="3"
                               :max-rows="100">
                   </b-form-textarea>
@@ -28,7 +23,7 @@
         </b-row>
         <b-row>
           <b-col>
-            <b-table :items="procedures"></b-table>
+            <b-table :items="procedures" @row-clicked="viewProcedure" hover></b-table>
           </b-col>
         </b-row>
       </b-container>
@@ -41,11 +36,9 @@ export default {
   data() {
     return {
       procedures: [],
-      options: ['Opcode', 'ABI', 'Solidity'],
       procedure: {
         name: "",
-        type: "Opcode",
-        input: ""
+        abi: "",
       },
       status: "off"
     };
@@ -55,7 +48,7 @@ export default {
   },
   computed: {
     kernel() {
-      return this.$kernels().get(this.$route.params.id);
+      return this.$kernels()[this.$route.params.id];
     }
   },
   methods: {
@@ -64,39 +57,13 @@ export default {
       const web3 = this.$web3();
       const account = this.$accounts()[1];
 
+      const procedure = this.procedure
       try {
         this.status = "running";
-        window.Instance = instance;
-        let name = web3.utils.toHex(this.procedure.name);
 
-        let code;
-        switch (this.procedure.type) {
-          case "Opcode":
-            code = this.procedure.input
-            break;
-          case "ABI":
-            code = JSON.parse(this.procedure.input).bytecode;
-            break;
-          case "Solidity": {
-            const contract = await web3.eth.compile.solidity(
-              this.procedure.input
-            );
-            code = contract.abi.bytecode;
-            break;
-          }
-        }
+        await this.$createProcedure({kernel: instance, procedure})
+        this.$saveProcedure(kernelAddr, procedure)
 
-        // Convert to Hex
-        code = web3.utils.toHex(code);
-
-        // HACK
-        await this.$unlockAccount(account, '')
-
-        await instance.methods.createProcedure(name, code).send({
-          from: account,
-          gas: this.$MIN_GAS(),
-          gasPrice: this.$MIN_GAS_PRICE()
-        });
       } catch (e) {
         console.error(e);
         this.status = "error";
@@ -123,6 +90,9 @@ export default {
       }
 
       this.procedures = procedures;
+    },
+    viewProcedure(item) {
+      this.$router.push({ path: `procedure/${item.name}` });
     }
   }
 };
@@ -132,5 +102,8 @@ export default {
 <style scoped>
 .procedures .tools {
   padding: 1rem 0;
+}
+.procedures .table-hover tbody tr:hover {
+  cursor: pointer;
 }
 </style>

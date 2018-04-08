@@ -16,7 +16,7 @@ export default {
         // Setup Provider, Default with Localhost
         Vue.web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
         Vue.accounts = [];
-        Vue.kernels = new Map();
+        Vue.kernels = {};
         window.web3 = Vue.web3
 
         Vue.prototype.$web3 = () => Vue.web3;
@@ -41,7 +41,7 @@ export default {
                     params: [address, quantity, start, block]
                 })
             }
-            
+
             let res = await fetch(Vue.web3.currentProvider.host, req)
             let { result } = await res.json()
 
@@ -66,6 +66,7 @@ export default {
 
             await fetch(Vue.web3.currentProvider.host, req)
         }
+
         Vue.prototype.$connect = async function ({ address = "http://localhost:8545" }) {
             Vue.web3.setProvider(address);
             Vue.accounts = await Vue.web3.eth.getAccounts();
@@ -79,9 +80,34 @@ export default {
             const Kernel = new Vue.web3.eth.Contract([KernelABI])
             let instance = await Kernel.deploy({ data: KernelABI.bytecode }).send({ from: account, gas: MIN_GAS, gasPrice: MIN_GAS_PRICE })
             instance.options.jsonInterface = KernelABI.abi;
+
             // Add Kernel to List
-            Vue.kernels.set(instance.options.address, { name, instance });
+            Vue.kernels[instance.options.address] = { name, instance, procedures: {} }
             return instance;
+        }
+
+        Vue.prototype.$createProcedure = async function ({ kernel, procedure, account = false, password = '' }) {
+            // Unlock Account
+            if (!account) account = Vue.accounts[1];
+            await this.$unlockAccount(account, password)
+
+            // Parse Abi
+            const abi = JSON.parse(procedure.abi)
+
+            // Convert to Hex
+            const code = Vue.web3.utils.toHex(abi.bytecode);
+            const hex_name = Vue.web3.utils.toHex(procedure.name)
+
+            await kernel.methods.createProcedure(hex_name, code).send({
+                from: account,
+                gas: this.$MIN_GAS(),
+                gasPrice: this.$MIN_GAS_PRICE()
+            });
+
+        }
+
+        Vue.prototype.$saveProcedure = function (kernelAddr, procedure) {
+            Vue.set(Vue.kernels[kernelAddr].procedures, procedure.name, procedure)
         }
 
     }
