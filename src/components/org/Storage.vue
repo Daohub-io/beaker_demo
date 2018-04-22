@@ -55,7 +55,7 @@ export default {
     listStore() {
       return Object.entries(this.storage).map(([key, value]) => {
         const fileId = Number(key.substring(0,4))
-        return {fileId, key, value}
+        return {fileId, key, value, type: 'raw'}
       })
     },
     tableCount() {
@@ -82,7 +82,7 @@ export default {
       }      
     },
     viewTable(item) {
-      this.$router.push({path: `file/${item.fileId}`})
+      this.$router.push({name: 'k_table', params: { fileId: item.fileId} })
     }
   }
 };

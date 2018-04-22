@@ -33,10 +33,12 @@ export default {
         Vue.web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
         Vue.accounts = [];
         Vue.kernels = {};
+        Vue.modules = [];
 
         Vue.prototype.$web3 = () => Vue.web3;
         Vue.prototype.$accounts = () => Vue.accounts;
         Vue.prototype.$kernels = () => Vue.kernels;
+        Vue.prototype.$modules = () => Vue.modules;
 
         Vue.prototype.$MIN_GAS = () => MIN_GAS;
         Vue.prototype.$MIN_GAS_PRICE = () => MIN_GAS_PRICE;
