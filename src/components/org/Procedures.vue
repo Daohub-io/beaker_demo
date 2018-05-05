@@ -74,7 +74,7 @@ export default {
     },
     async getData() {
       let web3 = this.$web3();
-      const instance = this.kernel.instxance;
+      const instance = this.kernel.instance;
 
       const raw = await instance.methods.listProcedures().call();
       const procedures = raw
