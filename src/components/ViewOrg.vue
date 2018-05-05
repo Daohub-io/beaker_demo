@@ -11,8 +11,8 @@
           <b-col>
              <b-nav class="sub_bar" tabs>
                 <b-nav-item :to="{name: 'k_storage'}" exact>Storage</b-nav-item>
+                <b-nav-item :to="{name: 'k_orders'}">Orders</b-nav-item>
                 <b-nav-item :to="{name: 'k_procedures'}">Procedures</b-nav-item>
-                <b-nav-item :to="{name: 'k_actions'}">Actions</b-nav-item>
             </b-nav>
           </b-col>
         </b-row>

@@ -17,7 +17,7 @@
             <b-col cols="12">
                 <b-table 
                   :sort-by.sync="sortBy" 
-                  :items="listStore"
+                  :items="listFiles"
                   :fields="fields"
                   :hover="true"
                   :small="true"
@@ -57,6 +57,18 @@ export default {
         const fileId = Number(key.substring(0,4))
         return {fileId, key, value, type: 'raw'}
       })
+    },
+    listFiles() {
+      let keys = this.listStore
+      let keyMap = keys.reduce((files, values) => {
+        if (files[values.fileId]) {
+          files[values.fileId] += 1;
+        } else {
+          files[values.fileId] = 1;
+        }
+        return files;
+      }, {})
+      return Object.entries(keyMap).map(([fileId, size]) => ({ fileId, size, type: 'raw' }))
     },
     tableCount() {
       return new Set(Object.keys(this.storage).map(key => Number(key.substring(0,4)))).size

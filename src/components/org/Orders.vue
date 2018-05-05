@@ -1,10 +1,23 @@
 <template>
-  <div class=".actions">
+  <div class="orders">
       <b-container>
+        <b-row>
+          <b-col cols="2">
+            <header class="top">
+              <b-btn v-b-modal.modalCreateOrder size="sm">New Order</b-btn>
+              <b-modal id="modalCreateOrder" ref="modal" title="New Order" @ok="createOrder">
+                <form>
+                  <label class="mr-sm-2" for="inlineFormCustomSelectPref">Type</label>
+                  <b-form-input v-model="order.name" placeholder="Order Name"></b-form-input>
+                </form>
+              </b-modal>
+            </header>
+          </b-col>
+        </b-row>
         <b-row>
             <b-col cols="12">
                 <b-table 
-                  :items="listActions"
+                  :items="orders"
                   :fields="fields"
                   :hover="true"
                   :small="true"
@@ -18,17 +31,18 @@
 
 <script>
 export default {
-  name: ".View",
+  name: "Orders",
   data() {
     return {
+      order: {
+        name: ''
+      },
+      orders: [],
       fields: [
         'name'
       ],
       error: false
     };
-  },
-  created() {
-    this.getData();
   },
   computed: {
     kernel() {
@@ -45,26 +59,12 @@ export default {
     }
   },
   methods: {
-    async getData() {
-      const kernel = this.kernel.instance
-      const kernelAddr = kernel.options.address
-      const web3 = this.$web3();
-
-      // Get all Used Storage Keys
-      const currentKeys = await this.$getStorageKeys(kernelAddr, 100);
-      if (currentKeys) {
-        this.error = false
-
-      // See https://vuejs.org/v2/guide/list.html#Object-Change-Detection-Caveats
-        currentKeys.forEach(async key => {
-          this.$set(this.storage, key, await web3.eth.getStorageAt(kernelAddr, key))
-        })
-      } else {
-        this.error = true
-      }      
-    },
     viewAction(item) {
       
+    },
+    createOrder() {
+      this.orders.push({ name: this.order.name});
+      this.order.name = '';
     }
   }
 };
@@ -73,18 +73,16 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 
-.actions h5 {
-  padding: 2rem 0 0;
-}
-.actions .table-hover tbody tr:hover {
+
+.orders .table-hover tbody tr:hover {
   cursor: pointer;
 }
 
-.actions header.top {
+.orders header.top {
   padding: 2rem 0 1rem;
 }
 
-.actions header.top .details {
+.orders header.top .details {
   width: 100%;
   border-radius: 4px;
   border: 1px solid #9a9a9a;
