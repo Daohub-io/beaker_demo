@@ -1,33 +1,6 @@
 <template>
   <div id="app">
-
-    <b-navbar toggleable variant="dark" type="dark">
-      <b-container>
-        <b-navbar-brand>Daolab</b-navbar-brand>
-        <b-navbar-nav>
-          <b-nav-item to="/org/list">List</b-nav-item>
-          <b-nav-item to="/org/create">Create</b-nav-item>
-        </b-navbar-nav>
-        <b-navbar-nav class="ml-auto">
-          <b-nav-form>
-            <b-btn v-b-modal.modalConnection size="sm" :variant="connected ? 'success': 'danger'">{{ connected ? 'Connected': 'No Connection'}}</b-btn>
-            <b-modal id="modalConnection" ref="modal" title="Set Connection" @ok="handleOk">
-              <form @submit.stop.prevent="handleOk">
-                <p>Network Id: {{ network.id }}</p>
-                <p>Type: {{ network.type }} </p>
-                <ul>
-                  Accounts:
-                  <li v-for="account in accounts">
-                     {{ account }} 
-                  </li>
-                </ul>
-                <b-form-input type="text" placeholder="Enter Node Address" v-model="address"></b-form-input>
-              </form>
-            </b-modal>
-          </b-nav-form>
-        </b-navbar-nav>
-      </b-container>
-    </b-navbar>
+    <Navbar></Navbar>
     <div class="content">
       <router-view/>
     </div>
@@ -35,54 +8,22 @@
 </template>
 
 <script>
-import Contracts from "Contracts";
-import Web3 from "web3";
 
 // Import Bootstrap
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 
+import Navbar from '@/components/Navbar'
+
 export default {
   name: "App",
   data() {
-    return {
-      connected: null,
-      address: "http://localhost:8545",
-      accounts: [],
-      network: {
-        id: "",
-        type: ""
-      }
-    };
+    return {};
   },
-  created() {
-    this.connect();
-  },
-  methods: {
-    async handleOk() {
-      await this.connect();
-      this.$refs.modal.hide();
-    },
-    async connect() {
-      try {
-        await this.$connect({ address: this.address });
-
-        const web3 = this.$web3();
-        this.network.id = await web3.eth.net.getId();
-        this.network.type = await web3.eth.net.getNetworkType();
-        this.accounts = this.$accounts();
-        
-      } catch (e) {
-        console.error(e, `Invalid Connection`);
-        this.connected = false;
-        this.network.id = false;
-        this.network.type = false;
-        return;
-      }
-      this.connected = true;
-    }
-  }
-};
+  components: { Navbar },
+  created() {},
+  methods: {}
+}
 </script>
 
 <style>

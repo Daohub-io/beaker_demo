@@ -1,11 +1,7 @@
 <template>
   <div class="list">
     <b-container>
-      <b-table striped hover :items="modules">
-        <template slot="name" slot-scope="data">
-          <b-btn size="sm" :to="'/module/'+data.item.address">{{data.item.name}}</b-btn>
-        </template>
-      </b-table>
+      
     </b-container>
   </div>
 </template>
@@ -13,17 +9,17 @@
 <script>
 
 export default {
-  name: "ListModules",
+  name: "ListOrg",
   data() {
     return {};
   },
   computed: {
     // See http://web3js.readthedocs.io/en/1.0/web3-eth-contract.html#properties
-    modules() {
-      let modules = this.$modules();
+    organizations() {
+      let kernels = this.$kernels();
       let web3 = this.$web3();
 
-      return modules.map(module => {
+      return Object.entries(kernels).map(([address, {name}]) => {
           return {
               name,
               address,

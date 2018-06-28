@@ -18,7 +18,7 @@
 <script>
 export default {
   name: "Login",
-  data() {
+  data() { 
     return {
       username: "",
       email: "",
@@ -34,19 +34,6 @@ export default {
     }
   },
   computed: {
-    // See http://web3js.readthedocs.io/en/1.0/web3-eth-contract.html#properties
-    organizations() {
-      let kernels = this.$kernels();
-      let web3 = this.$web3();
-
-      return Array.from(kernels).map(([address, { name }]) => {
-        return {
-          name,
-          address,
-          balance: 0
-        };
-      });
-    }
   }
 };
 </script>

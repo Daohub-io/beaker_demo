@@ -73,7 +73,7 @@ export default {
     tableCount() {
       return new Set(Object.keys(this.storage).map(key => Number(key.substring(0,4)))).size
     }
-  },
+  }, 
   methods: {
     async getData() {
       const kernel = this.kernel.instance

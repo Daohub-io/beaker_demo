@@ -1,10 +1,10 @@
 <template>
-  <div class="org">
+  <div class="instance">
     <header>
       <b-container>
         <b-row>
           <b-col>
-            <h4>{{ kernel.name }} </h4>
+            <h4>{{ kernel.name }}</h4>
           </b-col>
         </b-row>
         <b-row>
@@ -24,10 +24,10 @@
 
 <script>
 export default {
-  name: "ViewOrg",
+  name: "Instance",
   data() {
 
-    let id = this.$route.params.id;
+    let id = this.$route.params.instance;
 
     // See http://web3js.readthedocs.io/en/1.0/web3-eth-contract.html#properties
     return {};
