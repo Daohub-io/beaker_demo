@@ -6,9 +6,10 @@ import Login from '@/components/Login'
 import Explore from '@/components/Explore'
 import Instance from '@/components/Instance'
 
-import Org from '@/components/Org'
+import UserProjects from '@/components/UserProjects'
+import NewProject from '@/components/NewProject'
 
-import OrgStorage from '@/components/org/Storage.vue'
+import Org from '@/components/org/Storage.vue'
 import OrgFile from '@/components/org/File.vue'
 import OrgProcedures from '@/components/org/Procedures.vue'
 import OrgProcedure from '@/components/org/Procedure.vue'
@@ -19,12 +20,16 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '',
       component: Home
     },
     {
       path: '/login',
       component: Login
+    },
+    {
+      path: '/projects/new',
+      component: NewProject
     },
     {
       path: '/:org',
@@ -34,7 +39,7 @@ export default new Router({
           component: Org,
         },
         {
-          path: '/:instance',
+          path: ':instance',
           component: Instance
         }
       ]

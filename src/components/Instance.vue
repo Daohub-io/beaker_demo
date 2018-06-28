@@ -26,10 +26,8 @@
 export default {
   name: "Instance",
   data() {
-
     let id = this.$route.params.instance;
 
-    // See http://web3js.readthedocs.io/en/1.0/web3-eth-contract.html#properties
     return {};
   },
   mounted() {
