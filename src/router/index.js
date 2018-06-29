@@ -4,7 +4,13 @@ import Router from 'vue-router'
 import Home from '@/components/Home'
 import Login from '@/components/Login'
 import Explore from '@/components/Explore'
+
 import Contract from '@/components/Contract'
+import ContractState from '@/components/contract/State'
+import ContractRequests from '@/components/contract/Requests'
+import ContractActors from '@/components/contract/Actors'
+import ContractTx from '@/components/contract/Transactions'
+
 
 import User from '@/components/User'
 import NewProject from '@/components/NewProject'
@@ -12,7 +18,6 @@ import NewProject from '@/components/NewProject'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
   routes: [
     {
       path: '',
@@ -29,7 +34,29 @@ export default new Router({
     {
       path: '/:owner/:contract',
       name: 'contract',
-      component: Contract
+      component: Contract,
+      children: [
+        {
+          path: '',
+          name: 'contract-state',
+          component: ContractState
+        },
+        {
+          path: 'requests',
+          name: 'contract-requests',
+          component: ContractRequests
+        },
+        {
+          path: 'actors',
+          name: 'contract-actors',
+          component: ContractActors
+        },
+        {
+          path: 'tx',
+          name: 'contract-tx',
+          component: ContractTx
+        }
+      ]
     },
     {
       path: '/:user',
