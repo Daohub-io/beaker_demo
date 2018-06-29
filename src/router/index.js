@@ -4,20 +4,15 @@ import Router from 'vue-router'
 import Home from '@/components/Home'
 import Login from '@/components/Login'
 import Explore from '@/components/Explore'
-import Instance from '@/components/Instance'
+import Contract from '@/components/Contract'
 
-import UserProjects from '@/components/UserProjects'
+import User from '@/components/User'
 import NewProject from '@/components/NewProject'
-
-import Org from '@/components/org/Storage.vue'
-import OrgFile from '@/components/org/File.vue'
-import OrgProcedures from '@/components/org/Procedures.vue'
-import OrgProcedure from '@/components/org/Procedure.vue'
-import OrgOrders from '@/components/org/Orders.vue'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '',
@@ -32,17 +27,13 @@ export default new Router({
       component: NewProject
     },
     {
-      path: '/:org',
-      children: [
-        {
-          path: '',
-          component: Org,
-        },
-        {
-          path: ':instance',
-          component: Instance
-        }
-      ]
+      path: '/:owner/:contract',
+      name: 'contract',
+      component: Contract
+    },
+    {
+      path: '/:user',
+      component: User,
     },
     {
       path: '/explore',

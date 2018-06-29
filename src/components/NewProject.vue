@@ -10,12 +10,12 @@
         </b-col>
         <b-col cols="8">
           <b-tabs class="options">
-            <b-tab title="Blank project" active>
-              <b-form class="basic" @submit="createOrg" @reset="onReset">
+            <b-tab title="Blank project" class="blank">
+              <b-form class="basic" @reset="onReset" novalidate>
                 <b-form-row>
                   <b-col cols="6">
                     <b-form-group label="Project Path" label-for="project_path">
-                      <b-form-input id="project_path" type="text" v-model="path" placeholder="https://daolab.io/" />
+                      <b-form-input id="project_path" type="text" :value ="path" placeholder="https://daolab.io/" readonly/>
                     </b-form-group>
                   </b-col>
                   <b-col cols="6">
@@ -43,15 +43,34 @@
                     </b-form-radio>
                   </b-form-radio-group>
                 </b-form-group>
-                <!-- <b-form-input type="password" v-if="selected_account" v-model="password" placeholder="Account Password" /> -->
-                <b-button type="submit" variant="primary">Create</b-button>
+                <b-button variant="primary" @click="createProject">Create</b-button>
                 <b-button type="reset" variant="danger">Reset</b-button>
-
-                <p v-if="done"> Created </p>
               </b-form>
             </b-tab>
-            <b-tab title="Create from template"></b-tab>
-            <b-tab title="Import project"></b-tab>
+            <b-tab title="Create from template" class="template">
+              <ul class="list-unstyled">
+                <b-media tag="li">
+                  <h5>Simple Token</h5>
+                  <p>A simple template including an erc20 compatible token</p>
+                  <b-button>Use Template</b-button>
+                </b-media>
+                <b-media tag="li">
+                  <h5>Membership System</h5>
+                  <p>A template including a root with a membership system</p>
+                  <b-button>Use Template</b-button>
+                </b-media>
+              </ul>
+            </b-tab>
+            <b-tab title="Import project" class="import">
+              <b-form>
+                <b-form-group label="Import project from" label-for="project_import">
+                  <b-button>Daolab</b-button>
+                  <b-button>Github</b-button>
+                  <b-button>Gitlab</b-button>
+                  <b-button>By Url</b-button>
+                </b-form-group>
+              </b-form>
+            </b-tab>
           </b-tabs>
         </b-col>
       </b-row>
@@ -60,39 +79,42 @@
 </template>
 
 <script>
+import Vue from 'vue'
 
 export default {
   name: "NewProject",
   data() {
+    let owner = Vue.currentUser().name.toLowerCase();
+    
     return {
-      path: 'https://daolab.io/',
+      owner,
       name: '',
       description: '',
-      visibility: ''
+      visibility: 'private'
     };
   },
-  mounted() {
-    this.accounts = this.$accounts()
+  computed: {
+    path() {
+      return `https://daolab.io/${this.owner}/${this.name}`;
+    }
   },
   methods: {
-    async createOrg() {
-      let account = this.selected_account
-      let name = this.name
-      let password = this.password;
+    createProject() {
+      const {owner, name, description, visibility } = this;
 
-      try {
-        let instance = await this.$createKernel({name, account, password });
-        // Update Frontend
-        this.done = true;
-      } catch (e) {
-        console.error(e)
-      }
+      Vue.newProject({ 
+        name,
+        description,
+        visibility
+      })
+
+      this.$router.replace({ name: 'contract', params: { owner, contract: name } })
     },
     onReset() {
-      this.name = ''
-      this.done = false
-      this.selected_account = false
-      this.password = false
+      this.owner = 'user',
+      this.name = '',
+      this.description = '',
+      this.visibility = 'private'
     }
   }
 };
@@ -104,24 +126,27 @@ export default {
 header, .options {
   padding-top: 2rem;
 }
-.options {
-  
+
+.blank, .template, .import {
+  padding-top: 2rem;
 }
 
-.radio-group .choice{
+.blank .radio-group .choice{
   margin-bottom: 1rem;
 }
-.radio-group h6, .radio-group p {
+.blank .radio-group h6, .radio-group p {
   position: relative;
   left: 20px;
   top: 2px;
   margin: 0;
 }
-.radio-group i {
+.blank .radio-group i {
   position: absolute;
   left: -20px;
 }
-.basic {
-  margin-top: 2rem;
+
+
+.template li {
+  margin-bottom: 1rem;
 }
 </style>

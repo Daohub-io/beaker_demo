@@ -3,8 +3,10 @@ import App from './App'
 import router from './router'
 
 import BootstrapVue from 'bootstrap-vue'
+import State from './state'
 
 Vue.use(BootstrapVue)
+Vue.use(State)
 
 Vue.config.productionTip = false
 

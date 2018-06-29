@@ -18,7 +18,7 @@
             </b-nav-item>
             <b-nav-item-dropdown right>
                 <template slot="button-content">
-                    <b-img rounded="circle" blank width="30" height="30" blank-color="#a3f"/>
+                    <b-img rounded="circle" blank width="30" height="30" :blank-color="color"/>
                 </template>
                 <b-dropdown-item href="#">Profile</b-dropdown-item>
                 <b-dropdown-item href="#">Logout</b-dropdown-item>
@@ -29,11 +29,15 @@
 </template>
 
 <script>
+import Vue from 'vue'
 
 export default {
   name: "Navbar",
   data() {
-    return {};
+    let user = Vue.currentUser();
+    return {
+        color: user.color
+    };
   },
   computed: {}
 };

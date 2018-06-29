@@ -4,15 +4,15 @@
       <b-container>
         <b-row>
           <b-col>
-            <h4>{{ kernel.name }}</h4>
+            <h4> {{ owner }} / {{ name }}</h4>
           </b-col>
         </b-row>
         <b-row>
           <b-col>
              <b-nav class="sub_bar" tabs>
-                <b-nav-item :to="{name: 'k_storage'}" exact>Storage</b-nav-item>
+                <!-- <b-nav-item :to="{name: 'state'}" exact>Storage</b-nav-item>
                 <b-nav-item :to="{name: 'k_orders'}">Orders</b-nav-item>
-                <b-nav-item :to="{name: 'k_procedures'}">Procedures</b-nav-item>
+                <b-nav-item :to="{name: 'k_procedures'}">Procedures</b-nav-item> -->
             </b-nav>
           </b-col>
         </b-row>
@@ -26,25 +26,13 @@
 export default {
   name: "Instance",
   data() {
-    let id = this.$route.params.instance;
+    let {owner, contract } = this.$route.params;
 
-    return {};
-  },
-  mounted() {
-    this.getData();
+    return { owner, name: contract };
   },
   computed: {
-    kernel() {
-      return this.$kernels()[this.$route.params.id];
-    },
-    routeName() {
-      return this.$route.name
-    }
   },
   methods: {
-    async getData() {
-      let web3 = this.$web3();
-    }
   }
 };
 </script>
