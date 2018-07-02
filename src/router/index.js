@@ -10,6 +10,9 @@ import ContractState from '@/components/contract/State'
 import ContractRequests from '@/components/contract/Requests'
 import ContractActors from '@/components/contract/Actors'
 import ContractTx from '@/components/contract/Transactions'
+import ContractMetrics from '@/components/contract/Metrics'
+import ContractNetwork from '@/components/contract/Network'
+import ContractSettings from '@/components/contract/Settings'
 
 
 import User from '@/components/User'
@@ -33,12 +36,11 @@ export default new Router({
     },
     {
       path: '/:owner/:contract',
-      name: 'contract',
       component: Contract,
       children: [
         {
           path: '',
-          name: 'contract-state',
+          name: 'contract',
           component: ContractState
         },
         {
@@ -55,6 +57,21 @@ export default new Router({
           path: 'tx',
           name: 'contract-tx',
           component: ContractTx
+        },
+        {
+          path: 'metrics',
+          name: 'contract-metrics',
+          component: ContractMetrics
+        },
+        {
+          path: 'network',
+          name: 'contract-network',
+          component: ContractNetwork
+        },
+        {
+          path: 'settings',
+          name: 'contract-settings',
+          component: ContractSettings
         }
       ]
     },

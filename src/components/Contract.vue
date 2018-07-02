@@ -1,5 +1,5 @@
 <template>
-  <div class="instance">
+  <div class="contract">
     <header>
       <b-container>
         <b-row>
@@ -10,9 +10,13 @@
         <b-row>
           <b-col>
              <b-nav class="sub_bar" tabs>
-                <!-- <b-nav-item :to="{name: 'state'}" exact>Storage</b-nav-item>
-                <b-nav-item :to="{name: 'k_orders'}">Orders</b-nav-item>
-                <b-nav-item :to="{name: 'k_procedures'}">Procedures</b-nav-item> -->
+                <b-nav-item :to="{name: 'contract'}" exact>State</b-nav-item>
+                <b-nav-item :to="{name: 'contract-requests'}">Requests</b-nav-item>
+                <b-nav-item :to="{name: 'contract-actors'}">Actors</b-nav-item>
+                <b-nav-item :to="{name: 'contract-tx'}">Transactions</b-nav-item>
+                <b-nav-item :to="{name: 'contract-metrics'}">Metrics</b-nav-item>
+                <b-nav-item :to="{name: 'contract-network'}">Network</b-nav-item>
+                <b-nav-item :to="{name: 'contract-settings'}">Settings</b-nav-item>
             </b-nav>
           </b-col>
         </b-row>
@@ -24,7 +28,7 @@
 
 <script>
 export default {
-  name: "Instance",
+  name: "Contract",
   data() {
     let {owner, contract } = this.$route.params;
 
@@ -40,13 +44,13 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-.org header {
+header {
   background-color: #ddd;
-  padding-top: 1rem;
+  padding-top: 2rem;
   padding-bottom: 0;
 }
 
-.org h4 {
+header h4 {
   margin: 0 0 1rem 0;
 }
 </style>

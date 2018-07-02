@@ -1,7 +1,7 @@
 <template>
 <b-navbar toggleable variant="dark" type="dark" class="daolab-navbar">
     <b-container>
-        <b-navbar-brand>Daolab</b-navbar-brand>
+        <b-navbar-brand href="/">Daolab</b-navbar-brand>
         <b-navbar-nav class="links">
             <b-nav-form class="search-bar">
                 <b-form-input :state="null" type="text" placeholder="Search contracts.."/>
