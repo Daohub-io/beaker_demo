@@ -15,7 +15,7 @@ import ContractNetwork from '@/components/contract/Network'
 import ContractSettings from '@/components/contract/Settings'
 
 
-import User from '@/components/User'
+import Account from '@/components/Account'
 import NewProject from '@/components/NewProject'
 
 Vue.use(Router)
@@ -76,8 +76,9 @@ export default new Router({
       ]
     },
     {
-      path: '/:user',
-      component: User,
+      path: '/:account',
+      name: 'account',
+      component: Account,
     },
     {
       path: '/explore',

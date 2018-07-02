@@ -4,19 +4,22 @@
       <b-container>
         <b-row>
           <b-col>
-            <h4> {{ owner }} / {{ name }}</h4>
+            <h4>
+              <router-link :to="{name: 'account', params: { account: owner }}">{{ owner }}</router-link> / 
+              <router-link :to="{name: 'contract', params: { owner, name }}">{{ name }}</router-link>
+            </h4>
           </b-col>
         </b-row>
         <b-row>
           <b-col>
-             <b-nav class="sub_bar" tabs>
-                <b-nav-item :to="{name: 'contract'}" exact>State</b-nav-item>
-                <b-nav-item :to="{name: 'contract-requests'}">Requests</b-nav-item>
-                <b-nav-item :to="{name: 'contract-actors'}">Actors</b-nav-item>
-                <b-nav-item :to="{name: 'contract-tx'}">Transactions</b-nav-item>
-                <b-nav-item :to="{name: 'contract-metrics'}">Metrics</b-nav-item>
-                <b-nav-item :to="{name: 'contract-network'}">Network</b-nav-item>
-                <b-nav-item :to="{name: 'contract-settings'}">Settings</b-nav-item>
+             <b-nav class="sub-bar" tabs>
+                <b-nav-item :to="{name: 'contract'}" exact><i class="fas fa-book"></i> State</b-nav-item>
+                <b-nav-item :to="{name: 'contract-requests'}"><i class="fas fa-edit"></i> Requests <b-badge variant="light">0</b-badge></b-nav-item>
+                <b-nav-item :to="{name: 'contract-actors'}"><i class="fas fa-bolt"></i> Actors <b-badge variant="light">0</b-badge></b-nav-item>
+                <b-nav-item :to="{name: 'contract-tx'}"><i class="fas fa-table"></i> Transactions <b-badge variant="light">0</b-badge></b-nav-item>
+                <b-nav-item :to="{name: 'contract-metrics'}"><i class="fas fa-chart-bar"></i> Metrics</b-nav-item>
+                <b-nav-item :to="{name: 'contract-network'}"><i class="fas fa-broadcast-tower"></i> Network</b-nav-item>
+                <b-nav-item :to="{name: 'contract-settings'}"><i class="fas fa-cog"></i> Settings</b-nav-item>
             </b-nav>
           </b-col>
         </b-row>
@@ -52,5 +55,19 @@ header {
 
 header h4 {
   margin: 0 0 1rem 0;
+}
+
+ul.sub-bar >>> li a {
+  color: rgb(56, 56, 56);
+}
+ul.sub-bar >>> li a i {
+  color: rgb(150, 150, 150);
+}
+
+ul.sub-bar >>> li a.active {
+  color: #333;
+}
+ul.sub-bar >>> li a.active i {
+  color: #333;
 }
 </style>
