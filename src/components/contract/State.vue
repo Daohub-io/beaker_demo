@@ -32,9 +32,15 @@
 </template>
 
 <script>
+import Vue from 'vue'
+
 export default {
   name: "ContractState",
   data() {
+
+    let { contract } = this.$route.params;
+    let project = Vue.currentUser().projects[contract];
+
     return {
       fields: [
         "name",
@@ -43,17 +49,7 @@ export default {
         "latest_cost",
         "last_update"
       ],
-      items: [
-        {
-          name: "system",
-          icon: "folder",
-          type: "folder",
-          size: 24,
-          latest_transaction: "os#install",
-          latest_cost: "0.030",
-          last_update: "A month ago"
-        }
-      ]
+      items: project.files
     };
   },
   computed: {}
