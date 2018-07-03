@@ -1,21 +1,21 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Home from '@/views/Home'
-import Login from '@/views/Login'
-import Explore from '@/views/Explore'
+import Home from '@/views/Home.vue'
+import Login from '@/views/Login.vue'
+import Explore from '@/views/Explore.vue'
 
-import Contract from '@/views/Contract'
-import ContractState from '@/views/contract/State'
-import ContractRequests from '@/views/contract/Requests'
-import ContractActors from '@/views/contract/Actors'
-import ContractTx from '@/views/contract/Transactions'
-import ContractMetrics from '@/views/contract/Metrics'
-import ContractNetwork from '@/views/contract/Network'
-import ContractSettings from '@/views/contract/Settings'
+import Contract from '@/views/Contract.vue'
+import ContractState from '@/views/contract/State.vue'
+import ContractRequests from '@/views/contract/Requests.vue'
+import ContractActors from '@/views/contract/Actors.vue'
+import ContractTx from '@/views/contract/Transactions.vue'
+import ContractMetrics from '@/views/contract/Metrics.vue'
+import ContractNetwork from '@/views/contract/Network.vue'
+import ContractSettings from '@/views/contract/Settings.vue'
 
-import Account from '@/views/Account'
-import NewProject from '@/views/NewProject'
+import Account from '@/views/Account.vue'
+import NewProject from '@/views/NewProject.vue'
 
 Vue.use(Router)
 
