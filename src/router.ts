@@ -1,12 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+import NotFound from '@/views/NotFound.vue'
 import Home from '@/views/Home.vue'
 import Login from '@/views/Login.vue'
 import Explore from '@/views/Explore.vue'
 
 import Contract from '@/views/Contract.vue'
 import ContractState from '@/views/contract/State.vue'
+import ContractStateTree from '@/views/contract/state/Tree.vue'
 import ContractRequests from '@/views/contract/Requests.vue'
 import ContractActors from '@/views/contract/Actors.vue'
 import ContractTx from '@/views/contract/Transactions.vue'
@@ -26,6 +28,10 @@ export default new Router({
       component: Home
     },
     {
+      path: '/404',
+      component: NotFound
+    },
+    {
       path: '/login',
       component: Login
     },
@@ -41,6 +47,11 @@ export default new Router({
           path: '',
           name: 'contract',
           component: ContractState
+        },
+        {
+          path: 'tree/:block/:name',
+          name: 'contract-state-tree',
+          component: ContractStateTree
         },
         {
           path: 'requests',

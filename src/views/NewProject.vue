@@ -79,18 +79,17 @@
 </template>
 
 <script>
-import Vue from 'vue'
+import Vue from "vue";
 
 export default {
   name: "NewProject",
   data() {
-    let owner = Vue.currentUser().name.toLowerCase();
-    
+    let owner = Vue.$currentUser().name.toLowerCase();
     return {
       owner,
-      name: '',
-      description: '',
-      visibility: 'private'
+      name: "",
+      description: "",
+      visibility: "private"
     };
   },
   computed: {
@@ -100,21 +99,20 @@ export default {
   },
   methods: {
     createProject() {
-      const {owner, name, description, visibility } = this;
+      const { owner, name, description, visibility } = this;
 
-      Vue.newProject({ 
-        name,
-        description,
-        visibility
-      })
+      Vue.$newProject(name, description, visibility);
 
-      this.$router.replace({ name: 'contract', params: { owner, contract: name } })
+      this.$router.replace({
+        name: "contract",
+        params: { owner, contract: name }
+      });
     },
     onReset() {
-      this.owner = 'user',
-      this.name = '',
-      this.description = '',
-      this.visibility = 'private'
+      this.owner = "user";
+      this.name = "";
+      this.description = "";
+      this.visibility = "private";
     }
   }
 };
@@ -122,19 +120,22 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-header, .options {
+header,
+.options {
   padding-top: 2rem;
 }
 
-.blank, .template, .import {
+.blank,
+.template,
+.import {
   padding-top: 2rem;
 }
 
-.blank .radio-group .choice{
+.blank .radio-group .choice {
   margin-bottom: 1rem;
 }
-.blank .radio-group h6, .radio-group p {
+.blank .radio-group h6,
+.radio-group p {
   position: relative;
   left: 20px;
   top: 2px;
@@ -144,7 +145,6 @@ header, .options {
   position: absolute;
   left: -20px;
 }
-
 
 .template li {
   margin-bottom: 1rem;

@@ -1,16 +1,6 @@
 <template>
-  <div class="state">
+  <div class="state-tree">
     <b-container>
-        <b-row>
-            <b-col cols="12">
-                <ul class="summary-bar">
-                    <li><b>{{ items.reduce((sum, item) => item.size + sum, 0) }}</b> Keys</li>
-                    <li><b>4</b> Procedures</li>
-                    <li><b>0</b> Eth</li>
-                    <li><b>1</b> Account</li>
-                </ul>
-            </b-col>
-        </b-row>
         <b-row>
             <b-col cols="12">
                 <b-table :items="items" :fields="fields" class="state-table" thead-class="state-table-head">
@@ -32,14 +22,14 @@
 </template>
 
 <script >
-import Vue from 'vue'
+import Vue from "vue";
 
 export default {
   name: "ContractState",
   data() {
-
-    let { contract } = this.$route.params;
+    let { block, name, contract } = this.$route.params;
     let project = Vue.$currentUser().projects.get(contract);
+    let folder = project.files.find(f => f.name == name);
 
     return {
       fields: [
@@ -49,36 +39,22 @@ export default {
         "latest_cost",
         "last_update"
       ],
-      items: project.files
+      items: [...folder.children.values()]
     };
-  },
-  computed: {}
+  }
+  //   beforeMount() {
+  //     console.log(this.folder)
+  //     if (!this.folder) this.$router.push({ path: "404" });
+  //     if (this.folder.view !== "tree") this.$router.push({ path: "404" });
+  //   },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-ul.summary-bar {
-  padding: 0.8rem 0;
-  margin: 1rem 0;
-  list-style: none;
-  display: flex;
-  width: 100%;
-  justify-content: space-around;
-  border: 1px solid rgb(189, 189, 189);
-  border-radius: 3px;
+.state-tree {
+    margin-top: 1rem;
 }
-
-ul.summary-bar li {
-  flex-basis: 1;
-  font-size: 0.9rem;
-  color: #555;
-}
-
-ul.summary-bar li b {
-  color: #000;
-}
-
 .state-table {
   font-size: 0.9rem;
   border-collapse: separate;

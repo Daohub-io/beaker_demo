@@ -1,107 +1,99 @@
+import Vue from 'vue';
+import { VueConfiguration, VueConstructor } from 'vue/types/vue';
 
 export default { install }
 
-class File {
-    name = ''
-    icon = ''
-    type = 'file'
-    file_size = 0
-    latest_transaction = ''
-    latest_cost = 0
-    last_update = new Date()
-    children = new Map()
+export type View = 'tree' | 'blob' | 'raw';
 
-    constructor(file) { return Object.assign(this, file) }
-
-    push(filename, file) { this.children.set(filename, new File(file))}
-    delete(filename) { this.children.delete(filename) }
-    
-    set size(size: Number) {
-        this.file_size = size;
-    }
-    get size() {
-        if (this.type == 'file') {
-            return this.file_size;
-        } else {
-            let total = 0;
-            for (let child of this.children) {
-                if (child instanceof File) total += child.size()
-            }
-            return total;
-        }
-    }
-
+export class KernelObject {
+    readonly icon: string = 'chip'
+    readonly view: View = 'raw'
+    constructor(public name: string, public location: Array<[number, number]>, public size: number = 0, public latest_transaction: string, public latest_cost = 0, public last_update = new Date()) { }
 }
 
-class Project {
-    name = ''
-    description = ''
-    visibility = 'private'
-    files = []
-    gas = 0
-    actors = []
+export class Folder {
+    readonly icon: string = 'folder';
+    readonly view: View = 'tree'
+    public children: Map<String, File | Folder | KernelObject> = new Map();
 
-    constructor(name, description, visibility) {
-        this.name = name;
-        this.description = description;
-        this.visibility = visibility;
+    constructor(public name: string, public latest_transaction: string, public latest_cost = 0, public last_update = new Date()) { }
 
-        const system_folder = new File({
-            name: "system",
-            icon: "folder",
-            type: "folder",
-            size: 24,
-            latest_transaction: "os#install",
-            latest_cost: "0.030",
-            last_update: "A month ago"
-        });
+    push(filename: String, file: File | Folder | KernelObject) { this.children.set(filename, file) }
+    delete(filename: String) { return this.children.delete(filename) }
 
-        system_folder.push(new File({
-            name: 'files',
-            type: 'object',
-        }))
+    get size() {
+        let total = 0;
+        for (let [_, child] of this.children) {
+            total += child.size
+        }
+        return total;
+    }
+}
 
-        system_folder.push(new File({
-            name: 'procedure_list',
-            type: 'object',
-        }))
+export class File {
+    readonly icon = 'file'
+    readonly view: View = 'blob'
+    constructor(public name: String, public size = 0, public latest_transaction = '', public latest_cost = 0, public last_update = new Date()) { }
+}
 
-        system_folder.push(new File({
-            name: 'capability_lists',
-            type: 'object',
-        }))
+export class Project {
+    public files: Array<File | Folder >;
+    public gas = 0
+    public actors: Array<String> = [];
+
+    constructor(public name: string, public description: string = '', public visibility: 'private' | 'shared' | 'listed' = 'private') {
+
+        const system_folder = new Folder(
+            "system",
+            "os#install",
+            0.030,
+            new Date()
+        );
+
+        system_folder.push('procedures', new KernelObject('procedures', [[0,1000]], 28, 'os#init'))
+        system_folder.push('filesystem', new KernelObject('filesystem', [[1,1000]], 12, 'os#init'))
 
         // Push the system folder
+        this.files = [];
         this.files.push(system_folder)
     }
 
 }
 
-class User {
-    name = ''
-    color = ''
-    projects = {}
+export class User {
+    public color: string;
+    public projects: Map<string, Project> = new Map();
 
-    constructor(name) {
+    constructor(public name: string) {
         this.name = name
-        this.color = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+        this.color = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
     }
 
-    addProject(name, project) {
-        this.projects[name] = project;
+    addProject(name: string, project: Project) {
+        this.projects.set(name, project);
     }
 
 }
 
-function install(Vue, options) {
+declare module 'vue/types/vue' {
+    // Global properties can be declared
+    // on the `VueConstructor` interface
+    interface VueConstructor {
+        $login: (name: string) => void,
+        $currentUser: () => User,
+        $newProject: (name: string, description: string, visibility: 'private' | 'shared' | 'listed') => void
+    }
+}
 
-    let user = new User('John');
+function install(Vue: VueConstructor, options: VueConfiguration) {
 
-    Vue.login = () => { user = new User() }
-    Vue.currentUser = () => user;
+    let user: User | undefined = new User('John');
 
-    Vue.newProject = ({ name, description, visibility}) => {
-        user.addProject(name, new Project(name, description, visibility))
+    Vue.$login = (name: string) => { user = new User(name) }
+    Vue.$currentUser = () => user!;
+
+    Vue.$newProject = (name: string, description: string, visibility: 'private' | 'shared' | 'listed') => {
+        user!.addProject(name, new Project(name, description, visibility))
         // Vue.set(user.projects, name, new Project(name, description, visibility))
     }
 

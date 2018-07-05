@@ -15,8 +15,8 @@
              <b-nav class="sub-bar" tabs>
                 <b-nav-item :to="{name: 'contract'}" exact><i class="fas fa-book"></i> State</b-nav-item>
                 <b-nav-item :to="{name: 'contract-requests'}"><i class="fas fa-edit"></i> Requests <b-badge variant="light">0</b-badge></b-nav-item>
-                <b-nav-item :to="{name: 'contract-actors'}"><i class="fas fa-bolt"></i> Actors <b-badge variant="light">0</b-badge></b-nav-item>
-                <b-nav-item :to="{name: 'contract-tx'}"><i class="fas fa-table"></i> Transactions <b-badge variant="light">0</b-badge></b-nav-item>
+                <b-nav-item :to="{name: 'contract-actors'}"><i class="fas fa-bolt"></i> Actors</b-nav-item>
+                <b-nav-item :to="{name: 'contract-tx'}"><i class="fas fa-table"></i> Transactions</b-nav-item>
                 <b-nav-item :to="{name: 'contract-metrics'}"><i class="fas fa-chart-bar"></i> Metrics</b-nav-item>
                 <b-nav-item :to="{name: 'contract-network'}"><i class="fas fa-broadcast-tower"></i> Network</b-nav-item>
                 <b-nav-item :to="{name: 'contract-settings'}"><i class="fas fa-cog"></i> Settings</b-nav-item>
@@ -30,12 +30,18 @@
 </template>
 
 <script>
+import Vue from "vue";
+
 export default {
   name: "Contract",
   data() {
     let {owner, contract } = this.$route.params;
-
     return { owner, name: contract };
+  },
+  beforeMount() {
+    let {owner, contract } = this.$route.params;
+    let user = Vue.$currentUser()
+    if (user.name.toLowerCase() != owner.toLowerCase() || !user.projects.has(contract)) return this.$router.push({path: '/404'});
   },
   computed: {
   },
