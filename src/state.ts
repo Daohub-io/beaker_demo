@@ -37,7 +37,7 @@ export class File {
 }
 
 export class Project {
-    public files: Array<File | Folder >;
+    public files: Array<File | Folder>;
     public gas = 0
     public actors: Array<String> = [];
 
@@ -50,8 +50,8 @@ export class Project {
             new Date()
         );
 
-        system_folder.push('procedures', new KernelObject('procedures', [[0,1000]], 28, 'os#init'))
-        system_folder.push('filesystem', new KernelObject('filesystem', [[1,1000]], 12, 'os#init'))
+        system_folder.push('procedures', new KernelObject('procedures', [[0, 1000]], 28, 'os#init'))
+        system_folder.push('filesystem', new KernelObject('filesystem', [[1, 1000]], 12, 'os#init'))
 
         // Push the system folder
         this.files = [];
