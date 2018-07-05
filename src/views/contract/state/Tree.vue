@@ -25,7 +25,7 @@
 import Vue from "vue";
 
 export default {
-  name: "ContractState",
+  name: "ContractStateTree",
   data() {
     let { block, name, contract } = this.$route.params;
     let project = Vue.$currentUser().projects.get(contract);

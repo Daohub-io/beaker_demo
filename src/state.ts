@@ -8,7 +8,7 @@ export type View = 'tree' | 'blob' | 'raw';
 export class KernelObject {
     readonly icon: string = 'chip'
     readonly view: View = 'raw'
-    constructor(public name: string, public location: Array<[number, number]>, public size: number = 0, public latest_transaction: string, public latest_cost = 0, public last_update = new Date()) { }
+    constructor(public name: string, public location: Array<[number, number, number]>, public size: number = 0, public latest_transaction: string, public latest_cost = 0, public last_update = new Date()) { }
 }
 
 export class Folder {
@@ -50,8 +50,9 @@ export class Project {
             new Date()
         );
 
-        system_folder.push('procedures', new KernelObject('procedures', [[0, 1000]], 28, 'os#init'))
-        system_folder.push('filesystem', new KernelObject('filesystem', [[1, 1000]], 12, 'os#init'))
+        system_folder.push('version', new KernelObject('version', [[0, 0, 2]], 2, 'os#init'))
+        system_folder.push('procedures', new KernelObject('procedures', [[0, 1000, 2000]], 28, 'os#init'))
+        system_folder.push('filesystem', new KernelObject('filesystem', [[1, 0, 1000]], 12, 'os#init'))
 
         // Push the system folder
         this.files = [];
