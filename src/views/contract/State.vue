@@ -49,7 +49,7 @@ export default {
         "latest_cost",
         "last_update"
       ],
-      items: project.files
+      items: [...project.files.values()]
     };
   },
   computed: {}

@@ -21,14 +21,16 @@
   </div>
 </template>
 
-<script>
+<script >
 import Vue from "vue";
 
 export default {
   name: "ContractStateTree",
   data() {
-    let files = this.files()
-    
+    let { block, name, contract } = this.$route.params;
+    let project = Vue.$currentUser().projects.get(contract);
+    let folder = project.files.find(f => f.name == name);
+
     return {
       fields: [
         "name",
@@ -37,34 +39,8 @@ export default {
         "latest_cost",
         "last_update"
       ],
-      items: files
+      items: [...folder.children.values()]
     };
-  },
-  methods: {
-    tree() {
-      const params = this.$route.params;
-      const depth = Object.keys(params).length - 3;
-      let tree = [];
-      for (let i = 0; i < depth; i += 1) {
-        tree[i] = params[i];
-      }
-      return tree;
-    },
-    files() {
-      const { block, contract } = this.$route.params;
-      let project = Vue.$currentUser().projects.get(contract);
-
-      let result = this.tree().reduce((folder, item, i) => {
-        // Check if folder has item
-        if (!folder || !folder.has(item)) return false;
-        // Get Item
-        return folder.get(item);
-        
-      }, project.files);
-
-      if (!result || result.view !== 'tree') return false;
-      return [...result.children.values()];
-    }
   }
   //   beforeMount() {
   //     console.log(this.folder)
@@ -77,7 +53,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .state-tree {
-  margin-top: 1rem;
+    margin-top: 1rem;
 }
 .state-table {
   font-size: 0.9rem;

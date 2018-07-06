@@ -9,6 +9,8 @@ import Explore from '@/views/Explore.vue'
 import Contract from '@/views/Contract.vue'
 import ContractState from '@/views/contract/State.vue'
 import ContractStateTree from '@/views/contract/state/Tree.vue'
+import ContractStateBlob from '@/views/contract/state/Blob.vue'
+
 import ContractRequests from '@/views/contract/Requests.vue'
 import ContractActors from '@/views/contract/Actors.vue'
 import ContractTx from '@/views/contract/Transactions.vue'
@@ -49,9 +51,14 @@ export default new Router({
           component: ContractState
         },
         {
-          path: 'tree/:block/:name',
+          path: 'tree/:block/(.*)',
           name: 'contract-state-tree',
           component: ContractStateTree
+        },
+        {
+          path: 'blob/:block/(.*)',
+          name: 'contract-state-blob',
+          component: ContractStateBlob
         },
         {
           path: 'requests',

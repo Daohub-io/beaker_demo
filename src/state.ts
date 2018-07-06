@@ -18,7 +18,7 @@ export class Folder {
 
     constructor(public name: string, public latest_transaction: string, public latest_cost = 0, public last_update = new Date()) { }
 
-    push(filename: String, file: File | Folder | KernelObject) { this.children.set(filename, file) }
+    put(file: File | Folder | KernelObject) { this.children.set(file.name, file) }
     delete(filename: String) { return this.children.delete(filename) }
 
     get size() {
@@ -37,26 +37,25 @@ export class File {
 }
 
 export class Project {
-    public files: Array<File | Folder>;
+    public files: Map<String, File | Folder> = new Map();
     public gas = 0
     public actors: Array<String> = [];
 
     constructor(public name: string, public description: string = '', public visibility: 'private' | 'shared' | 'listed' = 'private') {
 
         const system_folder = new Folder(
-            "system",
+            ".system",
             "os#install",
             0.030,
             new Date()
         );
 
-        system_folder.push('version', new KernelObject('version', [[0, 0, 2]], 2, 'os#init'))
-        system_folder.push('procedures', new KernelObject('procedures', [[0, 1000, 2000]], 28, 'os#init'))
-        system_folder.push('filesystem', new KernelObject('filesystem', [[1, 0, 1000]], 12, 'os#init'))
+        system_folder.put(new KernelObject('version', [[0, 0, 2]], 2, 'os#init'))
+        system_folder.put(new KernelObject('procedures', [[0, 1000, 2000]], 28, 'os#init'))
+        system_folder.put(new KernelObject('filesystem', [[1, 0, 1000]], 12, 'os#init'))
 
         // Push the system folder
-        this.files = [];
-        this.files.push(system_folder)
+        this.files.set('.system', system_folder)
     }
 
 }
