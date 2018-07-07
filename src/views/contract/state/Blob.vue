@@ -1,9 +1,9 @@
 <template>
-  <div class="state-tree">
+  <div class="state-blob">
     <b-container>
         <b-row>
             <b-col cols="12">
-                <b-table :items="items" :fields="fields" class="state-table" thead-class="state-table-head">
+                <!-- <b-table :items="items" :fields="fields" class="state-table" thead-class="state-table-head">
                     <template slot="name" slot-scope="data">
                         <i :class="`fas fa-${ data.item.icon }`"></i> 
                         <b-link class="filename" :to="{path: `${data.item.view}/latest/${data.value}`}">{{ data.value }}</b-link>
@@ -14,33 +14,52 @@
                     <template slot="latest_cost" slot-scope="data">
                         <span> {{ data.value }} Eth </span>
                     </template>
-                </b-table>
+                </b-table> -->
+                <b-card :title="file.name">
+                </b-card>
             </b-col>
         </b-row>
     </b-container>
   </div>
 </template>
 
-<script >
+<script>
 import Vue from "vue";
 
 export default {
-  name: "ContractStateTree",
+  name: "ContractStateBlob",
   data() {
-    let { block, name, contract } = this.$route.params;
-    let project = Vue.$currentUser().projects.get(contract);
-    let folder = project.files.find(f => f.name == name);
-
+    let file = this.file()
+    
     return {
-      fields: [
-        "name",
-        "size",
-        "latest_transaction",
-        "latest_cost",
-        "last_update"
-      ],
-      items: [...folder.children.values()]
+      file
     };
+  },
+  methods: {
+    tree() {
+      const params = this.$route.params;
+      const depth = Object.keys(params).length - 3;
+      let tree = [];
+      for (let i = 0; i < depth; i += 1) {
+        tree[i] = params[i];
+      }
+      return tree;
+    },
+    file() {
+      const { block, contract } = this.$route.params;
+      let project = Vue.$currentUser().projects.get(contract);
+
+      let file = this.tree().reduce((folder, item, i) => {
+        // Check if folder has item
+        if (!folder || !folder.has(item)) return false;
+        // Get Item
+        return folder.get(item);
+        
+      }, project.files);
+
+      if (!file || file.view !== 'blob') return false;
+      return file;
+    }
   }
   //   beforeMount() {
   //     console.log(this.folder)
@@ -53,7 +72,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .state-tree {
-    margin-top: 1rem;
+  margin-top: 1rem;
 }
 .state-table {
   font-size: 0.9rem;

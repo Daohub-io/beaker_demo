@@ -6,7 +6,7 @@ export default { install }
 export type View = 'tree' | 'blob' | 'raw';
 
 export class KernelObject {
-    readonly icon: string = 'chip'
+    readonly icon: string = 'microchip'
     readonly view: View = 'raw'
     constructor(public name: string, public location: Array<[number, number, number]>, public size: number = 0, public latest_transaction: string, public latest_cost = 0, public last_update = new Date()) { }
 }
