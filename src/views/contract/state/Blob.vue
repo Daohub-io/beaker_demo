@@ -20,8 +20,11 @@
                         <span> {{ data.value }} Eth </span>
                     </template>
                 </b-table> -->
-                <b-card :title="instance.name">
-                  <p>{{ instance.location }} </p>
+                <b-card>
+                  <b-badge v-if="isKernelLocation" variant="dark">Kernel Object</b-badge>
+                  <b-badge v-else variant="info">User Object</b-badge>
+                  <h3>{{ instance.name}}</h3>
+                  <p>Location {{ instance.location }}</p>
                 </b-card>
             </b-col>
         </b-row>
@@ -37,10 +40,14 @@ export default {
   data() {
     let instance = this.file();
     return {
-      instance
+      instance,
     };
   },
   computed: {
+    isKernelLocation() {
+      let location = this.file().location;
+      return location[0] === 0 
+    },
     breadcrumb() {
       const { owner, contract } = this.$route.params;
       let path = this.$route.path.slice().split("/");
@@ -80,10 +87,10 @@ export default {
       let filename = tree.pop()
       let folder = tree.reduce((folder, item, i) => {
         // Check if folder has item
-        if (!folder || !folder.has(item)) return false;
+        if (!folder || !folder.files.has(item)) return false;
         // Get Item
-        return folder.get(item)
-      }, project.files);
+        return folder.files.get(item)
+      }, project);
 
       return folder.files.get(filename)
     }

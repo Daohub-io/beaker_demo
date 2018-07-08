@@ -118,9 +118,12 @@ export class Project {
     constructor(public name: string, public description: string = '', public visibility: 'private' | 'shared' | 'listed' = 'private') {
 
         const system_folder = new Folder(".system");
+        const kernel_folder = new Folder("kernel");
 
-        system_folder.put(new KernelObject('version', [0, 0, 2], 2, 'os#init', 0.030, new Date()))
-        system_folder.put(new KernelObject('procedures', [0, 1000, 2000], 28, 'os#init', 0.030, new Date()))
+        kernel_folder.put(new KernelObject('version', [0, 0, 2], 2, 'os#init', 0.030, new Date()))
+        kernel_folder.put(new KernelObject('procedures', [0, 1000, 2000], 28, 'os#init', 0.030, new Date()))
+
+        system_folder.put(kernel_folder)
         system_folder.put(new KernelObject('filesystem', [1, 0, 1000], 12, 'os#init', 0.030, new Date()))
 
         // Push the system folder

@@ -8,7 +8,7 @@
         </b-row>
         <b-row>
             <b-col cols="12">
-                <b-table :items="items" :fields="fields" class="state-table" thead-class="state-table-head">
+                <b-table :items="files" :fields="fields" class="state-table" thead-class="state-table-head">
                     <template slot="name" slot-scope="data">
                         <i :class="`fas fa-${ data.item.icon }`"></i>
                         <b-link class="filename" :to="{path: path(data.item.view, data.value)}">{{ data.value }}</b-link>
@@ -35,7 +35,7 @@ import Vue from "vue";
 export default {
   name: "ContractStateTree",
   data() {
-    let files = this.files();
+    let files = this.files;
 
     return {
       fields: [
@@ -44,8 +44,7 @@ export default {
         "latest_transaction",
         "latest_cost",
         "last_update"
-      ],
-      items: files
+      ]
     };
   },
   computed: {
@@ -63,6 +62,20 @@ export default {
       links.unshift({ text: contract, to: { name: 'contract', params: {owner, contract} } });
 
       return links;
+    },
+    files() {
+      const { block, contract } = this.$route.params;
+      let project = Vue.$currentUser().projects.get(contract);
+
+      let folder = this.tree().reduce((folder, item, i) => {
+        // Check if folder has item
+        if (!folder || !folder.files.has(item)) return false;
+        // Get Item
+        return folder.files.get(item);
+      }, project);
+      console.log(folder.name)
+      if (!folder || folder.view !== "tree") return false;
+      return [...folder.files.values()];
     }
   },
   methods: {
@@ -77,25 +90,8 @@ export default {
     tree() {
       const params = this.$route.params;
       const depth = Object.keys(params).length - 3;
-      let tree = [];
-      for (let i = 0; i < depth; i += 1) {
-        tree[i] = params[i];
-      }
+      let tree = params[0].split("/");
       return tree;
-    },
-    files() {
-      const { block, contract } = this.$route.params;
-      let project = Vue.$currentUser().projects.get(contract);
-
-      let folder = this.tree().reduce((folder, item, i) => {
-        // Check if folder has item
-        if (!folder || !folder.has(item)) return false;
-        // Get Item
-        return folder.get(item);
-      }, project.files);
-
-      if (!folder || folder.view !== "tree") return false;
-      return [...folder.files.values()];
     }
   }
 };
