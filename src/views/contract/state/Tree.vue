@@ -50,16 +50,25 @@ export default {
   computed: {
     breadcrumb() {
       const { owner, contract } = this.$route.params;
-      let path = this.$route.path.slice().split('/');
-      path[3] = 'tree';
+      let path = this.$route.path.slice().split("/");
+      path[3] = "tree";
 
       let current = path.slice(5);
       let links = current.map((item, i, arr) => ({
         text: item,
-        to: { path: path.slice().slice(0, 5).concat(arr.slice(0, i+1)).join("/")}
-      }))
+        to: {
+          path: path
+            .slice()
+            .slice(0, 5)
+            .concat(arr.slice(0, i + 1))
+            .join("/")
+        }
+      }));
 
-      links.unshift({ text: contract, to: { name: 'contract', params: {owner, contract} } });
+      links.unshift({
+        text: contract,
+        to: { name: "contract", params: { owner, contract } }
+      });
 
       return links;
     },
@@ -73,7 +82,7 @@ export default {
         // Get Item
         return folder.files.get(item);
       }, project);
-      console.log(folder.name)
+
       if (!folder || folder.view !== "tree") return false;
       return [...folder.files.values()];
     }
