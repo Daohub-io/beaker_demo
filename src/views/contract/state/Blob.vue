@@ -2,6 +2,11 @@
   <div class="state-blob">
     <b-container>
         <b-row>
+          <b-col cols="12">
+            <b-breadcrumb :items="breadcrumb"/>
+          </b-col>
+        </b-row>
+        <b-row>
             <b-col cols="12">
                 <!-- <b-table :items="items" :fields="fields" class="state-table" thead-class="state-table-head">
                     <template slot="name" slot-scope="data">
@@ -15,7 +20,8 @@
                         <span> {{ data.value }} Eth </span>
                     </template>
                 </b-table> -->
-                <b-card :title="file.name">
+                <b-card :title="instance.name">
+                  <p>{{ instance.location }} </p>
                 </b-card>
             </b-col>
         </b-row>
@@ -29,49 +35,65 @@ import Vue from "vue";
 export default {
   name: "ContractStateBlob",
   data() {
-    let file = this.file()
-    
+    let instance = this.file();
     return {
-      file
+      instance
     };
+  },
+  computed: {
+    breadcrumb() {
+      const { owner, contract } = this.$route.params;
+      let path = this.$route.path.slice().split("/");
+      path[3] = "tree";
+
+      let current = path.slice(5);
+      let links = current.map((item, i, arr) => ({
+        text: item,
+        to: {
+          path: path
+            .slice()
+            .slice(0, 5)
+            .concat(arr.slice(0, i + 1))
+            .join("/")
+        }
+      }));
+
+      links.unshift({
+        text: contract,
+        to: { name: "contract", params: { owner, contract } }
+      });
+
+      return links;
+    }
   },
   methods: {
     tree() {
       const params = this.$route.params;
       const depth = Object.keys(params).length - 3;
-      let tree = [];
-      for (let i = 0; i < depth; i += 1) {
-        tree[i] = params[i];
-      }
+      let tree = params[0].split("/");
       return tree;
     },
     file() {
       const { block, contract } = this.$route.params;
       let project = Vue.$currentUser().projects.get(contract);
-
-      let file = this.tree().reduce((folder, item, i) => {
+      let tree = this.tree()
+      let filename = tree.pop()
+      let folder = tree.reduce((folder, item, i) => {
         // Check if folder has item
         if (!folder || !folder.has(item)) return false;
         // Get Item
-        return folder.get(item);
-        
+        return folder.get(item)
       }, project.files);
 
-      if (!file || file.view !== 'blob') return false;
-      return file;
+      return folder.files.get(filename)
     }
   }
-  //   beforeMount() {
-  //     console.log(this.folder)
-  //     if (!this.folder) this.$router.push({ path: "404" });
-  //     if (this.folder.view !== "tree") this.$router.push({ path: "404" });
-  //   },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.state-tree {
+.state-blob {
   margin-top: 1rem;
 }
 .state-table {

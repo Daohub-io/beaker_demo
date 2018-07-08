@@ -19,6 +19,9 @@
                     <template slot="latest_cost" slot-scope="data">
                         <span> {{ data.value }} Eth </span>
                     </template>
+                    <template slot="last_update" slot-scope="data">
+                        <span> {{ data.value.toDateString() }}</span>
+                    </template>
                 </b-table>
             </b-col>
         </b-row>
@@ -47,17 +50,17 @@ export default {
   },
   computed: {
     breadcrumb() {
-      const { contract } = this.$route.params;
+      const { owner, contract } = this.$route.params;
       let path = this.$route.path.slice().split('/');
+      path[3] = 'tree';
 
       let current = path.slice(5);
-
       let links = current.map((item, i, arr) => ({
         text: item,
-        to: { path: arr.slice(0,i).join("/")}
+        to: { path: path.slice().slice(0, 5).concat(arr.slice(0, i+1)).join("/")}
       }))
 
-      links.unshift({ text: contract, to: { path: path.slice(0, 3).join('/') } });
+      links.unshift({ text: contract, to: { name: 'contract', params: {owner, contract} } });
 
       return links;
     }
@@ -92,7 +95,7 @@ export default {
       }, project.files);
 
       if (!folder || folder.view !== "tree") return false;
-      return [...folder.children.values()];
+      return [...folder.files.values()];
     }
   }
 };

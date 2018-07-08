@@ -24,6 +24,9 @@
                     <template slot="latest_cost" slot-scope="data">
                         <span> {{ data.value }} Eth </span>
                     </template>
+                    <template slot="last_update" slot-scope="data">
+                        <span> {{ data.value.toDateString() }}</span>
+                    </template>
                 </b-table>
             </b-col>
         </b-row>
