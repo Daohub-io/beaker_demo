@@ -9,7 +9,14 @@ export type StorageLocation = [number, number, number];
 export class KernelObject {
     readonly icon: string = 'microchip'
     readonly view: View = 'blob'
-    constructor(public name: string, public location: Array<StorageLocation>, public size: number = 0, public latest_transaction: string, public latest_cost = 0, public last_update = new Date()) { }
+    constructor(public name: string, public location: StorageLocation, public size: number = 0, public latest_transaction: string, public latest_cost = 0, public last_update = new Date()) { }
+
+    public read_from(store: Storage): Uint32Array[] {
+        let [top, start, end] = this.location;
+        let s = [top, 0, 0, 0, 0, 0, 0, 0, 0, start]
+        let e = [top, 0, 0, 0, 0, 0, 0, 0, 0, end]
+        return store.slice(s, e)
+    }
 }
 
 export class File<K, T extends Iterable<K>> {
@@ -58,24 +65,67 @@ export class Folder {
     }
 }
 
+class Storage implements Iterable<Uint32Array>{
+    private data: Map<Uint32Array, Uint32Array> = new Map();
+    constructor(keys: number) {
+        for (let i = 0; i < keys; i += 1) {
+            let key = new Uint32Array(8);
+            key.set([i], 7)
+            this.data.set(key, new Uint32Array(8))
+        }
+    }
 
+    public [Symbol.iterator]() {
+        return this.data.values()
+    }
+
+    get_raw(key: Uint32Array): Uint32Array {
+        return this.data.get(key)!
+    }
+
+    get(key_num: number[]): number[] {
+        let key = Uint32Array.from(key_num)
+        let value = this.data.get(key);
+        return Array.from(value!)
+    }
+
+    slice(start: number[], end: number[]): Uint32Array[] {
+        let arr = []
+        for (let s = start; s < end; s[7] += 1) {
+            let key = Uint32Array.from(s)
+            arr.push(this.get_raw(key))
+        }
+        return arr;
+    }
+
+    set_raw(key: Uint32Array, value: Uint32Array) {
+        return this.data.set(key, value)
+    }
+
+    set(key_num: number[], value_num: number[]) {
+        let key = Uint32Array.from(key_num)
+        let value = Uint32Array.from(value_num)
+        return this.data.set(key, value)
+    }
+
+}
 export class Project {
     public files: Map<String, File<any, Iterable<any>> | Folder> = new Map();
     public gas = 0
     public actors: Array<String> = [];
+    public storage: Storage = new Storage(50)
 
     constructor(public name: string, public description: string = '', public visibility: 'private' | 'shared' | 'listed' = 'private') {
 
         const system_folder = new Folder(".system");
 
-        system_folder.put(new KernelObject('version', [[0, 0, 2]], 2, 'os#init', 0.030, new Date()))
-        system_folder.put(new KernelObject('procedures', [[0, 1000, 2000]], 28, 'os#init', 0.030, new Date()))
-        system_folder.put(new KernelObject('filesystem', [[1, 0, 1000]], 12, 'os#init', 0.030, new Date()))
+        system_folder.put(new KernelObject('version', [0, 0, 2], 2, 'os#init', 0.030, new Date()))
+        system_folder.put(new KernelObject('procedures', [0, 1000, 2000], 28, 'os#init', 0.030, new Date()))
+        system_folder.put(new KernelObject('filesystem', [1, 0, 1000], 12, 'os#init', 0.030, new Date()))
 
         // Push the system folder
         this.files.set('.system', system_folder)
     }
-
 }
 
 export class User {
