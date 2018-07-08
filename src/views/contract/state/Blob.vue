@@ -23,8 +23,8 @@
                 <b-card>
                   <b-badge v-if="isKernelLocation" variant="dark">Kernel Object</b-badge>
                   <b-badge v-else variant="info">User Object</b-badge>
-                  <h3>{{ instance.name}}</h3>
-                  <p>Location {{ instance.location }}</p>
+                  <h3>{{ file.name}}</h3>
+                  <p>Location {{ file.location }}</p>
                 </b-card>
             </b-col>
         </b-row>
@@ -38,14 +38,11 @@ import Vue from "vue";
 export default {
   name: "ContractStateBlob",
   data() {
-    let instance = this.file();
-    return {
-      instance,
-    };
+    return { };
   },
   computed: {
     isKernelLocation() {
-      let location = this.file().location;
+      let location = this.file.location;
       return location[0] === 0 
     },
     breadcrumb() {
@@ -71,14 +68,6 @@ export default {
       });
 
       return links;
-    }
-  },
-  methods: {
-    tree() {
-      const params = this.$route.params;
-      const depth = Object.keys(params).length - 3;
-      let tree = params[0].split("/");
-      return tree;
     },
     file() {
       const { block, contract } = this.$route.params;
@@ -93,6 +82,14 @@ export default {
       }, project);
 
       return folder.files.get(filename)
+    }
+  },
+  methods: {
+    tree() {
+      const params = this.$route.params;
+      const depth = Object.keys(params).length - 3;
+      let tree = params[0].split("/");
+      return tree;
     }
   }
 };
