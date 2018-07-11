@@ -9,7 +9,8 @@ export type StorageLocation = [number, number, number];
 export class KernelObject {
     readonly icon: string = 'microchip'
     readonly view: View = 'blob'
-    constructor(public name: string, public location: StorageLocation, public size: number = 0, public latest_transaction: string, public latest_cost = 0, public last_update = new Date()) { }
+    public latest_transaction?: string;
+    constructor(public name: string, public location: StorageLocation, public size: number = 0, public latest_cost = 0, public last_update = new Date()) { }
 
     public read_from(store: Storage): Uint32Array[] {
         let [top, start, end] = this.location;
@@ -22,7 +23,8 @@ export class KernelObject {
 export class File<K, T extends Iterable<K>> {
     readonly icon = 'file'
     readonly view: View = 'blob'
-    constructor(public name: String, readonly data: T, public size = 0, public latest_transaction = '', public latest_cost = 0, public last_update = new Date()) { }
+    public latest_transaction?: string;
+    constructor(public name: String, readonly data: T, public size = 0, public latest_cost = 0, public last_update = new Date()) { }
 }
 
 export class Folder {
@@ -57,11 +59,84 @@ export class Folder {
     }
 
     get latest_transaction(): string {
-        return this.latest_child!.latest_transaction;
+        return this.latest_child!.latest_transaction!;
+    }
+
+    set latest_transaction(tx_hash: string) {
+        for (let [_, child] of this.files) {
+            console.log(`${child.name}: ${tx_hash}`)
+            child.latest_transaction = tx_hash;
+        }
     }
 
     get latest_cost(): number {
         return this.latest_child!.latest_cost;
+    }
+}
+
+interface Diff {
+    location: StorageLocation | number;
+    before: Uint32Array[] | string;
+    after: Uint32Array[] | string;
+}
+
+interface ToString {
+    [Symbol.toStringTag](): string
+}
+
+export type Resource = File<any, any> | KernelObject | Folder;
+class Transaction {
+    public hash: string = (Math.random() * 10**6).toString(16)
+    constructor(public changes: [Resource, Array<Diff>][], public gas_cost = 0, readonly date = new Date()) {
+        // Update latest_transaction for each resource
+        const hash = this.hash
+        this.changes.forEach(([resource, ] )=> {
+            resource.latest_transaction = hash;
+        })
+    }
+
+    // Create File Tx
+    static new_file<ToString, T extends Iterable<ToString>>(file: File<ToString, T>): Transaction {
+        let gas_cost = file.latest_cost * file.size;
+
+        let diffs = Array.from(file.data).map((item, i) => ({
+            location: i,
+            before: [new Uint32Array(0)],
+            after: item.toString()
+        }))
+
+        let change: [Resource, Diff[]] = [file, diffs]
+        return new Transaction([change], gas_cost)
+    }
+
+    // Create KernelObject Tx
+    static new_object(obj: KernelObject, store: Storage): Transaction {
+        let changes = new Map()
+        let gas_cost = obj.latest_cost * obj.size;
+
+        let diff = {
+            location: obj.location,
+            before: [new Uint32Array(0)],
+            after: obj.read_from(store)
+        }
+
+        let change: [Resource, Diff[]] = [obj, [diff]]
+        return new Transaction([change], gas_cost)
+    }
+
+    // Create Folder Tx 
+    static new_folder(folder: Folder, store: Storage): Transaction {
+        let tx_all = [...folder.files.values()].map(item => {
+            let tx: Transaction;
+            if (item instanceof KernelObject) tx = Transaction.new_object(item, store)
+            if (item instanceof File) tx = Transaction.new_file(item)
+            if (item instanceof Folder) tx = Transaction.new_folder(item, store)
+            if (item instanceof Transaction) throw 'ERROR'
+            return tx!;
+        })
+        let gas_cost = tx_all.reduce((total, tx) => total + tx.gas_cost, 0)
+        let changes = tx_all.map(({ changes }) => changes).reduce((prev, item) => prev.concat(item))
+        return new Transaction(changes, gas_cost)
     }
 }
 
@@ -114,36 +189,37 @@ export class Project {
     public gas = 0
     public actors: Array<String> = [];
     public storage: Storage = new Storage(50)
+    public transactions: Map<string, Transaction> = new Map()
 
     constructor(public name: string, public description: string = '', public visibility: 'private' | 'shared' | 'listed' = 'private') {
 
         const system_folder = new Folder(".system");
         const kernel_folder = new Folder("kernel");
 
-        kernel_folder.put(new KernelObject('version', [0, 0, 2], 2, 'os#init', 0.030, new Date()))
-        kernel_folder.put(new KernelObject('procedures', [0, 1000, 2000], 28, 'os#init', 0.030, new Date()))
+        kernel_folder.put(new KernelObject('version', [0, 0, 2], 2, 0.030, new Date()))
+        kernel_folder.put(new KernelObject('procedures', [0, 1000, 2000], 28, 0.030, new Date()))
 
         system_folder.put(kernel_folder)
-        system_folder.put(new KernelObject('filesystem', [1, 0, 1000], 12, 'os#init', 0.030, new Date()))
+        system_folder.put(new KernelObject('filesystem', [1, 0, 1000], 12, 0.030, new Date()))
+        
+        // Create Transaction
+        const init_tx = Transaction.new_folder(system_folder, this.storage)
+        this.transactions.set(init_tx.hash, init_tx)
 
-        // Push the system folder
+        // Set the system folder
         this.files.set('.system', system_folder)
     }
 }
 
 export class User {
-    public color: string;
     public projects: Map<string, Project> = new Map();
+    public color: string = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
 
-    constructor(public name: string) {
-        this.name = name
-        this.color = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
-    }
+    constructor(public name: string) { }
 
     addProject(name: string, project: Project) {
         this.projects.set(name, project);
     }
-
 }
 
 declare module 'vue/types/vue' {
