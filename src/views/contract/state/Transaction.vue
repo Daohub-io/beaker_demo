@@ -15,9 +15,21 @@
                         <span> {{ data.value }} Eth </span>
                     </template>
                 </b-table> -->
-                <b-card>
+                <b-card class="tx-head">
                   <h3>{{ tx.hash }}</h3>
+                  <p> {{ tx.date.toString() }}</p>
                 </b-card>
+                <ul class="file-list">
+                  <b-list-group v-for="([item, diffs]) in tx.changes" :key="item" tag="li">
+                    <b-list-group-item variant="dark">
+                      <i :class="`fas fa-${ item.icon }`"></i> 
+                      {{ item.name }}
+                    </b-list-group-item>
+                    <b-list-group-item v-for="diff in diffs" :key="diff.location">
+                      {{ diff }}
+                    </b-list-group-item>
+                  </b-list-group>
+                </ul>
             </b-col>
         </b-row>
     </b-container>
@@ -80,5 +92,14 @@ export default {
 
 .state-table .filename {
   margin-left: 4px;
+}
+
+.file-list, .tx-head {
+  margin-top: 1rem;
+  padding: 0;
+}
+
+.file-list >>> li {
+  margin-bottom: 1rem;
 }
 </style>
