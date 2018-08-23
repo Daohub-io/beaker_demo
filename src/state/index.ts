@@ -6,8 +6,8 @@ export default { install }
 export type View = 'tree' | 'blob' | 'raw';
 export type StorageLocation = [number, number, number];
 
-export class KernelObject {
-    readonly icon: string = 'microchip'
+export class File {
+    readonly icon: string = 'file'
     readonly view: View = 'blob'
     public latest_transaction?: string;
     constructor(public name: string, public data: ArrayLike<number | string>, public location: StorageLocation, public size: number = 0, public latest_cost = 0, public last_update = new Date()) { }
@@ -20,21 +20,14 @@ export class KernelObject {
     }
 }
 
-export class File<K, T extends ArrayLike<K>> {
-    readonly icon = 'file'
-    readonly view: View = 'blob'
-    public latest_transaction?: string;
-    constructor(public name: String, readonly data: T, public size = 0, public latest_cost = 0, public last_update = new Date()) { }
-}
-
 export class Folder {
     readonly icon: string = 'folder';
     readonly view: View = 'tree'
-    public files: Map<String, File<any, ArrayLike<any>> | Folder | KernelObject> = new Map();
+    public files: Map<String, Folder | File> = new Map();
 
     constructor(public name: string) { }
 
-    put<K, V extends ArrayLike<any>>(file: File<K, V> | Folder | KernelObject) { this.files.set(file.name, file) }
+    put<K, V extends ArrayLike<any>>(file: Folder | File) { this.files.set(file.name, file) }
     delete(filename: String) { return this.files.delete(filename) }
 
     get size() {
@@ -80,7 +73,7 @@ interface Diff {
     after: Uint32Array[] | string;
 }
 
-export type Resource = File<any, any> | KernelObject | Folder;
+export type Resource = File | Folder;
 class Transaction {
     public hash: string = (Math.random() * 10**6).toString(16)
     constructor(public changes: [Resource, Array<Diff>][], public gas_cost = 0, readonly date = new Date()) {
@@ -92,31 +85,17 @@ class Transaction {
     }
 
     // Create File Tx
-    static new_file<ToString, T extends ArrayLike<ToString>>(file: File<ToString, T>): Transaction {
+    static new_file(file: File, store: Storage): Transaction {
+        let changes = new Map()
         let gas_cost = file.latest_cost * file.size;
 
-        let diffs = Array.from(file.data).map((item, i) => ({
-            location: i,
-            before: [new Uint32Array(0)],
-            after: item.toString()
-        }))
-
-        let change: [Resource, Diff[]] = [file, diffs]
-        return new Transaction([change], gas_cost)
-    }
-
-    // Create KernelObject Tx
-    static new_object(obj: KernelObject, store: Storage): Transaction {
-        let changes = new Map()
-        let gas_cost = obj.latest_cost * obj.size;
-
         let diff = {
-            location: obj.location,
+            location: file.location,
             before: [new Uint32Array(0)],
-            after: obj.data.toString()
+            after: file.data.toString()
         }
 
-        let change: [Resource, Diff[]] = [obj, [diff]]
+        let change: [Resource, Diff[]] = [file, [diff]]
         return new Transaction([change], gas_cost)
     }
 
@@ -124,8 +103,7 @@ class Transaction {
     static new_folder(folder: Folder, store: Storage): Transaction {
         let tx_all = [...folder.files.values()].map(item => {
             let tx: Transaction;
-            if (item instanceof KernelObject) tx = Transaction.new_object(item, store)
-            if (item instanceof File) tx = Transaction.new_file(item)
+            if (item instanceof File) tx = Transaction.new_file(item, store)
             if (item instanceof Folder) tx = Transaction.new_folder(item, store)
             if (item instanceof Transaction) throw 'ERROR'
             return tx!;
@@ -181,7 +159,7 @@ class Storage implements Iterable<Uint32Array>{
 
 }
 export class Project {
-    public files: Map<String, File<any, ArrayLike<any>> | Folder> = new Map();
+    public files: Map<String, File | Folder> = new Map();
     public gas = 0
     public actors: Array<String> = [];
     public storage: Storage = new Storage(50)
@@ -192,11 +170,11 @@ export class Project {
         const system_folder = new Folder(".system");
         const kernel_folder = new Folder("kernel");
 
-        kernel_folder.put(new KernelObject('version', '0.0.2',[0, 0, 2], 2, 0.030, new Date()))
-        kernel_folder.put(new KernelObject('procedures', ['0x4034', '0x2939485'], [0, 1000, 2000], 28, 0.030, new Date()))
+        kernel_folder.put(new File('version', '0.0.2',[0, 0, 2], 2, 0.030, new Date()))
+        kernel_folder.put(new File('procedures', ['0x4034', '0x2939485'], [0, 1000, 2000], 28, 0.030, new Date()))
 
         system_folder.put(kernel_folder)
-        system_folder.put(new KernelObject('filesystem', '.system,kernel,version,procedures', [1, 0, 1000], 12, 0.030, new Date()))
+        system_folder.put(new File('filesystem', '.system,kernel,version,procedures', [1, 0, 1000], 12, 0.030, new Date()))
         
         // Create Transaction
         const init_tx = Transaction.new_folder(system_folder, this.storage)

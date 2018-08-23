@@ -3,7 +3,7 @@ import App from './App.vue';
 import router from './router';
 
 import BootstrapVue from 'bootstrap-vue'
-import State from './state'
+import State from '@/state/index'
 
 Vue.use(BootstrapVue)
 Vue.use(State)
