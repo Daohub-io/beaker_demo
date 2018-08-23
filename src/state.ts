@@ -10,7 +10,7 @@ export class KernelObject {
     readonly icon: string = 'microchip'
     readonly view: View = 'blob'
     public latest_transaction?: string;
-    constructor(public name: string, public location: StorageLocation, public size: number = 0, public latest_cost = 0, public last_update = new Date()) { }
+    constructor(public name: string, public data: ArrayLike<number | string>, public location: StorageLocation, public size: number = 0, public latest_cost = 0, public last_update = new Date()) { }
 
     public read_from(store: Storage): Uint32Array[] {
         let [top, start, end] = this.location;
@@ -20,7 +20,7 @@ export class KernelObject {
     }
 }
 
-export class File<K, T extends Iterable<K>> {
+export class File<K, T extends ArrayLike<K>> {
     readonly icon = 'file'
     readonly view: View = 'blob'
     public latest_transaction?: string;
@@ -30,11 +30,11 @@ export class File<K, T extends Iterable<K>> {
 export class Folder {
     readonly icon: string = 'folder';
     readonly view: View = 'tree'
-    public files: Map<String, File<any, Iterable<any>> | Folder | KernelObject> = new Map();
+    public files: Map<String, File<any, ArrayLike<any>> | Folder | KernelObject> = new Map();
 
     constructor(public name: string) { }
 
-    put<K, V extends Iterable<any>>(file: File<K, V> | Folder | KernelObject) { this.files.set(file.name, file) }
+    put<K, V extends ArrayLike<any>>(file: File<K, V> | Folder | KernelObject) { this.files.set(file.name, file) }
     delete(filename: String) { return this.files.delete(filename) }
 
     get size() {
@@ -80,10 +80,6 @@ interface Diff {
     after: Uint32Array[] | string;
 }
 
-interface ToString {
-    [Symbol.toStringTag](): string
-}
-
 export type Resource = File<any, any> | KernelObject | Folder;
 class Transaction {
     public hash: string = (Math.random() * 10**6).toString(16)
@@ -96,7 +92,7 @@ class Transaction {
     }
 
     // Create File Tx
-    static new_file<ToString, T extends Iterable<ToString>>(file: File<ToString, T>): Transaction {
+    static new_file<ToString, T extends ArrayLike<ToString>>(file: File<ToString, T>): Transaction {
         let gas_cost = file.latest_cost * file.size;
 
         let diffs = Array.from(file.data).map((item, i) => ({
@@ -117,7 +113,7 @@ class Transaction {
         let diff = {
             location: obj.location,
             before: [new Uint32Array(0)],
-            after: obj.read_from(store)
+            after: obj.data.toString()
         }
 
         let change: [Resource, Diff[]] = [obj, [diff]]
@@ -185,7 +181,7 @@ class Storage implements Iterable<Uint32Array>{
 
 }
 export class Project {
-    public files: Map<String, File<any, Iterable<any>> | Folder> = new Map();
+    public files: Map<String, File<any, ArrayLike<any>> | Folder> = new Map();
     public gas = 0
     public actors: Array<String> = [];
     public storage: Storage = new Storage(50)
@@ -196,11 +192,11 @@ export class Project {
         const system_folder = new Folder(".system");
         const kernel_folder = new Folder("kernel");
 
-        kernel_folder.put(new KernelObject('version', [0, 0, 2], 2, 0.030, new Date()))
-        kernel_folder.put(new KernelObject('procedures', [0, 1000, 2000], 28, 0.030, new Date()))
+        kernel_folder.put(new KernelObject('version', '0.0.2',[0, 0, 2], 2, 0.030, new Date()))
+        kernel_folder.put(new KernelObject('procedures', ['0x4034', '0x2939485'], [0, 1000, 2000], 28, 0.030, new Date()))
 
         system_folder.put(kernel_folder)
-        system_folder.put(new KernelObject('filesystem', [1, 0, 1000], 12, 0.030, new Date()))
+        system_folder.put(new KernelObject('filesystem', '.system,kernel,version,procedures', [1, 0, 1000], 12, 0.030, new Date()))
         
         // Create Transaction
         const init_tx = Transaction.new_folder(system_folder, this.storage)

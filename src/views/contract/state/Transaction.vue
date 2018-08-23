@@ -26,7 +26,20 @@
                       {{ item.name }}
                     </b-list-group-item>
                     <b-list-group-item v-for="diff in diffs" :key="diff.location">
-                      {{ diff }}
+                      <b-row>
+                        <b-col class="diff-before">
+                          <li v-for="(val, index) in diff.before" :key="index">
+                            <span>{{ index }} </span>
+                            <span>{{ val }}</span>
+                          </li>
+                        </b-col>
+                        <b-col tag="ul" class="diff-after">
+                          <li v-for="(val, index) in diff.after" :key="index">
+                            <span>{{ index }} </span>
+                            <span>{{ val }}</span>
+                          </li>
+                        </b-col>
+                      </b-row>
                     </b-list-group-item>
                   </b-list-group>
                 </ul>
@@ -101,5 +114,12 @@ export default {
 
 .file-list >>> li {
   margin-bottom: 1rem;
+}
+
+.diff-before {
+  background-color: #fad1d1;
+}
+.diff-after {
+  background-color: rgb(128, 255, 128);
 }
 </style>
