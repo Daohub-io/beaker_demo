@@ -4,10 +4,10 @@
         <b-row>
             <b-col cols="12">
                 <ul class="summary-bar">
+                    <li><b>1</b> Transactions</li>
                     <li><b>{{ items.reduce((sum, item) => item.size + sum, 0) }}</b> Keys</li>
                     <li><b>4</b> Procedures</li>
                     <li><b>0</b> Eth</li>
-                    <li><b>1</b> Account</li>
                 </ul>
             </b-col>
         </b-row>
@@ -22,7 +22,7 @@
                         <span> {{ data.value }} Keys / {{ data.value * 32 }} Bytes </span>
                     </template>
                     <template slot="latest_transaction" slot-scope="data">
-                        <b-link class="tx-link" :to="{name: 'contract-state-tx', params: {hash: data.value}}"> {{ data.value }}</b-link>
+                        <b-link class="tx-link" :to="{name: 'contract-transaction', params: {hash: data.value}}"> {{ data.value }}</b-link>
                     </template>
                     <template slot="latest_cost" slot-scope="data">
                         <span> {{ data.value }} Eth </span>

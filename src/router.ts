@@ -10,9 +10,10 @@ import Contract from '@/views/Contract.vue'
 import ContractState from '@/views/contract/State.vue'
 import ContractStateTree from '@/views/contract/state/Tree.vue'
 import ContractStateBlob from '@/views/contract/state/Blob.vue'
-import ContractStateTx from '@/views/contract/state/Transaction.vue'
 
-import ContractRequests from '@/views/contract/Requests.vue'
+import ContractTxList from '@/views/contract/TxList.vue'
+import ContractTx from '@/views/contract/tx/Transaction.vue'
+
 import ContractActors from '@/views/contract/Actors.vue'
 import ContractMetrics from '@/views/contract/Metrics.vue'
 import ContractNetwork from '@/views/contract/Network.vue'
@@ -61,14 +62,14 @@ export default new Router({
           component: ContractStateBlob
         },
         {
-          path: 'tx/:hash',
-          name: 'contract-state-tx',
-          component: ContractStateTx
+          path: 'tx',
+          name: 'contract-transactions',
+          component: ContractTxList
         },
         {
-          path: 'requests',
-          name: 'contract-requests',
-          component: ContractRequests
+          path: 'tx/:hash',
+          name: 'contract-transaction',
+          component: ContractTx
         },
         {
           path: 'actors',

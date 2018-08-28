@@ -14,7 +14,7 @@
           <b-col>
              <b-nav class="sub-bar" tabs>
                 <b-nav-item :to="{name: 'contract'}" exact><i class="fas fa-book"></i> State</b-nav-item>
-                <b-nav-item :to="{name: 'contract-requests'}"><i class="fas fa-edit"></i> Requests <b-badge variant="light">0</b-badge></b-nav-item>
+                <b-nav-item :to="{name: 'contract-transactions'}"><i class="fas fa-edit"></i> Transactions </b-nav-item>
                 <b-nav-item :to="{name: 'contract-actors'}"><i class="fas fa-bolt"></i> Actors</b-nav-item>
                 <b-nav-item :to="{name: 'contract-metrics'}"><i class="fas fa-chart-bar"></i> Metrics</b-nav-item>
                 <b-nav-item :to="{name: 'contract-network'}"><i class="fas fa-broadcast-tower"></i> Network</b-nav-item>

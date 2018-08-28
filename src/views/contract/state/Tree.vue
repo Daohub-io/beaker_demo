@@ -17,7 +17,7 @@
                         <span> {{ data.value }} Keys / {{ data.value * 32 }} Bytes </span>
                     </template>
                     <template slot="latest_transaction" slot-scope="data">
-                        <b-link class="tx-link" :to="{name: 'contract-state-tx', params: {hash: data.value}}"> {{ data.value }}</b-link>
+                        <b-link class="tx-link" :to="{name: 'contract-transaction', params: {hash: data.value}}"> {{ data.value }}</b-link>
                     </template>
                     <template slot="latest_cost" slot-scope="data">
                         <span> {{ data.value }} Eth </span>
