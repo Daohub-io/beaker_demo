@@ -33,8 +33,8 @@ export default {
       txs_fields: [
         'hash',
         'gas_cost',
+        'changes',
         'date',
-        'changes'
       ]
     };
   },
@@ -43,7 +43,7 @@ export default {
       const { hash, contract } = this.$route.params;
       let project = Vue.$currentUser().projects.get(contract);
 
-      return [...project.transactions.values()]
+      return project.transactions
     }
   }
 };

@@ -163,7 +163,7 @@ export class Project {
     public gas = 0
     public actors: Array<String> = [];
     public storage: Storage = new Storage(50)
-    public transactions: Map<string, Transaction> = new Map()
+    public transactions: Array<Transaction> = []
 
     constructor(public name: string, public description: string = '', public visibility: 'private' | 'shared' | 'listed' = 'private') {
 
@@ -174,11 +174,10 @@ export class Project {
         kernel_folder.put(new File('procedures', ['0x4034', '0x2939485'], [0, 1000, 2000], 28, 0.030, new Date()))
 
         system_folder.put(kernel_folder)
-        system_folder.put(new File('filesystem', '.system,kernel,version,procedures', [1, 0, 1000], 12, 0.030, new Date()))
         
         // Create Transaction
         const init_tx = Transaction.new_folder(system_folder, this.storage)
-        this.transactions.set(init_tx.hash, init_tx)
+        this.transactions.push(init_tx)
 
         // Set the system folder
         this.files.set('.system', system_folder)

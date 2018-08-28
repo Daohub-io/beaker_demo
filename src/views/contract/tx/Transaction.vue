@@ -62,7 +62,7 @@ export default {
       const { hash, contract } = this.$route.params;
       let project = Vue.$currentUser().projects.get(contract);
 
-      return project.transactions.get(hash);
+      return project.transactions.find(x => x.hash === hash);
     }
   },
   methods: {

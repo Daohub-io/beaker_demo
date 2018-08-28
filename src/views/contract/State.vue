@@ -28,7 +28,7 @@
                         <span> {{ data.value }} Eth </span>
                     </template>
                     <template slot="last_update" slot-scope="data">
-                        <span> {{ data.value.toDateString() }}</span>
+                        <span> {{ elapsed(data.value) }}</span>
                     </template>
                 </b-table>
             </b-col>
@@ -58,7 +58,20 @@ export default {
       items: [...project.files.values()]
     };
   },
-  computed: {}
+  computed: {},
+  methods: {
+    // Get Elapsed Time in Seconds/Minutes/Hours/Days/Months/Years
+    elapsed(from) {
+      let mills = new Date().getTime() - from.getTime();
+      if (mills < 0) throw 'Time cannot be in future'
+      if (mills < 2000) return 'Just Now'
+      if (mills < 60000) return Math.floor(mills/1000) + ' seconds ago'
+      if (mills < 360000) return Math.floor(mills/60000) + ' minutes ago'
+      if (mills < 360000 * 30) return Math.floor(mills/360000) + ' hours ago'
+      if (mills < 360000 * 30 * 12) return Math.floor(mills/360000/30) + ' months ago'
+      return Math.floor(mills/360000/30/12) + ' years ago'
+    }
+  }
 };
 </script>
 
