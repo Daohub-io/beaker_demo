@@ -4,9 +4,11 @@
   "private": true,
   "author": "Daolab <info@daolab.io>",
   "scripts": {
+    "dev": "scripts/dev.sh",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "postinstall": "rm -f node_modules/web3/index.d.ts"
   },
   "dependencies": {
     "autoprefixer": "^9.1.3",
@@ -25,6 +27,7 @@
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "browserslist": "^4.1.0",
+    "ganache-cli": "^6.1.8",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
     "typescript": "^3.0.1",

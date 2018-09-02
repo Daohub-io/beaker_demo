@@ -1,6 +1,4 @@
 import Web3 from 'web3'
-import { Contract, ABIDefinition, Provider } from 'web3/types';
-
 import { VueConfiguration, VueConstructor } from 'vue/types/vue';
 
 export default { install }
@@ -15,17 +13,12 @@ declare module 'vue/types/vue' {
         
         web3: Web3,
         accounts: string[],
-        kernels: { [key: string]: Contract }
+        kernels: { [key: string]: any }
         
         $connect: (name: string, description: string, visibility: 'private' | 'shared' | 'listed') => void
-        $createKernel: (name: string, kernelAbi: ContractABI, account?: string) => Contract
+        $createKernel: (name: string, kernelAbi: any, account?: string) => any
     }
     
-}
-
-interface ContractABI {
-    bytecode: string,
-    abi: ABIDefinition[]
 }
 
 // Web3 Vue Plugin
@@ -42,7 +35,7 @@ function install(Vue: VueConstructor, options: VueConfiguration) {
         Vue.accounts = await Vue.web3.eth.getAccounts();
     }
 
-    Vue.prototype.$createKernel = async function (name: string, kernelAbi: ContractABI, account = Vue.accounts[0]) {
+    Vue.prototype.$createKernel = async function (name: string, kernelAbi: any, account = Vue.accounts[0]) {
 
         // Create New Kernel Contract in Memory
         const Kernel = new Vue.web3.eth.Contract([kernelAbi])
