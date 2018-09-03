@@ -1,8 +1,9 @@
 import Vue from 'vue';
-import App from './App.vue';
+import BootstrapVue from 'bootstrap-vue'
+
 import router from './router';
 
-import BootstrapVue from 'bootstrap-vue'
+import App from '@/components/App.vue';
 import State from '@/state/index'
 import Web3 from '@/web3/index'
 

@@ -205,12 +205,12 @@ declare module 'vue/types/vue' {
 
 function install(Vue: VueConstructor, options: VueConfiguration) {
 
-    let user: User | undefined = new User('John');
+    let user: User | undefined;
 
-    Vue.$login = (name: string) => { user = new User(name) }
-    Vue.$currentUser = () => user!;
+    Vue.prototype.$login = (name: string) => { user = new User(name) }
+    Vue.prototype.$currentUser = () => user!;
 
-    Vue.$newProject = (name: string, description: string, visibility: 'private' | 'shared' | 'listed') => {
+    Vue.prototype.$newProject = (name: string, description: string, visibility: 'private' | 'shared' | 'listed') => {
         user!.addProject(name, new Project(name, description, visibility))
         // Vue.set(user.projects, name, new Project(name, description, visibility))
     }
