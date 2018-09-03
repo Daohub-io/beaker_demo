@@ -1,6 +1,8 @@
 import Web3 from 'web3'
 import { VueConfiguration, VueConstructor } from 'vue/types/vue';
 
+const LocalKernelAbi = require('./Kernel.json')
+
 export default { install }
 
 const MIN_GAS = 4712388;
@@ -16,9 +18,9 @@ declare module 'vue/types/vue' {
         kernels: { [key: string]: any }
         
         $connect: (name: string, description: string, visibility: 'private' | 'shared' | 'listed') => void
-        $createKernel: (name: string, kernelAbi: any, account?: string) => any
+        $createKernel: (name: string, kernelAbi?: any, account?: string) => Promise<Web3['eth']['Contract']>
     }
-    
+
 }
 
 // Web3 Vue Plugin
@@ -35,7 +37,7 @@ function install(Vue: VueConstructor, options: VueConfiguration) {
         Vue.accounts = await Vue.web3.eth.getAccounts();
     }
 
-    Vue.prototype.$createKernel = async function (name: string, kernelAbi: any, account = Vue.accounts[0]) {
+    Vue.prototype.$createKernel = async function (name: string, kernelAbi = LocalKernelAbi, account = Vue.accounts[0]) {
 
         // Create New Kernel Contract in Memory
         const Kernel = new Vue.web3.eth.Contract([kernelAbi])
