@@ -71,17 +71,17 @@ export default {
     },
     file() {
       const { block, contract } = this.$route.params;
-      let project = Vue.$currentUser().projects.get(contract);
+      let project = Vue.$currentUser().projects[contract];
       let tree = this.tree()
       let filename = tree.pop()
       let folder = tree.reduce((folder, item, i) => {
         // Check if folder has item
-        if (!folder || !folder.files.has(item)) return false;
+        if (!folder || !folder.files[item]) return false;
         // Get Item
-        return folder.files.get(item)
+        return folder.files[item]
       }, project);
 
-      return folder.files.get(filename)
+      return folder.files[filename]
     }
   },
   methods: {

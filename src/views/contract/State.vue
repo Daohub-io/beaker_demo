@@ -45,7 +45,7 @@ export default {
   data() {
 
     let { contract } = this.$route.params;
-    let project = Vue.$currentUser().projects.get(contract);
+    let project = Vue.$currentUser().projects[contract];
 
     return {
       fields: [
@@ -55,7 +55,7 @@ export default {
         "latest_cost",
         "last_update"
       ],
-      items: [...project.files.values()]
+      items: Object.values(project.files)
     };
   },
   computed: {},

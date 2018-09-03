@@ -23,17 +23,17 @@ export class File {
 export class Folder {
     readonly icon: string = 'folder';
     readonly view: View = 'tree'
-    public files: Map<String, Folder | File> = new Map();
+    public files: {[name: string]: Folder | File} = {};
 
     constructor(public name: string) { }
 
-    put<K, V extends ArrayLike<any>>(file: Folder | File) { this.files.set(file.name, file) }
-    delete(filename: String) { return this.files.delete(filename) }
+    put<K, V extends ArrayLike<any>>(file: Folder | File) { this.files[file.name] = file }
+    delete(filename: string) { return delete this.files[filename] }
 
     get size() {
         let total = 0;
-        for (let [_, child] of this.files) {
-            total += child.size
+        for (let id in this.files) {
+            total += this.files[id].size
         }
         return total;
     }
@@ -41,8 +41,8 @@ export class Folder {
     get latest_child() {
         let time = 0;
         let latest;
-        for (let [_, child] of this.files) {
-            if (time < child.last_update.getMilliseconds()) latest = child;
+        for (let id in this.files) {
+            if (time < this.files[id].last_update.getMilliseconds()) latest = this.files[id];
         }
         return latest;
     }
@@ -56,9 +56,8 @@ export class Folder {
     }
 
     set latest_transaction(tx_hash: string) {
-        for (let [_, child] of this.files) {
-            console.log(`${child.name}: ${tx_hash}`)
-            child.latest_transaction = tx_hash;
+        for (let id in this.files) {
+            this.files[id].latest_transaction = tx_hash;
         }
     }
 
@@ -101,12 +100,11 @@ class Transaction {
 
     // Create Folder Tx 
     static new_folder(folder: Folder, store: Storage): Transaction {
-        let tx_all = [...folder.files.values()].map(item => {
-            let tx: Transaction;
-            if (item instanceof File) tx = Transaction.new_file(item, store)
-            if (item instanceof Folder) tx = Transaction.new_folder(item, store)
-            if (item instanceof Transaction) throw 'ERROR'
-            return tx!;
+        let tx_all = Object.keys(folder.files).map(id => {
+            let item = folder.files[id];
+            if (item instanceof File) return Transaction.new_file(item, store)
+            if (item instanceof Folder) return Transaction.new_folder(item, store)
+            throw 'Invalid File'
         })
         let gas_cost = tx_all.reduce((total, tx) => total + tx.gas_cost, 0)
         let changes = tx_all.map(({ changes }) => changes).reduce((prev, item) => prev.concat(item))
@@ -159,7 +157,7 @@ class Storage implements Iterable<Uint32Array>{
 
 }
 export class Project {
-    public files: Map<String, File | Folder> = new Map();
+    public files: {[name: string]: File | Folder} = {};
     public gas = 0
     public actors: Array<String> = [];
     public storage: Storage = new Storage(50)
@@ -180,18 +178,18 @@ export class Project {
         this.transactions.push(init_tx)
 
         // Set the system folder
-        this.files.set('.system', system_folder)
+        this.files['.system'] = system_folder
     }
 }
 
 export class User {
-    public projects: Map<string, Project> = new Map();
+    public projects: {[name: string]: Project} = {};
     public color: string = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
 
     constructor(public name: string) { }
 
     addProject(name: string, project: Project) {
-        this.projects.set(name, project);
+        this.projects[name] = project;
     }
 }
 

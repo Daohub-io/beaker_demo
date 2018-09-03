@@ -1,9 +1,10 @@
 <template>
   <div id="app">
-    <Navbar></Navbar>
     <div class="content">
+    <Navbar></Navbar>
       <router-view/>
     </div>
+    <DevTool></DevTool>
   </div>
 </template>
 
@@ -14,13 +15,14 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 
 import Navbar from '@/components/Navbar'
+import DevTool from '@/components/DevTool'
 
 export default {
   name: "App",
   data() {
     return {};
   },
-  components: { Navbar },
+  components: { Navbar, DevTool },
   created() {},
   methods: {}
 }
@@ -33,7 +35,8 @@ export default {
 
 html,
 body,
-#app {
+#app,
+.content {
   width: 100%;
   height: 100%;
   margin: 0;
@@ -45,10 +48,10 @@ body,
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   display: flex;
-  flex-direction: column;
 }
 
 .content {
-  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 </style>

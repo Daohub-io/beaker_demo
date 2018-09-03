@@ -40,7 +40,7 @@ export default {
   beforeMount() {
     let {owner, contract } = this.$route.params;
     let user = Vue.$currentUser()
-    if (user.name.toLowerCase() != owner.toLowerCase() || !user.projects.has(contract)) return this.$router.push({path: '/404'});
+    if (user.name.toLowerCase() != owner.toLowerCase() || !user.projects[contract]) return this.$router.push({path: '/404'});
   },
   computed: {
   },

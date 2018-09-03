@@ -11,7 +11,7 @@
         <b-col cols="8">
           <b-tabs class="options">
             <b-tab title="Blank project" class="blank">
-              <b-form class="basic" @reset="onReset" novalidate>
+              <b-form class="basic" @reset="onReset">
                 <b-form-row>
                   <b-col cols="6">
                     <b-form-group label="Project Path" label-for="project_path">
@@ -24,6 +24,9 @@
                     </b-form-group>
                   </b-col>
                 </b-form-row>
+                <b-form-group label="Kernel Version" label-for="version">
+                  <b-form-select v-model="version" :options="versions"></b-form-select>
+                </b-form-group>
                 <b-form-group label="Project Description" label-for="project_desc">
                   <b-form-textarea id="project_desc" type="text" v-model="description" placeholder="Description format" />
                 </b-form-group>
@@ -89,7 +92,9 @@ export default {
       owner,
       name: "",
       description: "",
-      visibility: "private"
+      visibility: "private",
+      version: "0.0.1",
+      versions: ['0.0.1']
     };
   },
   computed: {
@@ -100,7 +105,8 @@ export default {
   methods: {
     createProject() {
       const { owner, name, description, visibility } = this;
-
+      if (name.length == 0) return;
+      
       Vue.$newProject(name, description, visibility);
 
       this.$router.replace({

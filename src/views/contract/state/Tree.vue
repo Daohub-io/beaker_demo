@@ -38,8 +38,6 @@ import Vue from "vue";
 export default {
   name: "ContractStateTree",
   data() {
-    let files = this.files;
-
     return {
       fields: [
         "name",
@@ -77,17 +75,18 @@ export default {
     },
     files() {
       const { block, contract } = this.$route.params;
-      let project = Vue.$currentUser().projects.get(contract);
+      let project = Vue.$currentUser().projects[contract];
 
       let folder = this.tree().reduce((folder, item, i) => {
         // Check if folder has item
-        if (!folder || !folder.files.has(item)) return false;
+        if (!folder || !folder.files[item]) return false;
         // Get Item
-        return folder.files.get(item);
+        return folder.files[item];
       }, project);
 
+      console.log(folder.files)
       if (!folder || folder.view !== "tree") return false;
-      return [...folder.files.values()];
+      return Object.values(folder.files);
     }
   },
   methods: {
