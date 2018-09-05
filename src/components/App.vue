@@ -4,7 +4,6 @@
     <Navbar></Navbar>
       <router-view/>
     </div>
-    <DevTool></DevTool>
   </div>
 </template>
 

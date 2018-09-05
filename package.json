@@ -27,6 +27,7 @@
     "@vue/cli-service": "^3.0.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "browserslist": "^4.1.0",
     "ganache-cli": "^6.1.8",
     "node-sass": "^4.9.0",

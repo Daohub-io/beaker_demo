@@ -12,7 +12,7 @@
             <b-nav-item to="/">Network</b-nav-item>
             <b-nav-item to="/">Explore</b-nav-item>
         </b-navbar-nav>
-        <b-navbar-nav class="ml-auto" v-if="name">
+        <b-navbar-nav class="ml-auto" v-if="username">
             <b-nav-item class="notification">
                 <i class="fas fa-bell"></i>
             </b-nav-item>
@@ -36,18 +36,16 @@
 
 <script>
 import Vue from "vue";
-
+import { mapState, mapGetters } from 'vuex'
 export default {
   name: "Navbar",
   data() {
-    let user = Vue.$currentUser();
-    return {
-      color: user.color,
-      name: user.name
-    };
+    return {};
   },
-  computed: {}
-};
+  computed: {
+      ...mapState('account', ['username'])
+  }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
