@@ -8,6 +8,7 @@ export interface Account {
 export const account: Module<Account, any> = {
     namespaced: true,
     state: {
+        username: '',
         projects: []
     },
     getters: {
@@ -16,8 +17,13 @@ export const account: Module<Account, any> = {
         }
     },
     mutations: {
-        login(state: Account, username: string) {
+        set_username(state: Account, username: string) {
             state.username = username;
         }
     },
+    actions: {
+        login({commit}, username: string) {
+            commit('set_username', username)
+        }
+    }
 }

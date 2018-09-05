@@ -8,6 +8,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
+    "eth-local": "ganache-cli",
     "postinstall": "rm -f node_modules/web3/index.d.ts"
   },
   "dependencies": {

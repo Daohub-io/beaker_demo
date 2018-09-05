@@ -77,14 +77,11 @@ export default {
   data() {
     return {};
   },
-  computed: {
-    account() {
-      return this.$store.getters.username
-    }
-  },
+  computed: { },
   beforeRouteEnter(to, from, next) {
     next(vm => {
-      if (!vm.account) {
+      let account = vm.$store.state.account;
+      if (!account.username) {
         vm.$router.push('login')
       }
     })

@@ -23,8 +23,14 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 ## Development
 
+
 ```bash
 # serve with hot reload at localhost:8080
 npm run serve
+
+# start a test eth server in a seperate console
+npm run eth-local
 ```
+
+### Start Node
 

@@ -18,7 +18,7 @@
             </b-nav-item>
             <b-nav-item-dropdown right>
                 <template slot="button-content">
-                    <b-img blank rounded="circle" class="user-icon" width="30" height="30" :blank-color="color" :alt="name"/>
+                    <b-img blank rounded="circle" class="user-icon" width="30" height="30" :blank-color="color" :alt="username"/>
                 </template>
                 <b-dropdown-item href="#">Profile</b-dropdown-item>
                 <b-dropdown-item href="#">Logout</b-dropdown-item>
@@ -43,6 +43,7 @@ export default {
     return {};
   },
   computed: {
+      ...mapGetters('account', ['color']),
       ...mapState('account', ['username'])
   }
 }

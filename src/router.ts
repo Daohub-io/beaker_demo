@@ -4,7 +4,6 @@ import Router from 'vue-router'
 import NotFound from '@/views/NotFound.vue'
 import Home from '@/views/Home.vue'
 import Login from '@/views/Login.vue'
-import Explore from '@/views/Explore.vue'
 
 import Contract from '@/views/Contract.vue'
 import ContractState from '@/views/contract/State.vue'
@@ -22,6 +21,8 @@ import ContractSettings from '@/views/contract/Settings.vue'
 import Account from '@/views/Account.vue'
 import NewProject from '@/views/NewProject.vue'
 
+import Dev from '@/views/Dev.vue'
+
 Vue.use(Router)
 
 export default new Router({
@@ -29,6 +30,10 @@ export default new Router({
     {
       path: '',
       component: Home
+    },
+    {
+      path: '/dev',
+      component: Dev
     },
     {
       path: '/404',
@@ -97,10 +102,6 @@ export default new Router({
       path: '/:account',
       name: 'account',
       component: Account,
-    },
-    {
-      path: '/explore',
-      component: Explore
     }
   ]
 })

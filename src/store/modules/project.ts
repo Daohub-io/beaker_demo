@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import { Module } from 'vuex/types'
 
-import {web3, LocalKernelAbi, MIN_GAS, MIN_GAS_PRICE} from '@/web3/index'
+import { web3, LocalKernelAbi, MIN_GAS, MIN_GAS_PRICE } from '@/web3/index'
 import Contract from 'web3/eth/contract';
 
 export type View = 'tree' | 'blob' | 'raw';
@@ -21,7 +21,7 @@ export class File {
 export class Folder {
     readonly icon: string = 'folder';
     readonly view: View = 'tree'
-    public files: {[name: string]: Folder | File} = {};
+    public files: { [name: string]: Folder | File } = {};
 
     constructor(public name: string) { }
 
@@ -65,7 +65,7 @@ export class Folder {
 }
 
 export interface Project {
-    files: {[name: string]: File | Folder};
+    files: { [name: string]: File | Folder };
     gas: number;
     transactions: Array<Transaction>;
     address: string;
@@ -80,17 +80,14 @@ export const project: Module<Project, any> = {
         address: ''
     },
     getters: {
-        get_file(state: Project | Folder, path: string[]): File | Folder | undefined {
-            function _get_file(state: Project | Folder, path: string[]): File | Folder | undefined {
-                let item = state.files[path[0]];
-                if (item instanceof File || path.length == 1) return item;
-                if (item instanceof Folder) {
-                    let sub = path.slice(1);
-                    return _get_file(item, sub)
-                }
-                return <any>false;
+        get_file: function get_file(state: Project | Folder, path: string[]): File | Folder | Error {
+            let item = state.files[path[0]];
+            if (item instanceof File || path.length == 1) return item;
+            if (item instanceof Folder) {
+                let sub = path.slice(1);
+                return get_file(item, sub)
             }
-            return _get_file(state, path)
+            return Error('Invalid Path')
         }
     },
     mutations: {

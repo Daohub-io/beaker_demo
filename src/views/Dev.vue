@@ -3,6 +3,7 @@
     <b-container>
       <b-row>
           <b-col cols="3" align="center">
+            Development
             <form>
                 <b-form-input type="text" placeholder="Username" v-model="username"></b-form-input>
                 <b-form-input type="email" placeholder="Email" v-model="email"></b-form-input>
