@@ -22,7 +22,7 @@ export default {
   data() {
     return {};
   },
-  components: { Navbar, DevTool },
+  components: { Navbar },
   created() {},
   methods: {}
 }

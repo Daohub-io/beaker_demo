@@ -77,7 +77,14 @@ export default {
   data() {
     return {};
   },
-  computed: {}
+  computed: {},
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      if (!vm.$currentUser()) {
+        vm.$router.push('login')
+      }
+    })
+  }
 };
 </script>
 

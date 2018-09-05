@@ -28,9 +28,8 @@ export default {
   methods: {
     // Fake Login
     loginUser() {
-      setTimeout(() => {
-
-      }, 1500);
+      this.$login(this.username)
+      this.$router.push('/')
     }
   },
   computed: {
