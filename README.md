@@ -31,6 +31,3 @@ npm run serve
 # start a test eth server in a seperate console
 npm run eth-local
 ```
-
-### Start Node
-
