@@ -1,11 +1,13 @@
 import { Module } from 'vuex/types'
 
+import Root from '@/store/modules/root'
+
 export interface Account {
     username?: string;
     projects: string[];
 }
 
-export const account: Module<Account, any> = {
+export const account: Module<Account, Root> = {
     namespaced: true,
     state: {
         username: '',

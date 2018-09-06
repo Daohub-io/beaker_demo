@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import { Module } from 'vuex/types'
-
 import { web3, LocalKernelAbi, MIN_GAS, MIN_GAS_PRICE } from '@/web3/index'
 import Contract from 'web3/eth/contract';
+
+import Root from '@/store/modules/root'
 
 export type View = 'tree' | 'blob' | 'raw';
 export type StorageLocation = [number, number, number];
@@ -71,7 +72,7 @@ export interface Project {
     address: string;
 }
 
-export const project: Module<Project, any> = {
+export const project: Module<Project, Root> = {
     namespaced: true,
     state: {
         files: {},
