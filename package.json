@@ -8,6 +8,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
+    "eth-local": "ganache-cli",
     "postinstall": "rm -f node_modules/web3/index.d.ts"
   },
   "dependencies": {
@@ -16,7 +17,8 @@
     "bootstrap-vue": "^2.0.0-rc.11",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",
-    "web3": "^1.0.0-beta.35"
+    "vuex": "^3.0.1",
+    "web3": "^1.0.0-beta.30"
   },
   "devDependencies": {
     "@types/web3": "^1.0.3",
@@ -26,6 +28,7 @@
     "@vue/cli-service": "^3.0.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "browserslist": "^4.1.0",
     "ganache-cli": "^6.1.8",
     "node-sass": "^4.9.0",

@@ -1,10 +1,8 @@
 <template>
   <div id="app">
     <div class="content">
-    <Navbar></Navbar>
       <router-view/>
     </div>
-    <DevTool></DevTool>
   </div>
 </template>
 
@@ -14,15 +12,11 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 
-import Navbar from '@/components/Navbar'
-import DevTool from '@/components/DevTool'
-
 export default {
   name: "App",
   data() {
     return {};
   },
-  components: { Navbar, DevTool },
   created() {},
   methods: {}
 }
@@ -40,14 +34,13 @@ body,
   width: 100%;
   height: 100%;
   margin: 0;
-  padding: 0;
+  padding: 0 !important;
 }
 
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  display: flex;
 }
 
 .content {
