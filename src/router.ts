@@ -28,11 +28,11 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '',
+      path: '/home',
       component: Home
     },
     {
-      path: '/dev',
+      path: '',
       component: Dev
     },
     {

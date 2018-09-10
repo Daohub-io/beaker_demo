@@ -1,15 +1,26 @@
 <template>
-  <div class="login">
+  <div class="dev">
+    <Navbar>
+      <template slot="context">
+        <b-navbar-nav class="ml-auto">
+          <b-nav-form>
+            <b-btn v-b-modal.modalConnection size="sm" :variant="connected ? 'success': 'danger'">{{ connected ? 'Connected': 'No Connection'}}</b-btn>
+            <b-modal id="modalConnection" ref="modal" title="Set Connection" @ok="handleOk">
+              <form @submit.stop.prevent="handleOk">
+                <p>Network Id: {{ network.node.id }}</p>
+                <p>Type: {{ network.node.type }} </p>
+                <b-form-input type="text" placeholder="Enter Node Address" v-model="address"></b-form-input>
+              </form>
+            </b-modal>
+          </b-nav-form>
+        </b-navbar-nav>
+      </template>
+    </Navbar>
     <b-container>
       <b-row>
           <b-col cols="3" align="center">
             Development
-            <form>
-                <b-form-input type="text" placeholder="Username" v-model="username"></b-form-input>
-                <b-form-input type="email" placeholder="Email" v-model="email"></b-form-input>
-                <b-form-input type="password" placeholder="Password" v-model="password"></b-form-input>
-                <b-button @click="loginUser">Login</b-button>
-            </form>
+            
           </b-col>
       </b-row>
     </b-container>
@@ -17,30 +28,47 @@
 </template>
 
 <script>
+import Navbar from "@/components/Navbar";
+import { web3 } from "@/web3";
 
 export default {
-  name: "Login",
-  data() { 
+  name: "Dev",
+  data() {
+    this.connect();
     return {
-      username: "",
-      email: "",
-      password: ""
+      address: ""
     };
   },
+  components: { Navbar },
   methods: {
-    // Fake Login
-    loginUser() {
-      this.$store.dispatch('account/login', this.username)
-      this.$router.push('/')
-    }
+    async connect(address) {
+      return this.$store.dispatch("network/connect");
+    },
+    async handleOk() {
+      await this.connect();
+      this.$refs.modal.hide();
+    },
   },
   computed: {
+    network() {
+      return this.$store.state.network;
+    },
+    connected() {
+      return this.network.accounts.length !== 0;
+    },
+    version() {
+      return web3.version.node
+    }
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.login form {
+.dev {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 </style>
