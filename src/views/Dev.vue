@@ -27,39 +27,41 @@
   </div>
 </template>
 
-<script>
-import Navbar from "@/components/Navbar";
-import { web3 } from "@/web3";
+<script lang="ts">
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import * as Store from 'vuex-class'
 
-export default {
-  name: "Dev",
-  data() {
+import Navbar from "@/components/Navbar.vue";
+import { web3 } from "@/web3";
+import { Network, actions  } from '@/store/modules/network';
+import { ActionMethod, Action } from 'vuex';
+
+@Component({
+  components: { Navbar }
+})
+export default class Dev extends Vue {
+
+  @Store.State network: Network
+  @Store.Action('network/connect') connect: () => Promise<void>;
+
+  address = "";
+  
+  mounted() {
     this.connect();
-    return {
-      address: ""
-    };
-  },
-  components: { Navbar },
-  methods: {
-    async connect(address) {
-      return this.$store.dispatch("network/connect");
-    },
-    async handleOk() {
-      await this.connect();
-      this.$refs.modal.hide();
-    },
-  },
-  computed: {
-    network() {
-      return this.$store.state.network;
-    },
-    connected() {
-      return this.network.accounts.length !== 0;
-    },
-    version() {
-      return web3.version.node
-    }
   }
+
+  async handleOk() {
+    await this.connect();
+  }
+
+  get connected() {
+    return this.network.accounts.length !== 0;
+  }
+  get version() {
+    return web3.version 
+  }
+
 };
 </script>
 

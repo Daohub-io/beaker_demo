@@ -1,4 +1,4 @@
-import { Module } from 'vuex/types'
+import { Module, GetterTree, MutationTree, ActionTree } from 'vuex/types'
 
 import Root from '@/store/modules/root'
 
@@ -7,25 +7,26 @@ export interface Account {
     projects: string[];
 }
 
-export const account: Module<Account, Root> = {
-    namespaced: true,
-    state: {
-        username: '',
-        projects: []
-    },
-    getters: {
-        color(state: Account): string {
-            return '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
-        }
-    },
-    mutations: {
-        set_username(state: Account, username: string) {
-            state.username = username;
-        }
-    },
-    actions: {
-        login({commit}, username: string) {
-            commit('set_username', username)
-        }
+export const namespaced = true;
+export const state: Account = {
+    username: '',
+    projects: []
+};
+
+export const getters: GetterTree<Account, Root> = {
+    color(state: Account): string {
+        return '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
+    }
+};
+
+export const mutations: MutationTree<Account> = {
+    set_username(state: Account, username: string) {
+        state.username = username;
+    }
+};
+
+export const actions: ActionTree<Account, Root> = {
+    login({commit}, username: string) {
+        commit('set_username', username)
     }
 }

@@ -4,6 +4,8 @@
     "tslint:recommended"
   ],
   "linterOptions": {
+    "strictPropertyInitialization": false,
+    "experimentalDecorators": true,
     "exclude": [
       "node_modules/**"
     ]

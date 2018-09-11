@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { Module } from 'vuex/types'
+import { Module, GetterTree, MutationTree } from 'vuex/types'
 import { web3, LocalKernelAbi, MIN_GAS, MIN_GAS_PRICE } from '@/web3/index'
 import Contract from 'web3/eth/contract';
 
@@ -72,32 +72,29 @@ export interface Project {
     address: string;
 }
 
-export const project: Module<Project, Root> = {
-    namespaced: true,
-    state: {
-        files: {},
-        gas: 0,
-        transactions: [],
-        address: ''
-    },
-    getters: {
-        get_file: function get_file(state: Project | Folder, path: string[]): File | Folder | Error {
-            let item = state.files[path[0]];
-            if (item instanceof File || path.length == 1) return item;
-            if (item instanceof Folder) {
-                let sub = path.slice(1);
-                return get_file(item, sub)
-            }
-            return Error('Invalid Path')
+export const namespaced = true;
+export const state: Project = {
+    files: {},
+    gas: 0,
+    transactions: [],
+    address: ''
+}
+export const getters: GetterTree<Project, Root> = {
+    get_file: function get_file(state: Project | Folder, path: string[]): File | Folder | Error {
+        let item = state.files[path[0]];
+        if (item instanceof File || path.length == 1) return item;
+        if (item instanceof Folder) {
+            let sub = path.slice(1);
+            return get_file(item, sub)
         }
+        return Error('Invalid Path')
+    }
+}
+export const mutations: MutationTree<Project> = {
+    replace(state: Project, new_state: Project) {
+        state = new_state;
     },
-    mutations: {
-        replace(state: Project, new_state: Project) {
-            state = new_state;
-        },
-        set_file(state: Project, file: File) {
-            state.files[file.name] = file;
-        }
-    },
-    actions: {}
+    set_file(state: Project, file: File) {
+        state.files[file.name] = file;
+    }
 }
