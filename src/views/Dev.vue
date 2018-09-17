@@ -67,7 +67,7 @@ import Component from "vue-class-component";
 import * as Store from "vuex-class";
 
 import Navbar from "@/components/Navbar.vue";
-import { web3, TestAbi } from "@/web3";
+import { web3, TestAbi, MIN_GAS, MIN_GAS_PRICE } from "@/web3";
 import { Network, actions } from "@/store/modules/network";
 import { ActionMethod, Action } from "vuex";
 import Contract from 'web3/eth/contract';
@@ -108,8 +108,8 @@ export default class Dev extends Vue {
 
     let name = web3.utils.toHex("Entry")
 
-    let res = await this.instance.methods.createProcedure(name, entry_code, []).call({ from: account});
-    let tx1 = await this.instance.methods.createProcedure(name, entry_code, []).send({ from: account });
+    let res = await this.instance.methods.createProcedure(name, entry_code, []).call({ from: account, gas: MIN_GAS, gasPrice: MIN_GAS_PRICE});
+    let tx1 = await this.instance.methods.createProcedure(name, entry_code, []).send({ from: account, gas: MIN_GAS, gasPrice: MIN_GAS_PRICE});
 
     this.procedures = [await this.instance.methods.listProcedures().call()] as any;
   }
