@@ -1,0 +1,189 @@
+{
+  "contractName": "TestWrite",
+  "abi": [
+    {
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "fallback"
+    }
+  ],
+  "bytecode": "0x6080604052348015600f57600080fd5b50604580601d6000396000f3006080604052348015600f57600080fd5b50610164618000550000a165627a7a72305820c3375ecee64162ffe7642b73f7632a765155328b4150a7eb65d43e9733d352130029",
+  "deployedBytecode": "0x6080604052348015600f57600080fd5b50610164618000550000a165627a7a72305820c3375ecee64162ffe7642b73f7632a765155328b4150a7eb65d43e9733d352130029",
+  "sourceMap": "26:112:5:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:112:5;;;;;;;",
+  "deployedSourceMap": "26:112:5:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:112:5;116:3;109:6;102:18;26:112",
+  "source": "pragma solidity ^0.4.17;\n\ncontract TestWrite {\n    function() public {\n        assembly {\n            sstore(0x8000,356)\n        }\n    }\n}",
+  "sourcePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/TestWrite.sol",
+  "ast": {
+    "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/TestWrite.sol",
+    "exportedSymbols": {
+      "TestWrite": [
+        2574
+      ]
+    },
+    "id": 2575,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2568,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".17"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:5"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 2574,
+        "linearizedBaseContracts": [
+          2574
+        ],
+        "name": "TestWrite",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 2572,
+              "nodeType": "Block",
+              "src": "69:67:5",
+              "statements": [
+                {
+                  "externalReferences": [],
+                  "id": 2571,
+                  "nodeType": "InlineAssembly",
+                  "operations": "{\n    sstore(0x8000, 356)\n}",
+                  "src": "79:57:5"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 2573,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2569,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "59:2:5"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 2570,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "69:0:5"
+            },
+            "scope": 2574,
+            "src": "51:85:5",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 2575,
+        "src": "26:112:5"
+      }
+    ],
+    "src": "0:138:5"
+  },
+  "legacyAST": {
+    "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/TestWrite.sol",
+    "exportedSymbols": {
+      "TestWrite": [
+        2574
+      ]
+    },
+    "id": 2575,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2568,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".17"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:5"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 2574,
+        "linearizedBaseContracts": [
+          2574
+        ],
+        "name": "TestWrite",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 2572,
+              "nodeType": "Block",
+              "src": "69:67:5",
+              "statements": [
+                {
+                  "externalReferences": [],
+                  "id": 2571,
+                  "nodeType": "InlineAssembly",
+                  "operations": "{\n    sstore(0x8000, 356)\n}",
+                  "src": "79:57:5"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 2573,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2569,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "59:2:5"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 2570,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "69:0:5"
+            },
+            "scope": 2574,
+            "src": "51:85:5",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 2575,
+        "src": "26:112:5"
+      }
+    ],
+    "src": "0:138:5"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-09-17T13:43:44.383Z"
+}

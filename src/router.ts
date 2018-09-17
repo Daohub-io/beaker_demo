@@ -33,7 +33,7 @@ export default new Router({
     },
     {
       path: '',
-      component: Dev
+      component: Dev,
     },
     {
       path: '/404',

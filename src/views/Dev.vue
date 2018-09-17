@@ -9,7 +9,7 @@
               <form @submit.stop.prevent="handleOk">
                 <p>Network Id: {{ network.node.id }}</p>
                 <p>Type: {{ network.node.type }} </p>
-                <b-form-input type="text" placeholder="Enter Node Address" v-model="address"></b-form-input>
+                <b-form-input type="text" placeholder="Enter Node Address" v-model="network.address"></b-form-input>
               </form>
             </b-modal>
           </b-nav-form>
@@ -18,37 +18,100 @@
     </Navbar>
     <b-container>
       <b-row>
-          <b-col cols="3" align="center">
-            Development
-            
-          </b-col>
+        <b-col cols="4">
+          <header>
+            <h3>New Instance</h3>
+            <p>Deploy a new Kernel Instance</p>
+          </header>
+          <b-form>
+            <b-form-group label="Name" label-for="name">
+              <b-form-input id="name" type="text" :value ="newInstance.name" placeholder=""/>
+            </b-form-group>
+            <b-form-group label="Account" label-for="account">
+              <b-form-select v-model="newInstance.account" :options="accounts">
+                <option value="" disabled> Please Select Account</option>
+              </b-form-select>
+            </b-form-group>
+            <b-form-group label="Entry Procedure" label-for="entry_proc_address">
+              <b-form-select v-model="newInstance.entry_test_choice">
+                <option value="" disabled> Please Select Test Entry</option>
+                <optgroup label="Procedure Object Capabilities">
+                  <option :value="entry_tests.proc.call.bytecode">Call Procedure</option>
+                </optgroup>
+                <optgroup label="Storage Object Capabilities">
+                  <option :value="entry_tests.store.write.bytecode">Write to Storage</option>
+                </optgroup>
+                <optgroup label="Log Object Capabilities">
+                  <option :value="entry_tests.log.write.bytecode">Write to Log</option>
+                </optgroup>
+              </b-form-select>
+            </b-form-group>
+            <b-button variant="primary" @click="createInstance">Create</b-button>
+            <b-button type="reset" variant="danger">Reset</b-button>
+          </b-form>
+        </b-col>
+        <b-col cols="8">
+          <h3>Procedures</h3>
+          <b-table :items="procedures"></b-table>
+          <h3>State</h3>
+          <b-table :items="state"></b-table>
+        </b-col>
       </b-row>
     </b-container>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import Component from 'vue-class-component'
-import * as Store from 'vuex-class'
+import Vue from "vue";
+import Component from "vue-class-component";
+import * as Store from "vuex-class";
 
 import Navbar from "@/components/Navbar.vue";
-import { web3 } from "@/web3";
-import { Network, actions  } from '@/store/modules/network';
-import { ActionMethod, Action } from 'vuex';
+import { web3, TestAbi } from "@/web3";
+import { Network, actions } from "@/store/modules/network";
+import { ActionMethod, Action } from "vuex";
+import Contract from 'web3/eth/contract';
 
 @Component({
   components: { Navbar }
 })
 export default class Dev extends Vue {
+  @Store.State network: Network;
+  @Store.Action("network/connect") connect: () => Promise<void>;
+  @Store.Action("network/deploy_instance") deployInstance: (account?: string) => Promise<void>
 
-  @Store.State network: Network
-  @Store.Action('network/connect') connect: () => Promise<void>;
+  newInstance = {
+    name: "",
+    account: "",
+    entry_proc_address: "",
+    entry_test_choice: "",
+  }
 
-  address = "";
-  
+  entry_tests = TestAbi;
+
+  instance: Contract;
+
+  procedures = []
+  state = []
+
   mounted() {
     this.connect();
+  }
+
+  async createInstance() {
+    let account = this.newInstance.account
+    await this.deployInstance(account);
+
+    let instances = this.network.instances;
+    this.instance = this.network.instances[instances.length -1]
+    let entry_code = this.newInstance.entry_test_choice
+
+    let name = web3.utils.toHex("Entry")
+
+    let res = await this.instance.methods.createProcedure(name, entry_code, []).call({ from: account});
+    let tx1 = await this.instance.methods.createProcedure(name, entry_code, []).send({ from: account });
+
+    this.procedures = [await this.instance.methods.listProcedures().call()] as any;
   }
 
   async handleOk() {
@@ -59,10 +122,14 @@ export default class Dev extends Vue {
     return this.network.accounts.length !== 0;
   }
   get version() {
-    return web3.version 
+    return web3.version;
   }
 
-};
+  get accounts() {
+    let accounts: Network['accounts'] = this.network.accounts;
+    return accounts.map(({id}) => id)
+  }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -72,5 +139,9 @@ export default class Dev extends Vue {
   height: 100%;
   margin: 0;
   padding: 0;
+}
+
+h3, h4 {
+  margin-top: 1rem;
 }
 </style>
