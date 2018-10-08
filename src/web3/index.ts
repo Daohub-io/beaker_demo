@@ -19,14 +19,15 @@ export const LocalKernelAbi = require('./contracts/Kernel.json')
 export const web3 = new Web3(DEFAULT_ADDRESS);
 
 
-enum CapabilityType {
+export enum CapabilityType {
     ProcedureCall = 0x3,
     StorageWrite = 0x7,
     LogWrite = 0x9
 }
 
 export abstract class Capability {
-    public raw_values: string[];
+    public owners: string[] = [];
+    public raw_values: string[] = [];
 
     constructor(public type: CapabilityType) { }
     // Format the capability values into the values that will be stored in the kernel.
@@ -49,7 +50,13 @@ export abstract class Capability {
 
 export class WriteCap extends Capability {
     constructor(public address: number, public size: number) {
-        super(CapabilityType.StorageWrite);
+        super(CapabilityType.StorageWrite)
+    }
+
+    static from_raw(raw_values: string[]) {
+        let address = web3.utils.hexToNumber(raw_values[0]);
+        let size = web3.utils.hexToNumber(raw_values[1])
+        return new WriteCap(address, size);
     }
 
     keyValues() {
@@ -57,9 +64,12 @@ export class WriteCap extends Capability {
     }
 }
 
-export class LogCap extends Capability {    
+export class LogCap extends Capability {
     constructor(public topics: string[]) {
         super(CapabilityType.LogWrite);
+    }
+    static from_raw(raw_values: string[]) {
+        return new LogCap(raw_values);
     }
 
     keyValues() {
@@ -73,6 +83,9 @@ export class CallCap extends Capability {
     // keys should be a list of strings
     constructor(public keys: string[] = []) {
         super(CapabilityType.ProcedureCall);
+    }
+    static from_raw(raw_values: string[]) {
+        return new CallCap(raw_values);
     }
 
     keyValues() {
@@ -110,15 +123,23 @@ export class ProcedureTable {
             const nCaps = web3.utils.hexToNumber(val[i]); i++;
 
             for (let j = 0; j < nCaps; j++) {
-                const cap: Capability = {} as any;
                 const length = web3.utils.hexToNumber(web3.utils.toHex(val[i])); i++;
-                cap.type = web3.utils.hexToNumber(web3.utils.toHex(val[i])); i++;
+                const type: CapabilityType = web3.utils.hexToNumber(web3.utils.toHex(val[i])); i++;
 
                 // (length - 1) as the first value is the length
-                cap.raw_values = [];
+                let raw_values = [];
                 for (let k = 0; k < (length - 1); k++) {
-                    cap.raw_values.push(web3.utils.toHex(val[i])); i++;
+                    raw_values.push(web3.utils.toHex(val[i])); i++;
                 }
+                
+                let cap: WriteCap | LogCap | CallCap;
+                switch(type) {
+                    case CapabilityType.StorageWrite: cap = WriteCap.from_raw(raw_values); break;
+                    case CapabilityType.LogWrite: cap = LogCap.from_raw(raw_values); break;
+                    case CapabilityType.ProcedureCall: cap = CallCap.from_raw(raw_values); break;
+                    default: throw 'Undefined Capability Type: ' + type
+                }
+
                 proc.caps.push(cap);
             }
             table[proc.key] = proc;
