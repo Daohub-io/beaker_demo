@@ -67,7 +67,7 @@ import Component from "vue-class-component";
 import * as Store from "vuex-class";
 
 import Navbar from "@/components/Navbar.vue";
-import { web3, TestAbi, MIN_GAS, MIN_GAS_PRICE } from "@/web3";
+import { web3, TestAbi, MIN_GAS, MIN_GAS_PRICE, ProcedureTable, WriteCap, LogCap, CallCap, Capability } from "@/web3";
 import { Network, actions } from "@/store/modules/network";
 import { ActionMethod, Action } from "vuex";
 import Contract from 'web3/eth/contract';
@@ -91,8 +91,8 @@ export default class Dev extends Vue {
 
   instance: Contract;
 
-  procedures = []
-  state = []
+  procedures: {id: string, address: string}[] = [];
+  state: {owner: string, size: number}[] = [];
 
   mounted() {
     this.connect();
@@ -103,15 +103,45 @@ export default class Dev extends Vue {
     await this.deployInstance(account);
 
     let instances = this.network.instances;
-    this.instance = this.network.instances[instances.length -1]
+    this.instance = instances[instances.length -1]
     let entry_code = this.newInstance.entry_test_choice
 
     let name = web3.utils.toHex("Entry")
+    const cap1 = new WriteCap(0x8000, 2);
+    const cap2 = new LogCap([]);
+    const cap3 = new CallCap();
+    const caps = Capability.toInput([cap1, cap2, cap3]);
 
-    let res = await this.instance.methods.createProcedure(name, entry_code, []).call({ from: account, gas: MIN_GAS, gasPrice: MIN_GAS_PRICE});
-    let tx1 = await this.instance.methods.createProcedure(name, entry_code, []).send({ from: account, gas: MIN_GAS, gasPrice: MIN_GAS_PRICE});
+    let { procedureAddress } = await this.instance.methods.createProcedure(name, entry_code, caps).call({ from: account, gas: MIN_GAS, gasPrice: MIN_GAS_PRICE});
+    let tx1 = await this.instance.methods.createProcedure(name, entry_code, caps).send({ from: account, gas: MIN_GAS, gasPrice: MIN_GAS_PRICE});
 
-    this.procedures = [await this.instance.methods.listProcedures().call()] as any;
+    this.procedures.push({id: "Entry", address: procedureAddress })
+    await this.updateProcedureTable()
+    await this.updateStorageTable()
+  }
+
+  async getProcedureAddress(id: string, account: string) {
+    let name = web3.utils.isHex(id) ? id : web3.utils.toHex(id);
+    return this.instance.methods.getProcedure(name).call();
+  }
+
+  async updateProcedureTable() {
+    const account = this.newInstance.account
+
+    const procedures: [string] = await this.instance.methods.listProcedures().call();
+
+    this.procedures = await Promise.all(procedures.map(async hex_id => {
+      let id = web3.utils.hexToUtf8(hex_id)
+      let address = await this.instance.methods.getProcedure(hex_id).call();
+      return {id, address}
+    }))
+  }
+
+  async updateStorageTable() {
+    let raw_proc_table = await this.instance.methods.returnProcedureTable().call();
+    let proc_table = ProcedureTable.parse(raw_proc_table)
+    console.log(proc_table)
+    return proc_table.table
   }
 
   async handleOk() {
@@ -129,6 +159,7 @@ export default class Dev extends Vue {
     let accounts: Network['accounts'] = this.network.accounts;
     return accounts.map(({id}) => id)
   }
+
 }
 </script>
 
