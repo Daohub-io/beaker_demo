@@ -16,48 +16,7 @@
         </b-navbar-nav>
       </template>
     </Navbar>
-    <b-container>
-      <b-row>
-        <b-col cols="4">
-          <header>
-            <h3>New Instance</h3>
-            <p>Deploy a new Kernel Instance</p>
-          </header>
-          <b-form>
-            <b-form-group label="Name" label-for="name">
-              <b-form-input id="name" type="text" :value ="newInstance.name" placeholder=""/>
-            </b-form-group>
-            <b-form-group label="Account" label-for="account">
-              <b-form-select v-model="newInstance.account" :options="accounts">
-                <option value="" disabled> Please Select Account</option>
-              </b-form-select>
-            </b-form-group>
-            <b-form-group label="Entry Procedure" label-for="entry_proc_address">
-              <b-form-select v-model="newInstance.entry_test_choice">
-                <option value="" disabled> Please Select Test Entry</option>
-                <optgroup label="Procedure Object Capabilities">
-                  <option :value="entry_tests.proc.call.bytecode">Call Procedure</option>
-                </optgroup>
-                <optgroup label="Storage Object Capabilities">
-                  <option :value="entry_tests.store.write.bytecode">Write to Storage</option>
-                </optgroup>
-                <optgroup label="Log Object Capabilities">
-                  <option :value="entry_tests.log.write.bytecode">Write to Log</option>
-                </optgroup>
-              </b-form-select>
-            </b-form-group>
-            <b-button variant="primary" @click="createInstance">Create</b-button>
-            <b-button type="reset" variant="danger">Reset</b-button>
-          </b-form>
-        </b-col>
-        <b-col cols="8">
-          <h3>Procedures</h3>
-          <b-table :items="procedures"></b-table>
-          <h3>State</h3>
-          <b-table :items="state"></b-table>
-        </b-col>
-      </b-row>
-    </b-container>
+    <router-view/>
   </div>
 </template>
 
@@ -87,107 +46,11 @@ import Contract from "web3/eth/contract";
   components: { Navbar }
 })
 export default class Dev extends Vue {
-  @Store.State
-  network: Network;
-  @Store.Action("network/connect")
-  connect: () => Promise<void>;
-  @Store.Action("network/deploy_instance")
-  deployInstance: (account?: string) => Promise<void>;
-
-  newInstance = {
-    name: "",
-    account: "",
-    entry_proc_address: "",
-    entry_test_choice: ""
-  };
-
-  entry_tests = TestAbi;
-
-  instance: Contract;
-
-  procedures: { id: string; address: string }[] = [];
-  state: WriteCap[] = [];
+  @Store.State network: Network;
+  @Store.Action("network/connect") connect: () => Promise<void>;
 
   mounted() {
     this.connect();
-  }
-
-  async createInstance() {
-    let account = this.newInstance.account;
-    await this.deployInstance(account);
-
-    let instances = this.network.instances;
-    this.instance = instances[instances.length - 1];
-    let entry_code = this.newInstance.entry_test_choice;
-
-    let name = web3.utils.toHex("Entry");
-    const cap1 = new WriteCap(0x8000, 2);
-    const cap2 = new LogCap([]);
-    const cap3 = new CallCap();
-    const caps = Capability.toInput([cap1, cap2, cap3]);
-
-    let { procedureAddress } = await this.instance.methods
-      .createProcedure(name, entry_code, caps)
-      .call({ from: account, gas: MIN_GAS, gasPrice: MIN_GAS_PRICE });
-    let tx1 = await this.instance.methods
-      .createProcedure(name, entry_code, caps)
-      .send({ from: account, gas: MIN_GAS, gasPrice: MIN_GAS_PRICE });
-
-    this.procedures.push({ id: "Entry", address: procedureAddress });
-    await this.updateProcedureTable();
-    await this.updateStorageTable();
-  }
-
-  async getProcedureAddress(id: string, account: string) {
-    let name = web3.utils.isHex(id) ? id : web3.utils.toHex(id);
-    return this.instance.methods.getProcedure(name).call();
-  }
-
-  async updateProcedureTable() {
-    const account = this.newInstance.account;
-
-    const procedures: [string] = await this.instance.methods.listProcedures().call();
-
-    this.procedures = await Promise.all(
-      procedures.map(async hex_id => {
-        let id = web3.utils.hexToUtf8(hex_id);
-        let address = await this.instance.methods.getProcedure(hex_id).call();
-        return { id, address };
-      })
-    );
-  }
-
-  async updateStorageTable() {
-    let raw_proc_table = await this.instance.methods
-      .returnProcedureTable()
-      .call();
-    let proc_table = ProcedureTable.parse(raw_proc_table).table;
-
-    let result: WriteCap[] = [];
-    
-    for (let key in proc_table) {
-      let proc = proc_table[key];
-
-      proc.caps.forEach(cap => {
-        if(cap.type === CapabilityType.StorageWrite) {
-          
-          // Set Key as Ascii
-          let name = web3.utils.hexToUtf8(key)
-          // Add Owner to Cap
-          cap.owners.push(name)
-
-          let dup_i = result.findIndex(p_cap => cap.raw_values === p_cap.raw_values);
-          // If a Duplicate Cap is found, add Proc to Owners, if not add to results.
-          if (dup_i !== -1) {
-            result[dup_i].owners.push(name)
-          } else {
-            result.push(cap as WriteCap)
-          }
-        }
-      })
-    }
-
-    this.state = result;
   }
 
   async handleOk() {

@@ -1,13 +1,13 @@
 import { Module, MutationTree, ActionTree } from 'vuex/types'
 
-import { web3, LocalKernelAbi, MIN_GAS, MIN_GAS_PRICE, DEFAULT_PORT, DEFAULT_ADDRESS } from '@/web3/index'
+import { web3, LocalKernelAbi, MIN_GAS, MIN_GAS_PRICE, DEFAULT_PORT, DEFAULT_ADDRESS, ProcedureTable } from '@/web3/index'
 import Contract from 'web3/eth/contract';
 import Root from '@/store/modules/root'
 
 export interface Network {
     address: string;
-    accounts: {id: string, balance: number}[];
-    instances: Contract[];
+    accounts: { id: string, balance: number }[];
+    instances: { contract: Contract, proc_table?: ProcedureTable }[];
     isSyncing: boolean;
     node: { id: string, type: string };
 }
@@ -25,15 +25,20 @@ export const mutations: MutationTree<Network> = {
     set_network(state: Network, address: string) {
         state.address = address
     },
-    set_accounts(state: Network, accounts: {id: string, balance: number}[]) {
-        state.accounts = accounts;
-    },
-    add_kernel(state: Network, kernel: Contract) {
-        state.instances.push(kernel)
-    },
     set_node(state: Network, node: { id: string, type: string }) {
         state.node = node;
+    },
+    set_accounts(state: Network, accounts: { id: string, balance: number }[]) {
+        state.accounts = accounts;
+    },
+    add_instance(state: Network, kernel: Contract) {
+        state.instances.push({ contract: kernel })
+    },
+    set_instance_proc_table(state: Network, new_state: { address: string, table: ProcedureTable }) {
+        let i = state.instances.findIndex(({ contract }) => contract.options.address === new_state.address)
+        if (i !== -1) state.instances[i].proc_table = new_state.table
     }
+
 }
 
 export const actions: ActionTree<Network, Root> = {
@@ -51,12 +56,30 @@ export const actions: ActionTree<Network, Root> = {
         commit('set_accounts', accounts)
     },
 
-    async deploy_instance({ dispatch, commit, state }, account: string = state.accounts[0].id, kernelAbi = LocalKernelAbi,) {
+    async deploy_instance({ dispatch, commit, state }, account: string = state.accounts[0].id, kernelAbi = LocalKernelAbi, ) {
         // Create New Kernel Contract in Memory
         const Kernel = new web3.eth.Contract([kernelAbi])
         let instance = await Kernel.deploy({ data: kernelAbi.bytecode } as any).send({ from: account, gas: MIN_GAS, gasPrice: MIN_GAS_PRICE })
         instance.options.jsonInterface = kernelAbi.abi;
 
-        commit('add_kernel', instance)
+        commit('add_instance', instance)
+    },
+
+    async update_instance({ dispatch, commit, state }, address: string) {
+        let instance = state.instances.find(({ contract }) => contract.options.address === address)
+        if (!instance) throw 'No Instance with address: ' + address + ' found';
+
+        let contract = instance.contract;
+        const raw_procedures: [string] = await contract.methods.listProcedures().call();
+
+        let table = await Promise.all(
+            raw_procedures.map(async hex_id => {
+                let id = web3.utils.hexToUtf8(hex_id);
+                let address = await contract.methods.getProcedure(hex_id).call();
+                return { id, address };
+            })
+        );
+
+        commit('set_instance_proc_table', { address, table })
     }
 }
