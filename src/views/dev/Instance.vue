@@ -2,6 +2,22 @@
   <div class="instance">
     <b-container>
       <b-row>
+        <b-col cols="3">
+          <b-form>
+            <b-form-group label="Account" label-for="account">
+              <b-form-select v-model="newCall.account" :options="accounts">
+                <option value="" disabled> Please Select Account</option>
+              </b-form-select>
+            </b-form-group>
+            <b-form-group label="Entry Procedure" label-for="call">
+              <b-form-select id="call" v-model="newCall.abi_sig" :options="entry_fn">
+                <option value="" disabled> Please Select Test Entry</option>
+              </b-form-select>
+            </b-form-group>
+            <b-button variant="primary" >Create</b-button>
+            <b-button type="reset" variant="danger">Reset</b-button>
+          </b-form>
+        </b-col>
         <b-col>
           <h3>Procedures</h3>
           <b-table :items="procedures"></b-table>
@@ -38,6 +54,7 @@ import {
 import { Network, actions } from "@/store/modules/network";
 import { ActionMethod, Action } from "vuex";
 import Contract from "web3/eth/contract";
+import ABI,{ ABIDefinition } from 'web3/eth/abi';
 
 @Component<Instance>({
   props: {
@@ -50,19 +67,24 @@ export default class Instance extends Vue {
 
   instance_address: string
   
-  newInstance = {
-    name: "",
+  newCall = {
     account: "",
-    entry_proc_address: "",
-    entry_test_choice: ""
-  };
+    abi_sig: "",
+    input: [],
+  }
+
+  entry_abi: ABIDefinition[] = [];
+  entry_fn: { text: string, value: number }[] = [];
 
   procedures: { id: string; address: string }[] = [];
   caps: Capability[] = [];
-
+  
   async mounted() {
     await this.updateProcedureTable()
     await this.updateCapTable()
+
+    this.entry_abi = await this.getEntryAbi()
+    this.entry_fn = this.getAbiFunctions(this.entry_abi)
   }
 
   async getProcedureAddress(id: string, account: string) {
@@ -112,6 +134,11 @@ export default class Instance extends Vue {
     this.caps = result;
   }
 
+  async getEntryAbi(): Promise<ABIDefinition[]> {
+    let entry_opcode = await web3.eth.getCode(this.procedures[0].address)
+    return [TestAbi.proc.call, TestAbi.store.write, TestAbi.log.write].find(abi => abi.deployedBytecode === entry_opcode).abi;
+  }
+
   getCapTypeName(num: CapabilityType) {
     switch(num) {
       case CapabilityType.ProcedureCall: return "Procedure Call"
@@ -121,10 +148,29 @@ export default class Instance extends Vue {
     }
   }
 
+  getAbiFunctions(abi: ABIDefinition[]) {
+    return abi.map((fn, id) => {
+      let name = fn.type === "fallback" ? 'fallback' : fn.name;
+      let inputs = !(fn.inputs) ? '': fn.inputs.map(input => input.type+ ' '+input.name).join(',')
+      let outputs = !(fn.outputs) || fn.outputs.length === 0 ? '': '-> ' + fn.outputs.map(output => output.type).join(',')
+      return {
+        value: id,
+        text: `${name}(${inputs})${outputs}`
+      }
+    })
+  }
+
   get instance(): Contract {
     let addr = this.instance_address;
     return this.network.instances.find(inst => inst.contract.options.address === addr)!.contract
   }
+
+  get accounts() {
+    let accounts: Network["accounts"] = this.network.accounts;
+    return accounts.map(({ id }) => id);
+  }
+
+  
 
 }
 </script>
