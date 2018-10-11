@@ -4,18 +4,22 @@
       <b-row>
         <b-col cols="3">
           <b-form>
-            <b-form-group label="Account" label-for="account">
+            <!-- <b-form-group label="Account" label-for="account">
               <b-form-select v-model="newCall.account" :options="accounts">
                 <option value="" disabled> Please Select Account</option>
               </b-form-select>
-            </b-form-group>
-            <b-form-group label="Entry Procedure" label-for="call">
-              <b-form-select id="call" v-model="newCall.abi_sig" :options="entry_fn">
-                <option value="" disabled> Please Select Test Entry</option>
-              </b-form-select>
-            </b-form-group>
-            <b-button variant="primary" >Create</b-button>
-            <b-button type="reset" variant="danger">Reset</b-button>
+            </b-form-group> -->
+            <b-input-group v-for="(abi, id) in entry_abi">
+              <b-input-group-text slot="prepend" v-if="abi.name">
+                {{ abi.name }}
+              </b-input-group-text>
+              <b-form-input id="call" v-for="input in abi.inputs" :key="input.name" :placeholder="input.type"></b-form-input>
+              <b-form-input v-if="abi.type === 'fallback'" placeholder="Fallback" disabled></b-form-input>
+              <b-form-input v-else-if="abi.inputs.length == 0" placeholder="No Parameters" disabled></b-form-input>
+              <b-input-group-append>
+                <b-btn variant="primary" @click="makeCall(id)" >Call</b-btn>
+              </b-input-group-append>
+            </b-input-group>
           </b-form>
         </b-col>
         <b-col>
@@ -68,8 +72,7 @@ export default class Instance extends Vue {
   instance_address: string
   
   newCall = {
-    account: "",
-    abi_sig: "",
+    abi_id: 0,
     input: [],
   }
 
@@ -85,6 +88,16 @@ export default class Instance extends Vue {
 
     this.entry_abi = await this.getEntryAbi()
     this.entry_fn = this.getAbiFunctions(this.entry_abi)
+
+  }
+
+  async makeCall(id: number) {
+    let fn_call = this.entry_abi[id];
+    let wrap = new web3.eth.Contract(this.entry_abi, this.instance.options.address, this.instance.options)
+ 
+    await wrap.methods[fn_call.name!]().send({ from: this.accounts[0], gas: MIN_GAS, gasPrice: MIN_GAS_PRICE })
+    await this.updateProcedureTable();
+    await this.updateCapTable();
   }
 
   async getProcedureAddress(id: string, account: string) {
