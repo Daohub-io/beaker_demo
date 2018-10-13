@@ -1,0 +1,193 @@
+{
+  "contractName": "SixthNestedCall",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "G",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b5061010f806100206000396000f300608060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680636fecb623146044575b600080fd5b348015604f57600080fd5b5060566058565b005b6078565b6000602082066020038201604051915080820160405250919050565b60d3565b600060866080605c565b60076000820152826020820152836040820152846060820152602060a881605c565b925080836061601f8501335af4151560ca5760805161089801600d526020600dfd5b50509392505050565b60e060506180066001607c565b505600a165627a7a7230582064c4eacb0da9a9589b1f7892d007088b1a10e360e5ddd57dd2e1ea6ac000d1340029",
+  "deployedBytecode": "0x608060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680636fecb623146044575b600080fd5b348015604f57600080fd5b5060566058565b005b6078565b6000602082066020038201604051915080820160405250919050565b60d3565b600060866080605c565b60076000820152826020820152836040820152846060820152602060a881605c565b925080836061601f8501335af4151560ca5760805161089801600d526020600dfd5b50509392505050565b60e060506180066001607c565b505600a165627a7a7230582064c4eacb0da9a9589b1f7892d007088b1a10e360e5ddd57dd2e1ea6ac000d1340029",
+  "sourceMap": "26:2046:21:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:2046:21;;;;;;;",
+  "deployedSourceMap": "26:2046:21:-;;;;;;;;;;;;;;;;;;;;;;;;341:1729;;8:9:-1;5:2;;;30:1;27;20:12;5:2;341:1729:21;;;;;;;447:402;;;;577:2;572:4;568:12;565:2;561:20;556:4;552:30;669:4;663:11;652:22;;828:5;821:6;817:17;812:4;805:30;479:370;;;;;;862:1062;;;;950:11;957:3;950:11;;;1113:4;1108:3;1104;1100:12;1093:25;1205:8;1199:4;1195:3;1191:13;1184:30;1312:8;1306:4;1302:3;1298:13;1291:30;1405:8;1399:4;1395:3;1391:13;1384:30;1446:4;1477:15;1484:7;1477:15;;;1467:25;;1790:7;1782:6;1778:2;1773;1769:3;1765:11;1757:6;1752:3;1739:59;1732:67;1729:2;;;1848:4;1842:11;1837:4;1833:21;1829:3;1822:33;1887:4;1883:3;1876:16;1729:2;921:1003;;;;;;;;;1937:24;1958:2;1950:6;1947:1;1937:24;;;1974:3;433:1554::o",
+  "source": "pragma solidity ^0.4.17;\n\ncontract SixthNestedCall {\n     // FirstNestedCall - store at 0x8001\n     //   SecondNestedCall - store at 0x8002\n     //     ThirdNestedCall - store at 0x8003\n     //       FourthNestedCall - store at 0x8004\n     //     FifthNestedCall - store at 0x8005\n     //   SixthNestedCall - store at 0x8006\n     // End\n    function G() public {\n        // First we do the store for FirstNestedCall\n        assembly {\n            function malloc(size) -> result {\n                // align to 32-byte words\n                let rsize := add(size,sub(32,mod(size,32)))\n                // get the current free mem location\n                result :=  mload(0x40)\n                // Bump the value of 0x40 so that it holds the next\n                // available memory location.\n                mstore(0x40,add(result,rsize))\n            }\n            function storeCall(capIndex, storeLoc, storeVal) -> retLoc {\n                let ins := malloc(128)\n                // First set up the input data (at memory location 0x0)\n                // The write call is 0x-07\n                mstore(add(ins,0x0),0x07)\n                // The capability index is 0x-01\n                mstore(add(ins,0x20),capIndex)\n                // The storage location we want is storeLoc\n                mstore(add(ins,0x40),storeLoc)\n                // The value we want to store\n                mstore(add(ins,0x60),storeVal)\n                let retSize := 0x20\n                retLoc := malloc(retSize)\n                // \"in_offset\" is at 31, because we only want the last byte of type\n                // \"in_size\" is 97 because it is 1+32+32+32\n                // we will store the result at 0x80 and it will be 32 bytes\n                if iszero(delegatecall(gas, caller, add(ins,31), 97, retLoc, retSize)) {\n                    mstore(0xd,add(2200,mload(0x80)))\n                    revert(0xd,0x20)\n                }\n            }\n            storeCall(1, 0x8006, 80)\n            pop\n        }\n        // End of write call\n        // TODO: perform some checks and return\n    }\n}",
+  "sourcePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/valid/NestedCalls/SixthNestedCall.sol",
+  "ast": {
+    "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/valid/NestedCalls/SixthNestedCall.sol",
+    "exportedSymbols": {
+      "SixthNestedCall": [
+        2903
+      ]
+    },
+    "id": 2904,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2897,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".17"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:21"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 2903,
+        "linearizedBaseContracts": [
+          2903
+        ],
+        "name": "SixthNestedCall",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 2901,
+              "nodeType": "Block",
+              "src": "361:1709:21",
+              "statements": [
+                {
+                  "externalReferences": [],
+                  "id": 2900,
+                  "nodeType": "InlineAssembly",
+                  "operations": "{\n    function malloc(size) -> result\n    {\n        let rsize := add(size, sub(32, mod(size, 32)))\n        result := mload(0x40)\n        mstore(0x40, add(result, rsize))\n    }\n    function storeCall(capIndex, storeLoc, storeVal) -> retLoc\n    {\n        let ins := malloc(128)\n        mstore(add(ins, 0x0), 0x07)\n        mstore(add(ins, 0x20), capIndex)\n        mstore(add(ins, 0x40), storeLoc)\n        mstore(add(ins, 0x60), storeVal)\n        let retSize := 0x20\n        retLoc := malloc(retSize)\n        if iszero(delegatecall(gas(), caller(), add(ins, 31), 97, retLoc, retSize))\n        {\n            mstore(0xd, add(2200, mload(0x80)))\n            revert(0xd, 0x20)\n        }\n    }\n    storeCall(1, 0x8006, 80)\n    pop\n}",
+                  "src": "424:1646:21"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 2902,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "G",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2898,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "351:2:21"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 2899,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "361:0:21"
+            },
+            "scope": 2903,
+            "src": "341:1729:21",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 2904,
+        "src": "26:2046:21"
+      }
+    ],
+    "src": "0:2072:21"
+  },
+  "legacyAST": {
+    "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/valid/NestedCalls/SixthNestedCall.sol",
+    "exportedSymbols": {
+      "SixthNestedCall": [
+        2903
+      ]
+    },
+    "id": 2904,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2897,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".17"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:21"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 2903,
+        "linearizedBaseContracts": [
+          2903
+        ],
+        "name": "SixthNestedCall",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 2901,
+              "nodeType": "Block",
+              "src": "361:1709:21",
+              "statements": [
+                {
+                  "externalReferences": [],
+                  "id": 2900,
+                  "nodeType": "InlineAssembly",
+                  "operations": "{\n    function malloc(size) -> result\n    {\n        let rsize := add(size, sub(32, mod(size, 32)))\n        result := mload(0x40)\n        mstore(0x40, add(result, rsize))\n    }\n    function storeCall(capIndex, storeLoc, storeVal) -> retLoc\n    {\n        let ins := malloc(128)\n        mstore(add(ins, 0x0), 0x07)\n        mstore(add(ins, 0x20), capIndex)\n        mstore(add(ins, 0x40), storeLoc)\n        mstore(add(ins, 0x60), storeVal)\n        let retSize := 0x20\n        retLoc := malloc(retSize)\n        if iszero(delegatecall(gas(), caller(), add(ins, 31), 97, retLoc, retSize))\n        {\n            mstore(0xd, add(2200, mload(0x80)))\n            revert(0xd, 0x20)\n        }\n    }\n    storeCall(1, 0x8006, 80)\n    pop\n}",
+                  "src": "424:1646:21"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 2902,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "G",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2898,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "351:2:21"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 2899,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "361:0:21"
+            },
+            "scope": 2903,
+            "src": "341:1729:21",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 2904,
+        "src": "26:2046:21"
+      }
+    ],
+    "src": "0:2072:21"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-10-11T16:50:35.273Z"
+}

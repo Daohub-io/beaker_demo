@@ -22,22 +22,22 @@
   ],
   "bytecode": "0x608060405234801561001057600080fd5b5061010a806100206000396000f3006080604052600436106049576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680634b3df20014604e578063c2985578146062575b600080fd5b348015605957600080fd5b5060606076565b005b348015606d57600080fd5b50607460aa565b005b60006104d2905080517f01000001000000000000000000000000000000000000000000000000000000006064604051525550565b60006104d2905080517f010000000000000000000000000000000000000000000000000000000000000060646040515255505600a165627a7a72305820ac28f5e1b452a29e7e6f3d2da70c09b0c4865879da7a4a6084a243bddcc5c7380029",
   "deployedBytecode": "0x6080604052600436106049576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680634b3df20014604e578063c2985578146062575b600080fd5b348015605957600080fd5b5060606076565b005b348015606d57600080fd5b50607460aa565b005b60006104d2905080517f01000001000000000000000000000000000000000000000000000000000000006064604051525550565b60006104d2905080517f010000000000000000000000000000000000000000000000000000000000000060646040515255505600a165627a7a72305820ac28f5e1b452a29e7e6f3d2da70c09b0c4865879da7a4a6084a243bddcc5c7380029",
-  "sourceMap": "26:718:17:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:718:17;;;;;;;",
-  "deployedSourceMap": "26:718:17:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;401:341;;8:9:-1;5:2;;;30:1;27;20:12;5:2;401:341:17;;;;;;55;;8:9:-1;5:2;;;30:1;27;20:12;5:2;55:341:17;;;;;;401;426:11;440:4;426:18;;483:3;477:10;500:66;660:4;683;677:11;701:6;720;463:273;:::o;55:341::-;80:11;94:4;80:18;;137:3;131:10;154:66;314:4;337;331:11;355:6;374;117:273;:::o",
+  "sourceMap": "26:718:24:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:718:24;;;;;;;",
+  "deployedSourceMap": "26:718:24:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;401:341;;8:9:-1;5:2;;;30:1;27;20:12;5:2;401:341:24;;;;;;55;;8:9:-1;5:2;;;30:1;27;20:12;5:2;55:341:24;;;;;;401;426:11;440:4;426:18;;483:3;477:10;500:66;660:4;683;677:11;701:6;720;463:273;:::o;55:341::-;80:11;94:4;80:18;;137:3;131:10;154:66;314:4;337;331:11;355:6;374;117:273;:::o",
   "source": "pragma solidity ^0.4.17;\n\ncontract StoreInTable1 {\n    function foo() {\n        uint256 foo = 1234;\n        assembly {\n            mload(foo)\n            0x0100000000000000000000000000000000000000000000000000000000000000\n            // This code is necessary in front of an SSTORE to pass verification\n            0x64\n            mload(0x40)\n            mstore\n            sstore\n        }\n    }\n    function boo() {\n        uint256 loo = 1234;\n        assembly {\n            mload(loo)\n            0x0100000100000000000000000000000000000000000000000000000000000000\n            // This code is necessary in front of an SSTORE to pass verification\n            0x64\n            mload(0x40)\n            mstore\n            sstore\n        }\n    }\n}\n",
   "sourcePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/valid/StoreInTable1.sol",
   "ast": {
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/valid/StoreInTable1.sol",
     "exportedSymbols": {
       "StoreInTable1": [
-        2760
+        2955
       ]
     },
-    "id": 2761,
+    "id": 2956,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2741,
+        "id": 2936,
         "literals": [
           "solidity",
           "^",
@@ -45,7 +45,7 @@
           ".17"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:17"
+        "src": "0:24:24"
       },
       {
         "baseContracts": [],
@@ -53,31 +53,31 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 2760,
+        "id": 2955,
         "linearizedBaseContracts": [
-          2760
+          2955
         ],
         "name": "StoreInTable1",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 2749,
+              "id": 2944,
               "nodeType": "Block",
-              "src": "70:326:17",
+              "src": "70:326:24",
               "statements": [
                 {
                   "assignments": [
-                    2745
+                    2940
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 2745,
+                      "id": 2940,
                       "name": "foo",
                       "nodeType": "VariableDeclaration",
-                      "scope": 2750,
-                      "src": "80:11:17",
+                      "scope": 2945,
+                      "src": "80:11:24",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -85,10 +85,10 @@
                         "typeString": "uint256"
                       },
                       "typeName": {
-                        "id": 2744,
+                        "id": 2939,
                         "name": "uint256",
                         "nodeType": "ElementaryTypeName",
-                        "src": "80:7:17",
+                        "src": "80:7:24",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -98,18 +98,18 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 2747,
+                  "id": 2942,
                   "initialValue": {
                     "argumentTypes": null,
                     "hexValue": "31323334",
-                    "id": 2746,
+                    "id": 2941,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
                     "kind": "number",
                     "lValueRequested": false,
                     "nodeType": "Literal",
-                    "src": "94:4:17",
+                    "src": "94:4:24",
                     "subdenomination": null,
                     "typeDescriptions": {
                       "typeIdentifier": "t_rational_1234_by_1",
@@ -118,29 +118,29 @@
                     "value": "1234"
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "80:18:17"
+                  "src": "80:18:24"
                 },
                 {
                   "externalReferences": [
                     {
                       "foo": {
-                        "declaration": 2745,
+                        "declaration": 2940,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "137:3:17",
+                        "src": "137:3:24",
                         "valueSize": 1
                       }
                     }
                   ],
-                  "id": 2748,
+                  "id": 2943,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    mload(foo)\n    0x0100000000000000000000000000000000000000000000000000000000000000\n    0x64\n    mload(0x40)\n    mstore\n    sstore\n}",
-                  "src": "108:288:17"
+                  "src": "108:288:24"
                 }
               ]
             },
             "documentation": null,
-            "id": 2750,
+            "id": 2945,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -148,42 +148,42 @@
             "name": "foo",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2742,
+              "id": 2937,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "67:2:17"
+              "src": "67:2:24"
             },
             "payable": false,
             "returnParameters": {
-              "id": 2743,
+              "id": 2938,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "70:0:17"
+              "src": "70:0:24"
             },
-            "scope": 2760,
-            "src": "55:341:17",
+            "scope": 2955,
+            "src": "55:341:24",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 2758,
+              "id": 2953,
               "nodeType": "Block",
-              "src": "416:326:17",
+              "src": "416:326:24",
               "statements": [
                 {
                   "assignments": [
-                    2754
+                    2949
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 2754,
+                      "id": 2949,
                       "name": "loo",
                       "nodeType": "VariableDeclaration",
-                      "scope": 2759,
-                      "src": "426:11:17",
+                      "scope": 2954,
+                      "src": "426:11:24",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -191,10 +191,10 @@
                         "typeString": "uint256"
                       },
                       "typeName": {
-                        "id": 2753,
+                        "id": 2948,
                         "name": "uint256",
                         "nodeType": "ElementaryTypeName",
-                        "src": "426:7:17",
+                        "src": "426:7:24",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -204,18 +204,18 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 2756,
+                  "id": 2951,
                   "initialValue": {
                     "argumentTypes": null,
                     "hexValue": "31323334",
-                    "id": 2755,
+                    "id": 2950,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
                     "kind": "number",
                     "lValueRequested": false,
                     "nodeType": "Literal",
-                    "src": "440:4:17",
+                    "src": "440:4:24",
                     "subdenomination": null,
                     "typeDescriptions": {
                       "typeIdentifier": "t_rational_1234_by_1",
@@ -224,29 +224,29 @@
                     "value": "1234"
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "426:18:17"
+                  "src": "426:18:24"
                 },
                 {
                   "externalReferences": [
                     {
                       "loo": {
-                        "declaration": 2754,
+                        "declaration": 2949,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "483:3:17",
+                        "src": "483:3:24",
                         "valueSize": 1
                       }
                     }
                   ],
-                  "id": 2757,
+                  "id": 2952,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    mload(loo)\n    0x0100000100000000000000000000000000000000000000000000000000000000\n    0x64\n    mload(0x40)\n    mstore\n    sstore\n}",
-                  "src": "454:288:17"
+                  "src": "454:288:24"
                 }
               ]
             },
             "documentation": null,
-            "id": 2759,
+            "id": 2954,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -254,43 +254,43 @@
             "name": "boo",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2751,
+              "id": 2946,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "413:2:17"
+              "src": "413:2:24"
             },
             "payable": false,
             "returnParameters": {
-              "id": 2752,
+              "id": 2947,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "416:0:17"
+              "src": "416:0:24"
             },
-            "scope": 2760,
-            "src": "401:341:17",
+            "scope": 2955,
+            "src": "401:341:24",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 2761,
-        "src": "26:718:17"
+        "scope": 2956,
+        "src": "26:718:24"
       }
     ],
-    "src": "0:745:17"
+    "src": "0:745:24"
   },
   "legacyAST": {
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/valid/StoreInTable1.sol",
     "exportedSymbols": {
       "StoreInTable1": [
-        2760
+        2955
       ]
     },
-    "id": 2761,
+    "id": 2956,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2741,
+        "id": 2936,
         "literals": [
           "solidity",
           "^",
@@ -298,7 +298,7 @@
           ".17"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:17"
+        "src": "0:24:24"
       },
       {
         "baseContracts": [],
@@ -306,31 +306,31 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 2760,
+        "id": 2955,
         "linearizedBaseContracts": [
-          2760
+          2955
         ],
         "name": "StoreInTable1",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 2749,
+              "id": 2944,
               "nodeType": "Block",
-              "src": "70:326:17",
+              "src": "70:326:24",
               "statements": [
                 {
                   "assignments": [
-                    2745
+                    2940
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 2745,
+                      "id": 2940,
                       "name": "foo",
                       "nodeType": "VariableDeclaration",
-                      "scope": 2750,
-                      "src": "80:11:17",
+                      "scope": 2945,
+                      "src": "80:11:24",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -338,10 +338,10 @@
                         "typeString": "uint256"
                       },
                       "typeName": {
-                        "id": 2744,
+                        "id": 2939,
                         "name": "uint256",
                         "nodeType": "ElementaryTypeName",
-                        "src": "80:7:17",
+                        "src": "80:7:24",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -351,18 +351,18 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 2747,
+                  "id": 2942,
                   "initialValue": {
                     "argumentTypes": null,
                     "hexValue": "31323334",
-                    "id": 2746,
+                    "id": 2941,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
                     "kind": "number",
                     "lValueRequested": false,
                     "nodeType": "Literal",
-                    "src": "94:4:17",
+                    "src": "94:4:24",
                     "subdenomination": null,
                     "typeDescriptions": {
                       "typeIdentifier": "t_rational_1234_by_1",
@@ -371,29 +371,29 @@
                     "value": "1234"
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "80:18:17"
+                  "src": "80:18:24"
                 },
                 {
                   "externalReferences": [
                     {
                       "foo": {
-                        "declaration": 2745,
+                        "declaration": 2940,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "137:3:17",
+                        "src": "137:3:24",
                         "valueSize": 1
                       }
                     }
                   ],
-                  "id": 2748,
+                  "id": 2943,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    mload(foo)\n    0x0100000000000000000000000000000000000000000000000000000000000000\n    0x64\n    mload(0x40)\n    mstore\n    sstore\n}",
-                  "src": "108:288:17"
+                  "src": "108:288:24"
                 }
               ]
             },
             "documentation": null,
-            "id": 2750,
+            "id": 2945,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -401,42 +401,42 @@
             "name": "foo",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2742,
+              "id": 2937,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "67:2:17"
+              "src": "67:2:24"
             },
             "payable": false,
             "returnParameters": {
-              "id": 2743,
+              "id": 2938,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "70:0:17"
+              "src": "70:0:24"
             },
-            "scope": 2760,
-            "src": "55:341:17",
+            "scope": 2955,
+            "src": "55:341:24",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 2758,
+              "id": 2953,
               "nodeType": "Block",
-              "src": "416:326:17",
+              "src": "416:326:24",
               "statements": [
                 {
                   "assignments": [
-                    2754
+                    2949
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 2754,
+                      "id": 2949,
                       "name": "loo",
                       "nodeType": "VariableDeclaration",
-                      "scope": 2759,
-                      "src": "426:11:17",
+                      "scope": 2954,
+                      "src": "426:11:24",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -444,10 +444,10 @@
                         "typeString": "uint256"
                       },
                       "typeName": {
-                        "id": 2753,
+                        "id": 2948,
                         "name": "uint256",
                         "nodeType": "ElementaryTypeName",
-                        "src": "426:7:17",
+                        "src": "426:7:24",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -457,18 +457,18 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 2756,
+                  "id": 2951,
                   "initialValue": {
                     "argumentTypes": null,
                     "hexValue": "31323334",
-                    "id": 2755,
+                    "id": 2950,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
                     "kind": "number",
                     "lValueRequested": false,
                     "nodeType": "Literal",
-                    "src": "440:4:17",
+                    "src": "440:4:24",
                     "subdenomination": null,
                     "typeDescriptions": {
                       "typeIdentifier": "t_rational_1234_by_1",
@@ -477,29 +477,29 @@
                     "value": "1234"
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "426:18:17"
+                  "src": "426:18:24"
                 },
                 {
                   "externalReferences": [
                     {
                       "loo": {
-                        "declaration": 2754,
+                        "declaration": 2949,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "483:3:17",
+                        "src": "483:3:24",
                         "valueSize": 1
                       }
                     }
                   ],
-                  "id": 2757,
+                  "id": 2952,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    mload(loo)\n    0x0100000100000000000000000000000000000000000000000000000000000000\n    0x64\n    mload(0x40)\n    mstore\n    sstore\n}",
-                  "src": "454:288:17"
+                  "src": "454:288:24"
                 }
               ]
             },
             "documentation": null,
-            "id": 2759,
+            "id": 2954,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -507,30 +507,30 @@
             "name": "boo",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2751,
+              "id": 2946,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "413:2:17"
+              "src": "413:2:24"
             },
             "payable": false,
             "returnParameters": {
-              "id": 2752,
+              "id": 2947,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "416:0:17"
+              "src": "416:0:24"
             },
-            "scope": 2760,
-            "src": "401:341:17",
+            "scope": 2955,
+            "src": "401:341:24",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 2761,
-        "src": "26:718:17"
+        "scope": 2956,
+        "src": "26:718:24"
       }
     ],
-    "src": "0:745:17"
+    "src": "0:745:24"
   },
   "compiler": {
     "name": "solc",
@@ -538,5 +538,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-09-17T13:43:44.384Z"
+  "updatedAt": "2018-10-11T16:50:35.328Z"
 }

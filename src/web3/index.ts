@@ -1,23 +1,52 @@
 import Web3 from 'web3'
+import Contract from 'web3/eth/contract';
 
 export const MIN_GAS = 4712388;
 export const MIN_GAS_PRICE = 100000000000;
 export const DEFAULT_PORT = 8545;
 export const DEFAULT_ADDRESS = `ws://localhost:${DEFAULT_PORT}`;
 
+export const LocalKernelAbi = require('./contracts/Kernel.json')
 export const TestAbi = {
     proc: { call: require('./contracts/SysCallTestCall.json') },
     log: { write: require('./contracts/SysCallTestLog.json') },
     store: {
         write: require('./contracts/SysCallTest.json'),
-    }
+    },
+    entry: require('./contracts/BasicEntryProcedure.json')
 }
 
-export const LocalKernelAbi = require('./contracts/Kernel.json')
+export async function installEntryProc(kernel: Contract, entryProcName: string, account: string) {
+    kernel.methods.setEntryProcedure(entryProcName);
+    const capArrayEntryProc = Capability.toInput([
+        new WriteCap(0x8001, 2),
+        new LogCap([]),
+        new CallCap()
+    ]);
+
+    const deployedEntryProc = await deployedTrimmed(TestAbi.entry, kernel.options.from);
+    // Install the entry procedure
+    await kernel.methods.registerAnyProcedure(entryProcName, deployedEntryProc.options.address, capArrayEntryProc).send({ from: account, gas: MIN_GAS, gasPrice: MIN_GAS_PRICE })
+    return deployedEntryProc
+}
+
+
+export async function deployedTrimmed(abi: any, account: string) {
+    const bytecode = trimSwarm(abi.bytecode);
+    const Proc = new web3.eth.Contract(abi.abi)
+    return await Proc.deploy({ data: bytecode } as any).send({ from: account, gas: MIN_GAS, gasPrice: MIN_GAS_PRICE })
+}
+
+function trimSwarm(bytecode: any) {
+    const size = bytecode.length;
+    const swarmSize = 43; // bytes
+    // overwrite the swarm data with '0'
+    return bytecode.slice(0, size - (swarmSize * 2)).padEnd(size, '0');
+}
+
 
 // Setup Provider, Default with Localhost
 export const web3 = new Web3(DEFAULT_ADDRESS);
-
 
 export enum CapabilityType {
     ProcedureCall = 0x3,
@@ -28,6 +57,7 @@ export enum CapabilityType {
 export abstract class Capability {
     public owners: string[] = [];
     public raw_values: string[] = [];
+    public data: string[] = [];
 
     constructor(public type: CapabilityType) { }
     // Format the capability values into the values that will be stored in the kernel.
@@ -131,9 +161,9 @@ export class ProcedureTable {
                 for (let k = 0; k < (length - 1); k++) {
                     raw_values.push(web3.utils.toHex(val[i])); i++;
                 }
-                
+
                 let cap: WriteCap | LogCap | CallCap;
-                switch(type) {
+                switch (type) {
                     case CapabilityType.StorageWrite: cap = WriteCap.from_raw(raw_values); break;
                     case CapabilityType.LogWrite: cap = LogCap.from_raw(raw_values); break;
                     case CapabilityType.ProcedureCall: cap = CallCap.from_raw(raw_values); break;

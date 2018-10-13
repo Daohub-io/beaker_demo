@@ -9,22 +9,22 @@
   ],
   "bytecode": "0x6080604052348015600f57600080fd5b50604580601d6000396000f3006080604052348015600f57600080fd5b50610164618000550000a165627a7a72305820c3375ecee64162ffe7642b73f7632a765155328b4150a7eb65d43e9733d352130029",
   "deployedBytecode": "0x6080604052348015600f57600080fd5b50610164618000550000a165627a7a72305820c3375ecee64162ffe7642b73f7632a765155328b4150a7eb65d43e9733d352130029",
-  "sourceMap": "26:112:5:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:112:5;;;;;;;",
-  "deployedSourceMap": "26:112:5:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:112:5;116:3;109:6;102:18;26:112",
+  "sourceMap": "26:112:6:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:112:6;;;;;;;",
+  "deployedSourceMap": "26:112:6:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:112:6;116:3;109:6;102:18;26:112",
   "source": "pragma solidity ^0.4.17;\n\ncontract TestWrite {\n    function() public {\n        assembly {\n            sstore(0x8000,356)\n        }\n    }\n}",
   "sourcePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/TestWrite.sol",
   "ast": {
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/TestWrite.sol",
     "exportedSymbols": {
       "TestWrite": [
-        2574
+        2674
       ]
     },
-    "id": 2575,
+    "id": 2675,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2568,
+        "id": 2668,
         "literals": [
           "solidity",
           "^",
@@ -32,7 +32,7 @@
           ".17"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:5"
+        "src": "0:24:6"
       },
       {
         "baseContracts": [],
@@ -40,30 +40,30 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 2574,
+        "id": 2674,
         "linearizedBaseContracts": [
-          2574
+          2674
         ],
         "name": "TestWrite",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 2572,
+              "id": 2672,
               "nodeType": "Block",
-              "src": "69:67:5",
+              "src": "69:67:6",
               "statements": [
                 {
                   "externalReferences": [],
-                  "id": 2571,
+                  "id": 2671,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    sstore(0x8000, 356)\n}",
-                  "src": "79:57:5"
+                  "src": "79:57:6"
                 }
               ]
             },
             "documentation": null,
-            "id": 2573,
+            "id": 2673,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -71,43 +71,43 @@
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2569,
+              "id": 2669,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "59:2:5"
+              "src": "59:2:6"
             },
             "payable": false,
             "returnParameters": {
-              "id": 2570,
+              "id": 2670,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "69:0:5"
+              "src": "69:0:6"
             },
-            "scope": 2574,
-            "src": "51:85:5",
+            "scope": 2674,
+            "src": "51:85:6",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 2575,
-        "src": "26:112:5"
+        "scope": 2675,
+        "src": "26:112:6"
       }
     ],
-    "src": "0:138:5"
+    "src": "0:138:6"
   },
   "legacyAST": {
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/TestWrite.sol",
     "exportedSymbols": {
       "TestWrite": [
-        2574
+        2674
       ]
     },
-    "id": 2575,
+    "id": 2675,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2568,
+        "id": 2668,
         "literals": [
           "solidity",
           "^",
@@ -115,7 +115,7 @@
           ".17"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:5"
+        "src": "0:24:6"
       },
       {
         "baseContracts": [],
@@ -123,30 +123,30 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 2574,
+        "id": 2674,
         "linearizedBaseContracts": [
-          2574
+          2674
         ],
         "name": "TestWrite",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 2572,
+              "id": 2672,
               "nodeType": "Block",
-              "src": "69:67:5",
+              "src": "69:67:6",
               "statements": [
                 {
                   "externalReferences": [],
-                  "id": 2571,
+                  "id": 2671,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    sstore(0x8000, 356)\n}",
-                  "src": "79:57:5"
+                  "src": "79:57:6"
                 }
               ]
             },
             "documentation": null,
-            "id": 2573,
+            "id": 2673,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -154,30 +154,30 @@
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2569,
+              "id": 2669,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "59:2:5"
+              "src": "59:2:6"
             },
             "payable": false,
             "returnParameters": {
-              "id": 2570,
+              "id": 2670,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "69:0:5"
+              "src": "69:0:6"
             },
-            "scope": 2574,
-            "src": "51:85:5",
+            "scope": 2674,
+            "src": "51:85:6",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 2575,
-        "src": "26:112:5"
+        "scope": 2675,
+        "src": "26:112:6"
       }
     ],
-    "src": "0:138:5"
+    "src": "0:138:6"
   },
   "compiler": {
     "name": "solc",
@@ -185,5 +185,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-09-17T13:43:44.383Z"
+  "updatedAt": "2018-10-11T16:50:35.278Z"
 }

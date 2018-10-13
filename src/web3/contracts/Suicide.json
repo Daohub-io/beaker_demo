@@ -18,22 +18,22 @@
   ],
   "bytecode": "0x608060405234801561001057600080fd5b5060c98061001f6000396000f300608060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063fdf80bda146044575b600080fd5b348015604f57600080fd5b506082600480360381019080803573ffffffffffffffffffffffffffffffffffffffff1690602001909291905050506084565b005b8073ffffffffffffffffffffffffffffffffffffffff16ff00a165627a7a72305820ff3bf47c056399e0c686dbd72bd364fd043412a24ea875373a67f3ee6798db1c0029",
   "deployedBytecode": "0x608060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063fdf80bda146044575b600080fd5b348015604f57600080fd5b506082600480360381019080803573ffffffffffffffffffffffffffffffffffffffff1690602001909291905050506084565b005b8073ffffffffffffffffffffffffffffffffffffffff16ff00a165627a7a72305820ff3bf47c056399e0c686dbd72bd364fd043412a24ea875373a67f3ee6798db1c0029",
-  "sourceMap": "26:88:12:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:88:12;;;;;;;",
-  "deployedSourceMap": "26:88:12:-;;;;;;;;;;;;;;;;;;;;;;;;49:63;;8:9:-1;5:2;;;30:1;27;20:12;5:2;49:63:12;;;;;;;;;;;;;;;;;;;;;;;;;;;;;103:1;90:15;;",
+  "sourceMap": "26:88:13:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:88:13;;;;;;;",
+  "deployedSourceMap": "26:88:13:-;;;;;;;;;;;;;;;;;;;;;;;;49:63;;8:9:-1;5:2;;;30:1;27;20:12;5:2;49:63:13;;;;;;;;;;;;;;;;;;;;;;;;;;;;;103:1;90:15;;",
   "source": "pragma solidity ^0.4.17;\n\ncontract Suicide {\n    function foo(address a) public {\n        selfdestruct(a);\n    }\n}\n",
   "sourcePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/invalid/Suicide.sol",
   "ast": {
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/invalid/Suicide.sol",
     "exportedSymbols": {
       "Suicide": [
-        2676
+        2776
       ]
     },
-    "id": 2677,
+    "id": 2777,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2665,
+        "id": 2765,
         "literals": [
           "solidity",
           "^",
@@ -41,7 +41,7 @@
           ".17"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:12"
+        "src": "0:24:13"
       },
       {
         "baseContracts": [],
@@ -49,18 +49,18 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 2676,
+        "id": 2776,
         "linearizedBaseContracts": [
-          2676
+          2776
         ],
         "name": "Suicide",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 2674,
+              "id": 2774,
               "nodeType": "Block",
-              "src": "80:32:12",
+              "src": "80:32:13",
               "statements": [
                 {
                   "expression": {
@@ -68,12 +68,12 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 2671,
+                        "id": 2771,
                         "name": "a",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2667,
-                        "src": "103:1:12",
+                        "referencedDeclaration": 2767,
+                        "src": "103:1:13",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
                           "typeString": "address"
@@ -87,18 +87,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 2670,
+                      "id": 2770,
                       "name": "selfdestruct",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2914,
-                      "src": "90:12:12",
+                      "referencedDeclaration": 3148,
+                      "src": "90:12:13",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_selfdestruct_nonpayable$_t_address_$returns$__$",
                         "typeString": "function (address)"
                       }
                     },
-                    "id": 2672,
+                    "id": 2772,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -106,20 +106,20 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "90:15:12",
+                    "src": "90:15:13",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 2673,
+                  "id": 2773,
                   "nodeType": "ExpressionStatement",
-                  "src": "90:15:12"
+                  "src": "90:15:13"
                 }
               ]
             },
             "documentation": null,
-            "id": 2675,
+            "id": 2775,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -127,16 +127,16 @@
             "name": "foo",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2668,
+              "id": 2768,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2667,
+                  "id": 2767,
                   "name": "a",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2675,
-                  "src": "62:9:12",
+                  "scope": 2775,
+                  "src": "62:9:13",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -144,10 +144,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2666,
+                    "id": 2766,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "62:7:12",
+                    "src": "62:7:13",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
@@ -157,40 +157,40 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "61:11:12"
+              "src": "61:11:13"
             },
             "payable": false,
             "returnParameters": {
-              "id": 2669,
+              "id": 2769,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "80:0:12"
+              "src": "80:0:13"
             },
-            "scope": 2676,
-            "src": "49:63:12",
+            "scope": 2776,
+            "src": "49:63:13",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 2677,
-        "src": "26:88:12"
+        "scope": 2777,
+        "src": "26:88:13"
       }
     ],
-    "src": "0:115:12"
+    "src": "0:115:13"
   },
   "legacyAST": {
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/invalid/Suicide.sol",
     "exportedSymbols": {
       "Suicide": [
-        2676
+        2776
       ]
     },
-    "id": 2677,
+    "id": 2777,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2665,
+        "id": 2765,
         "literals": [
           "solidity",
           "^",
@@ -198,7 +198,7 @@
           ".17"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:12"
+        "src": "0:24:13"
       },
       {
         "baseContracts": [],
@@ -206,18 +206,18 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 2676,
+        "id": 2776,
         "linearizedBaseContracts": [
-          2676
+          2776
         ],
         "name": "Suicide",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 2674,
+              "id": 2774,
               "nodeType": "Block",
-              "src": "80:32:12",
+              "src": "80:32:13",
               "statements": [
                 {
                   "expression": {
@@ -225,12 +225,12 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 2671,
+                        "id": 2771,
                         "name": "a",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2667,
-                        "src": "103:1:12",
+                        "referencedDeclaration": 2767,
+                        "src": "103:1:13",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
                           "typeString": "address"
@@ -244,18 +244,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 2670,
+                      "id": 2770,
                       "name": "selfdestruct",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2914,
-                      "src": "90:12:12",
+                      "referencedDeclaration": 3148,
+                      "src": "90:12:13",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_selfdestruct_nonpayable$_t_address_$returns$__$",
                         "typeString": "function (address)"
                       }
                     },
-                    "id": 2672,
+                    "id": 2772,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -263,20 +263,20 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "90:15:12",
+                    "src": "90:15:13",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 2673,
+                  "id": 2773,
                   "nodeType": "ExpressionStatement",
-                  "src": "90:15:12"
+                  "src": "90:15:13"
                 }
               ]
             },
             "documentation": null,
-            "id": 2675,
+            "id": 2775,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -284,16 +284,16 @@
             "name": "foo",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2668,
+              "id": 2768,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2667,
+                  "id": 2767,
                   "name": "a",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2675,
-                  "src": "62:9:12",
+                  "scope": 2775,
+                  "src": "62:9:13",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -301,10 +301,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2666,
+                    "id": 2766,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "62:7:12",
+                    "src": "62:7:13",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
@@ -314,27 +314,27 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "61:11:12"
+              "src": "61:11:13"
             },
             "payable": false,
             "returnParameters": {
-              "id": 2669,
+              "id": 2769,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "80:0:12"
+              "src": "80:0:13"
             },
-            "scope": 2676,
-            "src": "49:63:12",
+            "scope": 2776,
+            "src": "49:63:13",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 2677,
-        "src": "26:88:12"
+        "scope": 2777,
+        "src": "26:88:13"
       }
     ],
-    "src": "0:115:12"
+    "src": "0:115:13"
   },
   "compiler": {
     "name": "solc",
@@ -342,5 +342,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-09-17T13:43:44.384Z"
+  "updatedAt": "2018-10-11T16:50:35.314Z"
 }

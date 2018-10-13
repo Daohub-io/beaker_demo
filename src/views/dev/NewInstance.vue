@@ -9,24 +9,24 @@
           </header>
           <b-form>
             <b-form-group label="Name" label-for="name">
-              <b-form-input id="name" type="text" :value ="newInstance.name" placeholder=""/>
+              <b-form-input id="name" type="text" v-model="newInstance.name" placeholder=""/>
             </b-form-group>
             <b-form-group label="Account" label-for="account">
               <b-form-select v-model="newInstance.account" :options="accounts">
                 <option value="" disabled> Please Select Account</option>
               </b-form-select>
             </b-form-group>
-            <b-form-group label="Entry Procedure" label-for="entry_proc_address">
-              <b-form-select v-model="newInstance.entry_test_choice">
+            <b-form-group label="Sample Procedure" label-for="entry_proc_address">
+              <b-form-select v-model="newInstance.test_choice">
                 <option value="" disabled> Please Select Test Entry</option>
                 <optgroup label="Procedure Object Capabilities">
-                  <option :value="entry_tests.proc.call.bytecode">Call Procedure</option>
+                  <option :value="entry_tests.proc.call">Call Procedure</option>
                 </optgroup>
                 <optgroup label="Storage Object Capabilities">
-                  <option :value="entry_tests.store.write.bytecode">Write to Storage</option>
+                  <option :value="entry_tests.store.write">Write to Storage</option>
                 </optgroup>
                 <optgroup label="Log Object Capabilities">
-                  <option :value="entry_tests.log.write.bytecode">Write to Log</option>
+                  <option :value="entry_tests.log.write">Write to Log</option>
                 </optgroup>
               </b-form-select>
             </b-form-group>
@@ -57,9 +57,9 @@ import {
   Capability,
   CapabilityType
 } from "@/web3";
-import { Network, actions } from "@/store/modules/network";
+import { Network, actions} from "@/store/modules/network";
 import { ActionMethod, Action } from "vuex";
-import Contract from "web3/eth/contract";
+import Contract from "web3/eth/contract";import { ABIDefinition } from 'web3/eth/abi';
 
 @Component({
   components: { Navbar }
@@ -67,12 +67,14 @@ import Contract from "web3/eth/contract";
 export default class NewInstance extends Vue {
   @Store.State network: Network;
   @Store.Action("network/deploy_instance") deployInstance: (account?: string) => Promise<void>;
-
+  @Store.Action("network/deploy_procedure") deployProcedure: (proc: {name: string, abi: any}) => Promise<void>;
+  @Store.Action("network/register_procedure") registerProcedure: (proc: {address: string, caps: Capability[], instance_address: string }) => Promise<void>
+  
   newInstance = {
     name: "",
     account: "",
-    entry_proc_address: "",
-    entry_test_choice: ""
+    proc_address: "",
+    test_choice: {}
   };
 
   entry_tests = TestAbi;
@@ -87,20 +89,26 @@ export default class NewInstance extends Vue {
 
     let instances = this.network.instances;
     this.instance = instances[instances.length - 1].contract;
-    let entry_code = this.newInstance.entry_test_choice;
 
-    let name = web3.utils.toHex("Entry");
-    const cap1 = new WriteCap(0x8000, 2);
-    const cap2 = new LogCap([]);
-    const cap3 = new CallCap();
-    const caps = Capability.toInput([cap1, cap2, cap3]);
+    let entry_code = this.newInstance.test_choice;
+    let name = this.newInstance.name
 
-    let { procedureAddress } = await this.instance.methods
-      .createProcedure(name, entry_code, caps)
-      .call({ from: account, gas: MIN_GAS, gasPrice: MIN_GAS_PRICE });
-    let tx1 = await this.instance.methods
-      .createProcedure(name, entry_code, caps)
-      .send({ from: account, gas: MIN_GAS, gasPrice: MIN_GAS_PRICE });
+    await this.deployProcedure({
+      name,
+      abi: this.newInstance.test_choice
+    })
+    
+    let procedures = this.network.procedures;
+    let procedure = procedures[procedures.length - 1];
+
+    const cap1 = new WriteCap(0x8500, 2);
+    const cap2 = new WriteCap(0x8000, 2);
+
+    this.registerProcedure({
+      address: procedure.contract.options.address,
+      caps: [cap1, cap2],
+      instance_address: this.instance.options.address
+    })
 
     this.$router.push({
       name: "instance",
@@ -108,6 +116,13 @@ export default class NewInstance extends Vue {
           instance_address: this.instance.options.address
       } 
     });
+  }
+
+  async getAbi(address: string): Promise<ABIDefinition[]> {
+    let opcode = await web3.eth.getCode(address)
+    return [TestAbi.proc.call, TestAbi.store.write, TestAbi.log.write, TestAbi.entry].find(
+      abi => abi.deployedBytecode === opcode
+    ).abi
   }
 
   get accounts() {

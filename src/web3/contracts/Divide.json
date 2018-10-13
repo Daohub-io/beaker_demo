@@ -27,22 +27,22 @@
   ],
   "bytecode": "0x608060405234801561001057600080fd5b5060cd8061001f6000396000f300608060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063f88e9fbf146044575b600080fd5b348015604f57600080fd5b5060766004803603810190808035906020019092919080359060200190929190505050608c565b6040518082815260200191505060405180910390f35b60008183811515609857fe5b049050929150505600a165627a7a72305820a0678550be765f9e97ff96f8d388c2f21535d2076251ca8eb9712219dbc817010029",
   "deployedBytecode": "0x608060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063f88e9fbf146044575b600080fd5b348015604f57600080fd5b5060766004803603810190808035906020019092919080359060200190929190505050608c565b6040518082815260200191505060405180910390f35b60008183811515609857fe5b049050929150505600a165627a7a72305820a0678550be765f9e97ff96f8d388c2f21535d2076251ca8eb9712219dbc817010029",
-  "sourceMap": "26:115:14:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:115:14;;;;;;;",
-  "deployedSourceMap": "26:115:14:-;;;;;;;;;;;;;;;;;;;;;;;;48:91;;8:9:-1;5:2;;;30:1;27;20:12;5:2;48:91:14;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;101:7;131:1;127;:5;;;;;;;;120:12;;48:91;;;;:::o",
+  "sourceMap": "26:115:15:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:115:15;;;;;;;",
+  "deployedSourceMap": "26:115:15:-;;;;;;;;;;;;;;;;;;;;;;;;48:91;;8:9:-1;5:2;;;30:1;27;20:12;5:2;48:91:15;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;101:7;131:1;127;:5;;;;;;;;120:12;;48:91;;;;:::o",
   "source": "pragma solidity ^0.4.17;\n\ncontract Divide {\n    function divide(uint a, uint b) pure public returns (uint256) {\n        return a / b;\n    }\n}",
   "sourcePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/valid/Divide.sol",
   "ast": {
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/valid/Divide.sol",
     "exportedSymbols": {
       "Divide": [
-        2710
+        2810
       ]
     },
-    "id": 2711,
+    "id": 2811,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2695,
+        "id": 2795,
         "literals": [
           "solidity",
           "^",
@@ -50,7 +50,7 @@
           ".17"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:14"
+        "src": "0:24:15"
       },
       {
         "baseContracts": [],
@@ -58,18 +58,18 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 2710,
+        "id": 2810,
         "linearizedBaseContracts": [
-          2710
+          2810
         ],
         "name": "Divide",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 2708,
+              "id": 2808,
               "nodeType": "Block",
-              "src": "110:29:14",
+              "src": "110:29:15",
               "statements": [
                 {
                   "expression": {
@@ -78,19 +78,19 @@
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     },
-                    "id": 2706,
+                    "id": 2806,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftExpression": {
                       "argumentTypes": null,
-                      "id": 2704,
+                      "id": 2804,
                       "name": "a",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2697,
-                      "src": "127:1:14",
+                      "referencedDeclaration": 2797,
+                      "src": "127:1:15",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
@@ -100,32 +100,32 @@
                     "operator": "/",
                     "rightExpression": {
                       "argumentTypes": null,
-                      "id": 2705,
+                      "id": 2805,
                       "name": "b",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2699,
-                      "src": "131:1:14",
+                      "referencedDeclaration": 2799,
+                      "src": "131:1:15",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
                       }
                     },
-                    "src": "127:5:14",
+                    "src": "127:5:15",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
-                  "functionReturnParameters": 2703,
-                  "id": 2707,
+                  "functionReturnParameters": 2803,
+                  "id": 2807,
                   "nodeType": "Return",
-                  "src": "120:12:14"
+                  "src": "120:12:15"
                 }
               ]
             },
             "documentation": null,
-            "id": 2709,
+            "id": 2809,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -133,16 +133,16 @@
             "name": "divide",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2700,
+              "id": 2800,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2697,
+                  "id": 2797,
                   "name": "a",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2709,
-                  "src": "64:6:14",
+                  "scope": 2809,
+                  "src": "64:6:15",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -150,10 +150,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2696,
+                    "id": 2796,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "64:4:14",
+                    "src": "64:4:15",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -164,11 +164,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 2699,
+                  "id": 2799,
                   "name": "b",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2709,
-                  "src": "72:6:14",
+                  "scope": 2809,
+                  "src": "72:6:15",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -176,10 +176,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2698,
+                    "id": 2798,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "72:4:14",
+                    "src": "72:4:15",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -189,20 +189,20 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "63:16:14"
+              "src": "63:16:15"
             },
             "payable": false,
             "returnParameters": {
-              "id": 2703,
+              "id": 2803,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2702,
+                  "id": 2802,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2709,
-                  "src": "101:7:14",
+                  "scope": 2809,
+                  "src": "101:7:15",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -210,10 +210,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2701,
+                    "id": 2801,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "101:7:14",
+                    "src": "101:7:15",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -223,33 +223,33 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "100:9:14"
+              "src": "100:9:15"
             },
-            "scope": 2710,
-            "src": "48:91:14",
+            "scope": 2810,
+            "src": "48:91:15",
             "stateMutability": "pure",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 2711,
-        "src": "26:115:14"
+        "scope": 2811,
+        "src": "26:115:15"
       }
     ],
-    "src": "0:141:14"
+    "src": "0:141:15"
   },
   "legacyAST": {
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/valid/Divide.sol",
     "exportedSymbols": {
       "Divide": [
-        2710
+        2810
       ]
     },
-    "id": 2711,
+    "id": 2811,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2695,
+        "id": 2795,
         "literals": [
           "solidity",
           "^",
@@ -257,7 +257,7 @@
           ".17"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:14"
+        "src": "0:24:15"
       },
       {
         "baseContracts": [],
@@ -265,18 +265,18 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 2710,
+        "id": 2810,
         "linearizedBaseContracts": [
-          2710
+          2810
         ],
         "name": "Divide",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 2708,
+              "id": 2808,
               "nodeType": "Block",
-              "src": "110:29:14",
+              "src": "110:29:15",
               "statements": [
                 {
                   "expression": {
@@ -285,19 +285,19 @@
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     },
-                    "id": 2706,
+                    "id": 2806,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftExpression": {
                       "argumentTypes": null,
-                      "id": 2704,
+                      "id": 2804,
                       "name": "a",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2697,
-                      "src": "127:1:14",
+                      "referencedDeclaration": 2797,
+                      "src": "127:1:15",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
@@ -307,32 +307,32 @@
                     "operator": "/",
                     "rightExpression": {
                       "argumentTypes": null,
-                      "id": 2705,
+                      "id": 2805,
                       "name": "b",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2699,
-                      "src": "131:1:14",
+                      "referencedDeclaration": 2799,
+                      "src": "131:1:15",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
                       }
                     },
-                    "src": "127:5:14",
+                    "src": "127:5:15",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
-                  "functionReturnParameters": 2703,
-                  "id": 2707,
+                  "functionReturnParameters": 2803,
+                  "id": 2807,
                   "nodeType": "Return",
-                  "src": "120:12:14"
+                  "src": "120:12:15"
                 }
               ]
             },
             "documentation": null,
-            "id": 2709,
+            "id": 2809,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -340,16 +340,16 @@
             "name": "divide",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2700,
+              "id": 2800,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2697,
+                  "id": 2797,
                   "name": "a",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2709,
-                  "src": "64:6:14",
+                  "scope": 2809,
+                  "src": "64:6:15",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -357,10 +357,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2696,
+                    "id": 2796,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "64:4:14",
+                    "src": "64:4:15",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -371,11 +371,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 2699,
+                  "id": 2799,
                   "name": "b",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2709,
-                  "src": "72:6:14",
+                  "scope": 2809,
+                  "src": "72:6:15",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -383,10 +383,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2698,
+                    "id": 2798,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "72:4:14",
+                    "src": "72:4:15",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -396,20 +396,20 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "63:16:14"
+              "src": "63:16:15"
             },
             "payable": false,
             "returnParameters": {
-              "id": 2703,
+              "id": 2803,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2702,
+                  "id": 2802,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2709,
-                  "src": "101:7:14",
+                  "scope": 2809,
+                  "src": "101:7:15",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -417,10 +417,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2701,
+                    "id": 2801,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "101:7:14",
+                    "src": "101:7:15",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -430,20 +430,20 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "100:9:14"
+              "src": "100:9:15"
             },
-            "scope": 2710,
-            "src": "48:91:14",
+            "scope": 2810,
+            "src": "48:91:15",
             "stateMutability": "pure",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 2711,
-        "src": "26:115:14"
+        "scope": 2811,
+        "src": "26:115:15"
       }
     ],
-    "src": "0:141:14"
+    "src": "0:141:15"
   },
   "compiler": {
     "name": "solc",
@@ -451,5 +451,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-09-17T13:43:44.384Z"
+  "updatedAt": "2018-10-11T16:50:35.315Z"
 }
