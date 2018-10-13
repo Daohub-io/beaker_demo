@@ -134,20 +134,17 @@ export default class Instance extends Vue {
   async makeCall(proc_id: number, abi_id: number) {
     let proc = this.procedures[proc_id]
     let abi = proc.abi[abi_id]
+    // Make the function selector (TODO: we aren't considering input at all
+    // here)
+    const functionSelectorHash = web3.utils.sha3(abi.name!).slice(2,10);
+    // This platorm (typescript?) doesn't have String.padEnd(), so this does
+    // the padding of the key name (ASCII padded out to 24 bytes with nulls)
+    const paddedProcKey = (proc.id + "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0").slice(0,24);
+    const inputData = web3.utils.fromAscii(paddedProcKey) + functionSelectorHash;
 
-    const functionSelectorHash = web3.utils.sha3('A()').slice(2,10);
-    const inputData = web3.utils.fromAscii((proc.id as any).padEnd(24,"\0")) + functionSelectorHash;
-
-    let wrap = new web3.eth.Contract(proc.abi, this.instance.options.address, this.instance.options)
-    let tx = await wrap.methods[abi.name!]().send({
-      from: this.accounts[0],
-      gas: MIN_GAS,
-      gasPrice: MIN_GAS_PRICE
-    });
-    console.log(tx)
-
-    // let err = await web3.eth.call({to: this.instance.options.address, data: inputData, from: this.instance.options.from });
-    // let tx = await web3.eth.sendTransaction({to: this.instance.options.address, data: inputData, from: this.instance.options.from });
+    // Use this err value for error checking
+    const err = await web3.eth.call({to: this.instance.options.address, data: inputData, from: this.instance.options.from });
+    const tx = await web3.eth.sendTransaction({gas:300000, to: this.instance.options.address, data: inputData, from: this.instance.options.from });
 
     await this.updateInstance(this.instance_address)
     await this.updateProcedureTable();

@@ -17,7 +17,7 @@ export const TestAbi = {
 }
 
 export async function installEntryProc(kernel: Contract, entryProcName: string, account: string) {
-    kernel.methods.setEntryProcedure(entryProcName);
+    await kernel.methods.setEntryProcedure(entryProcName).send()
     const capArrayEntryProc = Capability.toInput([
         new WriteCap(0x8001, 2),
         new LogCap([]),
