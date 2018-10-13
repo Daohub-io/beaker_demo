@@ -2,9 +2,6 @@
   <div class="instance">
     <b-container>
       <b-row>
-        <b-button @click="updateProcedureTable">Refresh</b-button>
-      </b-row>
-      <b-row>
         <b-col>
           <b-card no-body header="Procedure Table">
             <b-list-group flush>
@@ -112,6 +109,7 @@ import ABI, { ABIDefinition } from "web3/eth/abi";
 export default class Instance extends Vue {
   @Store.State network: Network;
   @Store.Action("network/update_instance") updateInstance: (address: string) => Promise<void>;
+  @Store.Action("network/send_call") sendCall: (call: {proc_name: string, abi: ABIDefinition, instance: Contract}) => Promise<void>
 
   instance_address: string;
 
@@ -134,17 +132,12 @@ export default class Instance extends Vue {
   async makeCall(proc_id: number, abi_id: number) {
     let proc = this.procedures[proc_id]
     let abi = proc.abi[abi_id]
-    // Make the function selector (TODO: we aren't considering input at all
-    // here)
-    const functionSelectorHash = web3.utils.sha3(abi.name!).slice(2,10);
-    // This platorm (typescript?) doesn't have String.padEnd(), so this does
-    // the padding of the key name (ASCII padded out to 24 bytes with nulls)
-    const paddedProcKey = (proc.id + "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0").slice(0,24);
-    const inputData = web3.utils.fromAscii(paddedProcKey) + functionSelectorHash;
-
-    // Use this err value for error checking
-    const err = await web3.eth.call({to: this.instance.options.address, data: inputData, from: this.instance.options.from });
-    const tx = await web3.eth.sendTransaction({gas:300000, to: this.instance.options.address, data: inputData, from: this.instance.options.from });
+    
+    await this.sendCall({
+      proc_name: proc.id,
+      abi,
+      instance: this.instance,
+    })
 
     await this.updateInstance(this.instance_address)
     await this.updateProcedureTable();
