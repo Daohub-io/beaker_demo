@@ -8,7 +8,7 @@ import { ABIDefinition } from 'web3/eth/abi';
 export interface Network {
     address: string;
     accounts: { id: string, balance: number }[];
-    instances: { contract: Contract, proc_table?: ProcedureTable }[];
+    instance: { contract: Contract, proc_table?: ProcedureTable };
     procedures: { name: string, contract: Contract }[];
     isSyncing: boolean;
     node: { id: string, type: string };
@@ -18,7 +18,7 @@ export const namespaced = true;
 export const state: Network = {
     address: DEFAULT_ADDRESS,
     accounts: [],
-    instances: [],
+    instance: { contract: new web3.eth.Contract([LocalKernelAbi])},
     procedures: [],
     isSyncing: false,
     node: { id: '', type: '' }
@@ -34,12 +34,11 @@ export const mutations: MutationTree<Network> = {
     set_accounts(state: Network, accounts: { id: string, balance: number }[]) {
         state.accounts = accounts;
     },
-    add_instance(state: Network, kernel: Contract) {
-        state.instances.push({ contract: kernel })
+    set_instance(state: Network, kernel: Contract) {
+        state.instance.contract = kernel;
     },
-    set_instance_proc_table(state: Network, new_state: { address: string, table: ProcedureTable }) {
-        let i = state.instances.findIndex(({ contract }) => contract.options.address === new_state.address)
-        if (i !== -1) state.instances[i].proc_table = new_state.table
+    set_instance_proc_table(state: Network, table: ProcedureTable ) {
+        state.instance.proc_table = table;
     },
     add_procedure(state: Network, procedure: { contract: Contract, name: string }) {
         state.procedures.push(procedure)
@@ -60,7 +59,30 @@ export const actions: ActionTree<Network, Root> = {
 
         commit('set_accounts', accounts)
     },
+    
+    async update_instance({dispatch, commit, state}, instance?: {account?: string, address?: string}) {
+        
+        let contract = state.instance.contract;
 
+        if (instance && instance.address) {
+            contract.options.address = instance.address;
+            contract.options.from = instance.account || state.accounts[0].id;
+
+            commit('set_instance', contract)
+        }
+        
+        const raw_procedures: [string] = await contract.methods.listProcedures().call();
+
+        let table = await Promise.all(
+            raw_procedures.map(async hex_id => {
+                let id = web3.utils.hexToUtf8(hex_id);
+                let address = await contract.methods.getProcedure(hex_id).call();
+                return { id, address };
+            })
+        );
+        
+        commit('set_instance_proc_table', table)
+    },
     async deploy_instance({ dispatch, commit, state }, account: string = state.accounts[0].id, kernelAbi = LocalKernelAbi) {
         // Create New Kernel Contract in Memory
         const kernel = new web3.eth.Contract([kernelAbi])
@@ -71,7 +93,7 @@ export const actions: ActionTree<Network, Root> = {
         let name = web3.utils.toHex("Entry");
         let entryproc = await installEntryProc(instance, name, account)
 
-        commit('add_instance', instance)
+        commit('set_instance', instance)
         commit('add_procedure', { contract: entryproc, name })
     },
 
@@ -81,9 +103,9 @@ export const actions: ActionTree<Network, Root> = {
         commit('add_procedure', { contract, name })
     },
 
-    async register_procedure({ dispatch, commit, state }, proc: { address: string, caps: Capability[], instance_address: string }) {
-        let instance = state.instances.find(({ contract }) => contract.options.address === proc.instance_address)
-        if (!instance) throw 'No Instance with address: ' + proc.instance_address + ' found';
+    async register_procedure({ dispatch, commit, state }, proc: { address: string, caps: Capability[] }) {
+        let instance = state.instance;
+        if (!instance.contract) throw 'No Instance defined'
 
         let procedure = state.procedures.find(({ contract }) => contract.options.address === proc.address)
         if (!procedure) throw 'No Procedure with address: ' + proc.address + ' found';
@@ -91,25 +113,8 @@ export const actions: ActionTree<Network, Root> = {
         const caps = Capability.toInput(proc.caps);
 
         await instance.contract.methods.registerProcedure(procedure.name, proc.address, caps).send({ from: state.accounts[0].id, gas: MIN_GAS, gasPrice: MIN_GAS_PRICE })
-        await dispatch("update_instance", proc.instance_address)
-    },
-
-    async update_instance({ dispatch, commit, state }, address: string) {
-        let instance = state.instances.find(({ contract }) => contract.options.address === address)
-        if (!instance) throw 'No Instance with address: ' + address + ' found';
-
-        let contract = instance.contract;
-        const raw_procedures: [string] = await contract.methods.listProcedures().call();
-
-        let table = await Promise.all(
-            raw_procedures.map(async hex_id => {
-                let id = web3.utils.hexToUtf8(hex_id);
-                let address = await contract.methods.getProcedure(hex_id).call();
-                return { id, address };
-            })
-        );
-
-        commit('set_instance_proc_table', { address, table })
+        
+        await dispatch("update_instance")
     },
 
     async send_call({ dispatch, commit, state }, call: {proc_name: string, abi: ABIDefinition, instance: Contract}) {

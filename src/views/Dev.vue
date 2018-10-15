@@ -9,7 +9,7 @@
               <form @submit.stop.prevent="handleOk">
                 <p>Network Id: {{ network.node.id }}</p>
                 <p>Type: {{ network.node.type }} </p>
-                <b-form-input type="text" placeholder="Enter Node Address" v-model="network.address"></b-form-input>
+                <b-form-input type="text" placeholder="Enter Node Address" v-model="conn_address"></b-form-input>
               </form>
             </b-modal>
           </b-nav-form>
@@ -47,14 +47,17 @@ import Contract from "web3/eth/contract";
 })
 export default class Dev extends Vue {
   @Store.State network: Network;
-  @Store.Action("network/connect") connect: () => Promise<void>;
+  @Store.Action("network/connect") connect: (addr?: string) => Promise<void>;
+
+  conn_address = ''
 
   mounted() {
     this.connect();
+    this.conn_address = this.network.address;
   }
 
   async handleOk() {
-    await this.connect();
+    await this.connect(this.conn_address);
   }
 
   get connected() {

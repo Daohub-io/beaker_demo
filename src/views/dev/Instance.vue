@@ -3,9 +3,48 @@
     <b-container>
       <b-row>
         <b-col>
-          <b-card no-body header="Procedure Table">
+          <b-input-group>
+            <b-form-input v-model="new_address" type="text">
+            </b-form-input>
+            <b-input-group-append>
+              <b-btn variant="primary" @click="update(new_address)">Update</b-btn>
+            </b-input-group-append>
+          </b-input-group>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col>
+          <b-card header="Interface">
+              <b-input-group v-for="call in interface" class="abi_call">
+                <b-input-group-text slot="prepend">
+                  {{ call.proc_id }}
+                </b-input-group-text>
+                <b-input-group-text slot="prepend" v-if="call.fn.name">
+                  {{ call.fn.name }}
+                </b-input-group-text>
+                <b-form-input id="call" v-for="input in call.fn.inputs" :key="input.name" :placeholder="input.type" v-if="call.fn.inputs.length > 0"></b-form-input>
+                <b-form-input v-if="call.fn.type === 'fallback'" placeholder="Fallback" disabled></b-form-input>
+                <b-input-group-append>
+                  <b-btn variant="primary" @click="makeCall(call.proc_i, call.id)" @mouseover="highlight = call.proc_id" @mouseout="highlight = ''">Call</b-btn>
+                </b-input-group-append>
+              </b-input-group>
+          </b-card>
+        </b-col>
+        <b-col>
+          <b-card no-body>
+            <div slot="header" class="d-flex justify-content-between"> Procedures <b-button size="sm" class="clear-button" v-b-modal.modal1>+</b-button></div>
+            <b-modal id="modal1" title="Create Procedure" @ok="createProc" @shown="clearCreateProc">
+              <b-form>
+                <b-form-group>
+                  <b-form-input placeholder="Enter Address" v-model="newProc.address"></b-form-input>
+                  <b-form-input placeholder="Enter Bytecode" v-model="newProc.bytecode"></b-form-input>
+                  <b-form-input placeholder="Enter Abi" v-model="newProc.abi"></b-form-input>
+                  <b-form-input placeholder="Capabilities" v-model="newProc.caps"></b-form-input>
+                </b-form-group>
+              </b-form>
+            </b-modal>
             <b-list-group flush>
-              <b-list-group-item v-for="(proc, i) in procedures" class="flex-column align-items-start">
+              <b-list-group-item v-for="(proc, i) in procedures" class="flex-column align-items-start" v-bind:class="{highlight: highlight === proc.id}">
                 <div class="d-flex w-50 flex-column">
                   <small>{{ proc.address.slice(0,10)+'...' }}</small>
                   <h5 class="mb-1">{{ proc.id }}</h5>
@@ -17,19 +56,16 @@
                   <b-form-input id="call" v-for="input in abi.inputs" :key="input.name" :placeholder="input.type"></b-form-input>
                   <b-form-input v-if="abi.type === 'fallback'" placeholder="Fallback" disabled></b-form-input>
                   <b-form-input v-else-if="abi.inputs.length == 0" placeholder="No Parameters" disabled></b-form-input>
-                  <b-input-group-append>
-                    <b-btn variant="primary" @click="makeCall(i, id)" >Call</b-btn>
-                  </b-input-group-append>
                 </b-input-group>
               </b-list-group-item>
             </b-list-group>
           </b-card>
         </b-col>
-        <b-col cols="3"></b-col>
         <b-col class="resources" tag="ul">
-          <b-card no-body header="Storage" tag="li">
+          <b-card no-body tag="li">
+            <div slot="header" class="d-flex justify-content-between"> Storage <b-button size="sm" class="clear-button">+</b-button></div>
             <b-list-group flush>
-              <b-list-group-item v-for="store in storage_caps" class="d-flex flex-column align-items-start">
+              <b-list-group-item v-for="(store, i) in storage_caps" class="d-flex flex-column align-items-start" :key="i" v-bind:class="{lowhighlight: store.owners.includes(highlight)}">
                 <div class="d-flex w-50 flex-column">
                   <small v-for="owner in store.owners">{{ owner }}</small>
                 </div>
@@ -48,15 +84,18 @@
               </b-list-group-item>
             </b-list-group>
           </b-card>
-          <b-card no-body header="Logs" v-if="log_caps.length > 0" tag="li">
+        </b-col>
+        <b-col>
+          <b-card no-body v-if="log_caps.length > 0" tag="li">
+            <div slot="header" class="d-flex justify-content-between"> Logs <b-button size="sm" class="clear-button">+</b-button></div>
             <b-list-group flush>
-              <b-list-group-item v-for="log in log_caps" class="d-flex flex-column align-items-start">
+              <b-list-group-item v-for="(log, i) in log_caps" :key="i" class="d-flex flex-column align-items-start" v-bind:class="{lowhighlight: log.owners.includes(highlight)}">
                 <div class="d-flex w-50 flex-column">
                   <small v-for="owner in log.owners">{{ owner }}</small>
                 </div>
                 <b-card no-body class="w-100" v-if="log.topics.length > 0">
                   <b-list-group flush>
-                    <b-list-group-item v-for="(topic, i) in log.topics" class="d-flex justify-content-between">
+                    <b-list-group-item v-for="(topic, i) in log.topics" :key="i" class="d-flex justify-content-between">
                       <span>
                         {{ topic }}
                       </span>
@@ -94,7 +133,8 @@ import {
   LogCap,
   CallCap,
   Capability,
-  CapabilityType
+  CapabilityType,
+LocalKernelAbi
 } from "@/web3";
 import { Network, actions } from "@/store/modules/network";
 import { ActionMethod, Action } from "vuex";
@@ -108,25 +148,75 @@ import ABI, { ABIDefinition } from "web3/eth/abi";
 })
 export default class Instance extends Vue {
   @Store.State network: Network;
-  @Store.Action("network/update_instance") updateInstance: (address: string) => Promise<void>;
+  @Store.Action("network/update_instance") updateInstance: (instance?: {account?: string, address?: string}) => Promise<void>;
   @Store.Action("network/send_call") sendCall: (call: {proc_name: string, abi: ABIDefinition, instance: Contract}) => Promise<void>
-
+  @Store.Action("network/deploy_procedure") deployProcedure: (proc: {name: string, abi: any}) => Promise<void>;
+  @Store.Action("network/register_procedure") registerProcedure: (proc: {address: string, caps: Capability[] }) => Promise<void>
+  
   instance_address: string;
+  new_address: string = '';
+
+  highlight: string = '';
 
   newCall = {
     abi_id: 0,
     input: []
   };
 
+  newProc = {
+    address: '',
+    bytecode: '',
+    abi: '',
+    caps: [],
+  }
+
   entry_fn: { text: string; value: number }[] = [];
 
-  procedures: { id: string; address: string, abi: ABIDefinition[] }[] = [];
-  caps: Capability[] = [];
+  procedures: { id: string; address: string, abi: ABIDefinition[], owners: string[] }[] = [];
+  caps: (WriteCap | CallCap | LogCap)[] = [];
 
   async mounted() {
     await this.updateProcedureTable();
     await this.updateCapTable();
+    this.new_address = this.instance_address;
+  }
 
+   async update(address?: string) {
+    await this.updateInstance({address})
+    await this.updateCapTable();
+    await this.updateProcedureTable();
+  }
+
+  async createProc() {
+
+    if (this.newProc.address) {
+      await this.registerProcedure({
+        address: this.newProc.address,
+        caps: this.newProc.caps,
+      })
+      return;
+    } 
+
+    if (this.newProc.abi) {
+      await this.deployProcedure({
+        name,
+        abi: JSON.parse(this.newProc.abi)
+      })
+
+      let procedures = this.network.procedures;
+      let procedure = procedures[procedures.length - 1];
+
+      await this.registerProcedure({
+        address: procedure.contract.options.address,
+        caps: this.newProc.caps
+      })
+    }
+
+    await this.update();
+  }
+
+  clearCreateProc() {
+    this.newProc = { address: '', bytecode: '', abi: '', caps: []};
   }
 
   async makeCall(proc_id: number, abi_id: number) {
@@ -139,9 +229,9 @@ export default class Instance extends Vue {
       instance: this.instance,
     })
 
-    await this.updateInstance(this.instance_address)
-    await this.updateProcedureTable();
+    await this.updateInstance()
     await this.updateCapTable();
+    await this.updateProcedureTable();
   }
 
   async getProcedureAddress(id: string, account: string) {
@@ -156,7 +246,8 @@ export default class Instance extends Vue {
         let id = web3.utils.hexToUtf8(hex_id);
         let address = await this.instance.methods.getProcedure(hex_id).call();
         let abi = await this.getAbi(address)
-        return { id, address, abi };
+        let owners = Array.from(this.getProcCallers(id))
+        return { id, address, abi, owners };
       })
     );
   }
@@ -196,7 +287,19 @@ export default class Instance extends Vue {
       });
     }
 
-    this.caps = result;
+    this.caps = result as any;
+  }
+
+  getProcCallers(id: string) {
+    let callers: Set<string> = new Set();
+    this.caps.forEach(cap => {
+      if (cap instanceof CallCap) {
+        if (cap.keys.length == 0 || (cap.keys as any).includes(id)) {
+          cap.owners.forEach(owner => callers.add(owner))
+        }
+      }
+    })
+    return callers;
   }
 
   getAbi(address: string): ABIDefinition[] {
@@ -234,6 +337,11 @@ export default class Instance extends Vue {
     });
   }
 
+  get interface() {
+    return this.procedures.reduce((res, proc, proc_i) => {
+      return res.concat(proc.abi.map((fn, id) => ({ id, proc_i, proc_id: proc.id, fn })).filter(x => x.fn.type !== 'fallback'))
+    }, [] as {fn: ABIDefinition, proc_i: number, id: number, proc_id: string}[])
+  }
   get storage_caps(): WriteCap[] {
     return this.caps.filter(cap => cap.type === CapabilityType.StorageWrite) as WriteCap[]
   }
@@ -243,10 +351,7 @@ export default class Instance extends Vue {
   }
 
   get instance(): Contract {
-    let addr = this.instance_address;
-    return this.network.instances.find(
-      inst => inst.contract.options.address === addr
-    )!.contract;
+    return this.network.instance.contract
   }
 
   get accounts() {
@@ -264,8 +369,20 @@ export default class Instance extends Vue {
 .abi_call {
   margin-top: 0.5rem;
 }
-
+.highlight {
+  color: #fff;
+  background-color:rgb(107, 107, 107);
+}
+.lowhighlight {
+  background-color: #aaa;
+}
 .resources li {
   margin-bottom: 2rem;
+}
+
+.clear-button {
+  padding: 0 5px;
+  background-color: transparent;
+  color: #333;
 }
 </style>

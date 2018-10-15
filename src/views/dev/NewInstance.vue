@@ -87,8 +87,7 @@ export default class NewInstance extends Vue {
     let account = this.newInstance.account;
     await this.deployInstance(account);
 
-    let instances = this.network.instances;
-    this.instance = instances[instances.length - 1].contract;
+    this.instance = this.network.instance.contract;
 
     let entry_code = this.newInstance.test_choice;
     let name = this.newInstance.name
