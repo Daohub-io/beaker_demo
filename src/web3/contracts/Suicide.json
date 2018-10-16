@@ -26,14 +26,14 @@
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/invalid/Suicide.sol",
     "exportedSymbols": {
       "Suicide": [
-        2776
+        3024
       ]
     },
-    "id": 2777,
+    "id": 3025,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2765,
+        "id": 3013,
         "literals": [
           "solidity",
           "^",
@@ -49,16 +49,16 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 2776,
+        "id": 3024,
         "linearizedBaseContracts": [
-          2776
+          3024
         ],
         "name": "Suicide",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 2774,
+              "id": 3022,
               "nodeType": "Block",
               "src": "80:32:13",
               "statements": [
@@ -68,11 +68,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 2771,
+                        "id": 3019,
                         "name": "a",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2767,
+                        "referencedDeclaration": 3015,
                         "src": "103:1:13",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -87,18 +87,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 2770,
+                      "id": 3018,
                       "name": "selfdestruct",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3148,
+                      "referencedDeclaration": 3392,
                       "src": "90:12:13",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_selfdestruct_nonpayable$_t_address_$returns$__$",
                         "typeString": "function (address)"
                       }
                     },
-                    "id": 2772,
+                    "id": 3020,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -112,14 +112,14 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 2773,
+                  "id": 3021,
                   "nodeType": "ExpressionStatement",
                   "src": "90:15:13"
                 }
               ]
             },
             "documentation": null,
-            "id": 2775,
+            "id": 3023,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -127,15 +127,15 @@
             "name": "foo",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2768,
+              "id": 3016,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2767,
+                  "id": 3015,
                   "name": "a",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2775,
+                  "scope": 3023,
                   "src": "62:9:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -144,7 +144,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2766,
+                    "id": 3014,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "62:7:13",
@@ -161,19 +161,19 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 2769,
+              "id": 3017,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "80:0:13"
             },
-            "scope": 2776,
+            "scope": 3024,
             "src": "49:63:13",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 2777,
+        "scope": 3025,
         "src": "26:88:13"
       }
     ],
@@ -183,14 +183,14 @@
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/invalid/Suicide.sol",
     "exportedSymbols": {
       "Suicide": [
-        2776
+        3024
       ]
     },
-    "id": 2777,
+    "id": 3025,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2765,
+        "id": 3013,
         "literals": [
           "solidity",
           "^",
@@ -206,16 +206,16 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 2776,
+        "id": 3024,
         "linearizedBaseContracts": [
-          2776
+          3024
         ],
         "name": "Suicide",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 2774,
+              "id": 3022,
               "nodeType": "Block",
               "src": "80:32:13",
               "statements": [
@@ -225,11 +225,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 2771,
+                        "id": 3019,
                         "name": "a",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2767,
+                        "referencedDeclaration": 3015,
                         "src": "103:1:13",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -244,18 +244,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 2770,
+                      "id": 3018,
                       "name": "selfdestruct",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3148,
+                      "referencedDeclaration": 3392,
                       "src": "90:12:13",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_selfdestruct_nonpayable$_t_address_$returns$__$",
                         "typeString": "function (address)"
                       }
                     },
-                    "id": 2772,
+                    "id": 3020,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -269,14 +269,14 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 2773,
+                  "id": 3021,
                   "nodeType": "ExpressionStatement",
                   "src": "90:15:13"
                 }
               ]
             },
             "documentation": null,
-            "id": 2775,
+            "id": 3023,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -284,15 +284,15 @@
             "name": "foo",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2768,
+              "id": 3016,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2767,
+                  "id": 3015,
                   "name": "a",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2775,
+                  "scope": 3023,
                   "src": "62:9:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -301,7 +301,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2766,
+                    "id": 3014,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "62:7:13",
@@ -318,19 +318,19 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 2769,
+              "id": 3017,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "80:0:13"
             },
-            "scope": 2776,
+            "scope": 3024,
             "src": "49:63:13",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 2777,
+        "scope": 3025,
         "src": "26:88:13"
       }
     ],
@@ -342,5 +342,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-10-11T16:50:35.314Z"
+  "updatedAt": "2018-10-16T14:59:29.634Z"
 }

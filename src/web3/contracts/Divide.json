@@ -35,14 +35,14 @@
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/valid/Divide.sol",
     "exportedSymbols": {
       "Divide": [
-        2810
+        3058
       ]
     },
-    "id": 2811,
+    "id": 3059,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2795,
+        "id": 3043,
         "literals": [
           "solidity",
           "^",
@@ -58,16 +58,16 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 2810,
+        "id": 3058,
         "linearizedBaseContracts": [
-          2810
+          3058
         ],
         "name": "Divide",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 2808,
+              "id": 3056,
               "nodeType": "Block",
               "src": "110:29:15",
               "statements": [
@@ -78,18 +78,18 @@
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     },
-                    "id": 2806,
+                    "id": 3054,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftExpression": {
                       "argumentTypes": null,
-                      "id": 2804,
+                      "id": 3052,
                       "name": "a",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2797,
+                      "referencedDeclaration": 3045,
                       "src": "127:1:15",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -100,11 +100,11 @@
                     "operator": "/",
                     "rightExpression": {
                       "argumentTypes": null,
-                      "id": 2805,
+                      "id": 3053,
                       "name": "b",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2799,
+                      "referencedDeclaration": 3047,
                       "src": "131:1:15",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -117,15 +117,15 @@
                       "typeString": "uint256"
                     }
                   },
-                  "functionReturnParameters": 2803,
-                  "id": 2807,
+                  "functionReturnParameters": 3051,
+                  "id": 3055,
                   "nodeType": "Return",
                   "src": "120:12:15"
                 }
               ]
             },
             "documentation": null,
-            "id": 2809,
+            "id": 3057,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -133,15 +133,15 @@
             "name": "divide",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2800,
+              "id": 3048,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2797,
+                  "id": 3045,
                   "name": "a",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2809,
+                  "scope": 3057,
                   "src": "64:6:15",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -150,7 +150,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2796,
+                    "id": 3044,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "64:4:15",
@@ -164,10 +164,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 2799,
+                  "id": 3047,
                   "name": "b",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2809,
+                  "scope": 3057,
                   "src": "72:6:15",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -176,7 +176,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2798,
+                    "id": 3046,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "72:4:15",
@@ -193,15 +193,15 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 2803,
+              "id": 3051,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2802,
+                  "id": 3050,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2809,
+                  "scope": 3057,
                   "src": "101:7:15",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -210,7 +210,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2801,
+                    "id": 3049,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "101:7:15",
@@ -225,14 +225,14 @@
               ],
               "src": "100:9:15"
             },
-            "scope": 2810,
+            "scope": 3058,
             "src": "48:91:15",
             "stateMutability": "pure",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 2811,
+        "scope": 3059,
         "src": "26:115:15"
       }
     ],
@@ -242,14 +242,14 @@
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/valid/Divide.sol",
     "exportedSymbols": {
       "Divide": [
-        2810
+        3058
       ]
     },
-    "id": 2811,
+    "id": 3059,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2795,
+        "id": 3043,
         "literals": [
           "solidity",
           "^",
@@ -265,16 +265,16 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 2810,
+        "id": 3058,
         "linearizedBaseContracts": [
-          2810
+          3058
         ],
         "name": "Divide",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 2808,
+              "id": 3056,
               "nodeType": "Block",
               "src": "110:29:15",
               "statements": [
@@ -285,18 +285,18 @@
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     },
-                    "id": 2806,
+                    "id": 3054,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftExpression": {
                       "argumentTypes": null,
-                      "id": 2804,
+                      "id": 3052,
                       "name": "a",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2797,
+                      "referencedDeclaration": 3045,
                       "src": "127:1:15",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -307,11 +307,11 @@
                     "operator": "/",
                     "rightExpression": {
                       "argumentTypes": null,
-                      "id": 2805,
+                      "id": 3053,
                       "name": "b",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2799,
+                      "referencedDeclaration": 3047,
                       "src": "131:1:15",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -324,15 +324,15 @@
                       "typeString": "uint256"
                     }
                   },
-                  "functionReturnParameters": 2803,
-                  "id": 2807,
+                  "functionReturnParameters": 3051,
+                  "id": 3055,
                   "nodeType": "Return",
                   "src": "120:12:15"
                 }
               ]
             },
             "documentation": null,
-            "id": 2809,
+            "id": 3057,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -340,15 +340,15 @@
             "name": "divide",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2800,
+              "id": 3048,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2797,
+                  "id": 3045,
                   "name": "a",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2809,
+                  "scope": 3057,
                   "src": "64:6:15",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -357,7 +357,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2796,
+                    "id": 3044,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "64:4:15",
@@ -371,10 +371,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 2799,
+                  "id": 3047,
                   "name": "b",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2809,
+                  "scope": 3057,
                   "src": "72:6:15",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -383,7 +383,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2798,
+                    "id": 3046,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "72:4:15",
@@ -400,15 +400,15 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 2803,
+              "id": 3051,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2802,
+                  "id": 3050,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2809,
+                  "scope": 3057,
                   "src": "101:7:15",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -417,7 +417,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2801,
+                    "id": 3049,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "101:7:15",
@@ -432,14 +432,14 @@
               ],
               "src": "100:9:15"
             },
-            "scope": 2810,
+            "scope": 3058,
             "src": "48:91:15",
             "stateMutability": "pure",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 2811,
+        "scope": 3059,
         "src": "26:115:15"
       }
     ],
@@ -451,5 +451,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-10-11T16:50:35.315Z"
+  "updatedAt": "2018-10-16T14:59:29.635Z"
 }

@@ -49,22 +49,22 @@
   ],
   "bytecode": "0x608060405234801561001057600080fd5b50610283806100206000396000f30060806040526004361061006d576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680630f529ba21461007257806332e7c5bf1461008957806383dfe5fd146100a057806392bbf6e8146100b7578063f446c1d0146100ce575b600080fd5b34801561007e57600080fd5b506100876100e5565b005b34801561009557600080fd5b5061009e610135565b005b3480156100ac57600080fd5b506100b5610179565b005b3480156100c357600080fd5b506100cc6101c3565b005b3480156100da57600080fd5b506100e3610219565b005b60096000526001602052600360405261abcd60605261beef60805261cafe60a05264123456789060c0526020608060c1601f335af415156101305760805161089801600d526020600dfd5b600080f35b60096000526001602052600160405261abcd606052641234567890608052602060806081601f335af415156101745760805161089801600d526020600dfd5b600080f35b60096000526001602052600260405261abcd60605261beef60805264123456789060a0526020608060a1601f335af415156101be5760805161089801600d526020600dfd5b600080f35b60096000526001602052600460405261abcd60605261beef60805261cafe60a05261454560c05264123456789060e0526020608060e1601f335af415156102145760805161089801600d526020600dfd5b600080f35b600960005260016020526000604052641234567890606052602060806061601f335af415156102525760805161089801600d526020600dfd5b600080f300a165627a7a723058200bb0281354030c9836a0c7c581e890ab5d06c561fb8704e5303e03c8b6c138a50029",
   "deployedBytecode": "0x60806040526004361061006d576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680630f529ba21461007257806332e7c5bf1461008957806383dfe5fd146100a057806392bbf6e8146100b7578063f446c1d0146100ce575b600080fd5b34801561007e57600080fd5b506100876100e5565b005b34801561009557600080fd5b5061009e610135565b005b3480156100ac57600080fd5b506100b5610179565b005b3480156100c357600080fd5b506100cc6101c3565b005b3480156100da57600080fd5b506100e3610219565b005b60096000526001602052600360405261abcd60605261beef60805261cafe60a05264123456789060c0526020608060c1601f335af415156101305760805161089801600d526020600dfd5b600080f35b60096000526001602052600160405261abcd606052641234567890608052602060806081601f335af415156101745760805161089801600d526020600dfd5b600080f35b60096000526001602052600260405261abcd60605261beef60805264123456789060a0526020608060a1601f335af415156101be5760805161089801600d526020600dfd5b600080f35b60096000526001602052600460405261abcd60605261beef60805261cafe60a05261454560c05264123456789060e0526020608060e1601f335af415156102145760805161089801600d526020600dfd5b600080f35b600960005260016020526000604052641234567890606052602060806061601f335af415156102525760805161089801600d526020600dfd5b600080f300a165627a7a723058200bb0281354030c9836a0c7c581e890ab5d06c561fb8704e5303e03c8b6c138a50029",
-  "sourceMap": "26:5245:28:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:5245:28;;;;;;;",
-  "deployedSourceMap": "26:5245:28:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;3019:1077;;8:9:-1;5:2;;;30:1;27;20:12;5:2;3019:1077:28;;;;;;994:947;;8:9:-1;5:2;;;30:1;27;20:12;5:2;994:947:28;;;;;;1972:1014;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1972:1014:28;;;;;;4128:1141;;8:9:-1;5:2;;;30:1;27;20:12;5:2;4128:1141:28;;;;;;80:879;;8:9:-1;5:2;;;30:1;27;20:12;5:2;80:879:28;;;;;;3019:1077;3188:4;3184:3;3177:16;3263:4;3258;3251:17;3341:3;3336:4;3329:16;3401:6;3396:4;3389:19;3465:6;3460:4;3453:19;3528:6;3523:4;3516:19;3600:12;3595:4;3588:25;3892:4;3886;3881:3;3877:2;3869:6;3864:3;3851:46;3844:54;3841:2;;;3943:4;3937:11;3932:4;3928:21;3924:3;3917:33;3978:4;3974:3;3967:16;3841:2;4078:1;4076;4069:11;994:947;1163:4;1159:3;1152:16;1238:4;1233;1226:17;1316:3;1311:4;1304:16;1376:6;1371:4;1364:19;1448:12;1443:4;1436:25;1737:4;1731;1726:3;1722:2;1714:6;1709:3;1696:46;1689:54;1686:2;;;1788:4;1782:11;1777:4;1773:21;1769:3;1762:33;1823:4;1819:3;1812:16;1686:2;1923:1;1921;1914:11;1972:1014;2141:4;2137:3;2130:16;2216:4;2211;2204:17;2294:3;2289:4;2282:16;2354:6;2349:4;2342:19;2418:6;2413:4;2406:19;2490:12;2485:4;2478:25;2782:4;2776;2771:3;2767:2;2759:6;2754:3;2741:46;2734:54;2731:2;;;2833:4;2827:11;2822:4;2818:21;2814:3;2807:33;2868:4;2864:3;2857:16;2731:2;2968:1;2966;2959:11;4128:1141;4297:4;4293:3;4286:16;4372:4;4367;4360:17;4450:3;4445:4;4438:16;4510:6;4505:4;4498:19;4574:6;4569:4;4562:19;4637:6;4632:4;4625:19;4701:6;4696:4;4689:19;4773:12;4768:4;4761:25;5065:4;5059;5054:3;5050:2;5042:6;5037:3;5024:46;5017:54;5014:2;;;5116:4;5110:11;5105:4;5101:21;5097:3;5090:33;5151:4;5147:3;5140:16;5014:2;5251:1;5249;5242:11;80:879;249:4;245:3;238:16;324:4;319;312:17;402:3;397:4;390:16;471:12;466:4;459:25;755:4;749;745:2;741;733:6;728:3;715:45;708:53;705:2;;;806:4;800:11;795:4;791:21;787:3;780:33;841:4;837:3;830:16;705:2;941:1;939;932:11",
+  "sourceMap": "26:5245:29:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:5245:29;;;;;;;",
+  "deployedSourceMap": "26:5245:29:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;3019:1077;;8:9:-1;5:2;;;30:1;27;20:12;5:2;3019:1077:29;;;;;;994:947;;8:9:-1;5:2;;;30:1;27;20:12;5:2;994:947:29;;;;;;1972:1014;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1972:1014:29;;;;;;4128:1141;;8:9:-1;5:2;;;30:1;27;20:12;5:2;4128:1141:29;;;;;;80:879;;8:9:-1;5:2;;;30:1;27;20:12;5:2;80:879:29;;;;;;3019:1077;3188:4;3184:3;3177:16;3263:4;3258;3251:17;3341:3;3336:4;3329:16;3401:6;3396:4;3389:19;3465:6;3460:4;3453:19;3528:6;3523:4;3516:19;3600:12;3595:4;3588:25;3892:4;3886;3881:3;3877:2;3869:6;3864:3;3851:46;3844:54;3841:2;;;3943:4;3937:11;3932:4;3928:21;3924:3;3917:33;3978:4;3974:3;3967:16;3841:2;4078:1;4076;4069:11;994:947;1163:4;1159:3;1152:16;1238:4;1233;1226:17;1316:3;1311:4;1304:16;1376:6;1371:4;1364:19;1448:12;1443:4;1436:25;1737:4;1731;1726:3;1722:2;1714:6;1709:3;1696:46;1689:54;1686:2;;;1788:4;1782:11;1777:4;1773:21;1769:3;1762:33;1823:4;1819:3;1812:16;1686:2;1923:1;1921;1914:11;1972:1014;2141:4;2137:3;2130:16;2216:4;2211;2204:17;2294:3;2289:4;2282:16;2354:6;2349:4;2342:19;2418:6;2413:4;2406:19;2490:12;2485:4;2478:25;2782:4;2776;2771:3;2767:2;2759:6;2754:3;2741:46;2734:54;2731:2;;;2833:4;2827:11;2822:4;2818:21;2814:3;2807:33;2868:4;2864:3;2857:16;2731:2;2968:1;2966;2959:11;4128:1141;4297:4;4293:3;4286:16;4372:4;4367;4360:17;4450:3;4445:4;4438:16;4510:6;4505:4;4498:19;4574:6;4569:4;4562:19;4637:6;4632:4;4625:19;4701:6;4696:4;4689:19;4773:12;4768:4;4761:25;5065:4;5059;5054:3;5050:2;5042:6;5037:3;5024:46;5017:54;5014:2;;;5116:4;5110:11;5105:4;5101:21;5097:3;5090:33;5151:4;5147:3;5140:16;5014:2;5251:1;5249;5242:11;80:879;249:4;245:3;238:16;324:4;319;312:17;402:3;397:4;390:16;471:12;466:4;459:25;755:4;749;745:2;741;733:6;728:3;715:45;708:53;705:2;;;806:4;800:11;795:4;791:21;787:3;780:33;841:4;837:3;830:16;705:2;941:1;939;932:11",
   "source": "pragma solidity ^0.4.17;\n\ncontract SysCallTestLog {\n    // Log to no topics\n    function A() public {\n        assembly {\n            // First set up the input data (at memory location 0x0)\n            // The log call is 0x-07\n            mstore(0x0,0x09)\n            // The capability index is 0x-01\n            mstore(0x20,0x01)\n            // The number of topics we will use\n            mstore(0x40,0x0)\n            // The value we want to log\n            mstore(0x60,0x1234567890)\n            // \"in_offset\" is at 31, because we only want the last byte of type\n            // \"in_size\" is 97 because it is 1+32+32+32\n            // we will store the result at 0x80 and it will be 32 bytes\n            if iszero(delegatecall(gas, caller, 31, 97, 0x80, 0x20)) {\n                mstore(0xd,add(2200,mload(0x80)))\n                revert(0xd,0x20)\n            }\n            // We don't need to return anything in success\n            return(0,0)\n        }\n    }\n\n    // Log to a single topic\n    function B() public {\n        assembly {\n            // First set up the input data (at memory location 0x0)\n            // The log call is 0x-09\n            mstore(0x0,0x09)\n            // The capability index is 0x-01\n            mstore(0x20,0x01)\n            // The number of topics we will use\n            mstore(0x40,0x1)\n            // The first topic\n            mstore(0x60,0xabcd)\n            // The value we want to log\n            mstore(0x80,0x1234567890)\n            // \"in_offset\" is at 31, because we only want the last byte of type\n            // \"in_size\" is 129 because it is 1+32+32+32+32\n            // we will store the result at 0x80 and it will be 32 bytes\n            if iszero(delegatecall(gas, caller, 31, 129, 0x80, 0x20)) {\n                mstore(0xd,add(2200,mload(0x80)))\n                revert(0xd,0x20)\n            }\n            // We don't need to return anything in success\n            return(0,0)\n        }\n    }\n\n    // Log to two topics\n    function C() public {\n        assembly {\n            // First set up the input data (at memory location 0x0)\n            // The log call is 0x-09\n            mstore(0x0,0x09)\n            // The capability index is 0x-01\n            mstore(0x20,0x01)\n            // The number of topics we will use\n            mstore(0x40,0x2)\n            // The first topic\n            mstore(0x60,0xabcd)\n            // The second topic\n            mstore(0x80,0xbeef)\n            // The value we want to log\n            mstore(0xa0,0x1234567890)\n            // \"in_offset\" is at 31, because we only want the last byte of type\n            // \"in_size\" is 129 because it is 1+32+32+32+32+32\n            // we will store the result at 0x80 and it will be 32 bytes\n            if iszero(delegatecall(gas, caller, 31, 161, 0x80, 0x20)) {\n                mstore(0xd,add(2200,mload(0x80)))\n                revert(0xd,0x20)\n            }\n            // We don't need to return anything in success\n            return(0,0)\n        }\n    }\n\n    // Log to three topics\n    function D() public {\n        assembly {\n            // First set up the input data (at memory location 0x0)\n            // The log call is 0x-09\n            mstore(0x0,0x09)\n            // The capability index is 0x-01\n            mstore(0x20,0x01)\n            // The number of topics we will use\n            mstore(0x40,0x3)\n            // The first topic\n            mstore(0x60,0xabcd)\n            // The second topic\n            mstore(0x80,0xbeef)\n            // The third topic\n            mstore(0xa0,0xcafe)\n            // The value we want to log\n            mstore(0xc0,0x1234567890)\n            // \"in_offset\" is at 31, because we only want the last byte of type\n            // \"in_size\" is 129 because it is 1+32+32+32+32+32\n            // we will store the result at 0x80 and it will be 32 bytes\n            if iszero(delegatecall(gas, caller, 31, 193, 0x80, 0x20)) {\n                mstore(0xd,add(2200,mload(0x80)))\n                revert(0xd,0x20)\n            }\n            // We don't need to return anything in success\n            return(0,0)\n        }\n    }\n\n    // Log to four topics\n    function E() public {\n        assembly {\n            // First set up the input data (at memory location 0x0)\n            // The log call is 0x-09\n            mstore(0x0,0x09)\n            // The capability index is 0x-01\n            mstore(0x20,0x01)\n            // The number of topics we will use\n            mstore(0x40,0x4)\n            // The first topic\n            mstore(0x60,0xabcd)\n            // The second topic\n            mstore(0x80,0xbeef)\n            // The third topic\n            mstore(0xa0,0xcafe)\n            // The fourth topic\n            mstore(0xc0,0x4545)\n            // The value we want to log\n            mstore(0xe0,0x1234567890)\n            // \"in_offset\" is at 31, because we only want the last byte of type\n            // \"in_size\" is 129 because it is 1+32+32+32+32+32\n            // we will store the result at 0x80 and it will be 32 bytes\n            if iszero(delegatecall(gas, caller, 31, 225, 0x80, 0x20)) {\n                mstore(0xd,add(2200,mload(0x80)))\n                revert(0xd,0x20)\n            }\n            // We don't need to return anything in success\n            return(0,0)\n        }\n    }\n}",
   "sourcePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/valid/SysCallTestLog.sol",
   "ast": {
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/valid/SysCallTestLog.sol",
     "exportedSymbols": {
       "SysCallTestLog": [
-        3125
+        3369
       ]
     },
-    "id": 3126,
+    "id": 3370,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3099,
+        "id": 3343,
         "literals": [
           "solidity",
           "^",
@@ -72,7 +72,7 @@
           ".17"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:28"
+        "src": "0:24:29"
       },
       {
         "baseContracts": [],
@@ -80,30 +80,30 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 3125,
+        "id": 3369,
         "linearizedBaseContracts": [
-          3125
+          3369
         ],
         "name": "SysCallTestLog",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 3103,
+              "id": 3347,
               "nodeType": "Block",
-              "src": "100:859:28",
+              "src": "100:859:29",
               "statements": [
                 {
                   "externalReferences": [],
-                  "id": 3102,
+                  "id": 3346,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    mstore(0x0, 0x09)\n    mstore(0x20, 0x01)\n    mstore(0x40, 0x0)\n    mstore(0x60, 0x1234567890)\n    if iszero(delegatecall(gas(), caller(), 31, 97, 0x80, 0x20))\n    {\n        mstore(0xd, add(2200, mload(0x80)))\n        revert(0xd, 0x20)\n    }\n    return(0, 0)\n}",
-                  "src": "110:849:28"
+                  "src": "110:849:29"
                 }
               ]
             },
             "documentation": null,
-            "id": 3104,
+            "id": 3348,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -111,41 +111,41 @@
             "name": "A",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3100,
+              "id": 3344,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "90:2:28"
+              "src": "90:2:29"
             },
             "payable": false,
             "returnParameters": {
-              "id": 3101,
+              "id": 3345,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "100:0:28"
+              "src": "100:0:29"
             },
-            "scope": 3125,
-            "src": "80:879:28",
+            "scope": 3369,
+            "src": "80:879:29",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 3108,
+              "id": 3352,
               "nodeType": "Block",
-              "src": "1014:927:28",
+              "src": "1014:927:29",
               "statements": [
                 {
                   "externalReferences": [],
-                  "id": 3107,
+                  "id": 3351,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    mstore(0x0, 0x09)\n    mstore(0x20, 0x01)\n    mstore(0x40, 0x1)\n    mstore(0x60, 0xabcd)\n    mstore(0x80, 0x1234567890)\n    if iszero(delegatecall(gas(), caller(), 31, 129, 0x80, 0x20))\n    {\n        mstore(0xd, add(2200, mload(0x80)))\n        revert(0xd, 0x20)\n    }\n    return(0, 0)\n}",
-                  "src": "1024:917:28"
+                  "src": "1024:917:29"
                 }
               ]
             },
             "documentation": null,
-            "id": 3109,
+            "id": 3353,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -153,41 +153,41 @@
             "name": "B",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3105,
+              "id": 3349,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1004:2:28"
+              "src": "1004:2:29"
             },
             "payable": false,
             "returnParameters": {
-              "id": 3106,
+              "id": 3350,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1014:0:28"
+              "src": "1014:0:29"
             },
-            "scope": 3125,
-            "src": "994:947:28",
+            "scope": 3369,
+            "src": "994:947:29",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 3113,
+              "id": 3357,
               "nodeType": "Block",
-              "src": "1992:994:28",
+              "src": "1992:994:29",
               "statements": [
                 {
                   "externalReferences": [],
-                  "id": 3112,
+                  "id": 3356,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    mstore(0x0, 0x09)\n    mstore(0x20, 0x01)\n    mstore(0x40, 0x2)\n    mstore(0x60, 0xabcd)\n    mstore(0x80, 0xbeef)\n    mstore(0xa0, 0x1234567890)\n    if iszero(delegatecall(gas(), caller(), 31, 161, 0x80, 0x20))\n    {\n        mstore(0xd, add(2200, mload(0x80)))\n        revert(0xd, 0x20)\n    }\n    return(0, 0)\n}",
-                  "src": "2002:984:28"
+                  "src": "2002:984:29"
                 }
               ]
             },
             "documentation": null,
-            "id": 3114,
+            "id": 3358,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -195,41 +195,41 @@
             "name": "C",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3110,
+              "id": 3354,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1982:2:28"
+              "src": "1982:2:29"
             },
             "payable": false,
             "returnParameters": {
-              "id": 3111,
+              "id": 3355,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1992:0:28"
+              "src": "1992:0:29"
             },
-            "scope": 3125,
-            "src": "1972:1014:28",
+            "scope": 3369,
+            "src": "1972:1014:29",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 3118,
+              "id": 3362,
               "nodeType": "Block",
-              "src": "3039:1057:28",
+              "src": "3039:1057:29",
               "statements": [
                 {
                   "externalReferences": [],
-                  "id": 3117,
+                  "id": 3361,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    mstore(0x0, 0x09)\n    mstore(0x20, 0x01)\n    mstore(0x40, 0x3)\n    mstore(0x60, 0xabcd)\n    mstore(0x80, 0xbeef)\n    mstore(0xa0, 0xcafe)\n    mstore(0xc0, 0x1234567890)\n    if iszero(delegatecall(gas(), caller(), 31, 193, 0x80, 0x20))\n    {\n        mstore(0xd, add(2200, mload(0x80)))\n        revert(0xd, 0x20)\n    }\n    return(0, 0)\n}",
-                  "src": "3049:1047:28"
+                  "src": "3049:1047:29"
                 }
               ]
             },
             "documentation": null,
-            "id": 3119,
+            "id": 3363,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -237,41 +237,41 @@
             "name": "D",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3115,
+              "id": 3359,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "3029:2:28"
+              "src": "3029:2:29"
             },
             "payable": false,
             "returnParameters": {
-              "id": 3116,
+              "id": 3360,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "3039:0:28"
+              "src": "3039:0:29"
             },
-            "scope": 3125,
-            "src": "3019:1077:28",
+            "scope": 3369,
+            "src": "3019:1077:29",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 3123,
+              "id": 3367,
               "nodeType": "Block",
-              "src": "4148:1121:28",
+              "src": "4148:1121:29",
               "statements": [
                 {
                   "externalReferences": [],
-                  "id": 3122,
+                  "id": 3366,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    mstore(0x0, 0x09)\n    mstore(0x20, 0x01)\n    mstore(0x40, 0x4)\n    mstore(0x60, 0xabcd)\n    mstore(0x80, 0xbeef)\n    mstore(0xa0, 0xcafe)\n    mstore(0xc0, 0x4545)\n    mstore(0xe0, 0x1234567890)\n    if iszero(delegatecall(gas(), caller(), 31, 225, 0x80, 0x20))\n    {\n        mstore(0xd, add(2200, mload(0x80)))\n        revert(0xd, 0x20)\n    }\n    return(0, 0)\n}",
-                  "src": "4158:1111:28"
+                  "src": "4158:1111:29"
                 }
               ]
             },
             "documentation": null,
-            "id": 3124,
+            "id": 3368,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -279,43 +279,43 @@
             "name": "E",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3120,
+              "id": 3364,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "4138:2:28"
+              "src": "4138:2:29"
             },
             "payable": false,
             "returnParameters": {
-              "id": 3121,
+              "id": 3365,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "4148:0:28"
+              "src": "4148:0:29"
             },
-            "scope": 3125,
-            "src": "4128:1141:28",
+            "scope": 3369,
+            "src": "4128:1141:29",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 3126,
-        "src": "26:5245:28"
+        "scope": 3370,
+        "src": "26:5245:29"
       }
     ],
-    "src": "0:5271:28"
+    "src": "0:5271:29"
   },
   "legacyAST": {
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/valid/SysCallTestLog.sol",
     "exportedSymbols": {
       "SysCallTestLog": [
-        3125
+        3369
       ]
     },
-    "id": 3126,
+    "id": 3370,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3099,
+        "id": 3343,
         "literals": [
           "solidity",
           "^",
@@ -323,7 +323,7 @@
           ".17"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:28"
+        "src": "0:24:29"
       },
       {
         "baseContracts": [],
@@ -331,30 +331,30 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 3125,
+        "id": 3369,
         "linearizedBaseContracts": [
-          3125
+          3369
         ],
         "name": "SysCallTestLog",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 3103,
+              "id": 3347,
               "nodeType": "Block",
-              "src": "100:859:28",
+              "src": "100:859:29",
               "statements": [
                 {
                   "externalReferences": [],
-                  "id": 3102,
+                  "id": 3346,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    mstore(0x0, 0x09)\n    mstore(0x20, 0x01)\n    mstore(0x40, 0x0)\n    mstore(0x60, 0x1234567890)\n    if iszero(delegatecall(gas(), caller(), 31, 97, 0x80, 0x20))\n    {\n        mstore(0xd, add(2200, mload(0x80)))\n        revert(0xd, 0x20)\n    }\n    return(0, 0)\n}",
-                  "src": "110:849:28"
+                  "src": "110:849:29"
                 }
               ]
             },
             "documentation": null,
-            "id": 3104,
+            "id": 3348,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -362,41 +362,41 @@
             "name": "A",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3100,
+              "id": 3344,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "90:2:28"
+              "src": "90:2:29"
             },
             "payable": false,
             "returnParameters": {
-              "id": 3101,
+              "id": 3345,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "100:0:28"
+              "src": "100:0:29"
             },
-            "scope": 3125,
-            "src": "80:879:28",
+            "scope": 3369,
+            "src": "80:879:29",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 3108,
+              "id": 3352,
               "nodeType": "Block",
-              "src": "1014:927:28",
+              "src": "1014:927:29",
               "statements": [
                 {
                   "externalReferences": [],
-                  "id": 3107,
+                  "id": 3351,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    mstore(0x0, 0x09)\n    mstore(0x20, 0x01)\n    mstore(0x40, 0x1)\n    mstore(0x60, 0xabcd)\n    mstore(0x80, 0x1234567890)\n    if iszero(delegatecall(gas(), caller(), 31, 129, 0x80, 0x20))\n    {\n        mstore(0xd, add(2200, mload(0x80)))\n        revert(0xd, 0x20)\n    }\n    return(0, 0)\n}",
-                  "src": "1024:917:28"
+                  "src": "1024:917:29"
                 }
               ]
             },
             "documentation": null,
-            "id": 3109,
+            "id": 3353,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -404,41 +404,41 @@
             "name": "B",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3105,
+              "id": 3349,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1004:2:28"
+              "src": "1004:2:29"
             },
             "payable": false,
             "returnParameters": {
-              "id": 3106,
+              "id": 3350,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1014:0:28"
+              "src": "1014:0:29"
             },
-            "scope": 3125,
-            "src": "994:947:28",
+            "scope": 3369,
+            "src": "994:947:29",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 3113,
+              "id": 3357,
               "nodeType": "Block",
-              "src": "1992:994:28",
+              "src": "1992:994:29",
               "statements": [
                 {
                   "externalReferences": [],
-                  "id": 3112,
+                  "id": 3356,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    mstore(0x0, 0x09)\n    mstore(0x20, 0x01)\n    mstore(0x40, 0x2)\n    mstore(0x60, 0xabcd)\n    mstore(0x80, 0xbeef)\n    mstore(0xa0, 0x1234567890)\n    if iszero(delegatecall(gas(), caller(), 31, 161, 0x80, 0x20))\n    {\n        mstore(0xd, add(2200, mload(0x80)))\n        revert(0xd, 0x20)\n    }\n    return(0, 0)\n}",
-                  "src": "2002:984:28"
+                  "src": "2002:984:29"
                 }
               ]
             },
             "documentation": null,
-            "id": 3114,
+            "id": 3358,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -446,41 +446,41 @@
             "name": "C",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3110,
+              "id": 3354,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1982:2:28"
+              "src": "1982:2:29"
             },
             "payable": false,
             "returnParameters": {
-              "id": 3111,
+              "id": 3355,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1992:0:28"
+              "src": "1992:0:29"
             },
-            "scope": 3125,
-            "src": "1972:1014:28",
+            "scope": 3369,
+            "src": "1972:1014:29",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 3118,
+              "id": 3362,
               "nodeType": "Block",
-              "src": "3039:1057:28",
+              "src": "3039:1057:29",
               "statements": [
                 {
                   "externalReferences": [],
-                  "id": 3117,
+                  "id": 3361,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    mstore(0x0, 0x09)\n    mstore(0x20, 0x01)\n    mstore(0x40, 0x3)\n    mstore(0x60, 0xabcd)\n    mstore(0x80, 0xbeef)\n    mstore(0xa0, 0xcafe)\n    mstore(0xc0, 0x1234567890)\n    if iszero(delegatecall(gas(), caller(), 31, 193, 0x80, 0x20))\n    {\n        mstore(0xd, add(2200, mload(0x80)))\n        revert(0xd, 0x20)\n    }\n    return(0, 0)\n}",
-                  "src": "3049:1047:28"
+                  "src": "3049:1047:29"
                 }
               ]
             },
             "documentation": null,
-            "id": 3119,
+            "id": 3363,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -488,41 +488,41 @@
             "name": "D",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3115,
+              "id": 3359,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "3029:2:28"
+              "src": "3029:2:29"
             },
             "payable": false,
             "returnParameters": {
-              "id": 3116,
+              "id": 3360,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "3039:0:28"
+              "src": "3039:0:29"
             },
-            "scope": 3125,
-            "src": "3019:1077:28",
+            "scope": 3369,
+            "src": "3019:1077:29",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 3123,
+              "id": 3367,
               "nodeType": "Block",
-              "src": "4148:1121:28",
+              "src": "4148:1121:29",
               "statements": [
                 {
                   "externalReferences": [],
-                  "id": 3122,
+                  "id": 3366,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    mstore(0x0, 0x09)\n    mstore(0x20, 0x01)\n    mstore(0x40, 0x4)\n    mstore(0x60, 0xabcd)\n    mstore(0x80, 0xbeef)\n    mstore(0xa0, 0xcafe)\n    mstore(0xc0, 0x4545)\n    mstore(0xe0, 0x1234567890)\n    if iszero(delegatecall(gas(), caller(), 31, 225, 0x80, 0x20))\n    {\n        mstore(0xd, add(2200, mload(0x80)))\n        revert(0xd, 0x20)\n    }\n    return(0, 0)\n}",
-                  "src": "4158:1111:28"
+                  "src": "4158:1111:29"
                 }
               ]
             },
             "documentation": null,
-            "id": 3124,
+            "id": 3368,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -530,30 +530,30 @@
             "name": "E",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3120,
+              "id": 3364,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "4138:2:28"
+              "src": "4138:2:29"
             },
             "payable": false,
             "returnParameters": {
-              "id": 3121,
+              "id": 3365,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "4148:0:28"
+              "src": "4148:0:29"
             },
-            "scope": 3125,
-            "src": "4128:1141:28",
+            "scope": 3369,
+            "src": "4128:1141:29",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 3126,
-        "src": "26:5245:28"
+        "scope": 3370,
+        "src": "26:5245:29"
       }
     ],
-    "src": "0:5271:28"
+    "src": "0:5271:29"
   },
   "compiler": {
     "name": "solc",
@@ -561,5 +561,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-10-11T16:50:35.339Z"
+  "updatedAt": "2018-10-16T14:59:29.636Z"
 }

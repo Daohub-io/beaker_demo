@@ -71,17 +71,13 @@ export const actions: ActionTree<Network, Root> = {
             commit('set_instance', contract)
         }
         
-        const raw_procedures: [string] = await contract.methods.listProcedures().call();
+        let raw_proc_table = await contract.methods.returnProcedureTable().call();
+        let table = await contract.methods.listProcedures().call();
+        console.table(table)
+        let proc_table = ProcedureTable.parse(raw_proc_table);
 
-        let table = await Promise.all(
-            raw_procedures.map(async hex_id => {
-                let id = web3.utils.hexToUtf8(hex_id);
-                let address = await contract.methods.getProcedure(hex_id).call();
-                return { id, address };
-            })
-        );
-        
-        commit('set_instance_proc_table', table)
+        commit('set_instance_proc_table', proc_table)
+
     },
     async deploy_instance({ dispatch, commit, state }, account: string = state.accounts[0].id, kernelAbi = LocalKernelAbi) {
         // Create New Kernel Contract in Memory
@@ -103,17 +99,22 @@ export const actions: ActionTree<Network, Root> = {
         commit('add_procedure', { contract, name })
     },
 
-    async register_procedure({ dispatch, commit, state }, proc: { address: string, caps: Capability[] }) {
+    async register_procedure({ dispatch, commit, state }, proc: { name: string, address: string, caps: Capability[] }) {
         let instance = state.instance;
         if (!instance.contract) throw 'No Instance defined'
 
-        let procedure = state.procedures.find(({ contract }) => contract.options.address === proc.address)
-        if (!procedure) throw 'No Procedure with address: ' + proc.address + ' found';
-
+        let name = web3.utils.toHex(proc.name);
         const caps = Capability.toInput(proc.caps);
 
-        await instance.contract.methods.registerProcedure(procedure.name, proc.address, caps).send({ from: state.accounts[0].id, gas: MIN_GAS, gasPrice: MIN_GAS_PRICE })
-        
+        await instance.contract.methods.registerAnyProcedure(name, proc.address, caps).send({ from: state.accounts[0].id, gas: MIN_GAS, gasPrice: MIN_GAS_PRICE })
+        await dispatch("update_instance")
+    },
+
+    async remove_procedure({dispatch, commit, state}, name: string) {
+        let instance = state.instance
+        if (!instance.contract) throw 'No Instance defined'
+
+        await instance.contract.methods.deleteProcedure(web3.utils.toHex(name)).send({ from: state.accounts[0].id, gas: MIN_GAS, gasPrice: MIN_GAS_PRICE })
         await dispatch("update_instance")
     },
 

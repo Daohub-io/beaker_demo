@@ -18,22 +18,22 @@
   ],
   "bytecode": "0x608060405234801561001057600080fd5b5061013f806100206000396000f300608060405260043610610041576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680634be1c7961461008f575b34801561004d57600080fd5b506180005460076000526001602052618000604052610164606052602060806061601f335af41515610089576080516109c401600d526020600dfd5b60206080f35b34801561009b57600080fd5b506100a46100a6565b005b6180005460076000526001602052618000604052600181016060526000608052602060806061601f335af415156100e75760805161089801600d526020600dfd5b61800054600d52600181016180005414151561010d5760805161089801600d526020600dfd5b60206080f300a165627a7a723058207fe3f3c980957e597c1b4b9215cdf167b7088b5c1d7fe3a89bcc2916a3cc73f80029",
   "deployedBytecode": "0x608060405260043610610041576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680634be1c7961461008f575b34801561004d57600080fd5b506180005460076000526001602052618000604052610164606052602060806061601f335af41515610089576080516109c401600d526020600dfd5b60206080f35b34801561009b57600080fd5b506100a46100a6565b005b6180005460076000526001602052618000604052600181016060526000608052602060806061601f335af415156100e75760805161089801600d526020600dfd5b61800054600d52600181016180005414151561010d5760805161089801600d526020600dfd5b60206080f300a165627a7a723058207fe3f3c980957e597c1b4b9215cdf167b7088b5c1d7fe3a89bcc2916a3cc73f80029",
-  "sourceMap": "26:2172:5:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:2172:5;;;;;;;",
-  "deployedSourceMap": "26:2172:5:-;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:2172:5;1398:6;1392:13;1536:4;1532:3;1525:16;1611:4;1606;1599:17;1695:6;1690:4;1683:19;1769:3;1764:4;1757:16;2044:4;2038;2034:2;2030;2022:6;2017:3;2004:45;1997:53;1994:2;;;2095:4;2089:11;2084:4;2080:21;2076:3;2069:33;2130:4;2126:3;2119:16;1994:2;2175:4;2169;2162:18;53:1207;;8:9:-1;5:2;;;30:1;27;20:12;5:2;53:1207:5;;;;;;;187:6;181:13;325:4;321:3;314:16;400:4;395;388:17;484:6;479:4;472:19;573:1;562:10;558:17;553:4;546:30;640:1;635:4;628:14;913:4;907;903:2;899;891:6;886:3;873:45;866:53;863:2;;;964:4;958:11;953:4;949:21;945:3;938:33;999:4;995:3;988:16;863:2;1048:6;1042:13;1038:3;1031:25;1111:1;1100:10;1096:17;1088:6;1082:13;1079:35;1072:43;1069:2;;;1160:4;1154:11;1149:4;1145:21;1141:3;1134:33;1195:4;1191:3;1184:16;1069:2;1239:4;1234;1227:17",
+  "sourceMap": "26:2172:27:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:2172:27;;;;;;;",
+  "deployedSourceMap": "26:2172:27:-;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:2172:27;1398:6;1392:13;1536:4;1532:3;1525:16;1611:4;1606;1599:17;1695:6;1690:4;1683:19;1769:3;1764:4;1757:16;2044:4;2038;2034:2;2030;2022:6;2017:3;2004:45;1997:53;1994:2;;;2095:4;2089:11;2084:4;2080:21;2076:3;2069:33;2130:4;2126:3;2119:16;1994:2;2175:4;2169;2162:18;53:1207;;8:9:-1;5:2;;;30:1;27;20:12;5:2;53:1207:27;;;;;;;187:6;181:13;325:4;321:3;314:16;400:4;395;388:17;484:6;479:4;472:19;573:1;562:10;558:17;553:4;546:30;640:1;635:4;628:14;913:4;907;903:2;899;891:6;886:3;873:45;866:53;863:2;;;964:4;958:11;953:4;949:21;945:3;938:33;999:4;995:3;988:16;863:2;1048:6;1042:13;1038:3;1031:25;1111:1;1100:10;1096:17;1088:6;1082:13;1079:35;1072:43;1069:2;;;1160:4;1154:11;1149:4;1145:21;1141:3;1134:33;1195:4;1191:3;1184:16;1069:2;1239:4;1234;1227:17",
   "source": "pragma solidity ^0.4.17;\n\ncontract SysCallTest {\n    function S() public {\n        assembly {\n            // First get the original value from storage\n            let orig_value := sload(0x8000)\n            // First set up the input data (at memory location 0x0)\n            // The write call is 0x-07\n            mstore(0x0,0x07)\n            // The capability index is 0x-01\n            mstore(0x20,0x01)\n            // The storage location we want is 0x8000\n            mstore(0x40,0x8000)\n            // The value we want to store\n            mstore(0x60,add(orig_value,1))\n            // clear the output buffer\n            mstore(0x80,0)\n            // \"in_offset\" is at 31, because we only want the last byte of type\n            // \"in_size\" is 97 because it is 1+32+32+32\n            // we will store the result at 0x80 and it will be 32 bytes\n            if iszero(delegatecall(gas, caller, 31, 97, 0x80, 0x20)) {\n                mstore(0xd,add(2200,mload(0x80)))\n                revert(0xd,0x20)\n            }\n            mstore(0xd,sload(0x8000))\n            if iszero(eq(sload(0x8000),add(orig_value,1))) {\n                mstore(0xd,add(2200,mload(0x80)))\n                revert(0xd,0x20)\n            }\n            return(0x80,0x20)\n        }\n    }\n\n    function() public {\n        assembly {\n            // First get the original value from storage\n            let orig_value := sload(0x8000)\n            // First set up the input data (at memory location 0x0)\n            // The write call is 0x-07\n            mstore(0x0,0x07)\n            // The capability index is 0x-01\n            mstore(0x20,0x01)\n            // The storage location we want is 0x8000\n            mstore(0x40,0x8000)\n            // The value we want to store\n            mstore(0x60,356)\n            // \"in_offset\" is at 31, because we only want the last byte of type\n            // \"in_size\" is 97 because it is 1+32+32+32\n            // we will store the result at 0x80 and it will be 32 bytes\n            if iszero(delegatecall(gas, caller, 31, 97, 0x80, 0x20)) {\n                mstore(0xd,add(2500,mload(0x80)))\n                revert(0xd,0x20)\n            }\n            return(0x80, 0x20)\n        }\n    }\n}",
   "sourcePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/valid/SysCallTest.sol",
   "ast": {
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/valid/SysCallTest.sol",
     "exportedSymbols": {
       "SysCallTest": [
-        2820
+        3253
       ]
     },
-    "id": 2821,
+    "id": 3254,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2809,
+        "id": 3242,
         "literals": [
           "solidity",
           "^",
@@ -41,7 +41,7 @@
           ".17"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:5"
+        "src": "0:24:27"
       },
       {
         "baseContracts": [],
@@ -49,30 +49,30 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 2820,
+        "id": 3253,
         "linearizedBaseContracts": [
-          2820
+          3253
         ],
         "name": "SysCallTest",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 2813,
+              "id": 3246,
               "nodeType": "Block",
-              "src": "73:1187:5",
+              "src": "73:1187:27",
               "statements": [
                 {
                   "externalReferences": [],
-                  "id": 2812,
+                  "id": 3245,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    let orig_value := sload(0x8000)\n    mstore(0x0, 0x07)\n    mstore(0x20, 0x01)\n    mstore(0x40, 0x8000)\n    mstore(0x60, add(orig_value, 1))\n    mstore(0x80, 0)\n    if iszero(delegatecall(gas(), caller(), 31, 97, 0x80, 0x20))\n    {\n        mstore(0xd, add(2200, mload(0x80)))\n        revert(0xd, 0x20)\n    }\n    mstore(0xd, sload(0x8000))\n    if iszero(eq(sload(0x8000), add(orig_value, 1)))\n    {\n        mstore(0xd, add(2200, mload(0x80)))\n        revert(0xd, 0x20)\n    }\n    return(0x80, 0x20)\n}",
-                  "src": "83:1177:5"
+                  "src": "83:1177:27"
                 }
               ]
             },
             "documentation": null,
-            "id": 2814,
+            "id": 3247,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -80,41 +80,41 @@
             "name": "S",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2810,
+              "id": 3243,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "63:2:5"
+              "src": "63:2:27"
             },
             "payable": false,
             "returnParameters": {
-              "id": 2811,
+              "id": 3244,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "73:0:5"
+              "src": "73:0:27"
             },
-            "scope": 2820,
-            "src": "53:1207:5",
+            "scope": 3253,
+            "src": "53:1207:27",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 2818,
+              "id": 3251,
               "nodeType": "Block",
-              "src": "1284:912:5",
+              "src": "1284:912:27",
               "statements": [
                 {
                   "externalReferences": [],
-                  "id": 2817,
+                  "id": 3250,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    let orig_value := sload(0x8000)\n    mstore(0x0, 0x07)\n    mstore(0x20, 0x01)\n    mstore(0x40, 0x8000)\n    mstore(0x60, 356)\n    if iszero(delegatecall(gas(), caller(), 31, 97, 0x80, 0x20))\n    {\n        mstore(0xd, add(2500, mload(0x80)))\n        revert(0xd, 0x20)\n    }\n    return(0x80, 0x20)\n}",
-                  "src": "1294:902:5"
+                  "src": "1294:902:27"
                 }
               ]
             },
             "documentation": null,
-            "id": 2819,
+            "id": 3252,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -122,43 +122,43 @@
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2815,
+              "id": 3248,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1274:2:5"
+              "src": "1274:2:27"
             },
             "payable": false,
             "returnParameters": {
-              "id": 2816,
+              "id": 3249,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1284:0:5"
+              "src": "1284:0:27"
             },
-            "scope": 2820,
-            "src": "1266:930:5",
+            "scope": 3253,
+            "src": "1266:930:27",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 2821,
-        "src": "26:2172:5"
+        "scope": 3254,
+        "src": "26:2172:27"
       }
     ],
-    "src": "0:2198:5"
+    "src": "0:2198:27"
   },
   "legacyAST": {
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/valid/SysCallTest.sol",
     "exportedSymbols": {
       "SysCallTest": [
-        2820
+        3253
       ]
     },
-    "id": 2821,
+    "id": 3254,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2809,
+        "id": 3242,
         "literals": [
           "solidity",
           "^",
@@ -166,7 +166,7 @@
           ".17"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:5"
+        "src": "0:24:27"
       },
       {
         "baseContracts": [],
@@ -174,30 +174,30 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 2820,
+        "id": 3253,
         "linearizedBaseContracts": [
-          2820
+          3253
         ],
         "name": "SysCallTest",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 2813,
+              "id": 3246,
               "nodeType": "Block",
-              "src": "73:1187:5",
+              "src": "73:1187:27",
               "statements": [
                 {
                   "externalReferences": [],
-                  "id": 2812,
+                  "id": 3245,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    let orig_value := sload(0x8000)\n    mstore(0x0, 0x07)\n    mstore(0x20, 0x01)\n    mstore(0x40, 0x8000)\n    mstore(0x60, add(orig_value, 1))\n    mstore(0x80, 0)\n    if iszero(delegatecall(gas(), caller(), 31, 97, 0x80, 0x20))\n    {\n        mstore(0xd, add(2200, mload(0x80)))\n        revert(0xd, 0x20)\n    }\n    mstore(0xd, sload(0x8000))\n    if iszero(eq(sload(0x8000), add(orig_value, 1)))\n    {\n        mstore(0xd, add(2200, mload(0x80)))\n        revert(0xd, 0x20)\n    }\n    return(0x80, 0x20)\n}",
-                  "src": "83:1177:5"
+                  "src": "83:1177:27"
                 }
               ]
             },
             "documentation": null,
-            "id": 2814,
+            "id": 3247,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -205,41 +205,41 @@
             "name": "S",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2810,
+              "id": 3243,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "63:2:5"
+              "src": "63:2:27"
             },
             "payable": false,
             "returnParameters": {
-              "id": 2811,
+              "id": 3244,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "73:0:5"
+              "src": "73:0:27"
             },
-            "scope": 2820,
-            "src": "53:1207:5",
+            "scope": 3253,
+            "src": "53:1207:27",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 2818,
+              "id": 3251,
               "nodeType": "Block",
-              "src": "1284:912:5",
+              "src": "1284:912:27",
               "statements": [
                 {
                   "externalReferences": [],
-                  "id": 2817,
+                  "id": 3250,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    let orig_value := sload(0x8000)\n    mstore(0x0, 0x07)\n    mstore(0x20, 0x01)\n    mstore(0x40, 0x8000)\n    mstore(0x60, 356)\n    if iszero(delegatecall(gas(), caller(), 31, 97, 0x80, 0x20))\n    {\n        mstore(0xd, add(2500, mload(0x80)))\n        revert(0xd, 0x20)\n    }\n    return(0x80, 0x20)\n}",
-                  "src": "1294:902:5"
+                  "src": "1294:902:27"
                 }
               ]
             },
             "documentation": null,
-            "id": 2819,
+            "id": 3252,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -247,30 +247,30 @@
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2815,
+              "id": 3248,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1274:2:5"
+              "src": "1274:2:27"
             },
             "payable": false,
             "returnParameters": {
-              "id": 2816,
+              "id": 3249,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1284:0:5"
+              "src": "1284:0:27"
             },
-            "scope": 2820,
-            "src": "1266:930:5",
+            "scope": 3253,
+            "src": "1266:930:27",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 2821,
-        "src": "26:2172:5"
+        "scope": 3254,
+        "src": "26:2172:27"
       }
     ],
-    "src": "0:2198:5"
+    "src": "0:2198:27"
   },
   "compiler": {
     "name": "solc",
@@ -278,5 +278,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-10-12T18:05:18.065Z"
+  "updatedAt": "2018-10-16T14:59:29.636Z"
 }

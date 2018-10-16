@@ -68,7 +68,7 @@ export default class NewInstance extends Vue {
   @Store.State network: Network;
   @Store.Action("network/deploy_instance") deployInstance: (account?: string) => Promise<void>;
   @Store.Action("network/deploy_procedure") deployProcedure: (proc: {name: string, abi: any}) => Promise<void>;
-  @Store.Action("network/register_procedure") registerProcedure: (proc: {address: string, caps: Capability[], instance_address: string }) => Promise<void>
+  @Store.Action("network/register_procedure") registerProcedure: (proc: {name: string, address: string, caps: Capability[]}) => Promise<void>
   
   newInstance = {
     name: "",
@@ -104,9 +104,9 @@ export default class NewInstance extends Vue {
     const cap2 = new WriteCap(0x8000, 2);
 
     this.registerProcedure({
+      name,
       address: procedure.contract.options.address,
       caps: [cap1, cap2],
-      instance_address: this.instance.options.address
     })
 
     this.$router.push({

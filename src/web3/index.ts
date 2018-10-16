@@ -26,6 +26,9 @@ export async function installEntryProc(kernel: Contract, entryProcName: string, 
 
     const deployedEntryProc = await deployedTrimmed(TestAbi.entry, kernel.options.from);
     // Install the entry procedure
+    let {err, addr} = await kernel.methods.registerAnyProcedure(entryProcName, deployedEntryProc.options.address, capArrayEntryProc).call({ from: account, gas: MIN_GAS, gasPrice: MIN_GAS_PRICE })
+    if (err != "0") throw 'Error on registration: '+ err
+
     await kernel.methods.registerAnyProcedure(entryProcName, deployedEntryProc.options.address, capArrayEntryProc).send({ from: account, gas: MIN_GAS, gasPrice: MIN_GAS_PRICE })
     return deployedEntryProc
 }

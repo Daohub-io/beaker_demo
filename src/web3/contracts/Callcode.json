@@ -35,14 +35,14 @@
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/invalid/Callcode.sol",
     "exportedSymbols": {
       "Callcode": [
-        2702
+        2950
       ]
     },
-    "id": 2703,
+    "id": 2951,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2690,
+        "id": 2938,
         "literals": [
           "solidity",
           "^",
@@ -58,16 +58,16 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 2702,
+        "id": 2950,
         "linearizedBaseContracts": [
-          2702
+          2950
         ],
         "name": "Callcode",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 2700,
+              "id": 2948,
               "nodeType": "Block",
               "src": "114:91:8",
               "statements": [
@@ -75,7 +75,7 @@
                   "externalReferences": [
                     {
                       "gasAmount": {
-                        "declaration": 2694,
+                        "declaration": 2942,
                         "isOffset": false,
                         "isSlot": false,
                         "src": "161:9:8",
@@ -84,7 +84,7 @@
                     },
                     {
                       "a": {
-                        "declaration": 2692,
+                        "declaration": 2940,
                         "isOffset": false,
                         "isSlot": false,
                         "src": "172:1:8",
@@ -93,7 +93,7 @@
                     },
                     {
                       "v": {
-                        "declaration": 2697,
+                        "declaration": 2945,
                         "isOffset": false,
                         "isSlot": false,
                         "src": "147:1:8",
@@ -101,7 +101,7 @@
                       }
                     }
                   ],
-                  "id": 2699,
+                  "id": 2947,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    v := callcode(gasAmount, a, 0, 0, 0, 0, 0)\n}",
                   "src": "124:81:8"
@@ -109,7 +109,7 @@
               ]
             },
             "documentation": null,
-            "id": 2701,
+            "id": 2949,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -117,15 +117,15 @@
             "name": "foo",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2695,
+              "id": 2943,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2692,
+                  "id": 2940,
                   "name": "a",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2701,
+                  "scope": 2949,
                   "src": "63:9:8",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -134,7 +134,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2691,
+                    "id": 2939,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "63:7:8",
@@ -148,10 +148,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 2694,
+                  "id": 2942,
                   "name": "gasAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2701,
+                  "scope": 2949,
                   "src": "74:14:8",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -160,7 +160,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2693,
+                    "id": 2941,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "74:4:8",
@@ -177,15 +177,15 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 2698,
+              "id": 2946,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2697,
+                  "id": 2945,
                   "name": "v",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2701,
+                  "scope": 2949,
                   "src": "106:6:8",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -194,7 +194,7 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 2696,
+                    "id": 2944,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
                     "src": "106:4:8",
@@ -209,14 +209,14 @@
               ],
               "src": "105:8:8"
             },
-            "scope": 2702,
+            "scope": 2950,
             "src": "50:155:8",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 2703,
+        "scope": 2951,
         "src": "26:181:8"
       }
     ],
@@ -226,14 +226,14 @@
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/invalid/Callcode.sol",
     "exportedSymbols": {
       "Callcode": [
-        2702
+        2950
       ]
     },
-    "id": 2703,
+    "id": 2951,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2690,
+        "id": 2938,
         "literals": [
           "solidity",
           "^",
@@ -249,16 +249,16 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 2702,
+        "id": 2950,
         "linearizedBaseContracts": [
-          2702
+          2950
         ],
         "name": "Callcode",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 2700,
+              "id": 2948,
               "nodeType": "Block",
               "src": "114:91:8",
               "statements": [
@@ -266,7 +266,7 @@
                   "externalReferences": [
                     {
                       "gasAmount": {
-                        "declaration": 2694,
+                        "declaration": 2942,
                         "isOffset": false,
                         "isSlot": false,
                         "src": "161:9:8",
@@ -275,7 +275,7 @@
                     },
                     {
                       "a": {
-                        "declaration": 2692,
+                        "declaration": 2940,
                         "isOffset": false,
                         "isSlot": false,
                         "src": "172:1:8",
@@ -284,7 +284,7 @@
                     },
                     {
                       "v": {
-                        "declaration": 2697,
+                        "declaration": 2945,
                         "isOffset": false,
                         "isSlot": false,
                         "src": "147:1:8",
@@ -292,7 +292,7 @@
                       }
                     }
                   ],
-                  "id": 2699,
+                  "id": 2947,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    v := callcode(gasAmount, a, 0, 0, 0, 0, 0)\n}",
                   "src": "124:81:8"
@@ -300,7 +300,7 @@
               ]
             },
             "documentation": null,
-            "id": 2701,
+            "id": 2949,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -308,15 +308,15 @@
             "name": "foo",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2695,
+              "id": 2943,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2692,
+                  "id": 2940,
                   "name": "a",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2701,
+                  "scope": 2949,
                   "src": "63:9:8",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -325,7 +325,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2691,
+                    "id": 2939,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "63:7:8",
@@ -339,10 +339,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 2694,
+                  "id": 2942,
                   "name": "gasAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2701,
+                  "scope": 2949,
                   "src": "74:14:8",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -351,7 +351,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2693,
+                    "id": 2941,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "74:4:8",
@@ -368,15 +368,15 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 2698,
+              "id": 2946,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2697,
+                  "id": 2945,
                   "name": "v",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2701,
+                  "scope": 2949,
                   "src": "106:6:8",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -385,7 +385,7 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 2696,
+                    "id": 2944,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
                     "src": "106:4:8",
@@ -400,14 +400,14 @@
               ],
               "src": "105:8:8"
             },
-            "scope": 2702,
+            "scope": 2950,
             "src": "50:155:8",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 2703,
+        "scope": 2951,
         "src": "26:181:8"
       }
     ],
@@ -419,5 +419,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-10-11T16:50:35.279Z"
+  "updatedAt": "2018-10-16T14:59:29.634Z"
 }

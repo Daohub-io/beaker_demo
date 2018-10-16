@@ -32,10 +32,11 @@
         </b-col>
         <b-col>
           <b-card no-body>
-            <div slot="header" class="d-flex justify-content-between"> Procedures <b-button size="sm" class="clear-button" v-b-modal.modal1>+</b-button></div>
-            <b-modal id="modal1" title="Create Procedure" @ok="createProc" @shown="clearCreateProc">
+            <div slot="header" class="d-flex justify-content-between"> Procedures <b-button size="sm" class="clear-button" v-b-modal.modal-create-proc>+</b-button></div>
+            <b-modal id="modal-create-proc" title="Create Procedure" @ok="createProc" @shown="clearCreateProc">
               <b-form>
                 <b-form-group>
+                  <b-form-input placeholder="Name" v-model="newProc.name"></b-form-input>
                   <b-form-input placeholder="Enter Address" v-model="newProc.address"></b-form-input>
                   <b-form-input placeholder="Enter Bytecode" v-model="newProc.bytecode"></b-form-input>
                   <b-form-input placeholder="Enter Abi" v-model="newProc.abi"></b-form-input>
@@ -57,13 +58,26 @@
                   <b-form-input v-if="abi.type === 'fallback'" placeholder="Fallback" disabled></b-form-input>
                   <b-form-input v-else-if="abi.inputs.length == 0" placeholder="No Parameters" disabled></b-form-input>
                 </b-input-group>
+                <b-button size="sm" @click="removeProc(proc.id)">Remove</b-button>
               </b-list-group-item>
             </b-list-group>
           </b-card>
         </b-col>
         <b-col class="resources" tag="ul">
           <b-card no-body tag="li">
-            <div slot="header" class="d-flex justify-content-between"> Storage <b-button size="sm" class="clear-button">+</b-button></div>
+            <div slot="header" class="d-flex justify-content-between"> Storage <b-button size="sm" class="clear-button" v-b-modal.modal-create-storecap>+</b-button></div>
+            <b-modal id="modal-create-storecap" title="Add Store" @ok="createStoreCap" @shown="clearCreateStoreCap">
+              <b-form>
+                <b-form-group>
+                  <label for="cap-owner">For Procedure</label>
+                  <b-form-input id="cap-owner" placeholder="Owner" v-model="newStore.for"></b-form-input>
+                  <label for="cap-store-start">Location</label>
+                  <b-form-input id="cap-store-start" type="number" v-model="newStore.start"></b-form-input>
+                  <label for="cap-store-size">Size</label>
+                  <b-form-input id="cap-store-size" type="number" v-model="newStore.size"></b-form-input>
+                </b-form-group>
+              </b-form>
+            </b-modal>
             <b-list-group flush>
               <b-list-group-item v-for="(store, i) in storage_caps" class="d-flex flex-column align-items-start" :key="i" v-bind:class="{lowhighlight: store.owners.includes(highlight)}">
                 <div class="d-flex w-50 flex-column">
@@ -86,7 +100,7 @@
           </b-card>
         </b-col>
         <b-col>
-          <b-card no-body v-if="log_caps.length > 0" tag="li">
+          <b-card no-body tag="li">
             <div slot="header" class="d-flex justify-content-between"> Logs <b-button size="sm" class="clear-button">+</b-button></div>
             <b-list-group flush>
               <b-list-group-item v-for="(log, i) in log_caps" :key="i" class="d-flex flex-column align-items-start" v-bind:class="{lowhighlight: log.owners.includes(highlight)}">
@@ -151,7 +165,8 @@ export default class Instance extends Vue {
   @Store.Action("network/update_instance") updateInstance: (instance?: {account?: string, address?: string}) => Promise<void>;
   @Store.Action("network/send_call") sendCall: (call: {proc_name: string, abi: ABIDefinition, instance: Contract}) => Promise<void>
   @Store.Action("network/deploy_procedure") deployProcedure: (proc: {name: string, abi: any}) => Promise<void>;
-  @Store.Action("network/register_procedure") registerProcedure: (proc: {address: string, caps: Capability[] }) => Promise<void>
+  @Store.Action("network/register_procedure") registerProcedure: (proc: {name: string, address: string, caps: Capability[] }) => Promise<void>
+  @Store.Action("network/remove_procedure") removeProcedure: (name: string) => Promise<void>
   
   instance_address: string;
   new_address: string = '';
@@ -164,10 +179,17 @@ export default class Instance extends Vue {
   };
 
   newProc = {
+    name: '',
     address: '',
     bytecode: '',
     abi: '',
     caps: [],
+  }
+
+  newStore = {
+    for: '',
+    start: 0,
+    size: 0,
   }
 
   entry_fn: { text: string; value: number }[] = [];
@@ -187,17 +209,32 @@ export default class Instance extends Vue {
     await this.updateProcedureTable();
   }
 
+  async createStoreCap() {
+    
+  }
+
+  clearCreateStoreCap() {
+    this.newStore = { for: '', start: 0, size: 0 }
+  }
+
+  async removeProc(id: string) {
+    await this.removeProcedure(id);
+    await this.update();
+  }
+  
   async createProc() {
 
+    let name = this.newProc.name;
     if (this.newProc.address) {
+
       await this.registerProcedure({
+        name,
         address: this.newProc.address,
         caps: this.newProc.caps,
       })
-      return;
-    } 
+      
+    } else if (this.newProc.abi) {
 
-    if (this.newProc.abi) {
       await this.deployProcedure({
         name,
         abi: JSON.parse(this.newProc.abi)
@@ -207,6 +244,7 @@ export default class Instance extends Vue {
       let procedure = procedures[procedures.length - 1];
 
       await this.registerProcedure({
+        name,
         address: procedure.contract.options.address,
         caps: this.newProc.caps
       })
@@ -216,7 +254,7 @@ export default class Instance extends Vue {
   }
 
   clearCreateProc() {
-    this.newProc = { address: '', bytecode: '', abi: '', caps: []};
+    this.newProc = { name: '', address: '', bytecode: '', abi: '', caps: []};
   }
 
   async makeCall(proc_id: number, abi_id: number) {
@@ -245,7 +283,9 @@ export default class Instance extends Vue {
       procedures.map(async hex_id => {
         let id = web3.utils.hexToUtf8(hex_id);
         let address = await this.instance.methods.getProcedure(hex_id).call();
-        let abi = await this.getAbi(address)
+        let abi: ABIDefinition[] = [];
+        try { abi = await this.getAbi(address) } catch (e) {}
+
         let owners = Array.from(this.getProcCallers(id))
         return { id, address, abi, owners };
       })

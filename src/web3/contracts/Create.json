@@ -34,14 +34,14 @@
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/invalid/Create.sol",
     "exportedSymbols": {
       "Create": [
-        2716
+        2964
       ]
     },
-    "id": 2717,
+    "id": 2965,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2704,
+        "id": 2952,
         "literals": [
           "solidity",
           "^",
@@ -57,16 +57,16 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 2716,
+        "id": 2964,
         "linearizedBaseContracts": [
-          2716
+          2964
         ],
         "name": "Create",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 2714,
+              "id": 2962,
               "nodeType": "Block",
               "src": "104:85:9",
               "statements": [
@@ -74,7 +74,7 @@
                   "externalReferences": [
                     {
                       "value": {
-                        "declaration": 2706,
+                        "declaration": 2954,
                         "isOffset": false,
                         "isSlot": false,
                         "src": "153:5:9",
@@ -83,7 +83,7 @@
                     },
                     {
                       "offset": {
-                        "declaration": 2708,
+                        "declaration": 2956,
                         "isOffset": false,
                         "isSlot": false,
                         "src": "160:6:9",
@@ -92,7 +92,7 @@
                     },
                     {
                       "size": {
-                        "declaration": 2710,
+                        "declaration": 2958,
                         "isOffset": false,
                         "isSlot": false,
                         "src": "168:4:9",
@@ -100,7 +100,7 @@
                       }
                     }
                   ],
-                  "id": 2713,
+                  "id": 2961,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    let x := create(value, offset, size)\n}",
                   "src": "114:75:9"
@@ -108,7 +108,7 @@
               ]
             },
             "documentation": null,
-            "id": 2715,
+            "id": 2963,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -116,15 +116,15 @@
             "name": "foo",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2711,
+              "id": 2959,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2706,
+                  "id": 2954,
                   "name": "value",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2715,
+                  "scope": 2963,
                   "src": "61:10:9",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -133,7 +133,7 @@
                     "typeString": "bytes1"
                   },
                   "typeName": {
-                    "id": 2705,
+                    "id": 2953,
                     "name": "byte",
                     "nodeType": "ElementaryTypeName",
                     "src": "61:4:9",
@@ -147,10 +147,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 2708,
+                  "id": 2956,
                   "name": "offset",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2715,
+                  "scope": 2963,
                   "src": "73:11:9",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -159,7 +159,7 @@
                     "typeString": "bytes1"
                   },
                   "typeName": {
-                    "id": 2707,
+                    "id": 2955,
                     "name": "byte",
                     "nodeType": "ElementaryTypeName",
                     "src": "73:4:9",
@@ -173,10 +173,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 2710,
+                  "id": 2958,
                   "name": "size",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2715,
+                  "scope": 2963,
                   "src": "86:9:9",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -185,7 +185,7 @@
                     "typeString": "bytes1"
                   },
                   "typeName": {
-                    "id": 2709,
+                    "id": 2957,
                     "name": "byte",
                     "nodeType": "ElementaryTypeName",
                     "src": "86:4:9",
@@ -202,19 +202,19 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 2712,
+              "id": 2960,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "104:0:9"
             },
-            "scope": 2716,
+            "scope": 2964,
             "src": "48:141:9",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 2717,
+        "scope": 2965,
         "src": "26:165:9"
       }
     ],
@@ -224,14 +224,14 @@
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/invalid/Create.sol",
     "exportedSymbols": {
       "Create": [
-        2716
+        2964
       ]
     },
-    "id": 2717,
+    "id": 2965,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2704,
+        "id": 2952,
         "literals": [
           "solidity",
           "^",
@@ -247,16 +247,16 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 2716,
+        "id": 2964,
         "linearizedBaseContracts": [
-          2716
+          2964
         ],
         "name": "Create",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 2714,
+              "id": 2962,
               "nodeType": "Block",
               "src": "104:85:9",
               "statements": [
@@ -264,7 +264,7 @@
                   "externalReferences": [
                     {
                       "value": {
-                        "declaration": 2706,
+                        "declaration": 2954,
                         "isOffset": false,
                         "isSlot": false,
                         "src": "153:5:9",
@@ -273,7 +273,7 @@
                     },
                     {
                       "offset": {
-                        "declaration": 2708,
+                        "declaration": 2956,
                         "isOffset": false,
                         "isSlot": false,
                         "src": "160:6:9",
@@ -282,7 +282,7 @@
                     },
                     {
                       "size": {
-                        "declaration": 2710,
+                        "declaration": 2958,
                         "isOffset": false,
                         "isSlot": false,
                         "src": "168:4:9",
@@ -290,7 +290,7 @@
                       }
                     }
                   ],
-                  "id": 2713,
+                  "id": 2961,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    let x := create(value, offset, size)\n}",
                   "src": "114:75:9"
@@ -298,7 +298,7 @@
               ]
             },
             "documentation": null,
-            "id": 2715,
+            "id": 2963,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -306,15 +306,15 @@
             "name": "foo",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2711,
+              "id": 2959,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2706,
+                  "id": 2954,
                   "name": "value",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2715,
+                  "scope": 2963,
                   "src": "61:10:9",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -323,7 +323,7 @@
                     "typeString": "bytes1"
                   },
                   "typeName": {
-                    "id": 2705,
+                    "id": 2953,
                     "name": "byte",
                     "nodeType": "ElementaryTypeName",
                     "src": "61:4:9",
@@ -337,10 +337,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 2708,
+                  "id": 2956,
                   "name": "offset",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2715,
+                  "scope": 2963,
                   "src": "73:11:9",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -349,7 +349,7 @@
                     "typeString": "bytes1"
                   },
                   "typeName": {
-                    "id": 2707,
+                    "id": 2955,
                     "name": "byte",
                     "nodeType": "ElementaryTypeName",
                     "src": "73:4:9",
@@ -363,10 +363,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 2710,
+                  "id": 2958,
                   "name": "size",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2715,
+                  "scope": 2963,
                   "src": "86:9:9",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -375,7 +375,7 @@
                     "typeString": "bytes1"
                   },
                   "typeName": {
-                    "id": 2709,
+                    "id": 2957,
                     "name": "byte",
                     "nodeType": "ElementaryTypeName",
                     "src": "86:4:9",
@@ -392,19 +392,19 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 2712,
+              "id": 2960,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "104:0:9"
             },
-            "scope": 2716,
+            "scope": 2964,
             "src": "48:141:9",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 2717,
+        "scope": 2965,
         "src": "26:165:9"
       }
     ],
@@ -416,5 +416,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-10-11T16:50:35.314Z"
+  "updatedAt": "2018-10-16T14:59:29.634Z"
 }

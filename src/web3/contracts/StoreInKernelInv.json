@@ -11,24 +11,24 @@
       "type": "function"
     }
   ],
-  "bytecode": "0x6080604052348015600f57600080fd5b5060938061001e6000396000f300608060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063c2985578146044575b600080fd5b348015604f57600080fd5b5060566058565b005b60006104d290508051600055505600a165627a7a72305820a3e327828dd96732d346bcbf5638b88f6d8917ee589091b72352fc4e5dcbed470029",
-  "deployedBytecode": "0x608060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063c2985578146044575b600080fd5b348015604f57600080fd5b5060566058565b005b60006104d290508051600055505600a165627a7a72305820a3e327828dd96732d346bcbf5638b88f6d8917ee589091b72352fc4e5dcbed470029",
-  "sourceMap": "26:228:12:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:228:12;;;;;;;",
-  "deployedSourceMap": "26:228:12:-;;;;;;;;;;;;;;;;;;;;;;;;59:193;;8:9:-1;5:2;;;30:1;27;20:12;5:2;59:193:12;;;;;;;84:11;98:4;84:18;;141:3;135:10;158:3;230:6;121:125;:::o",
-  "source": "pragma solidity ^0.4.17;\n\ncontract StoreInKernelInv {\n\n    function foo() {\n        uint256 foo = 1234;\n        assembly {\n            mload(foo)\n            0x0\n            // This lacks the necessary protection code\n            sstore\n        }\n    }\n}",
+  "bytecode": "0x6080604052348015600f57600080fd5b5060938061001e6000396000f300608060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063c2985578146044575b600080fd5b348015604f57600080fd5b5060566058565b005b60006104d290508051600055505600a165627a7a7230582078433acc9ac9ea660ba277d8260a9f19420a49a7ff66dbc7b86eb2a34a771ce90029",
+  "deployedBytecode": "0x608060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063c2985578146044575b600080fd5b348015604f57600080fd5b5060566058565b005b60006104d290508051600055505600a165627a7a7230582078433acc9ac9ea660ba277d8260a9f19420a49a7ff66dbc7b86eb2a34a771ce90029",
+  "sourceMap": "26:241:12:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:241:12;;;;;;;",
+  "deployedSourceMap": "26:241:12:-;;;;;;;;;;;;;;;;;;;;;;;;59:206;;8:9:-1;5:2;;;30:1;27;20:12;5:2;59:206:12;;;;;;;91:14;108:4;91:21;;151:6;145:13;171:3;243:6;131:128;:::o",
+  "source": "pragma solidity ^0.4.17;\n\ncontract StoreInKernelInv {\n\n    function foo() public {\n        uint256 fooVal = 1234;\n        assembly {\n            mload(fooVal)\n            0x0\n            // This lacks the necessary protection code\n            sstore\n        }\n    }\n}",
   "sourcePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/invalid/StoreInKernelInv.sol",
   "ast": {
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/invalid/StoreInKernelInv.sol",
     "exportedSymbols": {
       "StoreInKernelInv": [
-        2763
+        3011
       ]
     },
-    "id": 2764,
+    "id": 3012,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2753,
+        "id": 3001,
         "literals": [
           "solidity",
           "^",
@@ -44,31 +44,31 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 2763,
+        "id": 3011,
         "linearizedBaseContracts": [
-          2763
+          3011
         ],
         "name": "StoreInKernelInv",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 2761,
+              "id": 3009,
               "nodeType": "Block",
-              "src": "74:178:12",
+              "src": "81:184:12",
               "statements": [
                 {
                   "assignments": [
-                    2757
+                    3005
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 2757,
-                      "name": "foo",
+                      "id": 3005,
+                      "name": "fooVal",
                       "nodeType": "VariableDeclaration",
-                      "scope": 2762,
-                      "src": "84:11:12",
+                      "scope": 3010,
+                      "src": "91:14:12",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -76,10 +76,10 @@
                         "typeString": "uint256"
                       },
                       "typeName": {
-                        "id": 2756,
+                        "id": 3004,
                         "name": "uint256",
                         "nodeType": "ElementaryTypeName",
-                        "src": "84:7:12",
+                        "src": "91:7:12",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -89,18 +89,18 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 2759,
+                  "id": 3007,
                   "initialValue": {
                     "argumentTypes": null,
                     "hexValue": "31323334",
-                    "id": 2758,
+                    "id": 3006,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
                     "kind": "number",
                     "lValueRequested": false,
                     "nodeType": "Literal",
-                    "src": "98:4:12",
+                    "src": "108:4:12",
                     "subdenomination": null,
                     "typeDescriptions": {
                       "typeIdentifier": "t_rational_1234_by_1",
@@ -109,29 +109,29 @@
                     "value": "1234"
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "84:18:12"
+                  "src": "91:21:12"
                 },
                 {
                   "externalReferences": [
                     {
-                      "foo": {
-                        "declaration": 2757,
+                      "fooVal": {
+                        "declaration": 3005,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "141:3:12",
+                        "src": "151:6:12",
                         "valueSize": 1
                       }
                     }
                   ],
-                  "id": 2760,
+                  "id": 3008,
                   "nodeType": "InlineAssembly",
-                  "operations": "{\n    mload(foo)\n    0x0\n    sstore\n}",
-                  "src": "112:140:12"
+                  "operations": "{\n    mload(fooVal)\n    0x0\n    sstore\n}",
+                  "src": "122:143:12"
                 }
               ]
             },
             "documentation": null,
-            "id": 2762,
+            "id": 3010,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -139,43 +139,43 @@
             "name": "foo",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2754,
+              "id": 3002,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "71:2:12"
             },
             "payable": false,
             "returnParameters": {
-              "id": 2755,
+              "id": 3003,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "74:0:12"
+              "src": "81:0:12"
             },
-            "scope": 2763,
-            "src": "59:193:12",
+            "scope": 3011,
+            "src": "59:206:12",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 2764,
-        "src": "26:228:12"
+        "scope": 3012,
+        "src": "26:241:12"
       }
     ],
-    "src": "0:254:12"
+    "src": "0:267:12"
   },
   "legacyAST": {
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/invalid/StoreInKernelInv.sol",
     "exportedSymbols": {
       "StoreInKernelInv": [
-        2763
+        3011
       ]
     },
-    "id": 2764,
+    "id": 3012,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2753,
+        "id": 3001,
         "literals": [
           "solidity",
           "^",
@@ -191,31 +191,31 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 2763,
+        "id": 3011,
         "linearizedBaseContracts": [
-          2763
+          3011
         ],
         "name": "StoreInKernelInv",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 2761,
+              "id": 3009,
               "nodeType": "Block",
-              "src": "74:178:12",
+              "src": "81:184:12",
               "statements": [
                 {
                   "assignments": [
-                    2757
+                    3005
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 2757,
-                      "name": "foo",
+                      "id": 3005,
+                      "name": "fooVal",
                       "nodeType": "VariableDeclaration",
-                      "scope": 2762,
-                      "src": "84:11:12",
+                      "scope": 3010,
+                      "src": "91:14:12",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -223,10 +223,10 @@
                         "typeString": "uint256"
                       },
                       "typeName": {
-                        "id": 2756,
+                        "id": 3004,
                         "name": "uint256",
                         "nodeType": "ElementaryTypeName",
-                        "src": "84:7:12",
+                        "src": "91:7:12",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -236,18 +236,18 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 2759,
+                  "id": 3007,
                   "initialValue": {
                     "argumentTypes": null,
                     "hexValue": "31323334",
-                    "id": 2758,
+                    "id": 3006,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
                     "kind": "number",
                     "lValueRequested": false,
                     "nodeType": "Literal",
-                    "src": "98:4:12",
+                    "src": "108:4:12",
                     "subdenomination": null,
                     "typeDescriptions": {
                       "typeIdentifier": "t_rational_1234_by_1",
@@ -256,29 +256,29 @@
                     "value": "1234"
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "84:18:12"
+                  "src": "91:21:12"
                 },
                 {
                   "externalReferences": [
                     {
-                      "foo": {
-                        "declaration": 2757,
+                      "fooVal": {
+                        "declaration": 3005,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "141:3:12",
+                        "src": "151:6:12",
                         "valueSize": 1
                       }
                     }
                   ],
-                  "id": 2760,
+                  "id": 3008,
                   "nodeType": "InlineAssembly",
-                  "operations": "{\n    mload(foo)\n    0x0\n    sstore\n}",
-                  "src": "112:140:12"
+                  "operations": "{\n    mload(fooVal)\n    0x0\n    sstore\n}",
+                  "src": "122:143:12"
                 }
               ]
             },
             "documentation": null,
-            "id": 2762,
+            "id": 3010,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -286,30 +286,30 @@
             "name": "foo",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2754,
+              "id": 3002,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "71:2:12"
             },
             "payable": false,
             "returnParameters": {
-              "id": 2755,
+              "id": 3003,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "74:0:12"
+              "src": "81:0:12"
             },
-            "scope": 2763,
-            "src": "59:193:12",
+            "scope": 3011,
+            "src": "59:206:12",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 2764,
-        "src": "26:228:12"
+        "scope": 3012,
+        "src": "26:241:12"
       }
     ],
-    "src": "0:254:12"
+    "src": "0:267:12"
   },
   "compiler": {
     "name": "solc",
@@ -317,5 +317,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-10-11T16:50:35.314Z"
+  "updatedAt": "2018-10-16T14:59:29.634Z"
 }
