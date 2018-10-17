@@ -49,14 +49,14 @@
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/Setter.sol",
     "exportedSymbols": {
       "Setter": [
-        2914
+        2902
       ]
     },
-    "id": 2915,
+    "id": 2903,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2895,
+        "id": 2883,
         "literals": [
           "solidity",
           "^",
@@ -72,16 +72,16 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 2914,
+        "id": 2902,
         "linearizedBaseContracts": [
-          2914
+          2902
         ],
         "name": "Setter",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 2903,
+              "id": 2891,
               "nodeType": "Block",
               "src": "98:89:5",
               "statements": [
@@ -89,7 +89,7 @@
                   "externalReferences": [
                     {
                       "key": {
-                        "declaration": 2897,
+                        "declaration": 2885,
                         "isOffset": false,
                         "isSlot": false,
                         "src": "131:3:5",
@@ -98,7 +98,7 @@
                     },
                     {
                       "value": {
-                        "declaration": 2899,
+                        "declaration": 2887,
                         "isOffset": false,
                         "isSlot": false,
                         "src": "147:5:5",
@@ -106,7 +106,7 @@
                       }
                     }
                   ],
-                  "id": 2902,
+                  "id": 2890,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    key\n    value\n    sstore\n}",
                   "src": "108:79:5"
@@ -114,7 +114,7 @@
               ]
             },
             "documentation": null,
-            "id": 2904,
+            "id": 2892,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -122,15 +122,15 @@
             "name": "store",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2900,
+              "id": 2888,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2897,
+                  "id": 2885,
                   "name": "key",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2904,
+                  "scope": 2892,
                   "src": "63:11:5",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -139,7 +139,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2896,
+                    "id": 2884,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "63:7:5",
@@ -153,10 +153,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 2899,
+                  "id": 2887,
                   "name": "value",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2904,
+                  "scope": 2892,
                   "src": "76:13:5",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -165,7 +165,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2898,
+                    "id": 2886,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "76:7:5",
@@ -182,12 +182,12 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 2901,
+              "id": 2889,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "98:0:5"
             },
-            "scope": 2914,
+            "scope": 2902,
             "src": "48:139:5",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -195,7 +195,7 @@
           },
           {
             "body": {
-              "id": 2912,
+              "id": 2900,
               "nodeType": "Block",
               "src": "254:91:5",
               "statements": [
@@ -203,7 +203,7 @@
                   "externalReferences": [
                     {
                       "key": {
-                        "declaration": 2906,
+                        "declaration": 2894,
                         "isOffset": false,
                         "isSlot": false,
                         "src": "287:3:5",
@@ -212,7 +212,7 @@
                     },
                     {
                       "value": {
-                        "declaration": 2909,
+                        "declaration": 2897,
                         "isOffset": false,
                         "isSlot": false,
                         "src": "324:5:5",
@@ -220,7 +220,7 @@
                       }
                     }
                   ],
-                  "id": 2911,
+                  "id": 2899,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    key\n    sload\n    =: value\n}",
                   "src": "264:81:5"
@@ -228,7 +228,7 @@
               ]
             },
             "documentation": null,
-            "id": 2913,
+            "id": 2901,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -236,15 +236,15 @@
             "name": "get",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2907,
+              "id": 2895,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2906,
+                  "id": 2894,
                   "name": "key",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2913,
+                  "scope": 2901,
                   "src": "205:11:5",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -253,7 +253,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2905,
+                    "id": 2893,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "205:7:5",
@@ -270,15 +270,15 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 2910,
+              "id": 2898,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2909,
+                  "id": 2897,
                   "name": "value",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2913,
+                  "scope": 2901,
                   "src": "239:13:5",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -287,7 +287,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2908,
+                    "id": 2896,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "239:7:5",
@@ -302,14 +302,14 @@
               ],
               "src": "238:15:5"
             },
-            "scope": 2914,
+            "scope": 2902,
             "src": "192:153:5",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 2915,
+        "scope": 2903,
         "src": "26:321:5"
       }
     ],
@@ -319,14 +319,14 @@
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/Setter.sol",
     "exportedSymbols": {
       "Setter": [
-        2914
+        2902
       ]
     },
-    "id": 2915,
+    "id": 2903,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2895,
+        "id": 2883,
         "literals": [
           "solidity",
           "^",
@@ -342,16 +342,16 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 2914,
+        "id": 2902,
         "linearizedBaseContracts": [
-          2914
+          2902
         ],
         "name": "Setter",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 2903,
+              "id": 2891,
               "nodeType": "Block",
               "src": "98:89:5",
               "statements": [
@@ -359,7 +359,7 @@
                   "externalReferences": [
                     {
                       "key": {
-                        "declaration": 2897,
+                        "declaration": 2885,
                         "isOffset": false,
                         "isSlot": false,
                         "src": "131:3:5",
@@ -368,7 +368,7 @@
                     },
                     {
                       "value": {
-                        "declaration": 2899,
+                        "declaration": 2887,
                         "isOffset": false,
                         "isSlot": false,
                         "src": "147:5:5",
@@ -376,7 +376,7 @@
                       }
                     }
                   ],
-                  "id": 2902,
+                  "id": 2890,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    key\n    value\n    sstore\n}",
                   "src": "108:79:5"
@@ -384,7 +384,7 @@
               ]
             },
             "documentation": null,
-            "id": 2904,
+            "id": 2892,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -392,15 +392,15 @@
             "name": "store",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2900,
+              "id": 2888,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2897,
+                  "id": 2885,
                   "name": "key",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2904,
+                  "scope": 2892,
                   "src": "63:11:5",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -409,7 +409,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2896,
+                    "id": 2884,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "63:7:5",
@@ -423,10 +423,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 2899,
+                  "id": 2887,
                   "name": "value",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2904,
+                  "scope": 2892,
                   "src": "76:13:5",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -435,7 +435,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2898,
+                    "id": 2886,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "76:7:5",
@@ -452,12 +452,12 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 2901,
+              "id": 2889,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "98:0:5"
             },
-            "scope": 2914,
+            "scope": 2902,
             "src": "48:139:5",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -465,7 +465,7 @@
           },
           {
             "body": {
-              "id": 2912,
+              "id": 2900,
               "nodeType": "Block",
               "src": "254:91:5",
               "statements": [
@@ -473,7 +473,7 @@
                   "externalReferences": [
                     {
                       "key": {
-                        "declaration": 2906,
+                        "declaration": 2894,
                         "isOffset": false,
                         "isSlot": false,
                         "src": "287:3:5",
@@ -482,7 +482,7 @@
                     },
                     {
                       "value": {
-                        "declaration": 2909,
+                        "declaration": 2897,
                         "isOffset": false,
                         "isSlot": false,
                         "src": "324:5:5",
@@ -490,7 +490,7 @@
                       }
                     }
                   ],
-                  "id": 2911,
+                  "id": 2899,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    key\n    sload\n    =: value\n}",
                   "src": "264:81:5"
@@ -498,7 +498,7 @@
               ]
             },
             "documentation": null,
-            "id": 2913,
+            "id": 2901,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -506,15 +506,15 @@
             "name": "get",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2907,
+              "id": 2895,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2906,
+                  "id": 2894,
                   "name": "key",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2913,
+                  "scope": 2901,
                   "src": "205:11:5",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -523,7 +523,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2905,
+                    "id": 2893,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "205:7:5",
@@ -540,15 +540,15 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 2910,
+              "id": 2898,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2909,
+                  "id": 2897,
                   "name": "value",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2913,
+                  "scope": 2901,
                   "src": "239:13:5",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -557,7 +557,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2908,
+                    "id": 2896,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "239:7:5",
@@ -572,14 +572,14 @@
               ],
               "src": "238:15:5"
             },
-            "scope": 2914,
+            "scope": 2902,
             "src": "192:153:5",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 2915,
+        "scope": 2903,
         "src": "26:321:5"
       }
     ],
@@ -591,5 +591,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-10-16T14:59:29.634Z"
+  "updatedAt": "2018-10-17T15:36:37.267Z"
 }

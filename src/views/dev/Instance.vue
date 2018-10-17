@@ -25,7 +25,7 @@
                 <b-form-input id="call" v-for="input in call.fn.inputs" :key="input.name" :placeholder="input.type" v-if="call.fn.inputs.length > 0"></b-form-input>
                 <b-form-input v-if="call.fn.type === 'fallback'" placeholder="Fallback" disabled></b-form-input>
                 <b-input-group-append>
-                  <b-btn variant="primary" @click="makeCall(call.proc_i, call.id)" @mouseover="highlight = call.proc_id" @mouseout="highlight = ''">Call</b-btn>
+                  <b-btn variant="primary" @click="makeCall(call.proc_id, call.fn.name)" @mouseover="highlight = call.proc_id" @mouseout="highlight = ''">Call</b-btn>
                 </b-input-group-append>
               </b-input-group>
           </b-card>
@@ -45,7 +45,7 @@
               </b-form>
             </b-modal>
             <b-list-group flush>
-              <b-list-group-item v-for="(proc, i) in procedures" class="flex-column align-items-start" v-bind:class="{highlight: highlight === proc.id}">
+              <b-list-group-item v-for="(proc, i) in procedures" :key="proc.id" class="flex-column align-items-start" v-bind:class="{highlight: highlight === proc.id}">
                 <div class="d-flex w-50 flex-column">
                   <small>{{ proc.address.slice(0,10)+'...' }}</small>
                   <h5 class="mb-1">{{ proc.id }}</h5>
@@ -87,7 +87,7 @@
                   <b-list-group flush>
                     <b-list-group-item v-for="(data, i) in store.data" class="d-flex justify-content-between">
                       <small>
-                        {{ store.address + i - 1}}
+                        {{ store.address + i}}
                       </small>
                       <span>
                         {{ data }}
@@ -119,7 +119,7 @@
                 <div class="d-flex w-50 flex-column">
                   <small v-for="owner in log.owners">{{ owner }}</small>
                 </div>
-                <b-card no-body class="w-100" v-if="log.topics.length > 1">
+                <b-card no-body class="w-100" v-if="log.topics.length > 0">
                   <b-list-group flush>
                     <b-list-group-item v-for="(topic, i) in log.topics.slice(0)" :key="i" class="d-flex justify-content-between">
                       <small>
@@ -229,7 +229,8 @@ export default class Instance extends Vue {
   async createLogCap() {
     let key = (web3.utils.toHex(this.newLogCap.for) as any ).padEnd(50, '0');
     let proc = this.network.instance.proc_table!.table[key];
-    let len = this.newLogCap.topic.reduce((p, t, i) => p = t === '' ? p : i, 0) + 1
+    let len = this.newLogCap.topic.reduce((p, t, i) => p = t === '' ? p : i, -1) + 1
+    let cap = new LogCap(this.newLogCap.topic.slice(0, len)) 
     let caps = [new LogCap(this.newLogCap.topic.slice(0, len))].concat(proc.caps as any)
 
     await this.removeProcedure(this.newLogCap.for)
@@ -305,12 +306,14 @@ export default class Instance extends Vue {
     this.newProc = { name: '', address: '', bytecode: '', abi: '', caps: []};
   }
 
-  async makeCall(proc_id: number, abi_id: number) {
-    let proc = this.procedures[proc_id]
-    let abi = proc.abi[abi_id]
+  async makeCall(proc_id: string, fnName: string) {
+    let proc = this.procedures.find(({id}) => id === proc_id)
+    let abi = proc!.abi.find(fn => fn.name === fnName)!
+    
+    console.log(proc!.id, fnName)
     
     await this.sendCall({
-      proc_name: proc.id,
+      proc_name: proc!.id,
       abi,
       instance: this.instance,
     })

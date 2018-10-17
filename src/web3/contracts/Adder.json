@@ -35,14 +35,14 @@
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/valid/Adder.sol",
     "exportedSymbols": {
       "Adder": [
-        3041
+        3029
       ]
     },
-    "id": 3042,
+    "id": 3030,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3026,
+        "id": 3014,
         "literals": [
           "solidity",
           "^",
@@ -58,16 +58,16 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 3041,
+        "id": 3029,
         "linearizedBaseContracts": [
-          3041
+          3029
         ],
         "name": "Adder",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 3039,
+              "id": 3027,
               "nodeType": "Block",
               "src": "112:29:14",
               "statements": [
@@ -78,18 +78,18 @@
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     },
-                    "id": 3037,
+                    "id": 3025,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftExpression": {
                       "argumentTypes": null,
-                      "id": 3035,
+                      "id": 3023,
                       "name": "a",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3028,
+                      "referencedDeclaration": 3016,
                       "src": "129:1:14",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -100,11 +100,11 @@
                     "operator": "+",
                     "rightExpression": {
                       "argumentTypes": null,
-                      "id": 3036,
+                      "id": 3024,
                       "name": "b",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3030,
+                      "referencedDeclaration": 3018,
                       "src": "133:1:14",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -117,15 +117,15 @@
                       "typeString": "uint256"
                     }
                   },
-                  "functionReturnParameters": 3034,
-                  "id": 3038,
+                  "functionReturnParameters": 3022,
+                  "id": 3026,
                   "nodeType": "Return",
                   "src": "122:12:14"
                 }
               ]
             },
             "documentation": null,
-            "id": 3040,
+            "id": 3028,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -133,15 +133,15 @@
             "name": "add",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3031,
+              "id": 3019,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3028,
+                  "id": 3016,
                   "name": "a",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3040,
+                  "scope": 3028,
                   "src": "60:9:14",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -150,7 +150,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3027,
+                    "id": 3015,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "60:7:14",
@@ -164,10 +164,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 3030,
+                  "id": 3018,
                   "name": "b",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3040,
+                  "scope": 3028,
                   "src": "71:9:14",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -176,7 +176,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3029,
+                    "id": 3017,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "71:7:14",
@@ -193,15 +193,15 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 3034,
+              "id": 3022,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3033,
+                  "id": 3021,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3040,
+                  "scope": 3028,
                   "src": "103:7:14",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -210,7 +210,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3032,
+                    "id": 3020,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "103:7:14",
@@ -225,14 +225,14 @@
               ],
               "src": "102:9:14"
             },
-            "scope": 3041,
+            "scope": 3029,
             "src": "47:94:14",
             "stateMutability": "pure",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 3042,
+        "scope": 3030,
         "src": "26:117:14"
       }
     ],
@@ -242,14 +242,14 @@
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/valid/Adder.sol",
     "exportedSymbols": {
       "Adder": [
-        3041
+        3029
       ]
     },
-    "id": 3042,
+    "id": 3030,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3026,
+        "id": 3014,
         "literals": [
           "solidity",
           "^",
@@ -265,16 +265,16 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 3041,
+        "id": 3029,
         "linearizedBaseContracts": [
-          3041
+          3029
         ],
         "name": "Adder",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 3039,
+              "id": 3027,
               "nodeType": "Block",
               "src": "112:29:14",
               "statements": [
@@ -285,18 +285,18 @@
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     },
-                    "id": 3037,
+                    "id": 3025,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftExpression": {
                       "argumentTypes": null,
-                      "id": 3035,
+                      "id": 3023,
                       "name": "a",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3028,
+                      "referencedDeclaration": 3016,
                       "src": "129:1:14",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -307,11 +307,11 @@
                     "operator": "+",
                     "rightExpression": {
                       "argumentTypes": null,
-                      "id": 3036,
+                      "id": 3024,
                       "name": "b",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3030,
+                      "referencedDeclaration": 3018,
                       "src": "133:1:14",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -324,15 +324,15 @@
                       "typeString": "uint256"
                     }
                   },
-                  "functionReturnParameters": 3034,
-                  "id": 3038,
+                  "functionReturnParameters": 3022,
+                  "id": 3026,
                   "nodeType": "Return",
                   "src": "122:12:14"
                 }
               ]
             },
             "documentation": null,
-            "id": 3040,
+            "id": 3028,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -340,15 +340,15 @@
             "name": "add",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3031,
+              "id": 3019,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3028,
+                  "id": 3016,
                   "name": "a",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3040,
+                  "scope": 3028,
                   "src": "60:9:14",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -357,7 +357,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3027,
+                    "id": 3015,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "60:7:14",
@@ -371,10 +371,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 3030,
+                  "id": 3018,
                   "name": "b",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3040,
+                  "scope": 3028,
                   "src": "71:9:14",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -383,7 +383,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3029,
+                    "id": 3017,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "71:7:14",
@@ -400,15 +400,15 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 3034,
+              "id": 3022,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3033,
+                  "id": 3021,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3040,
+                  "scope": 3028,
                   "src": "103:7:14",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -417,7 +417,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3032,
+                    "id": 3020,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "103:7:14",
@@ -432,14 +432,14 @@
               ],
               "src": "102:9:14"
             },
-            "scope": 3041,
+            "scope": 3029,
             "src": "47:94:14",
             "stateMutability": "pure",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 3042,
+        "scope": 3030,
         "src": "26:117:14"
       }
     ],
@@ -451,5 +451,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-10-16T14:59:29.634Z"
+  "updatedAt": "2018-10-17T15:36:37.264Z"
 }

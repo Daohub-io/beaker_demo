@@ -17,14 +17,14 @@
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/TestWrite.sol",
     "exportedSymbols": {
       "TestWrite": [
-        2922
+        2910
       ]
     },
-    "id": 2923,
+    "id": 2911,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2916,
+        "id": 2904,
         "literals": [
           "solidity",
           "^",
@@ -40,22 +40,22 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 2922,
+        "id": 2910,
         "linearizedBaseContracts": [
-          2922
+          2910
         ],
         "name": "TestWrite",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 2920,
+              "id": 2908,
               "nodeType": "Block",
               "src": "69:67:6",
               "statements": [
                 {
                   "externalReferences": [],
-                  "id": 2919,
+                  "id": 2907,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    sstore(0x8000, 356)\n}",
                   "src": "79:57:6"
@@ -63,7 +63,7 @@
               ]
             },
             "documentation": null,
-            "id": 2921,
+            "id": 2909,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -71,26 +71,26 @@
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2917,
+              "id": 2905,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "59:2:6"
             },
             "payable": false,
             "returnParameters": {
-              "id": 2918,
+              "id": 2906,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "69:0:6"
             },
-            "scope": 2922,
+            "scope": 2910,
             "src": "51:85:6",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 2923,
+        "scope": 2911,
         "src": "26:112:6"
       }
     ],
@@ -100,14 +100,14 @@
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/TestWrite.sol",
     "exportedSymbols": {
       "TestWrite": [
-        2922
+        2910
       ]
     },
-    "id": 2923,
+    "id": 2911,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2916,
+        "id": 2904,
         "literals": [
           "solidity",
           "^",
@@ -123,22 +123,22 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 2922,
+        "id": 2910,
         "linearizedBaseContracts": [
-          2922
+          2910
         ],
         "name": "TestWrite",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 2920,
+              "id": 2908,
               "nodeType": "Block",
               "src": "69:67:6",
               "statements": [
                 {
                   "externalReferences": [],
-                  "id": 2919,
+                  "id": 2907,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    sstore(0x8000, 356)\n}",
                   "src": "79:57:6"
@@ -146,7 +146,7 @@
               ]
             },
             "documentation": null,
-            "id": 2921,
+            "id": 2909,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -154,26 +154,26 @@
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2917,
+              "id": 2905,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "59:2:6"
             },
             "payable": false,
             "returnParameters": {
-              "id": 2918,
+              "id": 2906,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "69:0:6"
             },
-            "scope": 2922,
+            "scope": 2910,
             "src": "51:85:6",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 2923,
+        "scope": 2911,
         "src": "26:112:6"
       }
     ],
@@ -185,5 +185,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-10-16T14:59:29.634Z"
+  "updatedAt": "2018-10-17T15:36:37.260Z"
 }

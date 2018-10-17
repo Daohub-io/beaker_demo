@@ -106,7 +106,7 @@ export default class NewInstance extends Vue {
     this.registerProcedure({
       name,
       address: procedure.contract.options.address,
-      caps: [cap1, cap2],
+      caps: [cap1, cap2]
     })
 
     this.$router.push({

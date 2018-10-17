@@ -128,9 +128,9 @@ export const actions: ActionTree<Network, Root> = {
         // the padding of the key name (ASCII padded out to 24 bytes with nulls)
         const paddedProcKey = (call.proc_name as any).padEnd(24, '\0');
         const inputData = web3.utils.fromAscii(paddedProcKey) + functionSelectorHash;
-
+        
         let { address, from } = call.instance.options;
-
+        
         // Use this err value for error checking
         const err = await web3.eth.call({ to: address, data: inputData, from });
         const tx = await web3.eth.sendTransaction({ gas: 300000, to: address, data: inputData, from });

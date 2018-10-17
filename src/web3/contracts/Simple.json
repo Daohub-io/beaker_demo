@@ -44,14 +44,14 @@
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/valid/Simple.sol",
     "exportedSymbols": {
       "Simple": [
-        3187
+        3175
       ]
     },
-    "id": 3188,
+    "id": 3176,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3172,
+        "id": 3160,
         "literals": [
           "solidity",
           "^",
@@ -67,22 +67,22 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 3187,
+        "id": 3175,
         "linearizedBaseContracts": [
-          3187
+          3175
         ],
         "name": "Simple",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 3175,
+              "id": 3163,
               "nodeType": "Block",
               "src": "73:8:23",
               "statements": []
             },
             "documentation": null,
-            "id": 3176,
+            "id": 3164,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -90,19 +90,19 @@
             "name": "A",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3173,
+              "id": 3161,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "58:2:23"
             },
             "payable": false,
             "returnParameters": {
-              "id": 3174,
+              "id": 3162,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "73:0:23"
             },
-            "scope": 3187,
+            "scope": 3175,
             "src": "48:33:23",
             "stateMutability": "pure",
             "superFunction": null,
@@ -110,13 +110,13 @@
           },
           {
             "body": {
-              "id": 3179,
+              "id": 3167,
               "nodeType": "Block",
               "src": "112:8:23",
               "statements": []
             },
             "documentation": null,
-            "id": 3180,
+            "id": 3168,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -124,19 +124,19 @@
             "name": "B",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3177,
+              "id": 3165,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "97:2:23"
             },
             "payable": false,
             "returnParameters": {
-              "id": 3178,
+              "id": 3166,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "112:0:23"
             },
-            "scope": 3187,
+            "scope": 3175,
             "src": "87:33:23",
             "stateMutability": "pure",
             "superFunction": null,
@@ -144,13 +144,13 @@
           },
           {
             "body": {
-              "id": 3185,
+              "id": 3173,
               "nodeType": "Block",
               "src": "166:8:23",
               "statements": []
             },
             "documentation": null,
-            "id": 3186,
+            "id": 3174,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -158,15 +158,15 @@
             "name": "C",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3183,
+              "id": 3171,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3182,
+                  "id": 3170,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3186,
+                  "scope": 3174,
                   "src": "137:7:23",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -175,7 +175,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3181,
+                    "id": 3169,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "137:7:23",
@@ -192,19 +192,19 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 3184,
+              "id": 3172,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "166:0:23"
             },
-            "scope": 3187,
+            "scope": 3175,
             "src": "126:48:23",
             "stateMutability": "pure",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 3188,
+        "scope": 3176,
         "src": "26:151:23"
       }
     ],
@@ -214,14 +214,14 @@
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/valid/Simple.sol",
     "exportedSymbols": {
       "Simple": [
-        3187
+        3175
       ]
     },
-    "id": 3188,
+    "id": 3176,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3172,
+        "id": 3160,
         "literals": [
           "solidity",
           "^",
@@ -237,22 +237,22 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 3187,
+        "id": 3175,
         "linearizedBaseContracts": [
-          3187
+          3175
         ],
         "name": "Simple",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 3175,
+              "id": 3163,
               "nodeType": "Block",
               "src": "73:8:23",
               "statements": []
             },
             "documentation": null,
-            "id": 3176,
+            "id": 3164,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -260,19 +260,19 @@
             "name": "A",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3173,
+              "id": 3161,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "58:2:23"
             },
             "payable": false,
             "returnParameters": {
-              "id": 3174,
+              "id": 3162,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "73:0:23"
             },
-            "scope": 3187,
+            "scope": 3175,
             "src": "48:33:23",
             "stateMutability": "pure",
             "superFunction": null,
@@ -280,13 +280,13 @@
           },
           {
             "body": {
-              "id": 3179,
+              "id": 3167,
               "nodeType": "Block",
               "src": "112:8:23",
               "statements": []
             },
             "documentation": null,
-            "id": 3180,
+            "id": 3168,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -294,19 +294,19 @@
             "name": "B",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3177,
+              "id": 3165,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "97:2:23"
             },
             "payable": false,
             "returnParameters": {
-              "id": 3178,
+              "id": 3166,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "112:0:23"
             },
-            "scope": 3187,
+            "scope": 3175,
             "src": "87:33:23",
             "stateMutability": "pure",
             "superFunction": null,
@@ -314,13 +314,13 @@
           },
           {
             "body": {
-              "id": 3185,
+              "id": 3173,
               "nodeType": "Block",
               "src": "166:8:23",
               "statements": []
             },
             "documentation": null,
-            "id": 3186,
+            "id": 3174,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -328,15 +328,15 @@
             "name": "C",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3183,
+              "id": 3171,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3182,
+                  "id": 3170,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3186,
+                  "scope": 3174,
                   "src": "137:7:23",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -345,7 +345,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3181,
+                    "id": 3169,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "137:7:23",
@@ -362,19 +362,19 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 3184,
+              "id": 3172,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "166:0:23"
             },
-            "scope": 3187,
+            "scope": 3175,
             "src": "126:48:23",
             "stateMutability": "pure",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 3188,
+        "scope": 3176,
         "src": "26:151:23"
       }
     ],
@@ -386,5 +386,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-10-16T14:59:29.634Z"
+  "updatedAt": "2018-10-17T15:36:37.268Z"
 }

@@ -21,14 +21,14 @@
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/valid/StorerProtectedInline.sol",
     "exportedSymbols": {
       "StorerProtectedInline": [
-        3240
+        3228
       ]
     },
-    "id": 3241,
+    "id": 3229,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3222,
+        "id": 3210,
         "literals": [
           "solidity",
           "^",
@@ -44,30 +44,30 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 3240,
+        "id": 3228,
         "linearizedBaseContracts": [
-          3240
+          3228
         ],
         "name": "StorerProtectedInline",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 3238,
+              "id": 3226,
               "nodeType": "Block",
               "src": "173:1361:26",
               "statements": [
                 {
                   "assignments": [
-                    3226
+                    3214
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 3226,
+                      "id": 3214,
                       "name": "loo",
                       "nodeType": "VariableDeclaration",
-                      "scope": 3239,
+                      "scope": 3227,
                       "src": "183:11:26",
                       "stateVariable": false,
                       "storageLocation": "default",
@@ -76,7 +76,7 @@
                         "typeString": "uint256"
                       },
                       "typeName": {
-                        "id": 3225,
+                        "id": 3213,
                         "name": "uint256",
                         "nodeType": "ElementaryTypeName",
                         "src": "183:7:26",
@@ -89,11 +89,11 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 3228,
+                  "id": 3216,
                   "initialValue": {
                     "argumentTypes": null,
                     "hexValue": "31323334",
-                    "id": 3227,
+                    "id": 3215,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
@@ -113,15 +113,15 @@
                 },
                 {
                   "assignments": [
-                    3230
+                    3218
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 3230,
+                      "id": 3218,
                       "name": "lowerLimit",
                       "nodeType": "VariableDeclaration",
-                      "scope": 3239,
+                      "scope": 3227,
                       "src": "211:18:26",
                       "stateVariable": false,
                       "storageLocation": "default",
@@ -130,7 +130,7 @@
                         "typeString": "uint256"
                       },
                       "typeName": {
-                        "id": 3229,
+                        "id": 3217,
                         "name": "uint256",
                         "nodeType": "ElementaryTypeName",
                         "src": "211:7:26",
@@ -143,11 +143,11 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 3232,
+                  "id": 3220,
                   "initialValue": {
                     "argumentTypes": null,
                     "hexValue": "307830313030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030",
-                    "id": 3231,
+                    "id": 3219,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
@@ -167,15 +167,15 @@
                 },
                 {
                   "assignments": [
-                    3234
+                    3222
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 3234,
+                      "id": 3222,
                       "name": "upperLimit",
                       "nodeType": "VariableDeclaration",
-                      "scope": 3239,
+                      "scope": 3227,
                       "src": "308:18:26",
                       "stateVariable": false,
                       "storageLocation": "default",
@@ -184,7 +184,7 @@
                         "typeString": "uint256"
                       },
                       "typeName": {
-                        "id": 3233,
+                        "id": 3221,
                         "name": "uint256",
                         "nodeType": "ElementaryTypeName",
                         "src": "308:7:26",
@@ -197,11 +197,11 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 3236,
+                  "id": 3224,
                   "initialValue": {
                     "argumentTypes": null,
                     "hexValue": "307830323030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030",
-                    "id": 3235,
+                    "id": 3223,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
@@ -223,7 +223,7 @@
                   "externalReferences": [
                     {
                       "loo": {
-                        "declaration": 3226,
+                        "declaration": 3214,
                         "isOffset": false,
                         "isSlot": false,
                         "src": "438:3:26",
@@ -231,7 +231,7 @@
                       }
                     }
                   ],
-                  "id": 3237,
+                  "id": 3225,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    mload(loo)\n    0x0100000100000000000000000000000000000000000000000000000000000000\n    0x0100000000000000000000000000000000000000000000000000000000000000\n    dup2\n    lt\n    0x0200000000000000000000000000000000000000000000000000000000000000\n    dup3\n    gt\n    or\n    pc\n    jumpi\n    sstore\n}",
                   "src": "405:1129:26"
@@ -239,7 +239,7 @@
               ]
             },
             "documentation": null,
-            "id": 3239,
+            "id": 3227,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -247,26 +247,26 @@
             "name": "store",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3223,
+              "id": 3211,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "163:2:26"
             },
             "payable": false,
             "returnParameters": {
-              "id": 3224,
+              "id": 3212,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "173:0:26"
             },
-            "scope": 3240,
+            "scope": 3228,
             "src": "149:1385:26",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 3241,
+        "scope": 3229,
         "src": "112:1424:26"
       }
     ],
@@ -276,14 +276,14 @@
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/valid/StorerProtectedInline.sol",
     "exportedSymbols": {
       "StorerProtectedInline": [
-        3240
+        3228
       ]
     },
-    "id": 3241,
+    "id": 3229,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3222,
+        "id": 3210,
         "literals": [
           "solidity",
           "^",
@@ -299,30 +299,30 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 3240,
+        "id": 3228,
         "linearizedBaseContracts": [
-          3240
+          3228
         ],
         "name": "StorerProtectedInline",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 3238,
+              "id": 3226,
               "nodeType": "Block",
               "src": "173:1361:26",
               "statements": [
                 {
                   "assignments": [
-                    3226
+                    3214
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 3226,
+                      "id": 3214,
                       "name": "loo",
                       "nodeType": "VariableDeclaration",
-                      "scope": 3239,
+                      "scope": 3227,
                       "src": "183:11:26",
                       "stateVariable": false,
                       "storageLocation": "default",
@@ -331,7 +331,7 @@
                         "typeString": "uint256"
                       },
                       "typeName": {
-                        "id": 3225,
+                        "id": 3213,
                         "name": "uint256",
                         "nodeType": "ElementaryTypeName",
                         "src": "183:7:26",
@@ -344,11 +344,11 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 3228,
+                  "id": 3216,
                   "initialValue": {
                     "argumentTypes": null,
                     "hexValue": "31323334",
-                    "id": 3227,
+                    "id": 3215,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
@@ -368,15 +368,15 @@
                 },
                 {
                   "assignments": [
-                    3230
+                    3218
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 3230,
+                      "id": 3218,
                       "name": "lowerLimit",
                       "nodeType": "VariableDeclaration",
-                      "scope": 3239,
+                      "scope": 3227,
                       "src": "211:18:26",
                       "stateVariable": false,
                       "storageLocation": "default",
@@ -385,7 +385,7 @@
                         "typeString": "uint256"
                       },
                       "typeName": {
-                        "id": 3229,
+                        "id": 3217,
                         "name": "uint256",
                         "nodeType": "ElementaryTypeName",
                         "src": "211:7:26",
@@ -398,11 +398,11 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 3232,
+                  "id": 3220,
                   "initialValue": {
                     "argumentTypes": null,
                     "hexValue": "307830313030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030",
-                    "id": 3231,
+                    "id": 3219,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
@@ -422,15 +422,15 @@
                 },
                 {
                   "assignments": [
-                    3234
+                    3222
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 3234,
+                      "id": 3222,
                       "name": "upperLimit",
                       "nodeType": "VariableDeclaration",
-                      "scope": 3239,
+                      "scope": 3227,
                       "src": "308:18:26",
                       "stateVariable": false,
                       "storageLocation": "default",
@@ -439,7 +439,7 @@
                         "typeString": "uint256"
                       },
                       "typeName": {
-                        "id": 3233,
+                        "id": 3221,
                         "name": "uint256",
                         "nodeType": "ElementaryTypeName",
                         "src": "308:7:26",
@@ -452,11 +452,11 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 3236,
+                  "id": 3224,
                   "initialValue": {
                     "argumentTypes": null,
                     "hexValue": "307830323030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030",
-                    "id": 3235,
+                    "id": 3223,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
@@ -478,7 +478,7 @@
                   "externalReferences": [
                     {
                       "loo": {
-                        "declaration": 3226,
+                        "declaration": 3214,
                         "isOffset": false,
                         "isSlot": false,
                         "src": "438:3:26",
@@ -486,7 +486,7 @@
                       }
                     }
                   ],
-                  "id": 3237,
+                  "id": 3225,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    mload(loo)\n    0x0100000100000000000000000000000000000000000000000000000000000000\n    0x0100000000000000000000000000000000000000000000000000000000000000\n    dup2\n    lt\n    0x0200000000000000000000000000000000000000000000000000000000000000\n    dup3\n    gt\n    or\n    pc\n    jumpi\n    sstore\n}",
                   "src": "405:1129:26"
@@ -494,7 +494,7 @@
               ]
             },
             "documentation": null,
-            "id": 3239,
+            "id": 3227,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -502,26 +502,26 @@
             "name": "store",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3223,
+              "id": 3211,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "163:2:26"
             },
             "payable": false,
             "returnParameters": {
-              "id": 3224,
+              "id": 3212,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "173:0:26"
             },
-            "scope": 3240,
+            "scope": 3228,
             "src": "149:1385:26",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 3241,
+        "scope": 3229,
         "src": "112:1424:26"
       }
     ],
@@ -533,5 +533,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-10-16T14:59:29.636Z"
+  "updatedAt": "2018-10-17T15:36:37.272Z"
 }

@@ -109,11 +109,11 @@ export class LogCap extends Capability {
     }
 
     static from_raw(raw_values: string[]) {
-        return new LogCap([],raw_values);
+        return new LogCap([], raw_values);
     }
 
     keyValues() {
-        return [this.topics.length, ...this.raw_values]
+        return this.raw_values
     }
 }
 

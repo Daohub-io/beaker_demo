@@ -21,14 +21,14 @@
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/invalid/StoreInKernelInv.sol",
     "exportedSymbols": {
       "StoreInKernelInv": [
-        3011
+        2999
       ]
     },
-    "id": 3012,
+    "id": 3000,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3001,
+        "id": 2989,
         "literals": [
           "solidity",
           "^",
@@ -44,30 +44,30 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 3011,
+        "id": 2999,
         "linearizedBaseContracts": [
-          3011
+          2999
         ],
         "name": "StoreInKernelInv",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 3009,
+              "id": 2997,
               "nodeType": "Block",
               "src": "81:184:12",
               "statements": [
                 {
                   "assignments": [
-                    3005
+                    2993
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 3005,
+                      "id": 2993,
                       "name": "fooVal",
                       "nodeType": "VariableDeclaration",
-                      "scope": 3010,
+                      "scope": 2998,
                       "src": "91:14:12",
                       "stateVariable": false,
                       "storageLocation": "default",
@@ -76,7 +76,7 @@
                         "typeString": "uint256"
                       },
                       "typeName": {
-                        "id": 3004,
+                        "id": 2992,
                         "name": "uint256",
                         "nodeType": "ElementaryTypeName",
                         "src": "91:7:12",
@@ -89,11 +89,11 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 3007,
+                  "id": 2995,
                   "initialValue": {
                     "argumentTypes": null,
                     "hexValue": "31323334",
-                    "id": 3006,
+                    "id": 2994,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
@@ -115,7 +115,7 @@
                   "externalReferences": [
                     {
                       "fooVal": {
-                        "declaration": 3005,
+                        "declaration": 2993,
                         "isOffset": false,
                         "isSlot": false,
                         "src": "151:6:12",
@@ -123,7 +123,7 @@
                       }
                     }
                   ],
-                  "id": 3008,
+                  "id": 2996,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    mload(fooVal)\n    0x0\n    sstore\n}",
                   "src": "122:143:12"
@@ -131,7 +131,7 @@
               ]
             },
             "documentation": null,
-            "id": 3010,
+            "id": 2998,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -139,26 +139,26 @@
             "name": "foo",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3002,
+              "id": 2990,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "71:2:12"
             },
             "payable": false,
             "returnParameters": {
-              "id": 3003,
+              "id": 2991,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "81:0:12"
             },
-            "scope": 3011,
+            "scope": 2999,
             "src": "59:206:12",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 3012,
+        "scope": 3000,
         "src": "26:241:12"
       }
     ],
@@ -168,14 +168,14 @@
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/invalid/StoreInKernelInv.sol",
     "exportedSymbols": {
       "StoreInKernelInv": [
-        3011
+        2999
       ]
     },
-    "id": 3012,
+    "id": 3000,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3001,
+        "id": 2989,
         "literals": [
           "solidity",
           "^",
@@ -191,30 +191,30 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 3011,
+        "id": 2999,
         "linearizedBaseContracts": [
-          3011
+          2999
         ],
         "name": "StoreInKernelInv",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 3009,
+              "id": 2997,
               "nodeType": "Block",
               "src": "81:184:12",
               "statements": [
                 {
                   "assignments": [
-                    3005
+                    2993
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 3005,
+                      "id": 2993,
                       "name": "fooVal",
                       "nodeType": "VariableDeclaration",
-                      "scope": 3010,
+                      "scope": 2998,
                       "src": "91:14:12",
                       "stateVariable": false,
                       "storageLocation": "default",
@@ -223,7 +223,7 @@
                         "typeString": "uint256"
                       },
                       "typeName": {
-                        "id": 3004,
+                        "id": 2992,
                         "name": "uint256",
                         "nodeType": "ElementaryTypeName",
                         "src": "91:7:12",
@@ -236,11 +236,11 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 3007,
+                  "id": 2995,
                   "initialValue": {
                     "argumentTypes": null,
                     "hexValue": "31323334",
-                    "id": 3006,
+                    "id": 2994,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
@@ -262,7 +262,7 @@
                   "externalReferences": [
                     {
                       "fooVal": {
-                        "declaration": 3005,
+                        "declaration": 2993,
                         "isOffset": false,
                         "isSlot": false,
                         "src": "151:6:12",
@@ -270,7 +270,7 @@
                       }
                     }
                   ],
-                  "id": 3008,
+                  "id": 2996,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    mload(fooVal)\n    0x0\n    sstore\n}",
                   "src": "122:143:12"
@@ -278,7 +278,7 @@
               ]
             },
             "documentation": null,
-            "id": 3010,
+            "id": 2998,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -286,26 +286,26 @@
             "name": "foo",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3002,
+              "id": 2990,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "71:2:12"
             },
             "payable": false,
             "returnParameters": {
-              "id": 3003,
+              "id": 2991,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "81:0:12"
             },
-            "scope": 3011,
+            "scope": 2999,
             "src": "59:206:12",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 3012,
+        "scope": 3000,
         "src": "26:241:12"
       }
     ],
@@ -317,5 +317,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-10-16T14:59:29.634Z"
+  "updatedAt": "2018-10-17T15:36:37.264Z"
 }

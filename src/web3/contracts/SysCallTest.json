@@ -26,14 +26,14 @@
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/valid/SysCallTest.sol",
     "exportedSymbols": {
       "SysCallTest": [
-        3253
+        3241
       ]
     },
-    "id": 3254,
+    "id": 3242,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3242,
+        "id": 3230,
         "literals": [
           "solidity",
           "^",
@@ -49,22 +49,22 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 3253,
+        "id": 3241,
         "linearizedBaseContracts": [
-          3253
+          3241
         ],
         "name": "SysCallTest",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 3246,
+              "id": 3234,
               "nodeType": "Block",
               "src": "73:1187:27",
               "statements": [
                 {
                   "externalReferences": [],
-                  "id": 3245,
+                  "id": 3233,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    let orig_value := sload(0x8000)\n    mstore(0x0, 0x07)\n    mstore(0x20, 0x01)\n    mstore(0x40, 0x8000)\n    mstore(0x60, add(orig_value, 1))\n    mstore(0x80, 0)\n    if iszero(delegatecall(gas(), caller(), 31, 97, 0x80, 0x20))\n    {\n        mstore(0xd, add(2200, mload(0x80)))\n        revert(0xd, 0x20)\n    }\n    mstore(0xd, sload(0x8000))\n    if iszero(eq(sload(0x8000), add(orig_value, 1)))\n    {\n        mstore(0xd, add(2200, mload(0x80)))\n        revert(0xd, 0x20)\n    }\n    return(0x80, 0x20)\n}",
                   "src": "83:1177:27"
@@ -72,7 +72,7 @@
               ]
             },
             "documentation": null,
-            "id": 3247,
+            "id": 3235,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -80,19 +80,19 @@
             "name": "S",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3243,
+              "id": 3231,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "63:2:27"
             },
             "payable": false,
             "returnParameters": {
-              "id": 3244,
+              "id": 3232,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "73:0:27"
             },
-            "scope": 3253,
+            "scope": 3241,
             "src": "53:1207:27",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -100,13 +100,13 @@
           },
           {
             "body": {
-              "id": 3251,
+              "id": 3239,
               "nodeType": "Block",
               "src": "1284:912:27",
               "statements": [
                 {
                   "externalReferences": [],
-                  "id": 3250,
+                  "id": 3238,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    let orig_value := sload(0x8000)\n    mstore(0x0, 0x07)\n    mstore(0x20, 0x01)\n    mstore(0x40, 0x8000)\n    mstore(0x60, 356)\n    if iszero(delegatecall(gas(), caller(), 31, 97, 0x80, 0x20))\n    {\n        mstore(0xd, add(2500, mload(0x80)))\n        revert(0xd, 0x20)\n    }\n    return(0x80, 0x20)\n}",
                   "src": "1294:902:27"
@@ -114,7 +114,7 @@
               ]
             },
             "documentation": null,
-            "id": 3252,
+            "id": 3240,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -122,26 +122,26 @@
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3248,
+              "id": 3236,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1274:2:27"
             },
             "payable": false,
             "returnParameters": {
-              "id": 3249,
+              "id": 3237,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1284:0:27"
             },
-            "scope": 3253,
+            "scope": 3241,
             "src": "1266:930:27",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 3254,
+        "scope": 3242,
         "src": "26:2172:27"
       }
     ],
@@ -151,14 +151,14 @@
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/valid/SysCallTest.sol",
     "exportedSymbols": {
       "SysCallTest": [
-        3253
+        3241
       ]
     },
-    "id": 3254,
+    "id": 3242,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3242,
+        "id": 3230,
         "literals": [
           "solidity",
           "^",
@@ -174,22 +174,22 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 3253,
+        "id": 3241,
         "linearizedBaseContracts": [
-          3253
+          3241
         ],
         "name": "SysCallTest",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 3246,
+              "id": 3234,
               "nodeType": "Block",
               "src": "73:1187:27",
               "statements": [
                 {
                   "externalReferences": [],
-                  "id": 3245,
+                  "id": 3233,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    let orig_value := sload(0x8000)\n    mstore(0x0, 0x07)\n    mstore(0x20, 0x01)\n    mstore(0x40, 0x8000)\n    mstore(0x60, add(orig_value, 1))\n    mstore(0x80, 0)\n    if iszero(delegatecall(gas(), caller(), 31, 97, 0x80, 0x20))\n    {\n        mstore(0xd, add(2200, mload(0x80)))\n        revert(0xd, 0x20)\n    }\n    mstore(0xd, sload(0x8000))\n    if iszero(eq(sload(0x8000), add(orig_value, 1)))\n    {\n        mstore(0xd, add(2200, mload(0x80)))\n        revert(0xd, 0x20)\n    }\n    return(0x80, 0x20)\n}",
                   "src": "83:1177:27"
@@ -197,7 +197,7 @@
               ]
             },
             "documentation": null,
-            "id": 3247,
+            "id": 3235,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -205,19 +205,19 @@
             "name": "S",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3243,
+              "id": 3231,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "63:2:27"
             },
             "payable": false,
             "returnParameters": {
-              "id": 3244,
+              "id": 3232,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "73:0:27"
             },
-            "scope": 3253,
+            "scope": 3241,
             "src": "53:1207:27",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -225,13 +225,13 @@
           },
           {
             "body": {
-              "id": 3251,
+              "id": 3239,
               "nodeType": "Block",
               "src": "1284:912:27",
               "statements": [
                 {
                   "externalReferences": [],
-                  "id": 3250,
+                  "id": 3238,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    let orig_value := sload(0x8000)\n    mstore(0x0, 0x07)\n    mstore(0x20, 0x01)\n    mstore(0x40, 0x8000)\n    mstore(0x60, 356)\n    if iszero(delegatecall(gas(), caller(), 31, 97, 0x80, 0x20))\n    {\n        mstore(0xd, add(2500, mload(0x80)))\n        revert(0xd, 0x20)\n    }\n    return(0x80, 0x20)\n}",
                   "src": "1294:902:27"
@@ -239,7 +239,7 @@
               ]
             },
             "documentation": null,
-            "id": 3252,
+            "id": 3240,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -247,26 +247,26 @@
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3248,
+              "id": 3236,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1274:2:27"
             },
             "payable": false,
             "returnParameters": {
-              "id": 3249,
+              "id": 3237,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1284:0:27"
             },
-            "scope": 3253,
+            "scope": 3241,
             "src": "1266:930:27",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 3254,
+        "scope": 3242,
         "src": "26:2172:27"
       }
     ],
@@ -278,5 +278,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-10-16T14:59:29.636Z"
+  "updatedAt": "2018-10-17T15:36:37.267Z"
 }

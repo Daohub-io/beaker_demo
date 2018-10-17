@@ -21,14 +21,14 @@
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/valid/NestedCalls/FifthNestedCall.sol",
     "exportedSymbols": {
       "FifthNestedCall": [
-        3083
+        3071
       ]
     },
-    "id": 3084,
+    "id": 3072,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3077,
+        "id": 3065,
         "literals": [
           "solidity",
           "^",
@@ -44,22 +44,22 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 3083,
+        "id": 3071,
         "linearizedBaseContracts": [
-          3083
+          3071
         ],
         "name": "FifthNestedCall",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 3081,
+              "id": 3069,
               "nodeType": "Block",
               "src": "361:1709:17",
               "statements": [
                 {
                   "externalReferences": [],
-                  "id": 3080,
+                  "id": 3068,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    function malloc(size) -> result\n    {\n        let rsize := add(size, sub(32, mod(size, 32)))\n        result := mload(0x40)\n        mstore(0x40, add(result, rsize))\n    }\n    function storeCall(capIndex, storeLoc, storeVal) -> retLoc\n    {\n        let ins := malloc(128)\n        mstore(add(ins, 0x0), 0x07)\n        mstore(add(ins, 0x20), capIndex)\n        mstore(add(ins, 0x40), storeLoc)\n        mstore(add(ins, 0x60), storeVal)\n        let retSize := 0x20\n        retLoc := malloc(retSize)\n        if iszero(delegatecall(gas(), caller(), add(ins, 31), 97, retLoc, retSize))\n        {\n            mstore(0xd, add(2200, mload(0x80)))\n            revert(0xd, 0x20)\n        }\n    }\n    storeCall(1, 0x8005, 79)\n    pop\n}",
                   "src": "424:1646:17"
@@ -67,7 +67,7 @@
               ]
             },
             "documentation": null,
-            "id": 3082,
+            "id": 3070,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -75,26 +75,26 @@
             "name": "G",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3078,
+              "id": 3066,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "351:2:17"
             },
             "payable": false,
             "returnParameters": {
-              "id": 3079,
+              "id": 3067,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "361:0:17"
             },
-            "scope": 3083,
+            "scope": 3071,
             "src": "341:1729:17",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 3084,
+        "scope": 3072,
         "src": "26:2046:17"
       }
     ],
@@ -104,14 +104,14 @@
     "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/valid/NestedCalls/FifthNestedCall.sol",
     "exportedSymbols": {
       "FifthNestedCall": [
-        3083
+        3071
       ]
     },
-    "id": 3084,
+    "id": 3072,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3077,
+        "id": 3065,
         "literals": [
           "solidity",
           "^",
@@ -127,22 +127,22 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 3083,
+        "id": 3071,
         "linearizedBaseContracts": [
-          3083
+          3071
         ],
         "name": "FifthNestedCall",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 3081,
+              "id": 3069,
               "nodeType": "Block",
               "src": "361:1709:17",
               "statements": [
                 {
                   "externalReferences": [],
-                  "id": 3080,
+                  "id": 3068,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    function malloc(size) -> result\n    {\n        let rsize := add(size, sub(32, mod(size, 32)))\n        result := mload(0x40)\n        mstore(0x40, add(result, rsize))\n    }\n    function storeCall(capIndex, storeLoc, storeVal) -> retLoc\n    {\n        let ins := malloc(128)\n        mstore(add(ins, 0x0), 0x07)\n        mstore(add(ins, 0x20), capIndex)\n        mstore(add(ins, 0x40), storeLoc)\n        mstore(add(ins, 0x60), storeVal)\n        let retSize := 0x20\n        retLoc := malloc(retSize)\n        if iszero(delegatecall(gas(), caller(), add(ins, 31), 97, retLoc, retSize))\n        {\n            mstore(0xd, add(2200, mload(0x80)))\n            revert(0xd, 0x20)\n        }\n    }\n    storeCall(1, 0x8005, 79)\n    pop\n}",
                   "src": "424:1646:17"
@@ -150,7 +150,7 @@
               ]
             },
             "documentation": null,
-            "id": 3082,
+            "id": 3070,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -158,26 +158,26 @@
             "name": "G",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3078,
+              "id": 3066,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "351:2:17"
             },
             "payable": false,
             "returnParameters": {
-              "id": 3079,
+              "id": 3067,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "361:0:17"
             },
-            "scope": 3083,
+            "scope": 3071,
             "src": "341:1729:17",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 3084,
+        "scope": 3072,
         "src": "26:2046:17"
       }
     ],
@@ -189,5 +189,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-10-16T14:59:29.635Z"
+  "updatedAt": "2018-10-17T15:36:37.264Z"
 }
