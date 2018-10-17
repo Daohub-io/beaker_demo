@@ -98,15 +98,22 @@ export class WriteCap extends Capability {
 }
 
 export class LogCap extends Capability {
-    constructor(public topics: string[]) {
+
+    constructor(public topics: string[], raw_values?: string[]) {
         super(CapabilityType.LogWrite);
+        if (raw_values) {
+            this.raw_values = raw_values;
+            this.topics = raw_values.map(web3.utils.hexToAscii)
+        }
+        this.raw_values = this.topics.map(web3.utils.asciiToHex);
     }
+
     static from_raw(raw_values: string[]) {
-        return new LogCap(raw_values);
+        return new LogCap([],raw_values);
     }
 
     keyValues() {
-        return [this.topics.length, ...this.topics]
+        return [this.topics.length, ...this.raw_values]
     }
 }
 

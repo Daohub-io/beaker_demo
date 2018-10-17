@@ -70,11 +70,11 @@
               <b-form>
                 <b-form-group>
                   <label for="cap-owner">For Procedure</label>
-                  <b-form-input id="cap-owner" placeholder="Owner" v-model="newStore.for"></b-form-input>
+                  <b-form-select id="cap-owner" placeholder="Owner" v-model="newStoreCap.for" :options="procedures.map( p => ({ value: p.id, text: p.id }))"></b-form-select>
                   <label for="cap-store-start">Location</label>
-                  <b-form-input id="cap-store-start" type="number" v-model="newStore.start"></b-form-input>
+                  <b-form-input id="cap-store-start" type="number" v-model="newStoreCap.start"></b-form-input>
                   <label for="cap-store-size">Size</label>
-                  <b-form-input id="cap-store-size" type="number" v-model="newStore.size"></b-form-input>
+                  <b-form-input id="cap-store-size" type="number" v-model="newStoreCap.size"></b-form-input>
                 </b-form-group>
               </b-form>
             </b-modal>
@@ -86,12 +86,12 @@
                 <b-card no-body class="w-100">
                   <b-list-group flush>
                     <b-list-group-item v-for="(data, i) in store.data" class="d-flex justify-content-between">
-                      <span>
-                        {{ data }}
-                      </span>
                       <small>
                         {{ store.address + i - 1}}
                       </small>
+                      <span>
+                        {{ data }}
+                      </span>
                     </b-list-group-item>
                   </b-list-group>
                 </b-card>
@@ -101,21 +101,33 @@
         </b-col>
         <b-col>
           <b-card no-body tag="li">
-            <div slot="header" class="d-flex justify-content-between"> Logs <b-button size="sm" class="clear-button">+</b-button></div>
+             <div slot="header" class="d-flex justify-content-between"> Logs <b-button size="sm" class="clear-button" v-b-modal.modal-create-logcap>+</b-button></div>
+            <b-modal id="modal-create-logcap" title="Add Store" @ok="createLogCap" @shown="clearCreateLogCap">
+              <b-form>
+                <b-form-group>
+                  <label for="cap-owner">For Procedure</label>
+                  <b-form-select id="cap-owner" placeholder="Owner" v-model="newLogCap.for" :options="procedures.map( p => ({ value: p.id, text: p.id }))"></b-form-select>
+                  <label for="cap-log-topics">Topic</label>
+                  <b-input-group id="cap-log-topics">
+                    <b-form-input type="text"  v-for="(topic, i) in newLogCap.topic" placeholder="Topic " v-model="newLogCap.topic[i]"></b-form-input>
+                  </b-input-group>
+                </b-form-group>
+              </b-form>
+            </b-modal>
             <b-list-group flush>
               <b-list-group-item v-for="(log, i) in log_caps" :key="i" class="d-flex flex-column align-items-start" v-bind:class="{lowhighlight: log.owners.includes(highlight)}">
                 <div class="d-flex w-50 flex-column">
                   <small v-for="owner in log.owners">{{ owner }}</small>
                 </div>
-                <b-card no-body class="w-100" v-if="log.topics.length > 0">
+                <b-card no-body class="w-100" v-if="log.topics.length > 1">
                   <b-list-group flush>
-                    <b-list-group-item v-for="(topic, i) in log.topics" :key="i" class="d-flex justify-content-between">
-                      <span>
-                        {{ topic }}
-                      </span>
+                    <b-list-group-item v-for="(topic, i) in log.topics.slice(0)" :key="i" class="d-flex justify-content-between">
                       <small>
-                        Position {{ i }}
+                        Topic {{ i }}
                       </small>
+                      <span >
+                        {{ topic == "\u0000" ? "*": topic }}
+                      </span>
                     </b-list-group-item>
                   </b-list-group>
                 </b-card>
@@ -186,10 +198,15 @@ export default class Instance extends Vue {
     caps: [],
   }
 
-  newStore = {
+  newStoreCap = {
     for: '',
     start: 0,
     size: 0,
+  }
+
+  newLogCap = {
+    for: '',
+    topic: ['', '', '', '']
   }
 
   entry_fn: { text: string; value: number }[] = [];
@@ -209,12 +226,43 @@ export default class Instance extends Vue {
     await this.updateProcedureTable();
   }
 
+  async createLogCap() {
+    let key = (web3.utils.toHex(this.newLogCap.for) as any ).padEnd(50, '0');
+    let proc = this.network.instance.proc_table!.table[key];
+    let len = this.newLogCap.topic.reduce((p, t, i) => p = t === '' ? p : i, 0) + 1
+    let caps = [new LogCap(this.newLogCap.topic.slice(0, len))].concat(proc.caps as any)
+
+    await this.removeProcedure(this.newLogCap.for)
+    await this.registerProcedure({
+      name: this.newLogCap.for,
+      address: proc.location,
+      caps,
+    })
+
+    await this.updateCapTable();
+  }
+
+  clearCreateLogCap() {
+    this.newLogCap = { for: '', topic: ['','','',''] }
+  }
+  // TODO: Hacky way to add a cap...
   async createStoreCap() {
-    
+    let key = (web3.utils.toHex(this.newStoreCap.for) as any ).padEnd(50, '0');
+    let proc = this.network.instance.proc_table!.table[key];
+    let caps = [new WriteCap(this.newStoreCap.start, this.newStoreCap.size)].concat(proc.caps as any)
+
+    await this.removeProcedure(this.newStoreCap.for)
+    await this.registerProcedure({
+      name: this.newStoreCap.for,
+      address: proc.location,
+      caps,
+    })
+
+    await this.updateCapTable();
   }
 
   clearCreateStoreCap() {
-    this.newStore = { for: '', start: 0, size: 0 }
+    this.newStoreCap = { for: '', start: 0, size: 0 }
   }
 
   async removeProc(id: string) {

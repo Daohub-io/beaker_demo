@@ -73,7 +73,6 @@ export const actions: ActionTree<Network, Root> = {
         
         let raw_proc_table = await contract.methods.returnProcedureTable().call();
         let table = await contract.methods.listProcedures().call();
-        console.table(table)
         let proc_table = ProcedureTable.parse(raw_proc_table);
 
         commit('set_instance_proc_table', proc_table)
