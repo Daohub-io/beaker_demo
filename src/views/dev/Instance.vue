@@ -59,6 +59,7 @@
                   <b-form-input v-else-if="abi.inputs.length == 0" placeholder="No Parameters" disabled></b-form-input>
                 </b-input-group>
                 <b-button size="sm" @click="removeProc(proc.id)">Remove</b-button>
+                <b-button size="sm" @click="copyAddress(proc.address)">Copy Address</b-button>
               </b-list-group-item>
             </b-list-group>
           </b-card>
@@ -94,6 +95,7 @@
                       </span>
                     </b-list-group-item>
                   </b-list-group>
+                  <b-button size="sm" @click="removeCap(store)">Remove</b-button>
                 </b-card>
               </b-list-group-item>
             </b-list-group>
@@ -109,7 +111,7 @@
                   <b-form-select id="cap-owner" placeholder="Owner" v-model="newLogCap.for" :options="procedures.map( p => ({ value: p.id, text: p.id }))"></b-form-select>
                   <label for="cap-log-topics">Topic</label>
                   <b-input-group id="cap-log-topics">
-                    <b-form-input type="text"  v-for="(topic, i) in newLogCap.topic" placeholder="Topic " v-model="newLogCap.topic[i]"></b-form-input>
+                    <b-form-input type="text"  v-for="(topic, i) in newLogCap.topic" :key="i" placeholder="Topic " v-model="newLogCap.topic[i]"></b-form-input>
                   </b-input-group>
                 </b-form-group>
               </b-form>
@@ -117,13 +119,13 @@
             <b-list-group flush>
               <b-list-group-item v-for="(log, i) in log_caps" :key="i" class="d-flex flex-column align-items-start" v-bind:class="{lowhighlight: log.owners.includes(highlight)}">
                 <div class="d-flex w-50 flex-column">
-                  <small v-for="owner in log.owners">{{ owner }}</small>
+                  <small v-for="owner in log.owners" :key='owner'>{{ owner }}</small>
                 </div>
                 <b-card no-body class="w-100" v-if="log.topics.length > 0">
                   <b-list-group flush>
                     <b-list-group-item v-for="(topic, i) in log.topics.slice(0)" :key="i" class="d-flex justify-content-between">
                       <small>
-                        Topic {{ i }}
+                        Topic {{ i + 1 }}
                       </small>
                       <span >
                         {{ topic == "\u0000" ? "*": topic }}
@@ -134,6 +136,7 @@
                 <span v-else>
                   Any Topics
                 </span>
+                <b-button size="sm" @click="removeCap(log)">Remove</b-button>
               </b-list-group-item>
             </b-list-group>
           </b-card>
@@ -226,6 +229,35 @@ export default class Instance extends Vue {
     await this.updateProcedureTable();
   }
 
+  async copyAddress(addr: string) {
+    await (navigator as any).clipboard.writeText(addr)
+  }
+
+  async removeCap(cap: Capability) {
+    await this.updateInstance();
+
+    let tasks = cap.owners.map(async proc_id => {
+      let key = (web3.utils.toHex(proc_id) as any ).padEnd(50, '0');
+      let proc = this.network.instance.proc_table!.table[key];
+
+      let id = proc.caps.findIndex(c => c.type === cap.type && cap.raw_values.join('') === c.raw_values.join(''))
+      let new_caps = proc.caps.slice()
+      new_caps.splice(id, 1);
+
+      return await Promise.all([
+        await this.removeProcedure(proc_id),
+        await this.registerProcedure({
+          name: proc_id,
+          address: proc.location,
+          caps: new_caps
+        })
+      ])
+    })
+
+    await Promise.all(tasks)
+    await this.updateCapTable()
+    
+  }
   async createLogCap() {
     let key = (web3.utils.toHex(this.newLogCap.for) as any ).padEnd(50, '0');
     let proc = this.network.instance.proc_table!.table[key];
@@ -310,13 +342,13 @@ export default class Instance extends Vue {
     let proc = this.procedures.find(({id}) => id === proc_id)
     let abi = proc!.abi.find(fn => fn.name === fnName)!
     
-    console.log(proc!.id, fnName)
-    
     await this.sendCall({
       proc_name: proc!.id,
       abi,
       instance: this.instance,
     })
+
+    let events = this.network.instance.contract.events.allEvents()
 
     await this.updateInstance()
     await this.updateCapTable();
