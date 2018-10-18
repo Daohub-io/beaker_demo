@@ -4,6 +4,7 @@
       <b-row>
         <b-col>
           <b-input-group prepend="Instance" class="address-input">
+            <b-form-input v-model="new_address" type="text" placeholder="Other Instance"></b-form-input>
             <b-form-select v-model="new_address" :options="network.public.instances" type="text">
             </b-form-select>
             <b-input-group-append>
