@@ -37,7 +37,11 @@
               <b-form>
                 <b-form-group>
                   <b-form-input placeholder="Name" v-model="newProc.name"></b-form-input>
-                  <b-form-input placeholder="Enter Address" v-model="newProc.address"></b-form-input>
+                  <b-form-select placeholder="Enter Address" v-model="newProc.address" :options="public_procedures">
+                    <template slot="first">
+                      <option :value="null" disabled>-- Please select an option --</option>
+                    </template>
+                  </b-form-select>
                   <b-form-input placeholder="Enter Bytecode" v-model="newProc.bytecode"></b-form-input>
                   <b-form-input placeholder="Enter Abi" v-model="newProc.abi"></b-form-input>
                   <b-form-input placeholder="Capabilities" v-model="newProc.caps"></b-form-input>
@@ -217,7 +221,6 @@ export default class Instance extends Vue {
   }
 
   entry_fn: { text: string; value: number }[] = [];
-
   caps: (WriteCap | CallCap | LogCap)[] = [];
   
   async mounted() {
@@ -384,12 +387,15 @@ export default class Instance extends Vue {
           let data = Array.from({length: size}, (x,i) => web3.eth.getStorageAt(this.instance.options.address, address + i));
           cap.data = await Promise.all(data)
         }
-
+        
         let dup_i = result.findIndex(p_cap =>
-            cap.type === p_cap.type && cap.raw_values === p_cap.raw_values
-        );
+            cap.type === p_cap.type && 
+            cap.raw_values.length === p_cap.raw_values.length &&
+            cap.keyValues().every((val, i) => p_cap.keyValues()[i] === val)
+        )
+
         // If a Duplicate Cap is found, add Proc to Owners, if not add to results.
-        if (dup_i !== -1) {
+        if (dup_i !== -1 && result[dup_i].owners.indexOf(name) === -1) {
           result[dup_i].owners.push(name);
         } else {
           result.push(cap);
@@ -465,6 +471,10 @@ export default class Instance extends Vue {
     } catch (e) {
       return []
     }
+  }
+
+  get public_procedures(): string[] {
+    return Object.keys(this.network.public.procedures)
   }
 
   get interface() {

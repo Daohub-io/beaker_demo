@@ -215,7 +215,12 @@ export const actions: ActionTree<Network, Root> = {
         await dispatch("update_instance")
     },
 
-    async send_call({ dispatch, commit, state }, call: { proc_name: string, abi: ABIDefinition, instance: Contract }) {
+    async send_call({ dispatch, commit, state }, call: { proc_name: string, abi: ABIDefinition }) {
+
+        let events = state.instance.contract.events.allEvents()
+
+        events.on('data', console.log)
+        
         // Make the function selector (TODO: we aren't considering input at all
         // here)
         const functionSelectorHash = web3.utils.sha3(call.abi.name! + '()').slice(2, 10);
@@ -224,7 +229,7 @@ export const actions: ActionTree<Network, Root> = {
         const paddedProcKey = (call.proc_name as any).padEnd(24, '\0');
         const inputData = web3.utils.fromAscii(paddedProcKey) + functionSelectorHash;
 
-        let { address, from } = call.instance.options;
+        let { address, from } = state.instance.contract.options;
 
         // Use this err value for error checking
         const err = await web3.eth.call({ to: address, data: inputData, from });
