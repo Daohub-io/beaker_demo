@@ -3,9 +3,9 @@
     <b-container>
       <b-row>
         <b-col>
-          <b-input-group>
-            <b-form-input v-model="new_address" type="text">
-            </b-form-input>
+          <b-input-group prepend="Instance" class="address-input">
+            <b-form-select v-model="new_address" :options="network.public.instances" type="text">
+            </b-form-select>
             <b-input-group-append>
               <b-btn variant="primary" @click="update(new_address)">Update</b-btn>
             </b-input-group-append>
@@ -47,9 +47,14 @@
             <b-list-group flush>
               <b-list-group-item v-for="(proc, i) in procedures" :key="proc.id" class="flex-column align-items-start" v-bind:class="{highlight: highlight === proc.id}">
                 <div class="d-flex w-50 flex-column">
-                  <small>{{ proc.address.slice(0,10)+'...' }}</small>
                   <h5 class="mb-1">{{ proc.id }}</h5>
                 </div>
+                <b-input-group size="sm">
+                  <b-form-input readonly :value="proc.address"></b-form-input>
+                  <b-input-group-append size="sm">
+                    <b-btn size="sm" text="Button" variant="success"  @click="copyAddress(proc.address)">Copy</b-btn>
+                  </b-input-group-append>
+                </b-input-group>
                 <b-input-group v-for="(abi, id) in proc.abi" class="abi_call">
                   <b-input-group-text slot="prepend" v-if="abi.name">
                     {{ abi.name }}
@@ -59,7 +64,6 @@
                   <b-form-input v-else-if="abi.inputs.length == 0" placeholder="No Parameters" disabled></b-form-input>
                 </b-input-group>
                 <b-button size="sm" @click="removeProc(proc.id)">Remove</b-button>
-                <b-button size="sm" @click="copyAddress(proc.address)">Copy Address</b-button>
               </b-list-group-item>
             </b-list-group>
           </b-card>
@@ -214,19 +218,16 @@ export default class Instance extends Vue {
 
   entry_fn: { text: string; value: number }[] = [];
 
-  procedures: { id: string; address: string, abi: ABIDefinition[], owners: string[] }[] = [];
   caps: (WriteCap | CallCap | LogCap)[] = [];
-
+  
   async mounted() {
-    await this.updateProcedureTable();
-    await this.updateCapTable();
     this.new_address = this.instance_address;
+    await this.update(this.instance_address)
   }
 
-   async update(address?: string) {
+  async update(address?: string) {
     await this.updateInstance({address})
     await this.updateCapTable();
-    await this.updateProcedureTable();
   }
 
   async copyAddress(addr: string) {
@@ -255,15 +256,16 @@ export default class Instance extends Vue {
     })
 
     await Promise.all(tasks)
-    await this.updateCapTable()
-    
+    await this.updateInstance();
+    await this.updateCapTable();
   }
+
   async createLogCap() {
     let key = (web3.utils.toHex(this.newLogCap.for) as any ).padEnd(50, '0');
     let proc = this.network.instance.proc_table!.table[key];
     let len = this.newLogCap.topic.reduce((p, t, i) => p = t === '' ? p : i, -1) + 1
     let cap = new LogCap(this.newLogCap.topic.slice(0, len)) 
-    let caps = [new LogCap(this.newLogCap.topic.slice(0, len))].concat(proc.caps as any)
+    let caps = (proc.caps as any).concat(new LogCap(this.newLogCap.topic.slice(0, len)))
 
     await this.removeProcedure(this.newLogCap.for)
     await this.registerProcedure({
@@ -272,7 +274,9 @@ export default class Instance extends Vue {
       caps,
     })
 
+    await this.updateInstance();
     await this.updateCapTable();
+
   }
 
   clearCreateLogCap() {
@@ -282,7 +286,7 @@ export default class Instance extends Vue {
   async createStoreCap() {
     let key = (web3.utils.toHex(this.newStoreCap.for) as any ).padEnd(50, '0');
     let proc = this.network.instance.proc_table!.table[key];
-    let caps = [new WriteCap(this.newStoreCap.start, this.newStoreCap.size)].concat(proc.caps as any)
+    let caps = (proc.caps as any).concat(new WriteCap(this.newStoreCap.start, this.newStoreCap.size))
 
     await this.removeProcedure(this.newStoreCap.for)
     await this.registerProcedure({
@@ -291,6 +295,7 @@ export default class Instance extends Vue {
       caps,
     })
 
+    await this.updateInstance();
     await this.updateCapTable();
   }
 
@@ -352,7 +357,6 @@ export default class Instance extends Vue {
 
     await this.updateInstance()
     await this.updateCapTable();
-    await this.updateProcedureTable();
   }
 
   async getProcedureAddress(id: string, account: string) {
@@ -360,24 +364,8 @@ export default class Instance extends Vue {
     return this.instance.methods.getProcedure(name).call();
   }
 
-  async updateProcedureTable() {
-    const procedures: string[] = await this.instance.methods.listProcedures().call();
-    this.procedures = await Promise.all(
-      procedures.map(async hex_id => {
-        let id = web3.utils.hexToUtf8(hex_id);
-        let address = await this.instance.methods.getProcedure(hex_id).call();
-        let abi: ABIDefinition[] = [];
-        try { abi = await this.getAbi(address) } catch (e) {}
-
-        let owners = Array.from(this.getProcCallers(id))
-        return { id, address, abi, owners };
-      })
-    );
-  }
-
   async updateCapTable() {
-    let raw_proc_table = await this.instance.methods.returnProcedureTable().call();
-    let proc_table = ProcedureTable.parse(raw_proc_table).table;
+    let proc_table = this.network.instance.proc_table!.table!
 
     let result: Capability[] = [];
 
@@ -397,8 +385,7 @@ export default class Instance extends Vue {
           cap.data = await Promise.all(data)
         }
 
-        let dup_i = result.findIndex(
-          p_cap =>
+        let dup_i = result.findIndex(p_cap =>
             cap.type === p_cap.type && cap.raw_values === p_cap.raw_values
         );
         // If a Duplicate Cap is found, add Proc to Owners, if not add to results.
@@ -426,8 +413,9 @@ export default class Instance extends Vue {
   }
 
   getAbi(address: string): ABIDefinition[] {
-    let proc = this.network.procedures.find(proc => proc.contract.options.address === address);
-    return proc!.contract.options.jsonInterface
+    let proc = this.network.public.procedures[address]
+    if (proc && proc.abi) return proc.abi;
+    return [];
   }
 
   getCapTypeName(num: CapabilityType) {
@@ -460,6 +448,25 @@ export default class Instance extends Vue {
     });
   }
 
+  get procedures():  { id: string; address: string, abi: ABIDefinition[], owners: string[] }[] {
+
+    const proc_table: ProcedureTable = this.network.instance.proc_table!;
+    try {
+      let table_keys = Object.keys(proc_table.table);
+  
+      return table_keys.map(hex_id => {
+        let proc = proc_table.table[hex_id]
+        let id = web3.utils.hexToUtf8(hex_id);
+        let address = proc.location
+        let abi: ABIDefinition[] = this.getAbi(address);
+        let owners = Array.from(this.getProcCallers(id))
+        return { id, address, abi, owners };
+      })
+    } catch (e) {
+      return []
+    }
+  }
+
   get interface() {
     return this.procedures.reduce((res, proc, proc_i) => {
       return res.concat(proc.abi.map((fn, id) => ({ id, proc_i, proc_id: proc.id, fn })).filter(x => x.fn.type !== 'fallback'))
@@ -488,6 +495,10 @@ export default class Instance extends Vue {
 <style scoped>
 .instance {
   padding-top: 2rem;
+}
+
+.address-input {
+  margin-bottom: 1rem;
 }
 .abi_call {
   margin-top: 0.5rem;

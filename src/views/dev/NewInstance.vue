@@ -82,7 +82,7 @@ export default class NewInstance extends Vue {
 
   procedures: { id: string; address: string }[] = [];
   state: Capability[] = [];
-
+  
   async createInstance() {
     let account = this.newInstance.account;
     await this.deployInstance(account);
@@ -103,7 +103,7 @@ export default class NewInstance extends Vue {
     const cap1 = new WriteCap(0x8500, 2);
     const cap2 = new WriteCap(0x8000, 2);
 
-    this.registerProcedure({
+    await this.registerProcedure({
       name,
       address: procedure.contract.options.address,
       caps: [cap1, cap2]

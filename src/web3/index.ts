@@ -40,11 +40,11 @@ export async function deployedTrimmed(abi: any, account: string) {
     return await Proc.deploy({ data: bytecode } as any).send({ from: account, gas: MIN_GAS, gasPrice: MIN_GAS_PRICE })
 }
 
-function trimSwarm(bytecode: any) {
+export function trimSwarm(bytecode: string): string {
     const size = bytecode.length;
     const swarmSize = 43; // bytes
     // overwrite the swarm data with '0'
-    return bytecode.slice(0, size - (swarmSize * 2)).padEnd(size, '0');
+    return (bytecode.slice(0, size - (swarmSize * 2)) as any).padEnd(size, '0');
 }
 
 
