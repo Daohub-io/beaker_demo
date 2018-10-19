@@ -5,12 +5,38 @@
         <b-col>
           <b-input-group prepend="Instance" class="address-input">
             <b-form-input v-model="new_address" type="text" placeholder="Other Instance"></b-form-input>
-            <b-form-select v-model="new_address" :options="network.public.instances" type="text">
-            </b-form-select>
+            <b-form-select v-model="new_address" :options="network.public.instances" value-field="''" />
             <b-input-group-append>
               <b-btn variant="primary" @click="update(new_address)">Update</b-btn>
+              <b-btn variant="secondary" v-b-modal.modal-create-instance>New</b-btn>
             </b-input-group-append>
           </b-input-group>
+          <b-modal id="modal-create-instance" title="Create Instance" @ok="createInstance" @shown="clearCreateInstance">
+            <b-form>
+              <b-form-group label="Name" label-for="name">
+                <b-form-input id="name" type="text" v-model="newInstance.name" placeholder=""/>
+              </b-form-group>
+              <b-form-group label="Account" label-for="account">
+                <b-form-select v-model="newInstance.account" :options="accounts">
+                  <option value="" disabled> Please Select Account</option>
+                </b-form-select>
+              </b-form-group>
+              <b-form-group label="Sample Procedure" label-for="entry_proc_address">
+                <b-form-select v-model="newInstance.test_choice">
+                  <option value="" disabled> Please Select Test Entry</option>
+                  <optgroup label="Procedure Object Capabilities">
+                    <option :value="entry_tests.proc.call">Call Procedure</option>
+                  </optgroup>
+                  <optgroup label="Storage Object Capabilities">
+                    <option :value="entry_tests.store.write">Write to Storage</option>
+                  </optgroup>
+                  <optgroup label="Log Object Capabilities">
+                    <option :value="entry_tests.log.write">Write to Log</option>
+                  </optgroup>
+                </b-form-select>
+              </b-form-group>
+            </b-form>
+          </b-modal>
         </b-col>
       </b-row>
       <b-row>
@@ -50,7 +76,7 @@
               </b-form>
             </b-modal>
             <b-list-group flush>
-              <b-list-group-item v-for="(proc, i) in procedures" :key="proc.id" class="flex-column align-items-start" v-bind:class="{highlight: highlight === proc.id}">
+              <b-list-group-item v-for="(proc, i) in procedures" :key="proc.id" class="flex-column align-items-start"  v-bind:class="{highlighted: true, highlight: highlight === proc.id, lowhighlight: highlight, callerhighlight: proc.id == 'Entry' && highlight != 'Entry' && highlight}">
                 <div class="d-flex w-50 flex-column">
                   <h5 class="mb-1">{{ proc.id }}</h5>
                 </div>
@@ -89,7 +115,7 @@
               </b-form>
             </b-modal>
             <b-list-group flush>
-              <b-list-group-item v-for="(store, i) in storage_caps" class="d-flex flex-column align-items-start" :key="i" v-bind:class="{lowhighlight: store.owners.includes(highlight)}">
+              <b-list-group-item v-for="(store, i) in storage_caps" class="d-flex flex-column align-items-start" :key="i" v-bind:class="{highlighted: true, lowhighlight: store.owners.includes(highlight), basehighlight: highlight != '' && highlight != 'Entry'}">
                 <div class="d-flex w-50 flex-column">
                   <small v-for="owner in store.owners">{{ owner }}</small>
                 </div>
@@ -126,7 +152,7 @@
               </b-form>
             </b-modal>
             <b-list-group flush>
-              <b-list-group-item v-for="(log, i) in log_caps" :key="i" class="d-flex flex-column align-items-start" v-bind:class="{lowhighlight: log.owners.includes(highlight)}">
+              <b-list-group-item v-for="(log, i) in log_caps" :key="i" class="d-flex flex-column align-items-start" v-bind:class="{highlighted: true, lowhighlight: log.owners.includes(highlight), basehighlight: highlight != '' && highlight != 'Entry'}">
                 <div class="d-flex w-50 flex-row">
                   <small v-for="owner in log.owners" :key='owner'>{{ owner }}</small>
                 </div>
@@ -185,10 +211,17 @@ import { EventLog } from 'web3/types';
 @Component<Instance>({
   props: {
     instance_address: String
+  },
+  watch : {
+    new_address(new_addr, old_addr) {
+      if (new_addr !== old_addr) this.update(new_addr)
+    }
   }
 })
 export default class Instance extends Vue {
   @Store.State network: Network;
+
+  @Store.Action("network/deploy_instance") deployInstance: (account?: string) => Promise<void>;
   @Store.Action("network/update_instance") updateInstance: (instance?: {account?: string, address?: string}) => Promise<void>;
   @Store.Action("network/send_call") sendCall: (call: {proc_name: string, abi: ABIDefinition, instance: Contract}) => Promise<void>
   @Store.Action("network/deploy_procedure") deployProcedure: (proc: {name: string, abi: any}) => Promise<void>;
@@ -199,6 +232,14 @@ export default class Instance extends Vue {
   new_address: string = '';
 
   highlight: string = '';
+  entry_tests = TestAbi;
+
+  newInstance = {
+    name: "",
+    account: "",
+    proc_address: "",
+    test_choice: {}
+  };
 
   newCall = {
     abi_id: 0,
@@ -240,12 +281,50 @@ export default class Instance extends Vue {
   }
 
   async update(address?: string) {
+    if (address && !web3.utils.isAddress(address)) return;
     await this.updateInstance({address})
     await this.updateCapTable();
   }
 
   async copyAddress(addr: string) {
     await (navigator as any).clipboard.writeText(addr)
+  }
+
+  async createInstance() {
+    let account = this.newInstance.account;
+    await this.deployInstance(account);
+
+    let entry_code = this.newInstance.test_choice;
+    let name = this.newInstance.name
+
+    await this.deployProcedure({
+      name,
+      abi: this.newInstance.test_choice
+    })
+    
+    let procedures = this.network.procedures;
+    let procedure = procedures[procedures.length - 1];
+
+    const cap1 = new WriteCap(0x8500, 2);
+    const cap2 = new WriteCap(0x8000, 2);
+
+    this.registerProcedure({
+      name,
+      address: procedure.contract.options.address,
+      caps: [cap1, cap2]
+    })
+
+    this.new_address = this.network.instance.contract.options.address;
+    this.update();
+  }
+
+  clearCreateInstance() {
+    this.newInstance = {
+      name: "",
+      account: "",
+      proc_address: "",
+      test_choice: {}
+    };
   }
 
   async removeCap(cap: Capability) {
@@ -524,13 +603,39 @@ export default class Instance extends Vue {
 .abi_call {
   margin-top: 0.5rem;
 }
+
+.highlighted {
+  background-color: #fff;
+}
+
+.highlight, .lowhighlight, .callerhighlight, .highlighted {
+  transition: background-color 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
 .highlight {
   color: #fff;
   background-color:rgb(107, 107, 107);
 }
+.highlight.lowhighlight {
+    color: #fff;
+    background-color:rgb(73, 73, 73);
+}
+
+.callerhighlight {
+  background-color: #ddd;
+}
+
 .lowhighlight {
   background-color: #aaa;
 }
+.basehighlight {
+  background-color: #ddd;
+}
+
+.lowhighlight.basehighlight {
+    background-color: #aaa;
+}
+
 .resources li {
   margin-bottom: 2rem;
 }

@@ -17,7 +17,9 @@ export default {
   data() {
     return {};
   },
-  created() {},
+  created() {
+    this.$store.dispatch('network/connect')
+  },
   methods: {}
 }
 </script>
