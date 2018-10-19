@@ -474,7 +474,7 @@ export default class Instance extends Vue {
         // If Storage Cap, populate data with storage values
         if(cap.type === CapabilityType.StorageWrite) {
           let { address, size} = cap as WriteCap;
-          let data = Array.from({length: size}, (x,i) => web3.eth.getStorageAt(this.instance.options.address, address + i).then(web3.utils.hexToNumber));
+          let data = Array.from({length: size}, (x,i) => web3.eth.getStorageAt(this.instance.options.address, address + i).then(web3.utils.hexToNumberString));
           cap.data = await Promise.all(data) as any
         }
         
