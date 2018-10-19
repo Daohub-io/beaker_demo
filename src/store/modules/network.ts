@@ -13,7 +13,7 @@ type Opcodes = string;
 export interface Network {
     address: string;
     accounts: { id: string, balance: number }[];
-    instance: { contract: Contract, proc_table?: ProcedureTable, logs?: EventEmitter };
+    instance: { contract: Contract, proc_table: ProcedureTable, logs?: EventEmitter };
     public: {
         latest_block: number,
         instances: string[],
@@ -33,7 +33,7 @@ export const namespaced = true;
 export const state: Network = {
     address: DEFAULT_ADDRESS,
     accounts: [],
-    instance: { contract: new web3.eth.Contract(LocalKernelAbi.abi), },
+    instance: { contract: new web3.eth.Contract(LocalKernelAbi.abi), proc_table: new ProcedureTable({}) },
     public: {
         latest_block: 0,
         instances: [],
@@ -117,11 +117,6 @@ export const actions: ActionTree<Network, Root> = {
         let kernel = state.instance.contract;
         let len = state.public.latest_block;
         let latest = await web3.eth.getBlockNumber();
-
-        // If it's more than 200... let's just skip some;
-        if (latest - len > 200) len = latest - 200;
-
-        let contracts: { address: string, code: string }[] = [];
 
         for (let i = len; i < latest; i += 1) {
             let block = await web3.eth.getBlock(i)

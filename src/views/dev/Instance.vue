@@ -209,9 +209,6 @@ import ABI, { ABIDefinition } from "web3/eth/abi";
 import { EventLog } from 'web3/types';
 
 @Component<Instance>({
-  props: {
-    instance_address: String
-  },
   watch : {
     new_address(new_addr, old_addr) {
       if (new_addr !== old_addr) this.update(new_addr)
@@ -270,7 +267,10 @@ export default class Instance extends Vue {
   logs: EventLog[] = [];
   
   async mounted() {
-    this.new_address = this.instance_address;
+    // Create New Instance First
+    await this.$store.dispatch('network/connect')
+    await this.deployInstance(this.network.accounts[0].id);
+    this.new_address = this.instance_address || '';
     this.$store.subscribe(mutation => {
       if (mutation.type == 'network/instance_log') {
         this.logs.push(mutation.payload)
@@ -547,20 +547,16 @@ export default class Instance extends Vue {
   get procedures():  { id: string; address: string, abi: ABIDefinition[], owners: string[] }[] {
 
     const proc_table: ProcedureTable = this.network.instance.proc_table!;
-    try {
-      let table_keys = Object.keys(proc_table.table);
-  
-      return table_keys.map(hex_id => {
-        let proc = proc_table.table[hex_id]
-        let id = web3.utils.hexToUtf8(hex_id);
-        let address = proc.location
-        let abi: ABIDefinition[] = this.getAbi(address);
-        let owners = Array.from(this.getProcCallers(id))
-        return { id, address, abi, owners };
-      })
-    } catch (e) {
-      return []
-    }
+    let table_keys = Object.keys(proc_table.table);
+
+    return table_keys.map(hex_id => {
+      let proc = proc_table.table[hex_id]
+      let id = web3.utils.hexToUtf8(hex_id);
+      let address = proc.location
+      let abi: ABIDefinition[] = this.getAbi(address);
+      let owners = Array.from(this.getProcCallers(id))
+      return { id, address, abi, owners };
+    })
   }
 
   get public_procedures(): string[] {

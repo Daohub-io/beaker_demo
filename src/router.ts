@@ -38,12 +38,7 @@ export default new Router({
       component: Dev,
       children: [
         {
-          path: '',
-          name: 'new',
-          component: NewInstance
-        },
-        {
-          path: 'instance/:instance_address',
+          path: '/',
           name: 'instance',
           component: Instance,
           props: true
