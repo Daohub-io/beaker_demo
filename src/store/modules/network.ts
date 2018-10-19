@@ -5,14 +5,15 @@ import Contract from 'web3/eth/contract';
 import Root from '@/store/modules/root'
 import { ABIDefinition } from 'web3/eth/abi';
 import { Block, BlockHeader } from 'web3/eth/types';
-import { TransactionReceipt, Subscribe } from 'web3/types';
+import { TransactionReceipt, Subscribe, EventLog } from 'web3/types';
 import Vue from 'vue';
+import { EventEmitter } from 'events';
 
 type Opcodes = string;
 export interface Network {
     address: string;
     accounts: { id: string, balance: number }[];
-    instance: { contract: Contract, proc_table?: ProcedureTable };
+    instance: { contract: Contract, proc_table?: ProcedureTable, logs?: EventEmitter };
     public: {
         latest_block: number,
         instances: string[],
@@ -32,7 +33,7 @@ export const namespaced = true;
 export const state: Network = {
     address: DEFAULT_ADDRESS,
     accounts: [],
-    instance: { contract: new web3.eth.Contract(LocalKernelAbi.abi) },
+    instance: { contract: new web3.eth.Contract(LocalKernelAbi.abi), },
     public: {
         latest_block: 0,
         instances: [],
@@ -78,7 +79,8 @@ export const mutations: MutationTree<Network> = {
     },
     set_sync(state: Network, isSyncing: boolean) {
         state.isSyncing = isSyncing
-    }
+    },
+    instance_log(state: Network, event: EventLog) {},
 }
 
 export const actions: ActionTree<Network, Root> = {
@@ -112,6 +114,7 @@ export const actions: ActionTree<Network, Root> = {
 
     async update_network({ state, commit }) {
 
+        let kernel = state.instance.contract;
         let len = state.public.latest_block;
         let latest = await web3.eth.getBlockNumber();
 
@@ -123,36 +126,35 @@ export const actions: ActionTree<Network, Root> = {
         for (let i = len; i < latest; i += 1) {
             let block = await web3.eth.getBlock(i)
 
-            let receipts = await Promise.all(block.transactions.map(async tx => {
+            block.transactions.forEach(async tx => {
+                // Get Tx
                 let receipt: TransactionReceipt = await web3.eth.getTransactionReceipt(tx as any)
+
+                // Get Address
                 let address = receipt.contractAddress
-                let code = '';
-                if (address) code = await web3.eth.getCode(address)
-                return { address, code }
-            }))
+                if (!address) return;
 
-            contracts = contracts.concat(receipts.filter(({ address }) => address));
+                // Get Code
+                let code = await web3.eth.getCode(address)
+                if (code === '') return;
+
+                if(code === LocalKernelAbi.deployedBytecode) {
+                    commit('add_public_instance', address)
+                    return;
+                }
+
+                if (kernel.options.address !== null) {
+                    let isValid =  await kernel.methods.validate(code).call();
+                    if (!isValid) return;
+
+                    let def = state.public.known_abi.find(def => trimSwarm(def.deployedBytecode) === code) || { abi: undefined }
+                    let proc = { address, code, abi: def.abi }
+                    commit('add_public_procedure', proc)
+                }
+            })
         }
-
-        // Update Instances
-        let known_instances = contracts.filter(contract => contract.code === LocalKernelAbi.deployedBytecode).map(contract => contract.address);
-        known_instances.forEach(i => commit('add_public_instance', i))
-
-        let kernel = state.instance.contract;
-        if (kernel.options.address !== null) {
-            let non_instances = contracts.filter(contract => contract.code !== LocalKernelAbi.deployedBytecode);
-            let known_procedures = await Promise.all(non_instances.filter(async contract => await kernel.methods.validate(contract.code).call()))
-
-            // Check if Abi + Update Procedures
-            known_procedures.map(contract => {
-                let def = state.public.known_abi.find(def => trimSwarm(def.deployedBytecode) === contract.code) || { abi: undefined }
-                return { ...contract, abi: def.abi }
-            }).forEach(proc => commit('add_public_procedure', proc))
-
-            // Update Latest Length
-            commit('set_public_latest_block', latest)
-        }
-
+        // Update Latest Length
+        commit('set_public_latest_block', latest)
     },
 
     async update_instance({ dispatch, commit, state }, instance?: { account?: string, address?: string }) {
@@ -167,11 +169,10 @@ export const actions: ActionTree<Network, Root> = {
         }
 
         let raw_proc_table = await contract.methods.returnProcedureTable().call();
-        let table = await contract.methods.listProcedures().call();
         let proc_table = ProcedureTable.parse(raw_proc_table);
 
         commit('set_instance_proc_table', proc_table)
-        await dispatch('update_network')
+        dispatch('update_network')
     },
 
     async deploy_instance({ dispatch, commit, state }, account: string = state.accounts[0].id) {
@@ -184,10 +185,18 @@ export const actions: ActionTree<Network, Root> = {
         let name = web3.utils.toHex("Entry");
         let entryproc = await installEntryProc(instance, name, account)
 
+        instance.events.allEvents().on('data', event => { dispatch('get_event', event)})
+
         commit('set_instance', instance)
         commit('add_procedure', { contract: entryproc, name })
 
         await dispatch('update_instance')
+    },
+
+    get_event({state, commit}, event: EventLog) {
+        if (event.address === state.instance.contract.options.address) {
+            commit('instance_log', event)
+        }
     },
 
     async deploy_procedure({ dispatch, commit, state }, proc: { name: string, abi: any }) {
@@ -216,10 +225,6 @@ export const actions: ActionTree<Network, Root> = {
     },
 
     async send_call({ dispatch, commit, state }, call: { proc_name: string, abi: ABIDefinition }) {
-
-        let events = state.instance.contract.events.allEvents()
-
-        events.on('data', console.log)
         
         // Make the function selector (TODO: we aren't considering input at all
         // here)

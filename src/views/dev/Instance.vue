@@ -127,7 +127,7 @@
             </b-modal>
             <b-list-group flush>
               <b-list-group-item v-for="(log, i) in log_caps" :key="i" class="d-flex flex-column align-items-start" v-bind:class="{lowhighlight: log.owners.includes(highlight)}">
-                <div class="d-flex w-50 flex-column">
+                <div class="d-flex w-50 flex-row">
                   <small v-for="owner in log.owners" :key='owner'>{{ owner }}</small>
                 </div>
                 <b-card no-body class="w-100" v-if="log.topics.length > 0">
@@ -139,11 +139,13 @@
                       <span >
                         {{ topic == "\u0000" ? "*": topic }}
                       </span>
+                      <b-badge> {{ logs.filter(l => l.raw.topics.length === log.topics.length && l.raw.topics.some((val, i) => log.topics[i] === val)).length }}</b-badge>
                     </b-list-group-item>
                   </b-list-group>
                 </b-card>
                 <span v-else>
                   Any Topics
+                  <b-badge> {{ logs.length }}</b-badge>
                 </span>
                 <b-button size="sm" @click="removeCap(log)">Remove</b-button>
               </b-list-group-item>
@@ -178,6 +180,7 @@ import { Network, actions } from "@/store/modules/network";
 import { ActionMethod, Action } from "vuex";
 import Contract from "web3/eth/contract";
 import ABI, { ABIDefinition } from "web3/eth/abi";
+import { EventLog } from 'web3/types';
 
 @Component<Instance>({
   props: {
@@ -223,9 +226,16 @@ export default class Instance extends Vue {
 
   entry_fn: { text: string; value: number }[] = [];
   caps: (WriteCap | CallCap | LogCap)[] = [];
+  logs: EventLog[] = [];
   
   async mounted() {
     this.new_address = this.instance_address;
+    this.$store.subscribe(mutation => {
+      if (mutation.type == 'network/instance_log') {
+        this.logs.push(mutation.payload)
+      }
+    })
+
     await this.update(this.instance_address)
   }
 
@@ -385,8 +395,8 @@ export default class Instance extends Vue {
         // If Storage Cap, populate data with storage values
         if(cap.type === CapabilityType.StorageWrite) {
           let { address, size} = cap as WriteCap;
-          let data = Array.from({length: size}, (x,i) => web3.eth.getStorageAt(this.instance.options.address, address + i));
-          cap.data = await Promise.all(data)
+          let data = Array.from({length: size}, (x,i) => web3.eth.getStorageAt(this.instance.options.address, address + i).then(web3.utils.hexToNumber));
+          cap.data = await Promise.all(data) as any
         }
         
         let dup_i = result.findIndex(p_cap =>
