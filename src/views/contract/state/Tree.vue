@@ -84,7 +84,6 @@ export default {
         return folder.files[item];
       }, project);
 
-      console.log(folder.files)
       if (!folder || folder.view !== "tree") return false;
       return Object.values(folder.files);
     }

@@ -1,0 +1,555 @@
+{
+  "contractName": "ThirdNestedCall",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "G",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b506101fe806100206000396000f300608060405260043610610041576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680636fecb62314610046575b600080fd5b34801561005257600080fd5b5061005b61005d565b005b60006060610082565b6000602082066020038201604051915080820160405250919050565b6100e3565b60006100936080610066565b6007600082015282602082015283604082015284606082015260206100b781610066565b925080836061601f8501335af415156100da5760805161089801600d526020600dfd5b50509392505050565b6100f2604d6180036001610087565b507f466f757274684e657374656443616c6c0000000000000000000000000000000091506040805190810160405280600381526020017f4728290000000000000000000000000000000000000000000000000000000000815250905061016f565b6000602082066020038201604051915080820160405250919050565b6101796080610153565b6003600082015260026020820152826040820152602061019881610153565b81606084015283516020850120608084015281816065601f8601335af415156101cb5760805161089801600d526020600dfd5b50505050505600a165627a7a72305820a6a90bcecc0505718185322fd545ce36144374625ee4cf4e9d3160c5409c960e0029",
+  "deployedBytecode": "0x608060405260043610610041576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680636fecb62314610046575b600080fd5b34801561005257600080fd5b5061005b61005d565b005b60006060610082565b6000602082066020038201604051915080820160405250919050565b6100e3565b60006100936080610066565b6007600082015282602082015283604082015284606082015260206100b781610066565b925080836061601f8501335af415156100da5760805161089801600d526020600dfd5b50509392505050565b6100f2604d6180036001610087565b507f466f757274684e657374656443616c6c0000000000000000000000000000000091506040805190810160405280600381526020017f4728290000000000000000000000000000000000000000000000000000000000815250905061016f565b6000602082066020038201604051915080820160405250919050565b6101796080610153565b6003600082015260026020820152826040820152602061019881610153565b81606084015283516020850120608084015281816065601f8601335af415156101cb5760805161089801600d526020600dfd5b50505050505600a165627a7a72305820a6a90bcecc0505718185322fd545ce36144374625ee4cf4e9d3160c5409c960e0029",
+  "sourceMap": "26:3661:22:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:3661:22;;;;;;;",
+  "deployedSourceMap": "26:3661:22:-;;;;;;;;;;;;;;;;;;;;;;;;343:3342;;8:9:-1;5:2;;;30:1;27;20:12;5:2;343:3342:22;;;;;;;2073:15;2128:23;449:402;;;;579:2;574:4;570:12;567:2;563:20;558:4;554:30;671:4;665:11;654:22;;830:5;823:6;819:17;814:4;807:30;481:370;;;;;;864:1062;;;;952:11;959:3;952:11;;;1115:4;1110:3;1106;1102:12;1095:25;1207:8;1201:4;1197:3;1193:13;1186:30;1314:8;1308:4;1304:3;1300:13;1293:30;1407:8;1401:4;1397:3;1393:13;1386:30;1448:4;1479:15;1486:7;1479:15;;;1469:25;;1792:7;1784:6;1780:2;1775;1771:3;1767:11;1759:6;1754:3;1741:59;1734:67;1731:2;;;1850:4;1844:11;1839:4;1835:21;1831:3;1824:33;1889:4;1885:3;1878:16;1731:2;923:1003;;;;;;;;;1939:24;1960:2;1952:6;1949:1;1939:24;;;1976:3;2091:27;2073:45;;2128:31;;;;;;;;;;;;;;;;;;;;2192:402;;;;2322:2;2317:4;2313:12;2310:2;2306:20;2301:4;2297:30;2414:4;2408:11;2397:22;;2573:5;2566:6;2562:17;2557:4;2550:30;2224:370;;;;;;2618:11;2625:3;2618:11;;;2768:4;2763:3;2759;2755:12;2748:25;2852:4;2846;2842:3;2838:13;2831:26;2931:7;2925:4;2921:3;2917:13;2910:29;3028:4;3059:15;3066:7;3059:15;;;3108:7;3102:4;3098:3;3094:13;3087:29;3186:9;3180:16;3174:4;3164:9;3160:19;3150:47;3144:4;3140:3;3136:13;3129:69;3483:7;3475:6;3470:3;3465:2;3461:3;3457:11;3449:6;3444:3;3431:60;3424:68;3421:2;;;3537:4;3531:11;3526:4;3522:21;3518:3;3511:33;3572:4;3568:3;3561:16;3421:2;2178:1423;;;;;:::o",
+  "source": "pragma solidity ^0.4.17;\n\ncontract ThirdNestedCall {\n\n\n     // FirstNestedCall - store at 0x8001\n     //   SecondNestedCall - store at 0x8002\n     //     ThirdNestedCall - store at 0x8003\n     //       FourthNestedCall - store at 0x8004\n     //     FifthNestedCall - store at 0x8005\n     //   SixthNestedCall - store at 0x8006\n     // End\n    function G() public {\n        // First we do the store for FirstNestedCall\n        assembly {\n            function malloc(size) -> result {\n                // align to 32-byte words\n                let rsize := add(size,sub(32,mod(size,32)))\n                // get the current free mem location\n                result :=  mload(0x40)\n                // Bump the value of 0x40 so that it holds the next\n                // available memory location.\n                mstore(0x40,add(result,rsize))\n            }\n            function storeCall(capIndex, storeLoc, storeVal) -> retLoc {\n                let ins := malloc(128)\n                // First set up the input data (at memory location 0x0)\n                // The write call is 0x-07\n                mstore(add(ins,0x0),0x07)\n                // The capability index is 0x-01\n                mstore(add(ins,0x20),capIndex)\n                // The storage location we want is storeLoc\n                mstore(add(ins,0x40),storeLoc)\n                // The value we want to store\n                mstore(add(ins,0x60),storeVal)\n                let retSize := 0x20\n                retLoc := malloc(retSize)\n                // \"in_offset\" is at 31, because we only want the last byte of type\n                // \"in_size\" is 97 because it is 1+32+32+32\n                // we will store the result at 0x80 and it will be 32 bytes\n                if iszero(delegatecall(gas, caller, add(ins,31), 97, retLoc, retSize)) {\n                    mstore(0xd,add(2200,mload(0x80)))\n                    revert(0xd,0x20)\n                }\n            }\n            storeCall(1, 0x8003, 77)\n            pop\n        }\n        // End of write call\n        // Being our call to FourthNestedCall\n        bytes24 reqProc = bytes24(\"FourthNestedCall\");\n        string memory fselector = \"G()\";\n        assembly {\n            function malloc(size) -> result {\n                // align to 32-byte words\n                let rsize := add(size,sub(32,mod(size,32)))\n                // get the current free mem location\n                result :=  mload(0x40)\n                // Bump the value of 0x40 so that it holds the next\n                // available memory location.\n                mstore(0x40,add(result,rsize))\n            }\n            let ins := malloc(128)\n            // First set up the input data (at memory location 0x0)\n            // The call call is 0x-03\n            mstore(add(ins,0x0),0x03)\n            // The capability index is 0x-02\n            mstore(add(ins,0x20),0x02)\n            // The key of the procedure\n            mstore(add(ins,0x40),reqProc)\n            // The size of the return value we expect (0x20)\n            let retSize := 0x20\n            let retLoc := malloc(retSize)\n            mstore(add(ins,0x60),retSize)\n            mstore(add(ins,0x80),keccak256(add(fselector,0x20),mload(fselector)))\n            // \"in_offset\" is at 31, because we only want the last byte of type\n            // \"in_size\" is 65 because it is 1+32+32+32+4\n            // we will store the result at 0x80 and it will be 32 bytes\n            if iszero(delegatecall(gas, caller, add(ins,31), 101, retLoc, retSize)) {\n                mstore(0xd,add(2200,mload(0x80)))\n                revert(0xd,0x20)\n            }\n        }\n        // End procedure call\n        // TODO: perform some checks and return\n    }\n}",
+  "sourcePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/valid/NestedCalls/ThirdNestedCall.sol",
+  "ast": {
+    "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/valid/NestedCalls/ThirdNestedCall.sol",
+    "exportedSymbols": {
+      "ThirdNestedCall": [
+        3158
+      ]
+    },
+    "id": 3159,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 3141,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".17"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:22"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 3158,
+        "linearizedBaseContracts": [
+          3158
+        ],
+        "name": "ThirdNestedCall",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 3156,
+              "nodeType": "Block",
+              "src": "363:3322:22",
+              "statements": [
+                {
+                  "externalReferences": [],
+                  "id": 3144,
+                  "nodeType": "InlineAssembly",
+                  "operations": "{\n    function malloc(size) -> result\n    {\n        let rsize := add(size, sub(32, mod(size, 32)))\n        result := mload(0x40)\n        mstore(0x40, add(result, rsize))\n    }\n    function storeCall(capIndex, storeLoc, storeVal) -> retLoc\n    {\n        let ins := malloc(128)\n        mstore(add(ins, 0x0), 0x07)\n        mstore(add(ins, 0x20), capIndex)\n        mstore(add(ins, 0x40), storeLoc)\n        mstore(add(ins, 0x60), storeVal)\n        let retSize := 0x20\n        retLoc := malloc(retSize)\n        if iszero(delegatecall(gas(), caller(), add(ins, 31), 97, retLoc, retSize))\n        {\n            mstore(0xd, add(2200, mload(0x80)))\n            revert(0xd, 0x20)\n        }\n    }\n    storeCall(1, 0x8003, 77)\n    pop\n}",
+                  "src": "426:1654:22"
+                },
+                {
+                  "assignments": [
+                    3146
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 3146,
+                      "name": "reqProc",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 3157,
+                      "src": "2073:15:22",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes24",
+                        "typeString": "bytes24"
+                      },
+                      "typeName": {
+                        "id": 3145,
+                        "name": "bytes24",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "2073:7:22",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes24",
+                          "typeString": "bytes24"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 3150,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "466f757274684e657374656443616c6c",
+                        "id": 3148,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "2099:18:22",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_4c321766c0fe47dd2a2732c738823879b3afd27ed4878937cd004d36198c686e",
+                          "typeString": "literal_string \"FourthNestedCall\""
+                        },
+                        "value": "FourthNestedCall"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_stringliteral_4c321766c0fe47dd2a2732c738823879b3afd27ed4878937cd004d36198c686e",
+                          "typeString": "literal_string \"FourthNestedCall\""
+                        }
+                      ],
+                      "id": 3147,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "nodeType": "ElementaryTypeNameExpression",
+                      "src": "2091:7:22",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_bytes24_$",
+                        "typeString": "type(bytes24)"
+                      },
+                      "typeName": "bytes24"
+                    },
+                    "id": 3149,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2091:27:22",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes24",
+                      "typeString": "bytes24"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "2073:45:22"
+                },
+                {
+                  "assignments": [
+                    3152
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 3152,
+                      "name": "fselector",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 3157,
+                      "src": "2128:23:22",
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string"
+                      },
+                      "typeName": {
+                        "id": 3151,
+                        "name": "string",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "2128:6:22",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_storage_ptr",
+                          "typeString": "string"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 3154,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "hexValue": "472829",
+                    "id": 3153,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "string",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "2154:5:22",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_stringliteral_6fecb6233f98459d96e928d0255dfe396e85deb4ff21458aa329de333838d490",
+                      "typeString": "literal_string \"G()\""
+                    },
+                    "value": "G()"
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "2128:31:22"
+                },
+                {
+                  "externalReferences": [
+                    {
+                      "reqProc": {
+                        "declaration": 3146,
+                        "isOffset": false,
+                        "isSlot": false,
+                        "src": "2931:7:22",
+                        "valueSize": 1
+                      }
+                    },
+                    {
+                      "fselector": {
+                        "declaration": 3152,
+                        "isOffset": false,
+                        "isSlot": false,
+                        "src": "3164:9:22",
+                        "valueSize": 1
+                      }
+                    },
+                    {
+                      "fselector": {
+                        "declaration": 3152,
+                        "isOffset": false,
+                        "isSlot": false,
+                        "src": "3186:9:22",
+                        "valueSize": 1
+                      }
+                    }
+                  ],
+                  "id": 3155,
+                  "nodeType": "InlineAssembly",
+                  "operations": "{\n    function malloc(size) -> result\n    {\n        let rsize := add(size, sub(32, mod(size, 32)))\n        result := mload(0x40)\n        mstore(0x40, add(result, rsize))\n    }\n    let ins := malloc(128)\n    mstore(add(ins, 0x0), 0x03)\n    mstore(add(ins, 0x20), 0x02)\n    mstore(add(ins, 0x40), reqProc)\n    let retSize := 0x20\n    let retLoc := malloc(retSize)\n    mstore(add(ins, 0x60), retSize)\n    mstore(add(ins, 0x80), keccak256(add(fselector, 0x20), mload(fselector)))\n    if iszero(delegatecall(gas(), caller(), add(ins, 31), 101, retLoc, retSize))\n    {\n        mstore(0xd, add(2200, mload(0x80)))\n        revert(0xd, 0x20)\n    }\n}",
+                  "src": "2169:1516:22"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 3157,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "G",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 3142,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "353:2:22"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 3143,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "363:0:22"
+            },
+            "scope": 3158,
+            "src": "343:3342:22",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 3159,
+        "src": "26:3661:22"
+      }
+    ],
+    "src": "0:3687:22"
+  },
+  "legacyAST": {
+    "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/valid/NestedCalls/ThirdNestedCall.sol",
+    "exportedSymbols": {
+      "ThirdNestedCall": [
+        3158
+      ]
+    },
+    "id": 3159,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 3141,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".17"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:22"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 3158,
+        "linearizedBaseContracts": [
+          3158
+        ],
+        "name": "ThirdNestedCall",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 3156,
+              "nodeType": "Block",
+              "src": "363:3322:22",
+              "statements": [
+                {
+                  "externalReferences": [],
+                  "id": 3144,
+                  "nodeType": "InlineAssembly",
+                  "operations": "{\n    function malloc(size) -> result\n    {\n        let rsize := add(size, sub(32, mod(size, 32)))\n        result := mload(0x40)\n        mstore(0x40, add(result, rsize))\n    }\n    function storeCall(capIndex, storeLoc, storeVal) -> retLoc\n    {\n        let ins := malloc(128)\n        mstore(add(ins, 0x0), 0x07)\n        mstore(add(ins, 0x20), capIndex)\n        mstore(add(ins, 0x40), storeLoc)\n        mstore(add(ins, 0x60), storeVal)\n        let retSize := 0x20\n        retLoc := malloc(retSize)\n        if iszero(delegatecall(gas(), caller(), add(ins, 31), 97, retLoc, retSize))\n        {\n            mstore(0xd, add(2200, mload(0x80)))\n            revert(0xd, 0x20)\n        }\n    }\n    storeCall(1, 0x8003, 77)\n    pop\n}",
+                  "src": "426:1654:22"
+                },
+                {
+                  "assignments": [
+                    3146
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 3146,
+                      "name": "reqProc",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 3157,
+                      "src": "2073:15:22",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes24",
+                        "typeString": "bytes24"
+                      },
+                      "typeName": {
+                        "id": 3145,
+                        "name": "bytes24",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "2073:7:22",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes24",
+                          "typeString": "bytes24"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 3150,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "466f757274684e657374656443616c6c",
+                        "id": 3148,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "2099:18:22",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_4c321766c0fe47dd2a2732c738823879b3afd27ed4878937cd004d36198c686e",
+                          "typeString": "literal_string \"FourthNestedCall\""
+                        },
+                        "value": "FourthNestedCall"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_stringliteral_4c321766c0fe47dd2a2732c738823879b3afd27ed4878937cd004d36198c686e",
+                          "typeString": "literal_string \"FourthNestedCall\""
+                        }
+                      ],
+                      "id": 3147,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "nodeType": "ElementaryTypeNameExpression",
+                      "src": "2091:7:22",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_bytes24_$",
+                        "typeString": "type(bytes24)"
+                      },
+                      "typeName": "bytes24"
+                    },
+                    "id": 3149,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2091:27:22",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes24",
+                      "typeString": "bytes24"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "2073:45:22"
+                },
+                {
+                  "assignments": [
+                    3152
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 3152,
+                      "name": "fselector",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 3157,
+                      "src": "2128:23:22",
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string"
+                      },
+                      "typeName": {
+                        "id": 3151,
+                        "name": "string",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "2128:6:22",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_storage_ptr",
+                          "typeString": "string"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 3154,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "hexValue": "472829",
+                    "id": 3153,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "string",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "2154:5:22",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_stringliteral_6fecb6233f98459d96e928d0255dfe396e85deb4ff21458aa329de333838d490",
+                      "typeString": "literal_string \"G()\""
+                    },
+                    "value": "G()"
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "2128:31:22"
+                },
+                {
+                  "externalReferences": [
+                    {
+                      "reqProc": {
+                        "declaration": 3146,
+                        "isOffset": false,
+                        "isSlot": false,
+                        "src": "2931:7:22",
+                        "valueSize": 1
+                      }
+                    },
+                    {
+                      "fselector": {
+                        "declaration": 3152,
+                        "isOffset": false,
+                        "isSlot": false,
+                        "src": "3164:9:22",
+                        "valueSize": 1
+                      }
+                    },
+                    {
+                      "fselector": {
+                        "declaration": 3152,
+                        "isOffset": false,
+                        "isSlot": false,
+                        "src": "3186:9:22",
+                        "valueSize": 1
+                      }
+                    }
+                  ],
+                  "id": 3155,
+                  "nodeType": "InlineAssembly",
+                  "operations": "{\n    function malloc(size) -> result\n    {\n        let rsize := add(size, sub(32, mod(size, 32)))\n        result := mload(0x40)\n        mstore(0x40, add(result, rsize))\n    }\n    let ins := malloc(128)\n    mstore(add(ins, 0x0), 0x03)\n    mstore(add(ins, 0x20), 0x02)\n    mstore(add(ins, 0x40), reqProc)\n    let retSize := 0x20\n    let retLoc := malloc(retSize)\n    mstore(add(ins, 0x60), retSize)\n    mstore(add(ins, 0x80), keccak256(add(fselector, 0x20), mload(fselector)))\n    if iszero(delegatecall(gas(), caller(), add(ins, 31), 101, retLoc, retSize))\n    {\n        mstore(0xd, add(2200, mload(0x80)))\n        revert(0xd, 0x20)\n    }\n}",
+                  "src": "2169:1516:22"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 3157,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "G",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 3142,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "353:2:22"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 3143,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "363:0:22"
+            },
+            "scope": 3158,
+            "src": "343:3342:22",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 3159,
+        "src": "26:3661:22"
+      }
+    ],
+    "src": "0:3687:22"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-10-17T15:36:37.280Z"
+}

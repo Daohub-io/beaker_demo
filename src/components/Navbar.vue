@@ -1,8 +1,8 @@
 <template>
 <b-navbar toggleable variant="dark" type="dark" class="daolab-navbar">
     <b-container>
-        <b-navbar-brand href="/">Daolab</b-navbar-brand>
-        <b-navbar-nav class="links">
+        <b-navbar-brand href="/">Demo</b-navbar-brand>
+        <!-- <b-navbar-nav class="links">
             <b-nav-form class="search-bar">
                 <b-form-input :state="null" type="text" placeholder="Search contracts.."/>
             </b-nav-form>
@@ -11,7 +11,7 @@
             <b-nav-item to="/">Apps</b-nav-item>
             <b-nav-item to="/">Network</b-nav-item>
             <b-nav-item to="/">Explore</b-nav-item>
-        </b-navbar-nav>
+        </b-navbar-nav> -->
         <slot name="context">
             <b-navbar-nav class="ml-auto" v-if="username">
                 <b-nav-item class="notification">

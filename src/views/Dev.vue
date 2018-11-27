@@ -9,58 +9,69 @@
               <form @submit.stop.prevent="handleOk">
                 <p>Network Id: {{ network.node.id }}</p>
                 <p>Type: {{ network.node.type }} </p>
-                <b-form-input type="text" placeholder="Enter Node Address" v-model="address"></b-form-input>
+                <b-form-input type="text" placeholder="Enter Node Address" v-model="conn_address"></b-form-input>
               </form>
             </b-modal>
           </b-nav-form>
         </b-navbar-nav>
       </template>
     </Navbar>
-    <b-container>
-      <b-row>
-          <b-col cols="3" align="center">
-            Development
-            
-          </b-col>
-      </b-row>
-    </b-container>
+    <router-view/>
   </div>
 </template>
 
-<script>
-import Navbar from "@/components/Navbar";
-import { web3 } from "@/web3";
+<script lang="ts">
+import Vue from "vue";
+import Component from "vue-class-component";
+import * as Store from "vuex-class";
 
-export default {
-  name: "Dev",
-  data() {
+import Navbar from "@/components/Navbar.vue";
+import {
+  web3,
+  TestAbi,
+  MIN_GAS,
+  MIN_GAS_PRICE,
+  ProcedureTable,
+  WriteCap,
+  LogCap,
+  CallCap,
+  Capability,
+  CapabilityType
+} from "@/web3";
+import { Network, actions } from "@/store/modules/network";
+import { ActionMethod, Action } from "vuex";
+import Contract from "web3/eth/contract";
+
+@Component({
+  components: { Navbar }
+})
+export default class Dev extends Vue {
+  @Store.State network: Network;
+  @Store.Action("network/connect") connect: (addr?: string) => Promise<void>;
+
+  conn_address = ''
+
+  mounted() {
     this.connect();
-    return {
-      address: ""
-    };
-  },
-  components: { Navbar },
-  methods: {
-    async connect(address) {
-      return this.$store.dispatch("network/connect");
-    },
-    async handleOk() {
-      await this.connect();
-      this.$refs.modal.hide();
-    },
-  },
-  computed: {
-    network() {
-      return this.$store.state.network;
-    },
-    connected() {
-      return this.network.accounts.length !== 0;
-    },
-    version() {
-      return web3.version.node
-    }
+    this.conn_address = this.network.address;
   }
-};
+
+  async handleOk() {
+    await this.connect(this.conn_address);
+  }
+
+  get connected() {
+    return this.network.accounts.length !== 0;
+  }
+  get version() {
+    return web3.version;
+  }
+
+  get accounts() {
+    let accounts: Network["accounts"] = this.network.accounts;
+    return accounts.map(({ id }) => id);
+  }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -70,5 +81,10 @@ export default {
   height: 100%;
   margin: 0;
   padding: 0;
+}
+
+h3,
+h4 {
+  margin-top: 1rem;
 }
 </style>

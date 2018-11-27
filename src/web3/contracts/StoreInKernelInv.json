@@ -1,0 +1,321 @@
+{
+  "contractName": "StoreInKernelInv",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "foo",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x6080604052348015600f57600080fd5b5060938061001e6000396000f300608060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063c2985578146044575b600080fd5b348015604f57600080fd5b5060566058565b005b60006104d290508051600055505600a165627a7a7230582078433acc9ac9ea660ba277d8260a9f19420a49a7ff66dbc7b86eb2a34a771ce90029",
+  "deployedBytecode": "0x608060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063c2985578146044575b600080fd5b348015604f57600080fd5b5060566058565b005b60006104d290508051600055505600a165627a7a7230582078433acc9ac9ea660ba277d8260a9f19420a49a7ff66dbc7b86eb2a34a771ce90029",
+  "sourceMap": "26:241:12:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:241:12;;;;;;;",
+  "deployedSourceMap": "26:241:12:-;;;;;;;;;;;;;;;;;;;;;;;;59:206;;8:9:-1;5:2;;;30:1;27;20:12;5:2;59:206:12;;;;;;;91:14;108:4;91:21;;151:6;145:13;171:3;243:6;131:128;:::o",
+  "source": "pragma solidity ^0.4.17;\n\ncontract StoreInKernelInv {\n\n    function foo() public {\n        uint256 fooVal = 1234;\n        assembly {\n            mload(fooVal)\n            0x0\n            // This lacks the necessary protection code\n            sstore\n        }\n    }\n}",
+  "sourcePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/invalid/StoreInKernelInv.sol",
+  "ast": {
+    "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/invalid/StoreInKernelInv.sol",
+    "exportedSymbols": {
+      "StoreInKernelInv": [
+        2999
+      ]
+    },
+    "id": 3000,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2989,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".17"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:12"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 2999,
+        "linearizedBaseContracts": [
+          2999
+        ],
+        "name": "StoreInKernelInv",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 2997,
+              "nodeType": "Block",
+              "src": "81:184:12",
+              "statements": [
+                {
+                  "assignments": [
+                    2993
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 2993,
+                      "name": "fooVal",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 2998,
+                      "src": "91:14:12",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      "typeName": {
+                        "id": 2992,
+                        "name": "uint256",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "91:7:12",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 2995,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "hexValue": "31323334",
+                    "id": 2994,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "number",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "108:4:12",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_rational_1234_by_1",
+                      "typeString": "int_const 1234"
+                    },
+                    "value": "1234"
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "91:21:12"
+                },
+                {
+                  "externalReferences": [
+                    {
+                      "fooVal": {
+                        "declaration": 2993,
+                        "isOffset": false,
+                        "isSlot": false,
+                        "src": "151:6:12",
+                        "valueSize": 1
+                      }
+                    }
+                  ],
+                  "id": 2996,
+                  "nodeType": "InlineAssembly",
+                  "operations": "{\n    mload(fooVal)\n    0x0\n    sstore\n}",
+                  "src": "122:143:12"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 2998,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "foo",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2990,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "71:2:12"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 2991,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "81:0:12"
+            },
+            "scope": 2999,
+            "src": "59:206:12",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 3000,
+        "src": "26:241:12"
+      }
+    ],
+    "src": "0:267:12"
+  },
+  "legacyAST": {
+    "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/invalid/StoreInKernelInv.sol",
+    "exportedSymbols": {
+      "StoreInKernelInv": [
+        2999
+      ]
+    },
+    "id": 3000,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2989,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".17"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:12"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 2999,
+        "linearizedBaseContracts": [
+          2999
+        ],
+        "name": "StoreInKernelInv",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 2997,
+              "nodeType": "Block",
+              "src": "81:184:12",
+              "statements": [
+                {
+                  "assignments": [
+                    2993
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 2993,
+                      "name": "fooVal",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 2998,
+                      "src": "91:14:12",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      "typeName": {
+                        "id": 2992,
+                        "name": "uint256",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "91:7:12",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 2995,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "hexValue": "31323334",
+                    "id": 2994,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "number",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "108:4:12",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_rational_1234_by_1",
+                      "typeString": "int_const 1234"
+                    },
+                    "value": "1234"
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "91:21:12"
+                },
+                {
+                  "externalReferences": [
+                    {
+                      "fooVal": {
+                        "declaration": 2993,
+                        "isOffset": false,
+                        "isSlot": false,
+                        "src": "151:6:12",
+                        "valueSize": 1
+                      }
+                    }
+                  ],
+                  "id": 2996,
+                  "nodeType": "InlineAssembly",
+                  "operations": "{\n    mload(fooVal)\n    0x0\n    sstore\n}",
+                  "src": "122:143:12"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 2998,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "foo",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2990,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "71:2:12"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 2991,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "81:0:12"
+            },
+            "scope": 2999,
+            "src": "59:206:12",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 3000,
+        "src": "26:241:12"
+      }
+    ],
+    "src": "0:267:12"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-10-17T15:36:37.264Z"
+}

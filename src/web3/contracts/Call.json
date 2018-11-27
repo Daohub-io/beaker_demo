@@ -1,0 +1,423 @@
+{
+  "contractName": "Call",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "a",
+          "type": "address"
+        },
+        {
+          "name": "gasAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "foo",
+      "outputs": [
+        {
+          "name": "v",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b5060e68061001f6000396000f300608060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063bd0d639f146044575b600080fd5b348015604f57600080fd5b50608c600480360381019080803573ffffffffffffffffffffffffffffffffffffffff1690602001909291908035906020019092919050505060a6565b604051808215151515815260200191505060405180910390f35b6000806000806000808787f19050929150505600a165627a7a72305820d26aaa644850ec3c672b5bc8b69fbfda51038a594a7ef89da472d8845842f2b20029",
+  "deployedBytecode": "0x608060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063bd0d639f146044575b600080fd5b348015604f57600080fd5b50608c600480360381019080803573ffffffffffffffffffffffffffffffffffffffff1690602001909291908035906020019092919050505060a6565b604051808215151515815260200191505060405180910390f35b6000806000806000808787f19050929150505600a165627a7a72305820d26aaa644850ec3c672b5bc8b69fbfda51038a594a7ef89da472d8845842f2b20029",
+  "sourceMap": "26:172:7:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:172:7;;;;;;;",
+  "deployedSourceMap": "26:172:7:-;;;;;;;;;;;;;;;;;;;;;;;;46:150;;8:9:-1;5:2;;;30:1;27;20:12;5:2;46:150:7;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;102:6;178:1;176;173;170;167;164;153:9;148:32;143:37;;129:61;;;;:::o",
+  "source": "pragma solidity ^0.4.17;\n\ncontract Call {\n    function foo(address a, uint gasAmount) public returns (bool v) {\n        assembly {\n            v := call(gasAmount, a, 0, 0, 0, 0,0)\n        }\n    }\n}",
+  "sourcePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/invalid/Call.sol",
+  "ast": {
+    "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/invalid/Call.sol",
+    "exportedSymbols": {
+      "Call": [
+        2924
+      ]
+    },
+    "id": 2925,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2912,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".17"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:7"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 2924,
+        "linearizedBaseContracts": [
+          2924
+        ],
+        "name": "Call",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 2922,
+              "nodeType": "Block",
+              "src": "110:86:7",
+              "statements": [
+                {
+                  "externalReferences": [
+                    {
+                      "gasAmount": {
+                        "declaration": 2916,
+                        "isOffset": false,
+                        "isSlot": false,
+                        "src": "153:9:7",
+                        "valueSize": 1
+                      }
+                    },
+                    {
+                      "a": {
+                        "declaration": 2914,
+                        "isOffset": false,
+                        "isSlot": false,
+                        "src": "164:1:7",
+                        "valueSize": 1
+                      }
+                    },
+                    {
+                      "v": {
+                        "declaration": 2919,
+                        "isOffset": false,
+                        "isSlot": false,
+                        "src": "143:1:7",
+                        "valueSize": 1
+                      }
+                    }
+                  ],
+                  "id": 2921,
+                  "nodeType": "InlineAssembly",
+                  "operations": "{\n    v := call(gasAmount, a, 0, 0, 0, 0, 0)\n}",
+                  "src": "120:76:7"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 2923,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "foo",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2917,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2914,
+                  "name": "a",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2923,
+                  "src": "59:9:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2913,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "59:7:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2916,
+                  "name": "gasAmount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2923,
+                  "src": "70:14:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2915,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "70:4:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "58:27:7"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 2920,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2919,
+                  "name": "v",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2923,
+                  "src": "102:6:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 2918,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "102:4:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "101:8:7"
+            },
+            "scope": 2924,
+            "src": "46:150:7",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 2925,
+        "src": "26:172:7"
+      }
+    ],
+    "src": "0:198:7"
+  },
+  "legacyAST": {
+    "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/invalid/Call.sol",
+    "exportedSymbols": {
+      "Call": [
+        2924
+      ]
+    },
+    "id": 2925,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2912,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".17"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:7"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 2924,
+        "linearizedBaseContracts": [
+          2924
+        ],
+        "name": "Call",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 2922,
+              "nodeType": "Block",
+              "src": "110:86:7",
+              "statements": [
+                {
+                  "externalReferences": [
+                    {
+                      "gasAmount": {
+                        "declaration": 2916,
+                        "isOffset": false,
+                        "isSlot": false,
+                        "src": "153:9:7",
+                        "valueSize": 1
+                      }
+                    },
+                    {
+                      "a": {
+                        "declaration": 2914,
+                        "isOffset": false,
+                        "isSlot": false,
+                        "src": "164:1:7",
+                        "valueSize": 1
+                      }
+                    },
+                    {
+                      "v": {
+                        "declaration": 2919,
+                        "isOffset": false,
+                        "isSlot": false,
+                        "src": "143:1:7",
+                        "valueSize": 1
+                      }
+                    }
+                  ],
+                  "id": 2921,
+                  "nodeType": "InlineAssembly",
+                  "operations": "{\n    v := call(gasAmount, a, 0, 0, 0, 0, 0)\n}",
+                  "src": "120:76:7"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 2923,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "foo",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2917,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2914,
+                  "name": "a",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2923,
+                  "src": "59:9:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2913,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "59:7:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2916,
+                  "name": "gasAmount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2923,
+                  "src": "70:14:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2915,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "70:4:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "58:27:7"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 2920,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2919,
+                  "name": "v",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2923,
+                  "src": "102:6:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 2918,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "102:4:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "101:8:7"
+            },
+            "scope": 2924,
+            "src": "46:150:7",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 2925,
+        "src": "26:172:7"
+      }
+    ],
+    "src": "0:198:7"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-10-17T15:36:37.264Z"
+}

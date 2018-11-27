@@ -22,6 +22,8 @@ import Account from '@/views/Account.vue'
 import NewProject from '@/views/NewProject.vue'
 
 import Dev from '@/views/Dev.vue'
+import NewInstance from '@/views/dev/NewInstance.vue'
+import Instance from '@/views/dev/Instance.vue'
 
 Vue.use(Router)
 
@@ -33,7 +35,15 @@ export default new Router({
     },
     {
       path: '',
-      component: Dev
+      component: Dev,
+      children: [
+        {
+          path: '/',
+          name: 'instance',
+          component: Instance,
+          props: true
+        }
+      ]
     },
     {
       path: '/404',

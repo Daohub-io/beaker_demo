@@ -1,0 +1,390 @@
+{
+  "contractName": "Simple",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "A",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "B",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "C",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b5060dd8061001f6000396000f3006080604052600436106053576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806332e7c5bf1460585780636e9ed8cf14606c578063f446c1d0146096575b600080fd5b348015606357600080fd5b50606a60aa565b005b348015607757600080fd5b5060946004803603810190808035906020019092919050505060ac565b005b34801560a157600080fd5b5060a860af565b005b565b50565b5600a165627a7a72305820da4eae5ff84e8d81cc30544011d1f501c22b592fef8aacef441faef1eab3fc180029",
+  "deployedBytecode": "0x6080604052600436106053576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806332e7c5bf1460585780636e9ed8cf14606c578063f446c1d0146096575b600080fd5b348015606357600080fd5b50606a60aa565b005b348015607757600080fd5b5060946004803603810190808035906020019092919050505060ac565b005b34801560a157600080fd5b5060a860af565b005b565b50565b5600a165627a7a72305820da4eae5ff84e8d81cc30544011d1f501c22b592fef8aacef441faef1eab3fc180029",
+  "sourceMap": "26:151:23:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:151:23;;;;;;;",
+  "deployedSourceMap": "26:151:23:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;87:33;;8:9:-1;5:2;;;30:1;27;20:12;5:2;87:33:23;;;;;;126:48;;8:9:-1;5:2;;;30:1;27;20:12;5:2;126:48:23;;;;;;;;;;;;;;;;;;;;;;;;;;48:33;;8:9:-1;5:2;;;30:1;27;20:12;5:2;48:33:23;;;;;;87;:::o;126:48::-;;:::o;48:33::-;:::o",
+  "source": "pragma solidity ^0.4.17;\n\ncontract Simple {\n    function A() public pure {\n\n    }\n\n    function B() public pure {\n\n    }\n\n    function C(uint256 /* a */) public pure {\n\n    }\n\n}",
+  "sourcePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/valid/Simple.sol",
+  "ast": {
+    "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/valid/Simple.sol",
+    "exportedSymbols": {
+      "Simple": [
+        3175
+      ]
+    },
+    "id": 3176,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 3160,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".17"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:23"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 3175,
+        "linearizedBaseContracts": [
+          3175
+        ],
+        "name": "Simple",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 3163,
+              "nodeType": "Block",
+              "src": "73:8:23",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 3164,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "A",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 3161,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "58:2:23"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 3162,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "73:0:23"
+            },
+            "scope": 3175,
+            "src": "48:33:23",
+            "stateMutability": "pure",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 3167,
+              "nodeType": "Block",
+              "src": "112:8:23",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 3168,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "B",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 3165,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "97:2:23"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 3166,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "112:0:23"
+            },
+            "scope": 3175,
+            "src": "87:33:23",
+            "stateMutability": "pure",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 3173,
+              "nodeType": "Block",
+              "src": "166:8:23",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 3174,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "C",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 3171,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 3170,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 3174,
+                  "src": "137:7:23",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 3169,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "137:7:23",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "136:17:23"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 3172,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "166:0:23"
+            },
+            "scope": 3175,
+            "src": "126:48:23",
+            "stateMutability": "pure",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 3176,
+        "src": "26:151:23"
+      }
+    ],
+    "src": "0:177:23"
+  },
+  "legacyAST": {
+    "absolutePath": "/mnt/c/Users/Raketa/Documents/Repos/beakeros/contracts/test/valid/Simple.sol",
+    "exportedSymbols": {
+      "Simple": [
+        3175
+      ]
+    },
+    "id": 3176,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 3160,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".17"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:23"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 3175,
+        "linearizedBaseContracts": [
+          3175
+        ],
+        "name": "Simple",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 3163,
+              "nodeType": "Block",
+              "src": "73:8:23",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 3164,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "A",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 3161,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "58:2:23"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 3162,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "73:0:23"
+            },
+            "scope": 3175,
+            "src": "48:33:23",
+            "stateMutability": "pure",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 3167,
+              "nodeType": "Block",
+              "src": "112:8:23",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 3168,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "B",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 3165,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "97:2:23"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 3166,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "112:0:23"
+            },
+            "scope": 3175,
+            "src": "87:33:23",
+            "stateMutability": "pure",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 3173,
+              "nodeType": "Block",
+              "src": "166:8:23",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 3174,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "C",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 3171,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 3170,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 3174,
+                  "src": "137:7:23",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 3169,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "137:7:23",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "136:17:23"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 3172,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "166:0:23"
+            },
+            "scope": 3175,
+            "src": "126:48:23",
+            "stateMutability": "pure",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 3176,
+        "src": "26:151:23"
+      }
+    ],
+    "src": "0:177:23"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-10-17T15:36:37.268Z"
+}
